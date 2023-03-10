@@ -1,0 +1,48 @@
+plugins {
+    alias(libs.plugins.fl.gradle)
+    alias(libs.plugins.fl.publish)
+}
+
+dependencies {
+    add("shade", project.projects.base)
+
+    compileOnly(libs.kotlin.gradle)
+    compileOnly(libs.kotlin.gradle.api)
+    compileOnly(libs.dependency.analysis)
+    compileOnly(libs.gr8)
+    compileOnly(libs.publish)
+}
+
+gradlePlugin {
+    plugins {
+        commonAndroidPlugin {
+            id = "com.freeletics.gradle.common.android"
+            implementationClass = "com.freeletics.gradle.plugin.FreeleticsAndroidPlugin"
+        }
+
+        commonJvmPlugin {
+            id = "com.freeletics.gradle.common.jvm"
+            implementationClass = "com.freeletics.gradle.plugin.FreeleticsJvmPlugin"
+        }
+
+        commonMultiplatformPlugin {
+            id = "com.freeletics.gradle.common.multiplatform"
+            implementationClass = "com.freeletics.gradle.plugin.FreeleticsMultiplatformPlugin"
+        }
+
+        commonGradlePlugin {
+            id = "com.freeletics.gradle.common.gradle"
+            implementationClass = "com.freeletics.gradle.plugin.FreeleticsGradlePluginPlugin"
+        }
+
+        commonPublishInternalPlugin {
+            id = "com.freeletics.gradle.common.publish.internal"
+            implementationClass = "com.freeletics.gradle.plugin.FreeleticsPublishInternalPlugin"
+        }
+
+        commonPublishOssPlugin {
+            id = "com.freeletics.gradle.common.publish.oss"
+            implementationClass = "com.freeletics.gradle.plugin.FreeleticsPublishOssPlugin"
+        }
+    }
+}

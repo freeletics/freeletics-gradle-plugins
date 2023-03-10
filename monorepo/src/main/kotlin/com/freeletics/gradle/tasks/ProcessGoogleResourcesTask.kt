@@ -1,0 +1,32 @@
+package com.freeletics.gradle.tasks
+
+import com.android.build.api.variant.Variant
+import com.freeletics.gradle.util.capitalize
+import java.io.File
+import org.gradle.api.Project
+import org.gradle.api.tasks.Copy
+import org.gradle.api.tasks.Internal
+
+abstract class ProcessGoogleResourcesTask : Copy() {
+    // the Crashlytics plugin needs this property
+    @Internal
+    var intermediateDir: File? = null
+
+    companion object {
+        fun Project.registerProcessGoogleResourcesTask(variant: Variant) {
+            val variantName = variant.name.capitalize()
+            val variantResourceRoot = file(
+                "${project.buildDir}/generated/res/google-services/" +
+                    "${variant.buildType}/${variant.flavorName}"
+            )
+
+            tasks.register("process${variantName}GoogleServices", ProcessGoogleResourcesTask::class.java) { task ->
+                task.from("src/${variant.buildType}/res/values/google-services.xml")
+                task.into(variantResourceRoot.resolve("values"))
+                task.intermediateDir = variantResourceRoot
+
+                task.rename("google-services.xml", "values.xml")
+            }
+        }
+    }
+}

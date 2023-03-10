@@ -1,0 +1,17 @@
+plugins {
+    alias(libs.plugins.fl.gradle)
+    alias(libs.plugins.fl.publish)
+}
+
+dependencies {
+    compileOnly(libs.dependency.analysis)
+}
+
+gradlePlugin {
+    plugins {
+        plugin {
+            id = "com.freeletics.gradle.root"
+            implementationClass = "com.freeletics.gradle.plugin.RootPlugin"
+        }
+    }
+}

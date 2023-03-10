@@ -1,0 +1,1 @@
+-repackageclasses  com.freeletics.gradle.monorepoplugins.relocated

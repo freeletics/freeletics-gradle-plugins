@@ -1,0 +1,64 @@
+plugins {
+    alias(libs.plugins.fl.gradle)
+    alias(libs.plugins.fl.publish)
+}
+
+dependencies {
+    add("shade", project.projects.base)
+
+    compileOnly(libs.android.gradle.api)
+    compileOnly(libs.crashlytics.gradle)
+    compileOnly(libs.licensee)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.truth)
+}
+
+gradlePlugin {
+    plugins {
+        monoAppPlugin {
+            id = "com.freeletics.gradle.app"
+            implementationClass = "com.freeletics.gradle.plugin.AppPlugin"
+        }
+
+        monoCoreAndroidPlugin {
+            id = "com.freeletics.gradle.core-android"
+            implementationClass = "com.freeletics.gradle.plugin.CoreAndroidPlugin"
+        }
+
+        monoCoreKotlinPlugin {
+            id = "com.freeletics.gradle.core-kotlin"
+            implementationClass = "com.freeletics.gradle.plugin.CoreKotlinPlugin"
+        }
+
+        monoDomainAndroidPlugin {
+            id = "com.freeletics.gradle.domain-android"
+            implementationClass = "com.freeletics.gradle.plugin.DomainAndroidPlugin"
+        }
+
+        monoDomainKotlinPlugin {
+            id = "com.freeletics.gradle.domain-kotlin"
+            implementationClass = "com.freeletics.gradle.plugin.DomainKotlinPlugin"
+        }
+
+        monoFeaturePlugin {
+            id = "com.freeletics.gradle.feature"
+            implementationClass = "com.freeletics.gradle.plugin.FeaturePlugin"
+        }
+
+        monoNavPlugin {
+            id = "com.freeletics.gradle.nav"
+            implementationClass = "com.freeletics.gradle.plugin.NavPlugin"
+        }
+
+        monoLegacyAndroidPlugin {
+            id = "com.freeletics.gradle.legacy-android"
+            implementationClass = "com.freeletics.gradle.plugin.LegacyAndroidPlugin"
+        }
+
+        monoLegacyKotlinPlugin {
+            id = "com.freeletics.gradle.legacy-kotlin"
+            implementationClass = "com.freeletics.gradle.plugin.LegacyKotlinPlugin"
+        }
+    }
+}
