@@ -6,8 +6,11 @@
 # Keep kotlin metadata so that the Kotlin compiler knows about top level functions and other things
 -keep class kotlin.Metadata { *; }
 
-# Keep Functions because they are used in the public API of Gradle/AGP/KGP
+# Keep FunctionX because they are used in the public API of Gradle/AGP/KGP
 -keep class kotlin.jvm.functions.** { *; }
+
+# Keep Unit for kts compatibility, functions in a Gradle extension returning a relocated Unit won't work
+-keep class kotlin.Unit
 
 # We need to keep type arguments (Signature) for Gradle to be able to instantiate abstract models like `Property`
 -keepattributes Signature,Exceptions,*Annotation*,InnerClasses,PermittedSubclasses,EnclosingMethod,Deprecated,SourceFile,LineNumberTable
