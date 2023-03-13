@@ -3,7 +3,7 @@
 A collection of convention plugins that are used internally at Freeletics. The available plugins can be separated
 into 4 groups:
 
-- [monorepo plugin](monorepo/README.md) which are specific to the structure of the Freeletics Android mono repository,
+- [monorepo plugins](monorepo/README.md) which are specific to the structure of the Freeletics Android mono repository,
   provide more defaults and are more opinionated
 - [common plugins](common/README.md) which share the same basic configuration of the monorepo plugins but don't require
   a specific module structure. We are using these for some secondary repositories.
