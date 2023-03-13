@@ -9,6 +9,7 @@
   platformAutomerge: true,
   platformCommit: true,
   assignAutomerge: true,
+  reviewers: ["gabrielittner"],
   rebaseWhen: "conflicted",
   prBodyTemplate: "{{{header}}}{{{table}}}{{{notes}}}{{{changelogs}}}{{{controls}}}{{{footer}}}",
   prBodyColumns: ["Package", "Change", "Age"],
@@ -16,16 +17,26 @@
   ignoreDeps: [
   ],
   packageRules: [
-    //
-    //
-    // CUSTOM CHANGELOGS
-    //
-    //
     {
       matchPackageNames: [
-        "gradle"
+        "com.gradle:gradle-enterprise-gradle-plugin"
       ],
-      prBodyNotes: "[Changelog](https://docs.gradle.org/{{{newVersion}}}/release-notes.html)"
+      registryUrls: ["https://plugins.gradle.org/m2/"],
+      prBodyNotes: "[Changelog](https://plugins.gradle.org/plugin/com.gradle.enterprise)"
+    },
+    {
+      matchPackageNames: [
+        "org.gradle.toolchains:foojay-resolver"
+      ],
+      registryUrls: ["https://plugins.gradle.org/m2/"],
+      prBodyNotes: "[Changelog](https://plugins.gradle.org/plugin/org.gradle.toolchains.foojay-resolver)"
+    },
+    {
+      matchPackageNames: [
+        "com.google.firebase:firebase-crashlytics-gradle"
+      ],
+      registryUrls: ["https://dl.google.com/android/maven2"],
+      prBodyNotes: "[Changelog](https://firebase.google.com/support/release-notes/android)"
     }
   ]
 }
