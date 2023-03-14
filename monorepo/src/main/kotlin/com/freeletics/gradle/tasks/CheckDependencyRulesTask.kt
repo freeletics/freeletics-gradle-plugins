@@ -102,7 +102,6 @@ abstract class CheckDependencyRulesTask : DefaultTask() {
             }
         }
 
-        @Suppress("UnstableApiUsage")
         private fun Project.registerCheckDependencyRulesTask(
             configuration: Configuration,
             allowedProjectTypes: List<ProjectType>,

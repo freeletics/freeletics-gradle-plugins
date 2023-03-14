@@ -9,7 +9,6 @@ internal fun Project.configureStandaloneLint() {
     }
 }
 
-@Suppress("UnstableApiUsage")
 internal fun Lint.configure(project: Project) {
     lintConfig = project.rootProject.file("gradle/lint.xml")
 

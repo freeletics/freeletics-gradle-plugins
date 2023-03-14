@@ -43,7 +43,6 @@ abstract class AppExtension(project: Project) : FreeleticsAndroidExtension(proje
         }
     }
 
-    @Suppress("UnstableApiUsage")
     fun minify(vararg files: File) {
         project.androidApp {
             buildTypes.getByName("release") {

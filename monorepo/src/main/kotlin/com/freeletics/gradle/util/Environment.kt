@@ -33,7 +33,6 @@ internal const val QA = "qa"
  * between the prefix and suffix. For example `fpg.app.config.google.client_id.production` with `DEFAULT` as
  * `environmentName` will result in `DEFAULT_GOOGLE_CLIENT_ID`.
  */
-@Suppress("UnstableApiUsage")
 internal fun VariantDimension.environmentBuildConfigFields(
     environment: String,
     environmentName: String,
@@ -60,7 +59,6 @@ internal fun VariantDimension.environmentBuildConfigFields(
     resValues(project.stringProperties("fgp.${appType.name}.res.", propertySuffix, environment), generatedPrefix)
 }
 
-@Suppress("UnstableApiUsage")
 internal fun VariantDimension.buildConfigFields(
     properties: List<Pair<String, String>>,
     generatedPrefix: String,
@@ -70,7 +68,6 @@ internal fun VariantDimension.buildConfigFields(
     }
 }
 
-@Suppress("UnstableApiUsage")
 internal fun VariantDimension.resValues(
     properties: List<Pair<String, String>>,
     generatedPrefix: String,

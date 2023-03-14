@@ -40,10 +40,10 @@ abstract class FreeleticsAndroidExtension(project: Project) : FreeleticsBaseExte
         project.plugins.apply("org.jetbrains.kotlin.plugin.parcelize")
     }
 
-    @Suppress("UnstableApiUsage")
     fun enableCompose() {
         val project = this.project
         project.android {
+            @Suppress("UnstableApiUsage")
             buildFeatures.compose = true
 
             composeOptions {
@@ -65,30 +65,30 @@ abstract class FreeleticsAndroidExtension(project: Project) : FreeleticsBaseExte
         }
     }
 
-    @Suppress("UnstableApiUsage")
     fun enableViewBinding() {
         project.android {
+            @Suppress("UnstableApiUsage")
             buildFeatures.viewBinding = true
         }
     }
 
-    @Suppress("UnstableApiUsage")
     fun enableAndroidResources() {
         project.android {
+            @Suppress("UnstableApiUsage")
             buildFeatures.androidResources = true
         }
     }
 
-    @Suppress("UnstableApiUsage")
     fun enableBuildConfig() {
         project.android {
+            @Suppress("UnstableApiUsage")
             buildFeatures.buildConfig = true
         }
     }
 
-    @Suppress("UnstableApiUsage")
     fun enableResValues() {
         project.android {
+            @Suppress("UnstableApiUsage")
             buildFeatures.resValues = true
         }
     }
@@ -119,7 +119,6 @@ abstract class FreeleticsAndroidExtension(project: Project) : FreeleticsBaseExte
         }
     }
 
-    @Suppress("UnstableApiUsage")
     @JvmOverloads
     fun enableAndroidTests(
         testInstrumentationRunner: String = "androidx.test.runner.AndroidJUnitRunner",
@@ -134,6 +133,7 @@ abstract class FreeleticsAndroidExtension(project: Project) : FreeleticsBaseExte
                 this.testInstrumentationRunnerArguments += testInstrumentationRunnerArguments
             }
 
+            @Suppress("UnstableApiUsage")
             testOptions {
                 this.execution = execution
                 this.animationsDisabled = animationsDisabled

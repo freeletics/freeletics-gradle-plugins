@@ -27,7 +27,6 @@ abstract class AppPlugin : Plugin<Project> {
         extension.enableAndroidResources()
         extension.enableResValues()
 
-        @Suppress("UnstableApiUsage")
         target.androidApp {
             defaultConfig.targetSdk = target.getVersion("android.target").toInt()
 
