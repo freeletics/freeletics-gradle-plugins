@@ -16,7 +16,7 @@ abstract class NavPlugin : Plugin<Project> {
         target.plugins.apply(FreeleticsAndroidBasePlugin::class.java)
         target.plugins.apply("com.autonomousapps.dependency-analysis")
 
-        val extension = target.extensions.create("freeletics", NavExtension::class.java)
+        val extension = target.extensions.create("freeletics", FreeleticsAndroidExtension::class.java)
 
         extension.minSdkVersion(target.appType()?.minSdkVersion(target))
         extension.enableParcelize()
@@ -27,22 +27,15 @@ abstract class NavPlugin : Plugin<Project> {
             addTestDependencies(target)
         }
 
-        target.afterEvaluate {
-            target.registerCheckDependencyRulesTasks(
-                allowedProjectTypes = listOf(ProjectType.FEATURE_NAV),
-                allowedDependencyProjectTypes = listOfNotNull(
-                    ProjectType.CORE_API,
-                    ProjectType.CORE_TESTING,
-                    ProjectType.DOMAIN_API,
-                    ProjectType.DOMAIN_TESTING,
-                    // TODO remove when nav modules don't depend on legacy modules anymore
-                    if (extension.allowLegacyDependencies) {
-                        ProjectType.LEGACY
-                    } else {
-                        null
-                    },
-                ),
-            )
+        target.registerCheckDependencyRulesTasks(
+            allowedProjectTypes = listOf(ProjectType.FEATURE_NAV),
+            allowedDependencyProjectTypes = listOf(
+                ProjectType.CORE_API,
+                ProjectType.CORE_TESTING,
+                ProjectType.DOMAIN_API,
+                ProjectType.DOMAIN_TESTING,
+            ),
+        )
         }
     }
 }
