@@ -36,6 +36,5 @@ abstract class NavPlugin : Plugin<Project> {
                 ProjectType.DOMAIN_TESTING,
             ),
         )
-        }
     }
 }
