@@ -169,7 +169,8 @@ in the app.
 
 Applies the Crashlytics Gradle plugin and configures it for the release build type. This configuration
 does not require the Google services Gradle plugin but it expects `src/debug/res/values/google-services.xml`
-and `src/release/res/values/google-services.xml` to exist.
+and `src/release/res/values/google-services.xml` to exist. The Crashlytics mapping upload will only be enabled
+when `-Pfgp.computeInfoFromGit=true` is passed to the build.
 
 ```groovy
 freeletics {
@@ -177,7 +178,8 @@ freeletics {
 }
 ```
 
-There will also be a generated `BuildConfig.CRASHLYTICS_ENABLED` boolean field that is only `true` for CI builds.
+There will also be a generated `BuildConfig.CRASHLYTICS_ENABLED` boolean field that will only be `true` if the mapping 
+upload was enabled.
 
 
 ## `core` (Android)
