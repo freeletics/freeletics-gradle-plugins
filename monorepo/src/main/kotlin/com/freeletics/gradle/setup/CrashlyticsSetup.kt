@@ -4,7 +4,7 @@ import com.freeletics.gradle.monorepoplugins.VERSION
 import com.freeletics.gradle.tasks.ProcessGoogleResourcesTask.Companion.registerProcessGoogleResourcesTask
 import com.freeletics.gradle.util.androidApp
 import com.freeletics.gradle.util.androidComponentsApp
-import com.freeletics.gradle.util.isCiServer
+import com.freeletics.gradle.util.computeInfoFromGit
 import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
@@ -23,7 +23,12 @@ internal fun Project.configureCrashlytics() {
             }
 
             named("release") { releaseType ->
-                releaseType.buildConfigField("boolean", "CRASHLYTICS_ENABLED", "$isCiServer")
+                val enabled = computeInfoFromGit.get()
+                releaseType.buildConfigField("boolean", "CRASHLYTICS_ENABLED", "$enabled")
+                (releaseType as ExtensionAware).extensions.configure(CrashlyticsExtension::class.java) {
+                    it.mappingFileUploadEnabled = enabled
+                    it.nativeSymbolUploadEnabled = enabled
+                }
             }
         }
     }
