@@ -5,6 +5,11 @@ import org.gradle.api.Project
 
 private const val INJECT_BUILD_PROPERTIES_PROPERTY = "fgp.computeInfoFromGit"
 
+/**
+ * This property is used to determine whether real version information should be used for the app
+ * and whether Crashlytics should be enabled. If this is false or not set dummy values will be used
+ * for versioning and Crashlytics so that builds stay reproducible.
+ */
 internal val Project.computeInfoFromGit
     get() = booleanProperty(INJECT_BUILD_PROPERTIES_PROPERTY, false)
 
