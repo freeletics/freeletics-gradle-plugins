@@ -1,7 +1,7 @@
 [versions]
 java-target = "11"
-java-toolchain = "17"
-java-gradle = "17"
+java-toolchain = "19"
+java-gradle = "19"
 
 fl-gradle = "0.2.0"
 
