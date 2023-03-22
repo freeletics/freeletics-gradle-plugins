@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## 0.2.2 **[2023-03-22]**
+
+- don't create a `clean` task in the root plugin
+
+
 ## 0.2.1 **[2023-03-22]**
 
 #### Common
