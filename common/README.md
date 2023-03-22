@@ -117,9 +117,9 @@ java-toolchain=17
 kotlin-language=1.9
 
 # the Android minSdkVersion to use
-android-min=26
+android-min = "26"
 # the Android targetSdkVersion to use, only for app modules
-android-target=33
+android-target = "33"
 # the Android compileSdkVersion to use
 android-compile=33
 
