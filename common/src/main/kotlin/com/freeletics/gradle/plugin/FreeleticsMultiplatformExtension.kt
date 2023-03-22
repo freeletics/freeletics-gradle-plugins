@@ -3,6 +3,7 @@ package com.freeletics.gradle.plugin
 import com.freeletics.gradle.util.kotlinMultiplatform
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFrameworkConfig
 import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
@@ -22,13 +23,12 @@ abstract class FreeleticsMultiplatformExtension(project: Project) : FreeleticsBa
         createXcFramework: Boolean = false,
         configure: KotlinNativeTarget.() -> Unit = { },
     ) {
+        val xcFramework = if (createXcFramework) {
+            XCFrameworkConfig(project, frameworkName)
+        } else {
+            null
+        }
         project.kotlinMultiplatform {
-            val xcFramework = if (createXcFramework) {
-                XCFrameworkConfig(project, frameworkName)
-            } else {
-                null
-            }
-
             val iosMain = sourceSets.create("iosMain") { sourceSet ->
                 sourceSet.dependsOn(sourceSets.getByName("commonMain"))
             }
@@ -102,6 +102,20 @@ abstract class FreeleticsMultiplatformExtension(project: Project) : FreeleticsBa
             watchosX86()
             watchosX64()
             watchosSimulatorArm64()
+
+            val nativeMain = sourceSets.create("nativeMain") { sourceSet ->
+                sourceSet.dependsOn(sourceSets.getByName("commonMain"))
+            }
+            val nativeTest = sourceSets.create("nativeTest") { sourceSet ->
+                sourceSet.dependsOn(sourceSets.getByName("commonTest"))
+            }
+
+            targets.configureEach {
+                if (it.platformType == KotlinPlatformType.native) {
+                    it.compilations.getByName("main").source(nativeMain)
+                    it.compilations.getByName("test").source(nativeTest)
+                }
+            }
         }
     }
 }
