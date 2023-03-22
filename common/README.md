@@ -121,7 +121,7 @@ android-min = "26"
 # the Android targetSdkVersion to use, only for app modules
 android-target = "33"
 # the Android compileSdkVersion to use
-android-compile=33
+android-compile = "33"
 
 [libraries]
 # if this is present coreLibraryDesugaring will be enabled and this dependency is automatically added 
