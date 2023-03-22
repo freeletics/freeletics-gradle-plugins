@@ -65,7 +65,7 @@ fl-whetstone-compiler = { module = "com.freeletics.mad:whetstone-compiler", vers
 ```
 
 
-## Android Library projects
+## Android projects
 
 Applies:
 - `com.android.library`
@@ -91,7 +91,10 @@ General features:
 
 ```groovy
 plugins {
+    // for library projects
     id("com.freeletics.gradle.common.android").version("<latest-version>")
+    // for app projects
+    id("com.freeletics.gradle.common.android.app").version("<latest-version>")
 }
 ```
 
@@ -114,9 +117,11 @@ java-toolchain=17
 kotlin-language=1.9
 
 # the Android minSdkVersion to use
-android.min=26
+android-min = "26"
+# the Android targetSdkVersion to use, only for app modules
+android-target = "33"
 # the Android compileSdkVersion to use
-android.compile=34
+android-compile = "33"
 
 [libraries]
 # if this is present coreLibraryDesugaring will be enabled and this dependency is automatically added 
