@@ -1,5 +1,6 @@
 package com.freeletics.gradle.plugin
 
+import com.android.build.api.dsl.ApplicationDefaultConfig
 import com.android.build.api.variant.HasAndroidTestBuilder
 import com.freeletics.gradle.setup.configure
 import com.freeletics.gradle.setup.defaultTestSetup
@@ -45,6 +46,9 @@ abstract class FreeleticsAndroidBasePlugin : Plugin<Project> {
 
             compileSdk = getVersion("android.compile").toInt()
             defaultConfig.minSdk = getVersion("android.min").toInt()
+            (defaultConfig as? ApplicationDefaultConfig)?.let {
+                it.targetSdk = getVersion("android.target").toInt()
+            }
 
             // default all features to false, they will be enabled through FreeleticsAndroidExtension
             buildFeatures {
