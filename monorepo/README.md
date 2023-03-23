@@ -62,19 +62,19 @@ Add the following to the `libs` version catalog:
 ```toml
 [versions]
 # the Java version that the Java and Kotlin compilers will target
-java-target=11
+java-target = "11"
 # the Java version that is used to run the Java and Kotlin compilers and various other tasks
-java-toolchain=17
+java-toolchain = "17"
 
 # optional, the Kotlin language version to use
-kotlin-language=1.9
+kotlin-language = "1.8"
 
 # the Android minSdkVersion to use
-android.min=26
+android-min = "26"
 # the Android target to use
-android.target=34
+android-target = "34"
 # the Android compileSdkVersion to use
-android.compile=34
+android-compile = "34"
 
 [libraries]
 # if this is present coreLibraryDesugaring will be enabled and this dependency is automatically added 

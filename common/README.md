@@ -109,12 +109,12 @@ Add the following to the `libs` version catalog:
 ```toml
 [versions]
 # the Java version that the Java and Kotlin compilers will target
-java-target=11
+java-target = "11"
 # the Java version that is used to run the Java and Kotlin compilers and various other tasks
-java-toolchain=17
+java-toolchain = "17"
 
 # optional, the Kotlin language version to use
-kotlin-language=1.9
+kotlin-language = "1.8"
 
 # the Android minSdkVersion to use
 android-min = "26"
@@ -218,12 +218,12 @@ Add the following to the `libs` version catalog:
 ```toml
 [versions]
 # the Java version that the Java and Kotlin compilers will target
-java-target=11
+java-target = "11"
 # the Java version that is used to run the Java and Kotlin compilers and various other tasks
-java-toolchain=17
+java-toolchain = "17"
 
 # optional, the Kotlin language version to use
-kotlin-language=1.9
+kotlin-language = "1.8"
 ```
 
 ### Android Lint
@@ -261,12 +261,12 @@ Add the following to the `libs` version catalog:
 ```toml
 [versions]
 # the Java version that the Java and Kotlin compilers will target
-java-target=11
+java-target = "11"
 # the Java version that is used to run the Java and Kotlin compilers and various other tasks
-java-toolchain=17
+java-toolchain = "17"
 
 # optional, the Kotlin language version to use
-kotlin-language=1.9
+kotlin-language= "1.8"
 ```
 
 ### Adding targets
@@ -329,12 +329,12 @@ Add the following to the `libs` version catalog:
 ```toml
 [versions]
 # the Java version that the Java and Kotlin compilers will target
-java-target=11
+java-target = "11"
 # the Java version that is used to run the Java and Kotlin compilers and various other tasks
-java-toolchain=17
+java-toolchain = "17"
 
 # optional, the Kotlin language version to use
-kotlin-language=1.9
+kotlin-language = "1.8"
 
 [libraries]
 # will automatically be added and shaded
