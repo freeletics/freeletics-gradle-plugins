@@ -67,7 +67,7 @@ java-target = "11"
 java-toolchain = "17"
 
 # optional, the Kotlin language version to use
-kotlin-language = "1.8.10"
+kotlin-language = "1.8"
 
 # the Android minSdkVersion to use
 android-min = "26"

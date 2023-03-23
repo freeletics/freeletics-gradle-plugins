@@ -114,7 +114,7 @@ java-target = "11"
 java-toolchain = "17"
 
 # optional, the Kotlin language version to use
-kotlin-language = "1.8.10"
+kotlin-language = "1.8"
 
 # the Android minSdkVersion to use
 android-min = "26"
@@ -223,7 +223,7 @@ java-target = "11"
 java-toolchain = "17"
 
 # optional, the Kotlin language version to use
-kotlin-language = "1.8.10"
+kotlin-language = "1.8"
 ```
 
 ### Android Lint
@@ -266,7 +266,7 @@ java-target = "11"
 java-toolchain = "17"
 
 # optional, the Kotlin language version to use
-kotlin-language= "1.8.10"
+kotlin-language= "1.8"
 ```
 
 ### Adding targets
@@ -334,7 +334,7 @@ java-target = "11"
 java-toolchain = "17"
 
 # optional, the Kotlin language version to use
-kotlin-language = "1.8.10"
+kotlin-language = "1.8"
 
 [libraries]
 # will automatically be added and shaded
