@@ -59,8 +59,9 @@ abstract class AppExtension(project: Project) : FreeleticsAndroidExtension(proje
         project.configureLicensee()
     }
 
-    fun crashReporting() {
-        project.configureCrashlytics()
+    @JvmOverloads
+    fun crashReporting(uploadNativeSymbols: Boolean = false) {
+        project.configureCrashlytics(uploadNativeSymbols)
     }
 
     fun versionFromGit(gitTagName: String) {
