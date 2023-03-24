@@ -9,7 +9,7 @@ import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
 
-internal fun Project.configureCrashlytics() {
+internal fun Project.configureCrashlytics(uploadNativeSymbols: Boolean) {
     plugins.apply("com.google.firebase.crashlytics")
 
     androidApp {
@@ -27,7 +27,7 @@ internal fun Project.configureCrashlytics() {
                 releaseType.buildConfigField("boolean", "CRASHLYTICS_ENABLED", "$enabled")
                 (releaseType as ExtensionAware).extensions.configure(CrashlyticsExtension::class.java) {
                     it.mappingFileUploadEnabled = enabled
-                    it.nativeSymbolUploadEnabled = enabled
+                    it.nativeSymbolUploadEnabled = enabled && uploadNativeSymbols
                 }
             }
         }
