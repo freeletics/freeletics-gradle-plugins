@@ -19,7 +19,7 @@ bestpractices = "0.9"
 gradle-enterprise = "3.12.5"
 gradle-toolchain = "0.4.0"
 gr8 = "0.7"
-publish = "0.24.0"
+publish = "0.25.1"
 
 junit = "4.13.2"
 truth = "1.1.3"
