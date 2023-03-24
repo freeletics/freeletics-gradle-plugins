@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+## 0.2.3 **[2023-03-24]**
+
+- Make uploading native symbols to Crashlytics optional by adding a boolean parameter to `enableCrashReporting(...)`. This
+  defaults to `false`.
+- When using the oss publish plugin automatically apply Dokka and disable Dokka for `-SNAPSHOT` builds.
+
+
 ## 0.2.2 **[2023-03-22]**
 
 - don't create a `clean` task in the root plugin
