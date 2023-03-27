@@ -52,7 +52,7 @@ abstract class SettingsPlugin : Plugin<Settings> {
                         }
 
                         content.filter {
-                            it.includeGroupByRegex("com\\.freeletics\\.internal.*")
+                            it.includeGroupByRegex("^com\\.freeletics\\.internal.*")
                             // manually uploaded because only published on jitpack
                             it.includeModule("com.github.kamikat.moshi-jsonapi", "core")
                             it.includeModule("com.github.kamikat.moshi-jsonapi", "retrofit-converter")
@@ -64,16 +64,18 @@ abstract class SettingsPlugin : Plugin<Settings> {
                     content.forRepository { handler.google() }
 
                     content.filter {
-                        it.includeGroupByRegex("com\\.android.*")
-                        it.includeGroupByRegex("androidx\\..*")
-                        it.includeGroupByRegex("android\\..*")
+                        it.includeGroupByRegex("^com\\.android.*")
+                        it.includeGroupByRegex("^android\\..*")
+                        // all of AndroidX except for androidx.compose.compiler and -SNAPSHOT versions
+                        it.includeVersionByRegex("^androidx\\..*(?<!compose\\.compiler)\$", ".*", ".*(?<!-SNAPSHOT)\$")
+                        // androidx.compose.compiler but not dev versions because they come from a different repository
+                        it.includeVersionByRegex("^androidx.compose.compiler\$", ".*", "^((?!-dev-k).)*\$")
 
                         it.includeGroup("com.google.android.exoplayer")
                         it.includeGroup("com.google.android.material")
                         it.includeGroup("com.google.android.gms")
                         it.includeGroup("com.google.android.play")
                         it.includeGroup("com.google.android.datatransport")
-                        it.includeGroup("com.google.android.flexbox")
                         it.includeGroup("com.google.firebase")
                         it.includeGroup("com.google.testing.platform")
                         it.includeGroup("com.google.android.apps.common.testing.accessibility.framework")
@@ -84,12 +86,16 @@ abstract class SettingsPlugin : Plugin<Settings> {
                     content.forRepository { handler.gradlePluginPortal() }
 
                     content.filter {
-                        it.includeGroupByRegex("com.gradle.*")
-                        it.includeGroupByRegex("org.gradle.*")
+                        it.includeGroupByRegex("^com.gradle.*")
+                        it.includeGroupByRegex("^org.gradle.*")
                     }
                 }
 
-                handler.mavenCentral()
+                handler.mavenCentral {
+                    it.mavenContent { content ->
+                        content.releasesOnly()
+                    }
+                }
             }
 
             // TODO https://youtrack.jetbrains.com/issue/KT-51379
