@@ -9,15 +9,31 @@ abstract class SettingsExtension(private val settings: Settings) {
             management.repositories { handler ->
                 handler.maven {
                     it.setUrl("https://oss.sonatype.org/content/repositories/snapshots/")
+                    it.mavenContent { content ->
+                        content.snapshotsOnly()
+                    }
                 }
                 handler.maven {
                     it.setUrl("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+                    it.mavenContent { content ->
+                        content.snapshotsOnly()
+                    }
                 }
                 handler.maven {
                     it.setUrl("https://androidx.dev/storage/compose-compiler/repository/")
+
+                    it.mavenContent { content ->
+                        // limit to androidx.compose.compiler dev versions
+                        content.includeVersionByRegex("^androidx.compose.compiler\$", ".*", ".+-dev-k.+")
+                    }
                 }
                 handler.maven {
                     it.setUrl("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/bootstrap")
+                    it.mavenContent { content ->
+                        // limit to org.jetbrains.kotlin artifacts with -dev- or -release-
+                        content.includeVersionByRegex("^org.jetbrains.kotlin.*", ".*", ".*-(dev|release)-.*")
+
+                    }
                 }
                 handler.mavenLocal()
             }
