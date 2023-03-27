@@ -21,7 +21,6 @@ abstract class SettingsExtension(private val settings: Settings) {
                 }
                 handler.maven {
                     it.setUrl("https://androidx.dev/storage/compose-compiler/repository/")
-
                     it.mavenContent { content ->
                         // limit to androidx.compose.compiler dev versions
                         content.includeVersionByRegex("^androidx.compose.compiler\$", ".*", ".+-dev-k.+")
