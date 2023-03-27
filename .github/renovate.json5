@@ -37,6 +37,12 @@
       ],
       registryUrls: ["https://dl.google.com/android/maven2"],
       prBodyNotes: "[Changelog](https://firebase.google.com/support/release-notes/android)"
+    },
+    {
+      matchPackagePatterns: [
+        "^com.freeletics.gradle"
+      ],
+      groupName: "Freeletics Gradle Plugin"
     }
   ]
 }

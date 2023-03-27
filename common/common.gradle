@@ -20,6 +20,11 @@ gradlePlugin {
             implementationClass = "com.freeletics.gradle.plugin.FreeleticsAndroidPlugin"
         }
 
+        commonAndroidAppPlugin {
+            id = "com.freeletics.gradle.common.android.app"
+            implementationClass = "com.freeletics.gradle.plugin.FreeleticsAndroidAppPlugin"
+        }
+
         commonJvmPlugin {
             id = "com.freeletics.gradle.common.jvm"
             implementationClass = "com.freeletics.gradle.plugin.FreeleticsJvmPlugin"

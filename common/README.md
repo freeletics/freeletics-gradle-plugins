@@ -65,7 +65,7 @@ fl-whetstone-compiler = { module = "com.freeletics.mad:whetstone-compiler", vers
 ```
 
 
-## Android Library projects
+## Android projects
 
 Applies:
 - `com.android.library`
@@ -91,7 +91,10 @@ General features:
 
 ```groovy
 plugins {
+    // for library projects
     id("com.freeletics.gradle.common.android").version("<latest-version>")
+    // for app projects
+    id("com.freeletics.gradle.common.android.app").version("<latest-version>")
 }
 ```
 
@@ -106,17 +109,19 @@ Add the following to the `libs` version catalog:
 ```toml
 [versions]
 # the Java version that the Java and Kotlin compilers will target
-java-target=11
+java-target = "11"
 # the Java version that is used to run the Java and Kotlin compilers and various other tasks
-java-toolchain=17
+java-toolchain = "17"
 
 # optional, the Kotlin language version to use
-kotlin-language=1.9
+kotlin-language = "1.8"
 
 # the Android minSdkVersion to use
-android.min=26
+android-min = "26"
+# the Android targetSdkVersion to use, only for app modules
+android-target = "33"
 # the Android compileSdkVersion to use
-android.compile=34
+android-compile = "33"
 
 [libraries]
 # if this is present coreLibraryDesugaring will be enabled and this dependency is automatically added 
@@ -213,12 +218,12 @@ Add the following to the `libs` version catalog:
 ```toml
 [versions]
 # the Java version that the Java and Kotlin compilers will target
-java-target=11
+java-target = "11"
 # the Java version that is used to run the Java and Kotlin compilers and various other tasks
-java-toolchain=17
+java-toolchain = "17"
 
 # optional, the Kotlin language version to use
-kotlin-language=1.9
+kotlin-language = "1.8"
 ```
 
 ### Android Lint
@@ -256,12 +261,12 @@ Add the following to the `libs` version catalog:
 ```toml
 [versions]
 # the Java version that the Java and Kotlin compilers will target
-java-target=11
+java-target = "11"
 # the Java version that is used to run the Java and Kotlin compilers and various other tasks
-java-toolchain=17
+java-toolchain = "17"
 
 # optional, the Kotlin language version to use
-kotlin-language=1.9
+kotlin-language= "1.8"
 ```
 
 ### Adding targets
@@ -324,12 +329,12 @@ Add the following to the `libs` version catalog:
 ```toml
 [versions]
 # the Java version that the Java and Kotlin compilers will target
-java-target=11
+java-target = "11"
 # the Java version that is used to run the Java and Kotlin compilers and various other tasks
-java-toolchain=17
+java-toolchain = "17"
 
 # optional, the Kotlin language version to use
-kotlin-language=1.9
+kotlin-language = "1.8"
 
 [libraries]
 # will automatically be added and shaded

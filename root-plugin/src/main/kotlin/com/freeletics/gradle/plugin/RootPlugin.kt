@@ -113,12 +113,5 @@ abstract class RootPlugin : Plugin<Project> {
                 }
             }
         }
-
-        // root project does not have a clean task by default
-        target.tasks.register("clean", Delete::class.java) {
-            it.description = "Clean project"
-            it.group = "Build"
-            it.delete = setOf(target.buildDir)
-        }
     }
 }

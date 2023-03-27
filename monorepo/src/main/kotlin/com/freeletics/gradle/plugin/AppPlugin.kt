@@ -28,8 +28,6 @@ abstract class AppPlugin : Plugin<Project> {
         extension.enableResValues()
 
         target.androidApp {
-            defaultConfig.targetSdk = target.getVersion("android.target").toInt()
-
             signingConfigs {
                 named("debug") {
                     val debugKeystore = target.rootProject.file("gradle/debug.keystore")
