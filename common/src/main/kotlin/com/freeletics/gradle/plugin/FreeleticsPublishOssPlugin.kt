@@ -12,6 +12,9 @@ abstract class FreeleticsPublishOssPlugin : Plugin<Project> {
         target.plugins.apply("org.jetbrains.dokka")
         target.plugins.apply("com.vanniktech.maven.publish")
 
+        val extension = target.extensions.findByName("freeletics") as FreeleticsBaseExtension
+        extension.explicitApi()
+        
         target.extensions.configure(MavenPublishBaseExtension::class.java) {
             it.publishToMavenCentral(SonatypeHost.DEFAULT, automaticRelease = true)
             it.signAllPublications()
