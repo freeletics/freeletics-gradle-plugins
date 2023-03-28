@@ -4,7 +4,8 @@ import org.gradle.api.initialization.Settings
 
 abstract class SettingsExtension(private val settings: Settings) {
 
-    fun snapshots() {
+    @JvmOverloads
+    fun snapshots(androidXBuildId: String? = null) {
         settings.dependencyResolutionManagement { management ->
             management.repositories { handler ->
                 handler.maven {
@@ -24,6 +25,16 @@ abstract class SettingsExtension(private val settings: Settings) {
                     it.mavenContent { content ->
                         // limit to androidx.compose.compiler dev versions
                         content.includeVersionByRegex("^androidx.compose.compiler\$", ".*", ".+-dev-k.+")
+                    }
+                }
+                if (androidXBuildId != null) {
+                    handler.maven {
+                        it.setUrl("https://androidx.dev/snapshots/builds/$androidXBuildId/artifacts/repository/")
+                        it.mavenContent { content ->
+                            // limit to AndroidX and SNAPSHOT versions
+                            content.includeGroup("^androidx\\..*")
+                            content.snapshotsOnly()
+                        }
                     }
                 }
                 handler.maven {
