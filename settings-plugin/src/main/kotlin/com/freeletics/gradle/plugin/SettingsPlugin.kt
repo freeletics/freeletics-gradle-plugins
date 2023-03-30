@@ -37,6 +37,10 @@ abstract class SettingsPlugin : Plugin<Settings> {
 
         target.enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
+        if (target.providers.gradleProperty("fgp.stableConfigurationCache").getOrElse("true").toBoolean()) {
+            target.enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
+        }
+
         target.dependencyResolutionManagement { management ->
             @Suppress("UnstableApiUsage")
             management.repositories { handler ->
