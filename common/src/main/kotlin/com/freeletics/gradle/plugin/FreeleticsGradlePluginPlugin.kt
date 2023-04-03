@@ -1,15 +1,12 @@
 package com.freeletics.gradle.plugin
 
-import com.autonomousapps.tasks.CodeSourceExploderTask
 import com.freeletics.gradle.setup.setupGr8
-import com.freeletics.gradle.tasks.GenerateVersion
+import com.freeletics.gradle.tasks.GenerateVersionClass
 import com.freeletics.gradle.util.getDependency
 import com.freeletics.gradle.util.java
 import com.freeletics.gradle.util.stringProperty
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.jvm.tasks.Jar
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 abstract class FreeleticsGradlePluginPlugin : Plugin<Project> {
 
@@ -31,35 +28,18 @@ abstract class FreeleticsGradlePluginPlugin : Plugin<Project> {
     }
 
     private fun Project.generateVersionTask() {
-        val directory = layout.buildDirectory.dir("generated/pluginVersion")
-
-        java {
-            sourceSets.findByName("main")!!.java.srcDir(directory)
-        }
-
-        val generateVersion = tasks.register("generatePluginVersion", GenerateVersion::class.java) { task ->
+        val generateVersion = tasks.register("generatePluginVersion", GenerateVersionClass::class.java) { task ->
+            val artifactId = property("POM_ARTIFACT_ID")!!.toString()
             val packageName = stringProperty("GROUP").map { group ->
-                val artifactId = property("POM_ARTIFACT_ID")!!.toString()
                 "$group.$artifactId".replace("-", "")
             }
             task.packageName.set(packageName)
             task.version.set(stringProperty("VERSION_NAME"))
-            val file = packageName.map { "${it.replace(".", "/")}/Version.kt" }
-            task.outputFile.set(directory.flatMap { dir -> dir.file(file) })
+            task.outputDirectory.set(layout.buildDirectory.dir("generated/pluginVersion"))
         }
 
-        tasks.withType(KotlinCompile::class.java).configureEach {
-            it.dependsOn(generateVersion)
-        }
-
-        tasks.withType(Jar::class.java).configureEach {
-            if (it.name == "sourcesJar") {
-                it.dependsOn(generateVersion)
-            }
-        }
-
-        tasks.withType(CodeSourceExploderTask::class.java).configureEach {
-            it.dependsOn(generateVersion)
+        java {
+            sourceSets.findByName("main")!!.java.srcDir(generateVersion)
         }
     }
 }
