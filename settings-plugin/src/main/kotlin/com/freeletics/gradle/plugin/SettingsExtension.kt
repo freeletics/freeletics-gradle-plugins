@@ -4,6 +4,10 @@ import org.gradle.api.initialization.Settings
 
 abstract class SettingsExtension(private val settings: Settings) {
 
+    /**
+     * @param androidXBuildId   buildId for androidx snapshot artifacts. Can be taken from here:
+     *                          https://androidx.dev/snapshots/builds
+     */
     @JvmOverloads
     fun snapshots(androidXBuildId: String? = null) {
         settings.dependencyResolutionManagement { management ->
