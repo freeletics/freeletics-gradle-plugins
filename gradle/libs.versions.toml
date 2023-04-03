@@ -17,7 +17,7 @@ dependency-analysis = "1.19.0"
 bestpractices = "0.9"
 gradle-enterprise = "3.12.6"
 gradle-toolchain = "0.4.0"
-gr8 = "0.7"
+gr8 = "0.8"
 publish = "0.25.1"
 dokka = "1.8.10"
 
