@@ -24,12 +24,6 @@ fun Project.configureProcessing(vararg arguments: Pair<String, String>): String 
     } else {
         plugins.apply("org.jetbrains.kotlin.kapt")
 
-        project.tasks.withType(KaptGenerateStubsTask::class.java).configureEach {
-            it.compilerOptions {
-                jvmTarget.set(project.jvmTarget)
-            }
-        }
-
         if (arguments.isNotEmpty()) {
             extensions.configure(KaptExtension::class.java) { extension ->
                 extension.mapDiagnosticLocations = true

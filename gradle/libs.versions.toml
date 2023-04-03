@@ -5,7 +5,7 @@ java-toolchain = "19"
 fl-gradle = "0.2.3"
 
 gradle-api = "8.0.2"
-kotlin = "1.8.10"
+kotlin = "1.8.20"
 android-gradle = "7.4.2"
 ksp="1.8.10-1.0.9"
 anvil = "2.4.4"
