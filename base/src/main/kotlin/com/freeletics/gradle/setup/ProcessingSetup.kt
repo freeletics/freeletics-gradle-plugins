@@ -7,7 +7,7 @@ import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 
-fun Project.configureProcessing(vararg arguments: Pair<String, String>): String {
+public fun Project.configureProcessing(vararg arguments: Pair<String, String>): String {
     val useKsp = booleanProperty("fgp.kotlin.ksp", true)
     if (useKsp.get()) {
         plugins.apply("com.google.devtools.ksp")

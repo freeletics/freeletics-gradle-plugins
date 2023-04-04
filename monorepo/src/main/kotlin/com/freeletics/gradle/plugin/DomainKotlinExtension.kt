@@ -2,7 +2,7 @@ package com.freeletics.gradle.plugin
 
 import org.gradle.api.Project
 
-abstract class DomainKotlinExtension(project: Project) : FreeleticsJvmExtension(project) {
+public abstract class DomainKotlinExtension(project: Project) : FreeleticsJvmExtension(project) {
 
-    var allowLegacyDependencies = false
+    public var allowLegacyDependencies: Boolean = false
 }

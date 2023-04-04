@@ -7,12 +7,12 @@ import org.gradle.api.Project
 import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.Internal
 
-abstract class ProcessGoogleResourcesTask : Copy() {
+public abstract class ProcessGoogleResourcesTask : Copy() {
     // the Crashlytics plugin needs this property
     @Internal
-    var intermediateDir: File? = null
+    public var intermediateDir: File? = null
 
-    companion object {
+    internal companion object {
         fun Project.registerProcessGoogleResourcesTask(variant: Variant) {
             val variantName = variant.name.capitalize()
             val variantResourceRoot = file(

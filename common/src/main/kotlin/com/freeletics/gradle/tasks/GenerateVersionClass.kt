@@ -7,19 +7,19 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 
-abstract class GenerateVersionClass : DefaultTask() {
+public abstract class GenerateVersionClass : DefaultTask() {
 
     @get:Input
-    abstract val packageName: Property<String>
+    public abstract val packageName: Property<String>
 
     @get:Input
-    abstract val version: Property<String>
+    public abstract val version: Property<String>
 
     @get:OutputDirectory
-    abstract val outputDirectory: DirectoryProperty
+    public abstract val outputDirectory: DirectoryProperty
 
     @TaskAction
-    fun generate() {
+    public fun generate() {
         val file = outputDirectory.file("${packageName.get().replace(".", "/")}/Version.kt").get().asFile
         file.writeText(
             """
