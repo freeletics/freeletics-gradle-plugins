@@ -4,20 +4,50 @@ import org.gradle.api.initialization.Settings
 
 abstract class SettingsExtension(private val settings: Settings) {
 
-    fun snapshots() {
+    /**
+     * @param androidXBuildId   buildId for androidx snapshot artifacts. Can be taken from here:
+     *                          https://androidx.dev/snapshots/builds
+     */
+    @JvmOverloads
+    fun snapshots(androidXBuildId: String? = null) {
         settings.dependencyResolutionManagement { management ->
             management.repositories { handler ->
                 handler.maven {
                     it.setUrl("https://oss.sonatype.org/content/repositories/snapshots/")
+                    it.mavenContent { content ->
+                        content.snapshotsOnly()
+                    }
                 }
                 handler.maven {
                     it.setUrl("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+                    it.mavenContent { content ->
+                        content.snapshotsOnly()
+                    }
                 }
                 handler.maven {
                     it.setUrl("https://androidx.dev/storage/compose-compiler/repository/")
+                    it.mavenContent { content ->
+                        // limit to androidx.compose.compiler dev versions
+                        content.includeVersionByRegex("^androidx.compose.compiler\$", ".*", ".+-dev-k.+")
+                    }
+                }
+                if (androidXBuildId != null) {
+                    handler.maven {
+                        it.setUrl("https://androidx.dev/snapshots/builds/$androidXBuildId/artifacts/repository/")
+                        it.mavenContent { content ->
+                            // limit to AndroidX and SNAPSHOT versions
+                            content.includeGroup("^androidx\\..*")
+                            content.snapshotsOnly()
+                        }
+                    }
                 }
                 handler.maven {
                     it.setUrl("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/bootstrap")
+                    it.mavenContent { content ->
+                        // limit to org.jetbrains.kotlin artifacts with -dev- or -release-
+                        content.includeVersionByRegex("^org.jetbrains.kotlin.*", ".*", ".*-(dev|release)-.*")
+
+                    }
                 }
                 handler.mavenLocal()
             }

@@ -84,7 +84,6 @@ abstract class FreeleticsMultiplatformExtension(project: Project) : FreeleticsBa
 
             linuxX64()
 
-            iosArm32()
             iosArm64()
             iosX64()
             iosSimulatorArm64()
@@ -99,7 +98,6 @@ abstract class FreeleticsMultiplatformExtension(project: Project) : FreeleticsBa
 
             watchosArm32()
             watchosArm64()
-            watchosX86()
             watchosX64()
             watchosSimulatorArm64()
 

@@ -11,7 +11,6 @@ import org.gradle.api.plugins.JavaPluginExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
-import org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 fun Project.java(action: JavaPluginExtension.() -> Unit) {
@@ -35,10 +34,8 @@ fun Project.kotlinMultiplatform(action: KotlinMultiplatformExtension.() -> Unit)
 @Suppress("UnusedReceiverParameter") // until KGP provides something like this
 fun KotlinProjectExtension.compilerOptions(project: Project, action: KotlinJvmCompilerOptions.() -> Unit) {
     project.tasks.withType(KotlinCompile::class.java).configureEach {
-        if (it !is KaptGenerateStubsTask) {
-            it.compilerOptions {
-                action()
-            }
+        it.compilerOptions {
+            action()
         }
     }
 }
