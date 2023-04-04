@@ -3,7 +3,7 @@ package com.freeletics.gradle.setup
 import com.gradleup.gr8.Gr8Extension
 import org.gradle.api.Project
 
-fun Project.setupGr8() {
+internal fun Project.setupGr8() {
     val shadeConfiguration = configurations.create("shade")
 
     configurations.named("compileOnly").configure {

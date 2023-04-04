@@ -12,27 +12,27 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 private val Project.libs: VersionCatalog
     get() = extensions.getByType(VersionCatalogsExtension::class.java).named("libs")
 
-fun Project.getDependency(name: String): Provider<MinimalExternalModuleDependency> {
+public fun Project.getDependency(name: String): Provider<MinimalExternalModuleDependency> {
     return libs.findLibrary(name).orElseThrow { NoSuchElementException("Could not find library $name") }
 }
 
-fun Project.getDependencyOrNull(name: String): Provider<MinimalExternalModuleDependency>? {
+public fun Project.getDependencyOrNull(name: String): Provider<MinimalExternalModuleDependency>? {
     return libs.findLibrary(name).orElseGet { null }
 }
 
-fun Project.getVersion(name: String): String {
+public fun Project.getVersion(name: String): String {
     return getVersionOrNull(name) ?: throw NoSuchElementException("Could not find version $name")
 }
 
-fun Project.getVersionOrNull(name: String): String? {
+public fun Project.getVersionOrNull(name: String): String? {
     return libs.findVersion(name).orElseGet { null }?.requiredVersion
 }
 
-val Project.javaTargetVersion: JavaVersion
+public val Project.javaTargetVersion: JavaVersion
     get() = JavaVersion.toVersion(getVersion("java-target"))
 
-val Project.jvmTarget
+public val Project.jvmTarget
     get() = JvmTarget.fromTarget(getVersion("java-target"))
 
-val Project.javaToolchainVersion
+public val Project.javaToolchainVersion
     get() = JavaLanguageVersion.of(getVersion("java-toolchain"))

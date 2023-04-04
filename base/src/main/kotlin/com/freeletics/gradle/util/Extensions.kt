@@ -13,26 +13,26 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-fun Project.java(action: JavaPluginExtension.() -> Unit) {
+public fun Project.java(action: JavaPluginExtension.() -> Unit) {
     extensions.configure(JavaPluginExtension::class.java) {
         it.action()
     }
 }
 
-fun Project.kotlin(action: KotlinProjectExtension.() -> Unit) {
+public fun Project.kotlin(action: KotlinProjectExtension.() -> Unit) {
     extensions.configure(KotlinProjectExtension::class.java) {
         it.action()
     }
 }
 
-fun Project.kotlinMultiplatform(action: KotlinMultiplatformExtension.() -> Unit) {
+public fun Project.kotlinMultiplatform(action: KotlinMultiplatformExtension.() -> Unit) {
     extensions.configure(KotlinMultiplatformExtension::class.java) {
         it.action()
     }
 }
 
 @Suppress("UnusedReceiverParameter") // until KGP provides something like this
-fun KotlinProjectExtension.compilerOptions(project: Project, action: KotlinJvmCompilerOptions.() -> Unit) {
+public fun KotlinProjectExtension.compilerOptions(project: Project, action: KotlinJvmCompilerOptions.() -> Unit) {
     project.tasks.withType(KotlinCompile::class.java).configureEach {
         it.compilerOptions {
             action()
@@ -40,37 +40,37 @@ fun KotlinProjectExtension.compilerOptions(project: Project, action: KotlinJvmCo
     }
 }
 
-fun Project.android(action: CommonExtension<*, *, *, *>.() -> Unit) {
+public fun Project.android(action: CommonExtension<*, *, *, *>.() -> Unit) {
     extensions.configure(CommonExtension::class.java) {
         it.action()
     }
 }
 
-fun Project.androidLibrary(action: LibraryExtension.() -> Unit) {
+public fun Project.androidLibrary(action: LibraryExtension.() -> Unit) {
     extensions.configure(LibraryExtension::class.java) {
         it.action()
     }
 }
 
-fun Project.androidApp(action: ApplicationExtension.() -> Unit) {
+public fun Project.androidApp(action: ApplicationExtension.() -> Unit) {
     extensions.configure(ApplicationExtension::class.java) {
         it.action()
     }
 }
 
-fun Project.androidComponents(action: AndroidComponentsExtension<*, *, *>.() -> Unit) {
+public fun Project.androidComponents(action: AndroidComponentsExtension<*, *, *>.() -> Unit) {
     extensions.configure(AndroidComponentsExtension::class.java) {
         it.action()
     }
 }
 
-fun Project.androidComponentsLibrary(action: LibraryAndroidComponentsExtension.() -> Unit) {
+public fun Project.androidComponentsLibrary(action: LibraryAndroidComponentsExtension.() -> Unit) {
     extensions.configure(LibraryAndroidComponentsExtension::class.java) {
         it.action()
     }
 }
 
-fun Project.androidComponentsApp(action: ApplicationAndroidComponentsExtension.() -> Unit) {
+public fun Project.androidComponentsApp(action: ApplicationAndroidComponentsExtension.() -> Unit) {
     extensions.configure(ApplicationAndroidComponentsExtension::class.java) {
         it.action()
     }

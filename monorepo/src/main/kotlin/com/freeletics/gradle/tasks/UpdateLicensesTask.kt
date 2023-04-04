@@ -3,8 +3,8 @@ package com.freeletics.gradle.tasks
 import org.gradle.api.Project
 import org.gradle.api.tasks.Copy
 
-abstract class UpdateLicensesTask : Copy() {
-    companion object {
+public abstract class UpdateLicensesTask : Copy() {
+    internal companion object {
         fun Project.registerUpdateLicensesTask() {
             tasks.register("updateLicenses", UpdateLicensesTask::class.java) { task ->
                 task.from("$buildDir/reports/licensee/release/artifacts.json")

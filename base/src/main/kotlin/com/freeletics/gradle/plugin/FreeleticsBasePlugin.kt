@@ -13,7 +13,7 @@ import org.gradle.jvm.tasks.Jar
 import org.gradle.jvm.toolchain.JvmVendorSpec
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
-abstract class FreeleticsBasePlugin : Plugin<Project> {
+public abstract class FreeleticsBasePlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         target.makeJarsReproducible()

@@ -2,8 +2,8 @@ package com.freeletics.gradle.util
 
 import org.gradle.api.Project
 
-enum class ProjectType(
-    val fullName: String,
+public enum class ProjectType(
+    internal val fullName: String,
 ) {
     APP(":app:*"),
     CORE_API(":core:*:api"),
@@ -20,11 +20,11 @@ enum class ProjectType(
     LEGACY(":legacy-freeletics:*"),
 }
 
-fun Project.projectType(): ProjectType {
+internal fun Project.projectType(): ProjectType {
     return path.toProjectType()
 }
 
-fun String.toProjectType(): ProjectType {
+internal fun String.toProjectType(): ProjectType {
     return when {
         startsWith(":app:") -> ProjectType.APP
         startsWith(":core:") && endsWith(":api") -> ProjectType.CORE_API
