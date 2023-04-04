@@ -11,7 +11,7 @@ import org.gradle.kotlin.dsl.jvm
 import org.gradle.toolchains.foojay.FoojayToolchainResolver
 import org.gradle.toolchains.foojay.FoojayToolchainsPlugin
 
-abstract class SettingsPlugin : Plugin<Settings> {
+public abstract class SettingsPlugin : Plugin<Settings> {
 
     override fun apply(target: Settings) {
         target.plugins.apply(FoojayToolchainsPlugin::class.java)

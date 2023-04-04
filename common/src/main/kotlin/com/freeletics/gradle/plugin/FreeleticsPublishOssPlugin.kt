@@ -6,7 +6,7 @@ import com.vanniktech.maven.publish.SonatypeHost
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-abstract class FreeleticsPublishOssPlugin : Plugin<Project> {
+public abstract class FreeleticsPublishOssPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         target.plugins.apply("org.jetbrains.dokka")

@@ -2,7 +2,7 @@ package com.freeletics.gradle.util
 
 import org.gradle.api.Project
 
-data class AppType(
+internal data class AppType(
     val name: String,
 ) {
     fun minSdkVersion(project: Project): Int? {
@@ -10,11 +10,11 @@ data class AppType(
     }
 }
 
-fun Project.appType(): AppType? {
+internal fun Project.appType(): AppType? {
     return path.toAppType()
 }
 
-fun String.toAppType(): AppType? {
+internal fun String.toAppType(): AppType? {
     if (startsWith(":app:")) {
         return AppType(substringAfter(":app:"))
     }

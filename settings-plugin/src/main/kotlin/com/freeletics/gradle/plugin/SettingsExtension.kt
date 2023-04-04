@@ -2,14 +2,14 @@ package com.freeletics.gradle.plugin
 
 import org.gradle.api.initialization.Settings
 
-abstract class SettingsExtension(private val settings: Settings) {
+public abstract class SettingsExtension(private val settings: Settings) {
 
     /**
      * @param androidXBuildId   buildId for androidx snapshot artifacts. Can be taken from here:
      *                          https://androidx.dev/snapshots/builds
      */
     @JvmOverloads
-    fun snapshots(androidXBuildId: String? = null) {
+    public fun snapshots(androidXBuildId: String? = null) {
         settings.dependencyResolutionManagement { management ->
             management.repositories { handler ->
                 handler.maven {
@@ -55,7 +55,7 @@ abstract class SettingsExtension(private val settings: Settings) {
     }
 
     @JvmOverloads
-    fun includeMad(path: String = "../mad") {
+    public fun includeMad(path: String = "../mad") {
         settings.includeBuild(path) { build ->
             build.dependencySubstitution {
                 it.substitute(it.module("com.freeletics.mad:state-machine")).using(it.project(":state-machine"))
@@ -104,7 +104,7 @@ abstract class SettingsExtension(private val settings: Settings) {
     }
 
     @JvmOverloads
-    fun includeFlowRedux(path: String = "../flowredux") {
+    public fun includeFlowRedux(path: String = "../flowredux") {
         settings.includeBuild(path) { build ->
             build.dependencySubstitution {
                 it.substitute(it.module("com.freeletics.flowredux:flowredux")).using(it.project(":flowredux"))

@@ -8,7 +8,7 @@ import com.freeletics.gradle.util.stringProperty
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-abstract class FreeleticsGradlePluginPlugin : Plugin<Project> {
+public abstract class FreeleticsGradlePluginPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         target.plugins.apply("java-gradle-plugin")
