@@ -23,7 +23,7 @@ internal fun filesToFormat(
     matcher: PathMatcher,
 ): Flow<Path> {
     if (files != null) {
-        return files.asFlow().filter { matcher.matches(it.fileName) }
+        return files.asFlow().filter { matcher.matches(it) }
     }
 
     return channelFlow {
