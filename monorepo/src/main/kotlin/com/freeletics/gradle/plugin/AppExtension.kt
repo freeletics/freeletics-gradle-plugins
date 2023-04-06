@@ -23,28 +23,28 @@ import com.freeletics.gradle.util.environmentBuildConfigFields
 import java.io.File
 import org.gradle.api.Project
 
-abstract class AppExtension(project: Project) : FreeleticsAndroidExtension(project) {
+public abstract class AppExtension(project: Project) : FreeleticsAndroidExtension(project) {
 
-    fun applicationId(applicationId: String) {
+    public fun applicationId(applicationId: String) {
         project.androidApp {
             defaultConfig.applicationId = applicationId
         }
     }
 
-    fun applicationIdSuffix(buildType: String, suffix: String) {
+    public fun applicationIdSuffix(buildType: String, suffix: String) {
         project.androidApp {
             buildTypes.getByName(buildType).applicationIdSuffix = suffix
         }
     }
 
-    fun limitLanguagesTo(vararg configs: String) {
+    public fun limitLanguagesTo(vararg configs: String) {
         project.androidApp {
             defaultConfig.resourceConfigurations += configs
         }
     }
 
     @Suppress("UnstableApiUsage")
-    fun minify(vararg files: File) {
+    public fun minify(vararg files: File) {
         project.androidApp {
             buildTypes.getByName("release") {
                 it.isMinifyEnabled = true
@@ -55,16 +55,16 @@ abstract class AppExtension(project: Project) : FreeleticsAndroidExtension(proje
         project.dependencies.add("api", "com.freeletics.gradle:minify-common:$VERSION")
     }
 
-    fun checkLicenses() {
+    public fun checkLicenses() {
         project.configureLicensee()
     }
 
     @JvmOverloads
-    fun crashReporting(uploadNativeSymbols: Boolean = false) {
+    public fun crashReporting(uploadNativeSymbols: Boolean = false) {
         project.configureCrashlytics(uploadNativeSymbols)
     }
 
-    fun versionFromGit(gitTagName: String) {
+    public fun versionFromGit(gitTagName: String) {
         val versionNameTask = project.registerComputeVersionNameTask(gitTagName)
         val versionCodeTask = project.registerComputeVersionCodeTask(gitTagName)
         val gitShaTask = project.registerComputeGitShaTask()
@@ -83,7 +83,7 @@ abstract class AppExtension(project: Project) : FreeleticsAndroidExtension(proje
         }
     }
 
-    fun freeleticsBackend() {
+    public fun freeleticsBackend() {
         environmentBuildConfig(
             environments = listOf(PRODUCTION, INTEGRATION, QA),
             defaultDebugEnvironment = INTEGRATION,
@@ -113,7 +113,7 @@ abstract class AppExtension(project: Project) : FreeleticsAndroidExtension(proje
      * For example `fpg.app.config.google.client_id.production` with `DEFAULT` as `environmentName` will result in
      * `DEFAULT_GOOGLE_CLIENT_ID`.
      */
-    fun environmentBuildConfig(
+    public fun environmentBuildConfig(
         environments: List<String>,
         defaultDebugEnvironment: String,
         defaultReleaseEnvironment: String,

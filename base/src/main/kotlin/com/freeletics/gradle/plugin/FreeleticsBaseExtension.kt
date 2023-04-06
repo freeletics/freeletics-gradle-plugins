@@ -6,7 +6,7 @@ import com.freeletics.gradle.util.compilerOptions
 import com.freeletics.gradle.util.kotlin
 import org.gradle.api.Project
 
-abstract class FreeleticsBaseExtension(protected val project: Project) {
+public abstract class FreeleticsBaseExtension(protected val project: Project) {
 
     fun explicitApi() {
         project.kotlin {

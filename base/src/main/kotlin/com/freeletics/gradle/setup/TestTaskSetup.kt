@@ -2,7 +2,7 @@ package com.freeletics.gradle.setup
 
 import org.gradle.api.tasks.testing.Test
 
-fun Test.defaultTestSetup() {
+public fun Test.defaultTestSetup() {
     val projectName = project.path
         .replace("projects", "")
         .replaceFirst(":", "")

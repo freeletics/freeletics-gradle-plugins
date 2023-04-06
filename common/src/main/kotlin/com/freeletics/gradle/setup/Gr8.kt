@@ -5,7 +5,7 @@ import org.gradle.api.Project
 import org.gradle.api.attributes.Usage
 import org.gradle.api.attributes.Usage.JAVA_API
 
-fun Project.setupGr8() {
+internal fun Project.setupGr8() {
     val shadeConfiguration = configurations.create("shade")
 
     // make all shaded dependencies available during compilation

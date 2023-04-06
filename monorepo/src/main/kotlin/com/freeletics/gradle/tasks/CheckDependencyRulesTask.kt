@@ -20,24 +20,24 @@ import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.TaskProvider
 
 @CacheableTask
-abstract class CheckDependencyRulesTask : DefaultTask() {
+public abstract class CheckDependencyRulesTask : DefaultTask() {
     @get:Input
-    abstract val projectPath: Property<String>
+    public abstract val projectPath: Property<String>
 
     @get:Input
-    abstract val allowedProjectTypes: ListProperty<ProjectType>
+    public abstract val allowedProjectTypes: ListProperty<ProjectType>
 
     @get:Input
-    abstract val allowedDependencyProjectTypes: ListProperty<ProjectType>
+    public abstract val allowedDependencyProjectTypes: ListProperty<ProjectType>
 
     @get:Input
-    abstract val artifactIds: Property<ResolvedComponentResult>
+    public abstract val artifactIds: Property<ResolvedComponentResult>
 
     @get:OutputFile
-    abstract val outputFile: RegularFileProperty
+    public abstract val outputFile: RegularFileProperty
 
     @TaskAction
-    fun check() {
+    public fun check() {
         val projectPath = this.projectPath.get()
         val component = this.artifactIds.get()
         val errors = component.dependencies
@@ -79,7 +79,7 @@ abstract class CheckDependencyRulesTask : DefaultTask() {
         }
     }
 
-    companion object {
+    internal companion object {
         private val CATEGORY = Attribute.of("org.gradle.category", String::class.java)
 
         fun Project.registerCheckDependencyRulesTasks(

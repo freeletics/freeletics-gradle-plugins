@@ -13,7 +13,7 @@ import com.freeletics.gradle.util.stringProperty
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-abstract class AppPlugin : Plugin<Project> {
+public abstract class AppPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.plugins.apply("com.android.application")
         target.plugins.apply("org.jetbrains.kotlin.android")

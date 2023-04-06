@@ -2,7 +2,7 @@ package com.freeletics.gradle.plugin
 
 import org.gradle.api.Project
 
-abstract class DomainAndroidExtension(project: Project) : FreeleticsAndroidExtension(project) {
+public abstract class DomainAndroidExtension(project: Project) : FreeleticsAndroidExtension(project) {
 
-    var allowLegacyDependencies = false
+    public var allowLegacyDependencies: Boolean = false
 }

@@ -9,7 +9,7 @@ import com.freeletics.gradle.util.appType
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-abstract class FeaturePlugin : Plugin<Project> {
+public abstract class FeaturePlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.plugins.apply("com.android.library")
         target.plugins.apply("org.jetbrains.kotlin.android")

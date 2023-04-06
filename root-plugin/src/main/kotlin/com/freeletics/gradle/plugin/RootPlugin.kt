@@ -7,7 +7,7 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.tasks.Delete
 
-abstract class RootPlugin : Plugin<Project> {
+public abstract class RootPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.plugins.apply("com.autonomousapps.dependency-analysis")
 
