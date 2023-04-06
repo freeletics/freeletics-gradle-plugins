@@ -23,6 +23,7 @@ internal fun Project.setupGr8() {
     // needs to be an extra configuration because we want to filter it and compileOnly can't be resolved
     val shadeClassPathConfiguration = configurations.create("shadeClassPath") {
         it.extendsFrom(configurations.getByName("compileOnly"))
+        it.extendsFrom(configurations.getByName("runtimeClasspath"))
         it.attributes { attributes ->
             attributes.attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage::class.java, JAVA_API))
             // TODO workaround for KGP, it ships multiple variants for separate Gradle versions and we end up having
@@ -40,7 +41,6 @@ internal fun Project.setupGr8() {
         it.exclude(mapOf("group" to "org.jetbrains", "module" to "annotations"))
         // included in gradle-api and would cause duplicate class issues
         it.exclude(mapOf("group" to "javax.inject", "module" to "javax.inject"))
-
     }
 
     extensions.configure(Gr8Extension::class.java) { extension ->
