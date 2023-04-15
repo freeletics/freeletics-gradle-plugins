@@ -38,7 +38,6 @@ public abstract class FreeleticsAndroidBasePlugin : Plugin<Project> {
         addNoOpLogger.invoke(loggerFactory, "com.android.build.api.component.impl.MutableMapBackedUpWithMapProperty")
     }
 
-    @Suppress("UnstableApiUsage")
     private fun Project.androidSetup() {
         val desugarLibrary = project.getDependencyOrNull("android.desugarjdklibs")
         android {
@@ -51,6 +50,7 @@ public abstract class FreeleticsAndroidBasePlugin : Plugin<Project> {
             }
 
             // default all features to false, they will be enabled through FreeleticsAndroidExtension
+            @Suppress("UnstableApiUsage")
             buildFeatures {
                 androidResources = false
                 viewBinding = false
@@ -103,9 +103,9 @@ public abstract class FreeleticsAndroidBasePlugin : Plugin<Project> {
         }
     }
 
-    @Suppress("UnstableApiUsage")
     private fun Project.configureUnitTests() {
         android {
+            @Suppress("UnstableApiUsage")
             testOptions {
                 unitTests.all(Test::defaultTestSetup)
             }

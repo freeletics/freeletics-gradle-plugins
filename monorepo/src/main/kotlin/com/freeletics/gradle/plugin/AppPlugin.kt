@@ -27,7 +27,6 @@ public abstract class AppPlugin : Plugin<Project> {
         extension.enableAndroidResources()
         extension.enableResValues()
 
-        @Suppress("UnstableApiUsage")
         target.androidApp {
             signingConfigs {
                 named("debug") {
