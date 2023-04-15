@@ -15,6 +15,9 @@ dependencyAnalysis {
             onUsedTransitiveDependencies {
                 exclude(":base")
             }
+            onUnusedDependencies {
+                exclude("() -> java.io.File?")
+            }
         }
     }
 }

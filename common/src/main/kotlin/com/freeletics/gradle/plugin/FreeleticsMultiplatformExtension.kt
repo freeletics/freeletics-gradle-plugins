@@ -8,17 +8,17 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFrameworkConfig
 import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 
-abstract class FreeleticsMultiplatformExtension(project: Project) : FreeleticsBaseExtension(project) {
+public abstract class FreeleticsMultiplatformExtension(project: Project) : FreeleticsBaseExtension(project) {
 
     @JvmOverloads
-    fun addJvmTarget(configure: KotlinJvmTarget.() -> Unit = { }) {
+    public fun addJvmTarget(configure: KotlinJvmTarget.() -> Unit = { }) {
         project.kotlinMultiplatform {
             jvm(configure = configure)
         }
     }
 
     @JvmOverloads
-    fun addIosTargets(
+    public fun addIosTargets(
         frameworkName: String,
         createXcFramework: Boolean = false,
         configure: KotlinNativeTarget.() -> Unit = { },
@@ -74,7 +74,7 @@ abstract class FreeleticsMultiplatformExtension(project: Project) : FreeleticsBa
         }
     }
 
-    fun addCommonTargets() {
+    public fun addCommonTargets() {
         project.kotlinMultiplatform {
             jvm()
 
@@ -84,7 +84,6 @@ abstract class FreeleticsMultiplatformExtension(project: Project) : FreeleticsBa
 
             linuxX64()
 
-            iosArm32()
             iosArm64()
             iosX64()
             iosSimulatorArm64()
@@ -99,7 +98,6 @@ abstract class FreeleticsMultiplatformExtension(project: Project) : FreeleticsBa
 
             watchosArm32()
             watchosArm64()
-            watchosX86()
             watchosX64()
             watchosSimulatorArm64()
 

@@ -19,7 +19,7 @@ import org.gradle.api.tasks.testing.Test
 import org.slf4j.ILoggerFactory
 import org.slf4j.LoggerFactory
 
-abstract class FreeleticsAndroidBasePlugin : Plugin<Project> {
+public abstract class FreeleticsAndroidBasePlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         target.plugins.apply(FreeleticsBasePlugin::class.java)

@@ -1,0 +1,11 @@
+plugins {
+    alias(libs.plugins.fl.jvm)
+    alias(libs.plugins.fl.publish)
+}
+
+dependencies {
+    api(libs.clikt)
+    implementation(libs.coroutines)
+    implementation(libs.ktlint)
+    implementation(libs.ktlint.rules)
+}

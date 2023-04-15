@@ -13,22 +13,22 @@ import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.TaskProvider
 
-abstract class ComputeVersionNameTask : DefaultTask() {
+public abstract class ComputeVersionNameTask : DefaultTask() {
 
     @get:Input
-    abstract val computeFromGit: Property<Boolean>
+    public abstract val computeFromGit: Property<Boolean>
 
     @get:Input
-    abstract val gitTagName: Property<String>
+    public abstract val gitTagName: Property<String>
 
     @get:Input
-    abstract val gitRootDirectory: Property<File>
+    public abstract val gitRootDirectory: Property<File>
 
     @get:OutputFile
-    abstract val outputFile: RegularFileProperty
+    public abstract val outputFile: RegularFileProperty
 
     @TaskAction
-    fun action() {
+    public fun action() {
         val versionName = if (computeFromGit.get()) {
             val git = RealGit(gitRootDirectory.get())
             computeVersionName(git, gitTagName.get())

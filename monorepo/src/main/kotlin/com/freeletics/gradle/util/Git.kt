@@ -7,7 +7,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.concurrent.TimeUnit
 
-interface Git {
+internal interface Git {
     fun branch(): String
     fun commitSha(): String
     fun commitTimestamp(): String
@@ -15,7 +15,7 @@ interface Git {
     fun commitsSince(date: LocalDate): Int
 }
 
-class RealGit(
+internal class RealGit(
     private val rootDir: File,
 ) : Git {
 

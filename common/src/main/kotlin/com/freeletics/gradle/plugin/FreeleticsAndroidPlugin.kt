@@ -3,7 +3,7 @@ package com.freeletics.gradle.plugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-abstract class FreeleticsAndroidPlugin : Plugin<Project> {
+public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         target.plugins.apply("com.android.library")

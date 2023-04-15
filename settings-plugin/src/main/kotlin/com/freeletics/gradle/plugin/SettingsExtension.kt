@@ -2,9 +2,14 @@ package com.freeletics.gradle.plugin
 
 import org.gradle.api.initialization.Settings
 
-abstract class SettingsExtension(private val settings: Settings) {
+public abstract class SettingsExtension(private val settings: Settings) {
 
-    fun snapshots() {
+    /**
+     * @param androidXBuildId   buildId for androidx snapshot artifacts. Can be taken from here:
+     *                          https://androidx.dev/snapshots/builds
+     */
+    @JvmOverloads
+    public fun snapshots(androidXBuildId: String? = null) {
         settings.dependencyResolutionManagement { management ->
             management.repositories { handler ->
                 handler.maven {
@@ -26,6 +31,16 @@ abstract class SettingsExtension(private val settings: Settings) {
                         content.includeVersionByRegex("^androidx.compose.compiler\$", ".*", ".+-dev-k.+")
                     }
                 }
+                if (androidXBuildId != null) {
+                    handler.maven {
+                        it.setUrl("https://androidx.dev/snapshots/builds/$androidXBuildId/artifacts/repository/")
+                        it.mavenContent { content ->
+                            // limit to AndroidX and SNAPSHOT versions
+                            content.includeGroup("^androidx\\..*")
+                            content.snapshotsOnly()
+                        }
+                    }
+                }
                 handler.maven {
                     it.setUrl("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/bootstrap")
                     it.mavenContent { content ->
@@ -40,7 +55,7 @@ abstract class SettingsExtension(private val settings: Settings) {
     }
 
     @JvmOverloads
-    fun includeMad(path: String = "../mad") {
+    public fun includeMad(path: String = "../mad") {
         settings.includeBuild(path) { build ->
             build.dependencySubstitution {
                 it.substitute(it.module("com.freeletics.mad:state-machine")).using(it.project(":state-machine"))
@@ -89,7 +104,7 @@ abstract class SettingsExtension(private val settings: Settings) {
     }
 
     @JvmOverloads
-    fun includeFlowRedux(path: String = "../flowredux") {
+    public fun includeFlowRedux(path: String = "../flowredux") {
         settings.includeBuild(path) { build ->
             build.dependencySubstitution {
                 it.substitute(it.module("com.freeletics.flowredux:flowredux")).using(it.project(":flowredux"))

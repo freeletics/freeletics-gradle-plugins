@@ -13,7 +13,7 @@ import org.gradle.jvm.tasks.Jar
 import org.gradle.jvm.toolchain.JvmVendorSpec
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
-abstract class FreeleticsBasePlugin : Plugin<Project> {
+public abstract class FreeleticsBasePlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         target.makeJarsReproducible()
@@ -95,6 +95,8 @@ abstract class FreeleticsBasePlugin : Plugin<Project> {
                     // Support inferring type arguments based on only self upper bounds of the corresponding type parameters
                     // https://kotlinlang.org/docs/whatsnew1530.html#improvements-to-type-inference-for-recursive-generic-types
                     "-Xself-upper-bound-inference",
+                    // Enable faster jar file system
+                    "-Xuse-fast-jar-file-system"
                 )
             }
         }
