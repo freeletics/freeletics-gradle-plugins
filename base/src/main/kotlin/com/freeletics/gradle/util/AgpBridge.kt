@@ -4,7 +4,6 @@ import com.android.build.api.dsl.ApplicationBuildFeatures
 import com.android.build.api.dsl.BuildFeatures
 import com.android.build.api.dsl.LibraryBuildFeatures
 
-@Suppress("UnstableApiUsage")
 internal var BuildFeatures.dataBinding: Boolean?
     get() = when (this) {
         is ApplicationBuildFeatures -> dataBinding
@@ -17,7 +16,6 @@ internal var BuildFeatures.dataBinding: Boolean?
         else -> throw UnsupportedOperationException("")
     }
 
-@Suppress("UnstableApiUsage")
 internal var BuildFeatures.androidResources: Boolean?
     get() = when (this) {
         is LibraryBuildFeatures -> androidResources

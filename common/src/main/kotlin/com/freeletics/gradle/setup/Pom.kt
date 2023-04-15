@@ -4,10 +4,10 @@ import com.freeletics.gradle.util.stringProperty
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import org.gradle.api.Project
 
-@Suppress("UnstableApiUsage")
 internal fun Project.configurePom(includeLicense: Boolean) {
     val repoName = stringProperty("POM_REPO_NAME").get()
     extensions.configure(MavenPublishBaseExtension::class.java) {
+        @Suppress("UnstableApiUsage")
         it.pom { pom ->
             pom.url.set("https://github.com/freeletics/$repoName/")
 
