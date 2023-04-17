@@ -37,6 +37,8 @@ By adding the following snipped to `settings.gradle` it is possible to add vario
 ```groovy
 freeletics {
     snapshots()
+    // or to include one of the AndroidX snapshot repositories from https://androidx.dev/snapshots/builds use
+    snapshots("<build id>")
 }
 ```
 
