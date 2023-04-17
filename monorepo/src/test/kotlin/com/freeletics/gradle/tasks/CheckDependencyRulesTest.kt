@@ -4,7 +4,7 @@ import com.freeletics.gradle.util.ProjectType
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
-class CheckDependencyRulesTest {
+internal class CheckDependencyRulesTest {
 
     @Test
     fun `project has supported type and dependency has supported type`() {

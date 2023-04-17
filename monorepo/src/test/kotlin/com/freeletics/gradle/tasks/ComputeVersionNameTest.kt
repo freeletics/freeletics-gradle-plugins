@@ -4,7 +4,7 @@ import com.freeletics.gradle.util.FakeGit
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
-class ComputeVersionNameTest {
+internal class ComputeVersionNameTest {
 
     @Test
     fun `when not on a release or hotfix branch and nothing is tagged it returns version 0 with git sha`() {

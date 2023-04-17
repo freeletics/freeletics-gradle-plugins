@@ -2,7 +2,7 @@ package com.freeletics.gradle.util
 
 import java.time.LocalDate
 
-class FakeGit(
+internal class FakeGit(
     var branch: String = "main",
     var commitSha: String = "abcdefghij",
     var commitTimestamp: String = "2022-10-21 16:36:11 +0200",
