@@ -9,6 +9,6 @@ internal data class KtLintError(
     val corrected: Boolean
 ) {
     fun print(prefix: String) {
-        println("$prefix: ${file}:${error.line} ${error.ruleId} ${error.detail}")
+        println("$prefix ${file}:${error.line} ${error.ruleId} ${error.detail}")
     }
 }
