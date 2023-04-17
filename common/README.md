@@ -323,6 +323,7 @@ kotlin.stdlib.default.dependency=false
 # used for the package name of the generated VERSION constant, usually also used for publishing
 GROUP=com.example
 POM_ARTIFACT_ID=gradle-plugin
+VERSION_NAME=1.0.0
 ```
 
 Add the following to the `libs` version catalog:
@@ -346,8 +347,6 @@ gradle-api = { module = "dev.gradleplugins:gradle-api", version = "..." }
 Create a file called `rules.pro` in the root of the project and/or next to the projects build file containing (in
 a multi project setup it is possible to split the config and put the shared parts into the root `rules.pro` file):
 ```
-# The Gradle API jar isn't added to the classpath, ignore the missing symbols
--ignorewarnings
 # Allow to make some classes public so that we can repackage them without breaking package-private members
 -allowaccessmodification
 
