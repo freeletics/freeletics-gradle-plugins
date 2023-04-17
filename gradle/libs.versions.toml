@@ -2,7 +2,7 @@
 java-target = "11"
 java-toolchain = "19"
 
-fl-gradle = "0.2.3"
+fl-gradle = "0.3.0"
 
 gradle-api = "8.0.2"
 kotlin = "1.8.20"
