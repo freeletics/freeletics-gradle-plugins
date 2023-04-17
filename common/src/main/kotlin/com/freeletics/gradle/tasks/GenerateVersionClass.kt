@@ -20,7 +20,10 @@ public abstract class GenerateVersionClass : DefaultTask() {
 
     @TaskAction
     public fun generate() {
-        val file = outputDirectory.file("${packageName.get().replace(".", "/")}/Version.kt").get().asFile
+        val path = packageName.get().replace(".", "/")
+        val parentFolder = outputDirectory.dir(path).get().asFile
+        parentFolder.mkdirs()
+        val file = parentFolder.resolve("Version.kt")
         file.writeText(
             """
             // Generated file. Do not edit!
