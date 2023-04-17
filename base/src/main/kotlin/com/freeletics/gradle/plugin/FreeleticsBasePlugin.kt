@@ -11,6 +11,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.jvm.tasks.Jar
 import org.gradle.jvm.toolchain.JvmVendorSpec
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 public abstract class FreeleticsBasePlugin : Plugin<Project> {
@@ -76,7 +77,9 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
             }
 
             compilerOptions(project) {
-                jvmTarget.set(project.jvmTarget)
+                if (this is KotlinJvmCompilerOptions) {
+                    jvmTarget.set(project.jvmTarget)
+                }
                 getVersionOrNull("kotlin-language")?.let {
                     languageVersion.set(KotlinVersion.fromVersion(it))
                 }
