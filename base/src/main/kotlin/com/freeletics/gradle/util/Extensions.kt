@@ -8,9 +8,11 @@ import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPluginExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinCommonCompilerOptions
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 public fun Project.java(action: JavaPluginExtension.() -> Unit) {
@@ -32,11 +34,9 @@ public fun Project.kotlinMultiplatform(action: KotlinMultiplatformExtension.() -
 }
 
 @Suppress("UnusedReceiverParameter") // until KGP provides something like this
-public fun KotlinProjectExtension.compilerOptions(project: Project, action: KotlinJvmCompilerOptions.() -> Unit) {
-    project.tasks.withType(KotlinCompile::class.java).configureEach {
-        it.compilerOptions {
-            action()
-        }
+public fun KotlinProjectExtension.compilerOptions(project: Project, action: KotlinCommonCompilerOptions.() -> Unit) {
+    project.tasks.withType(KotlinCompilationTask::class.java).configureEach {
+        it.compilerOptions(action)
     }
 }
 

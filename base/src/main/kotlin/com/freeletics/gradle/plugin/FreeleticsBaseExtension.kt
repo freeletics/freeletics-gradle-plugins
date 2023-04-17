@@ -21,7 +21,7 @@ public abstract class FreeleticsBaseExtension(protected val project: Project) {
 
     fun optIn(vararg optIn: String) {
         project.kotlin {
-            this.compilerOptions(project) {
+            compilerOptions(project) {
                 freeCompilerArgs.addAll(optIn.map { "-opt-in=$it" })
             }
         }
