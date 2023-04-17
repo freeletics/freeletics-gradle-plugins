@@ -26,13 +26,6 @@ internal fun Project.setupGr8() {
         it.extendsFrom(configurations.getByName("runtimeClasspath"))
         it.attributes { attributes ->
             attributes.attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage::class.java, JAVA_API))
-            // TODO workaround for KGP, it ships multiple variants for separate Gradle versions and we end up having
-            //  both the one without classifier and the regular one on the classpath which causes duplicate class
-            //  errors. Ideally we'd force it to only the version that matches our Gradle version but that doesn't
-            //  seem to be possible. As a workaround we set the matching attribute to Gradle 1.0 which makes us match
-            //  only the general variant. Downside of this is that R8 will still have some missing class warnings
-            //  which need to be suppressed with `-dontwarn org.jetbrains.kotlin.**`
-            attributes.attribute(GradlePluginApiVersion.GRADLE_PLUGIN_API_VERSION_ATTRIBUTE, objects.named(GradlePluginApiVersion::class.java, "1.0"))
         }
 
         // already added to shade
