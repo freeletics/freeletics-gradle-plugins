@@ -10,6 +10,14 @@ dependencies {
     compileOnly(libs.crashlytics.gradle)
     compileOnly(libs.licensee)
 
+    add("shadeClassPath", variantOf(libs.kotlin.gradle) { classifier('gradle76') }) {
+        exclude(group: "org.jetbrains.kotlin", module: "kotlin-gradle-plugin-api")
+    }
+    add("shadeClassPath", variantOf(libs.kotlin.gradle.api) { classifier('gradle76') })
+    add("shadeClassPath", libs.ksp)
+    add("shadeClassPath", libs.anvil.gradle)
+    add("shadeClassPath", libs.moshix.gradle)
+
     testImplementation(libs.junit)
     testImplementation(libs.truth)
 }
