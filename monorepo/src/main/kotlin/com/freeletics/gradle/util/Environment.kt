@@ -58,7 +58,7 @@ internal fun VariantDimension.environmentBuildConfigFields(
     buildConfigFields(project.stringProperties("fgp.app.config.", propertySuffix, environment), generatedPrefix)
     buildConfigFields(
         project.stringProperties("fgp.${appType.name}.config.", propertySuffix, environment),
-        generatedPrefix
+        generatedPrefix,
     )
     resValues(project.stringProperties("fgp.app.res.", propertySuffix, environment), generatedPrefix)
     resValues(project.stringProperties("fgp.${appType.name}.res.", propertySuffix, environment), generatedPrefix)

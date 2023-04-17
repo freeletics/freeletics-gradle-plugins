@@ -5,10 +5,10 @@ import com.pinterest.ktlint.core.LintError
 import com.pinterest.ktlint.core.api.EditorConfigDefaults
 import com.pinterest.ktlint.core.api.KtLintParseException
 import com.pinterest.ktlint.ruleset.standard.StandardRuleSetProvider
-import kotlinx.coroutines.channels.trySendBlocking
-import kotlinx.coroutines.flow.channelFlow
 import java.nio.file.Path
 import kotlin.io.path.writeText
+import kotlinx.coroutines.channels.trySendBlocking
+import kotlinx.coroutines.flow.channelFlow
 
 internal class KtLintFormatter(
     editorConfig: Path,
@@ -30,7 +30,7 @@ internal class KtLintFormatter(
                 col = e.col,
                 ruleId = "file-parsing",
                 detail = e.message ?: "Failed to parse file",
-                canBeAutoCorrected = false
+                canBeAutoCorrected = false,
             )
             check(trySendBlocking(KtLintError(path, error, false)).isSuccess)
         }

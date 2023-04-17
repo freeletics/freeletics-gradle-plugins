@@ -87,7 +87,7 @@ public abstract class AppExtension(project: Project) : FreeleticsAndroidExtensio
             environments = listOf(PRODUCTION, INTEGRATION, QA),
             defaultDebugEnvironment = INTEGRATION,
             defaultReleaseEnvironment = PRODUCTION,
-            fallbackEnvironment = QA
+            fallbackEnvironment = QA,
         )
     }
 
@@ -126,7 +126,7 @@ public abstract class AppExtension(project: Project) : FreeleticsAndroidExtensio
                         environmentName = DEFAULT,
                         supportedEnvironments = environments,
                         fallbackEnvironment = fallbackEnvironment,
-                        project = project
+                        project = project,
                     )
                     // contains values for all environments to enable switching between them
                     environments.forEach {
@@ -135,7 +135,7 @@ public abstract class AppExtension(project: Project) : FreeleticsAndroidExtensio
                             environmentName = it,
                             supportedEnvironments = environments,
                             fallbackEnvironment = fallbackEnvironment,
-                            project = project
+                            project = project,
                         )
                     }
                 }
@@ -146,7 +146,7 @@ public abstract class AppExtension(project: Project) : FreeleticsAndroidExtensio
                         environmentName = DEFAULT,
                         supportedEnvironments = environments,
                         fallbackEnvironment = fallbackEnvironment,
-                        project = project
+                        project = project,
                     )
                 }
             }

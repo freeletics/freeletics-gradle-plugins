@@ -51,7 +51,7 @@ public abstract class ComputeGitTimestampTask : DefaultTask() {
                     BuildConfigField(
                         type = "String",
                         value = "\"${it.asFile.readText()}\"",
-                        comment = null
+                        comment = null,
                     )
                 }
             }

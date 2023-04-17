@@ -99,7 +99,7 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                     // https://kotlinlang.org/docs/whatsnew1530.html#improvements-to-type-inference-for-recursive-generic-types
                     "-Xself-upper-bound-inference",
                     // Enable faster jar file system
-                    "-Xuse-fast-jar-file-system"
+                    "-Xuse-fast-jar-file-system",
                 )
             }
         }
@@ -113,7 +113,7 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
             "implementation",
             "kapt",
             "ksp",
-            "runtimeOnly"
+            "runtimeOnly",
         )
     }
 }
