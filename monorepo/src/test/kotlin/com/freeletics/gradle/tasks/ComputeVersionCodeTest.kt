@@ -6,7 +6,7 @@ import java.time.LocalDate
 import org.junit.Assert.assertThrows
 import org.junit.Test
 
-class ComputeVersionCodeTest {
+internal class ComputeVersionCodeTest {
 
     @Test
     fun `when on a matching release branch it returns version computed from it`() {

@@ -43,7 +43,7 @@ public class KtLintCli : CliktCommand(
     ).flag()
 
     @OptIn(FlowPreview::class)
-    override fun run() = runBlocking(Dispatchers.IO) {
+    override fun run(): Unit = runBlocking(Dispatchers.IO) {
         if (init) {
             return@runBlocking
         }
