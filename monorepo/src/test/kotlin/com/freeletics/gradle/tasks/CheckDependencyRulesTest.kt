@@ -12,7 +12,7 @@ internal class CheckDependencyRulesTest {
             ":feature:test:implementation",
             ":core:test:api",
             allowedProjectTypes = listOf(ProjectType.FEATURE_IMPLEMENTATION),
-            allowedDependencyProjectTypes = listOf(ProjectType.CORE_API)
+            allowedDependencyProjectTypes = listOf(ProjectType.CORE_API),
         )
         assertThat(result).isEmpty()
     }
@@ -23,11 +23,11 @@ internal class CheckDependencyRulesTest {
             ":feature:test:implementation",
             ":core:test:api",
             allowedProjectTypes = listOf(ProjectType.DOMAIN_API),
-            allowedDependencyProjectTypes = listOf(ProjectType.CORE_API)
+            allowedDependencyProjectTypes = listOf(ProjectType.CORE_API),
         )
         assertThat(result).containsExactly(
             ":feature:test:implementation is a :feature:*:implementation project but the current plugin only " +
-                "allows :domain:*:api"
+                "allows :domain:*:api",
         )
     }
 
@@ -37,9 +37,11 @@ internal class CheckDependencyRulesTest {
             ":feature:test:implementation",
             ":core:test:api",
             allowedProjectTypes = listOf(ProjectType.FEATURE_IMPLEMENTATION),
-            allowedDependencyProjectTypes = listOf(ProjectType.DOMAIN_API)
+            allowedDependencyProjectTypes = listOf(ProjectType.DOMAIN_API),
         )
-        assertThat(result).containsExactly(":feature:test:implementation is not allowed to depend on :core:*:api module :core:test:api")
+        assertThat(result).containsExactly(
+            ":feature:test:implementation is not allowed to depend on :core:*:api module :core:test:api",
+        )
     }
 
     @Test
@@ -48,10 +50,10 @@ internal class CheckDependencyRulesTest {
             ":feature:test:implementation",
             ":domain-freeletics:test:api",
             allowedProjectTypes = listOf(ProjectType.FEATURE_IMPLEMENTATION),
-            allowedDependencyProjectTypes = listOf(ProjectType.DOMAIN_API)
+            allowedDependencyProjectTypes = listOf(ProjectType.DOMAIN_API),
         )
         assertThat(result).containsExactly(
-            ":feature:test:implementation is not allowed to depend on freeletics module :domain-freeletics:test:api"
+            ":feature:test:implementation is not allowed to depend on freeletics module :domain-freeletics:test:api",
         )
     }
 
@@ -61,11 +63,11 @@ internal class CheckDependencyRulesTest {
             ":feature-staedium:test:implementation",
             ":domain-freeletics:test:api",
             allowedProjectTypes = listOf(ProjectType.FEATURE_IMPLEMENTATION),
-            allowedDependencyProjectTypes = listOf(ProjectType.DOMAIN_API)
+            allowedDependencyProjectTypes = listOf(ProjectType.DOMAIN_API),
         )
         assertThat(result).containsExactly(
             ":feature-staedium:test:implementation is not allowed to depend on freeletics module " +
-                ":domain-freeletics:test:api"
+                ":domain-freeletics:test:api",
         )
     }
 
@@ -75,7 +77,7 @@ internal class CheckDependencyRulesTest {
             ":feature-freeletics:test:implementation",
             ":domain-freeletics:test:api",
             allowedProjectTypes = listOf(ProjectType.FEATURE_IMPLEMENTATION),
-            allowedDependencyProjectTypes = listOf(ProjectType.DOMAIN_API)
+            allowedDependencyProjectTypes = listOf(ProjectType.DOMAIN_API),
         )
         assertThat(result).isEmpty()
     }

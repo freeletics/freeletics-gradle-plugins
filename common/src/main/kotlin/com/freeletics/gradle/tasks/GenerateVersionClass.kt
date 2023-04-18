@@ -30,7 +30,7 @@ public abstract class GenerateVersionClass : DefaultTask() {
             package ${packageName.get()}
             
             internal const val VERSION = "${version.get()}"
-            """.trimIndent()
+            """.trimIndent(),
         )
     }
 }

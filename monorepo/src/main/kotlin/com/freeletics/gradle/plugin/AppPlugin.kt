@@ -8,7 +8,6 @@ import com.freeletics.gradle.util.ProjectType
 import com.freeletics.gradle.util.androidApp
 import com.freeletics.gradle.util.androidComponents
 import com.freeletics.gradle.util.appType
-import com.freeletics.gradle.util.getVersion
 import com.freeletics.gradle.util.stringProperty
 import org.gradle.api.Plugin
 import org.gradle.api.Project

@@ -61,7 +61,7 @@ public abstract class CheckDependencyRulesTask : DefaultTask() {
                     projectPath = projectPath,
                     dependencyPath = it.projectPath,
                     allowedProjectTypes = allowedProjectTypes.get(),
-                    allowedDependencyProjectTypes = allowedDependencyProjectTypes.get()
+                    allowedDependencyProjectTypes = allowedDependencyProjectTypes.get(),
                 )
             }
             .toList()
@@ -74,7 +74,7 @@ public abstract class CheckDependencyRulesTask : DefaultTask() {
         if (errors.isNotEmpty()) {
             throw Exception(
                 "Found dependency violations. See logs or the following file for more infomation:\n" +
-                    outputFile.get().asFile.absolutePath
+                    outputFile.get().asFile.absolutePath,
             )
         }
     }
@@ -93,7 +93,7 @@ public abstract class CheckDependencyRulesTask : DefaultTask() {
                     val configurationCheck = registerCheckDependencyRulesTask(
                         it,
                         allowedProjectTypes,
-                        allowedDependencyProjectTypes
+                        allowedDependencyProjectTypes,
                     )
                     checkDependencyRules.configure { task ->
                         task.dependsOn(configurationCheck)
@@ -111,7 +111,7 @@ public abstract class CheckDependencyRulesTask : DefaultTask() {
                 it.projectPath.set(objects.property(String::class.java).value(path))
                 it.allowedProjectTypes.set(objects.listProperty(ProjectType::class.java).value(allowedProjectTypes))
                 it.allowedDependencyProjectTypes.set(
-                    objects.listProperty(ProjectType::class.java).value(allowedDependencyProjectTypes)
+                    objects.listProperty(ProjectType::class.java).value(allowedDependencyProjectTypes),
                 )
                 it.artifactIds.set(configuration.incoming.resolutionResult.rootComponent)
                 it.outputFile.set(layout.buildDirectory.file("reports/dependency-rules/${configuration.name}.txt"))
