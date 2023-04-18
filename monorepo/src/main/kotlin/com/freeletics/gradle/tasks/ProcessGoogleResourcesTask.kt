@@ -17,7 +17,7 @@ public abstract class ProcessGoogleResourcesTask : Copy() {
             val variantName = variant.name.capitalize()
             val variantResourceRoot = file(
                 "${project.buildDir}/generated/res/google-services/" +
-                    "${variant.buildType}/${variant.flavorName}"
+                    "${variant.buildType}/${variant.flavorName}",
             )
 
             tasks.register("process${variantName}GoogleServices", ProcessGoogleResourcesTask::class.java) { task ->

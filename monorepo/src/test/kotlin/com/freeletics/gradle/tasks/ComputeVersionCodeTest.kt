@@ -13,7 +13,7 @@ internal class ComputeVersionCodeTest {
         val git = FakeGit(
             branch = "release/fl/1.2.0",
             describe = "fl/v1.0.0",
-            commitsSince = 0
+            commitsSince = 0,
         )
 
         assertThat(computeVersionCode(git, "fl", LocalDate.now())).isEqualTo(1020000)
@@ -24,7 +24,7 @@ internal class ComputeVersionCodeTest {
         val git = FakeGit(
             branch = "release/fl/1.2.0",
             describe = "fl/v1.0.0",
-            commitsSince = 23
+            commitsSince = 23,
         )
 
         assertThat(computeVersionCode(git, "fl", LocalDate.now())).isEqualTo(1020023)
@@ -35,7 +35,7 @@ internal class ComputeVersionCodeTest {
         val git = FakeGit(
             branch = "release/fl/1.2.5",
             describe = "fl/v1.0.0",
-            commitsSince = 100
+            commitsSince = 100,
         )
 
         val exception = assertThrows(IllegalStateException::class.java) {
@@ -49,7 +49,7 @@ internal class ComputeVersionCodeTest {
         val git = FakeGit(
             branch = "release/fl/100.2.5",
             describe = "fl/v1.0.0",
-            commitsSince = 0
+            commitsSince = 0,
         )
 
         val exception = assertThrows(IllegalStateException::class.java) {
@@ -63,7 +63,7 @@ internal class ComputeVersionCodeTest {
         val git = FakeGit(
             branch = "release/fl/1.100.5",
             describe = "fl/v1.0.0",
-            commitsSince = 0
+            commitsSince = 0,
         )
 
         val exception = assertThrows(IllegalStateException::class.java) {
@@ -77,7 +77,7 @@ internal class ComputeVersionCodeTest {
         val git = FakeGit(
             branch = "release/fl/1.2.10",
             describe = "fl/v1.0.0",
-            commitsSince = 0
+            commitsSince = 0,
         )
 
         val exception = assertThrows(IllegalStateException::class.java) {
@@ -91,7 +91,7 @@ internal class ComputeVersionCodeTest {
         val git = FakeGit(
             branch = "hotfix/fl/1.2.5",
             describe = "fl/v1.0.0",
-            commitsSince = 0
+            commitsSince = 0,
         )
 
         assertThat(computeVersionCode(git, "fl", LocalDate.now())).isEqualTo(1020500)
@@ -102,7 +102,7 @@ internal class ComputeVersionCodeTest {
         val git = FakeGit(
             branch = "hotfix/fl/1.2.5",
             describe = "fl/v1.0.0",
-            commitsSince = 23
+            commitsSince = 23,
         )
 
         assertThat(computeVersionCode(git, "fl", LocalDate.now())).isEqualTo(1020523)
@@ -113,7 +113,7 @@ internal class ComputeVersionCodeTest {
         val git = FakeGit(
             branch = "hotfix/fl/1.2.5",
             describe = "fl/v1.0.0",
-            commitsSince = 100
+            commitsSince = 100,
         )
 
         val exception = assertThrows(IllegalStateException::class.java) {
@@ -127,7 +127,7 @@ internal class ComputeVersionCodeTest {
         val git = FakeGit(
             branch = "hotfix/fl/100.2.1",
             describe = "fl/v1.0.0",
-            commitsSince = 0
+            commitsSince = 0,
         )
 
         val exception = assertThrows(IllegalStateException::class.java) {
@@ -141,7 +141,7 @@ internal class ComputeVersionCodeTest {
         val git = FakeGit(
             branch = "hotfix/fl/1.100.1",
             describe = "fl/v1.0.0",
-            commitsSince = 0
+            commitsSince = 0,
         )
 
         val exception = assertThrows(IllegalStateException::class.java) {
@@ -155,7 +155,7 @@ internal class ComputeVersionCodeTest {
         val git = FakeGit(
             branch = "hotfix/fl/1.2.10",
             describe = "fl/v1.0.0",
-            commitsSince = 0
+            commitsSince = 0,
         )
 
         val exception = assertThrows(IllegalStateException::class.java) {
@@ -169,7 +169,7 @@ internal class ComputeVersionCodeTest {
         val git = FakeGit(
             branch = "main",
             describe = "fl/v4.3.1",
-            commitsSince = 0
+            commitsSince = 0,
         )
 
         assertThat(computeVersionCode(git, "fl", LocalDate.now())).isEqualTo(4030100)
@@ -180,7 +180,7 @@ internal class ComputeVersionCodeTest {
         val git = FakeGit(
             branch = "main",
             describe = "fl/v4.3.1",
-            commitsSince = 23
+            commitsSince = 23,
         )
 
         assertThat(computeVersionCode(git, "fl", LocalDate.now())).isEqualTo(4030123)
@@ -191,7 +191,7 @@ internal class ComputeVersionCodeTest {
         val git = FakeGit(
             branch = "main",
             describe = "fl/v4.3.1",
-            commitsSince = 100
+            commitsSince = 100,
         )
 
         val exception = assertThrows(IllegalStateException::class.java) {
@@ -205,7 +205,7 @@ internal class ComputeVersionCodeTest {
         val git = FakeGit(
             branch = "main",
             describe = "fl/v100.3.1",
-            commitsSince = 0
+            commitsSince = 0,
         )
 
         val exception = assertThrows(IllegalStateException::class.java) {
@@ -219,7 +219,7 @@ internal class ComputeVersionCodeTest {
         val git = FakeGit(
             branch = "main",
             describe = "fl/v4.100.1",
-            commitsSince = 0
+            commitsSince = 0,
         )
 
         val exception = assertThrows(IllegalStateException::class.java) {
@@ -233,7 +233,7 @@ internal class ComputeVersionCodeTest {
         val git = FakeGit(
             branch = "main",
             describe = "fl/v4.3.10",
-            commitsSince = 0
+            commitsSince = 0,
         )
 
         val exception = assertThrows(IllegalStateException::class.java) {
@@ -254,7 +254,9 @@ internal class ComputeVersionCodeTest {
         val exception = assertThrows(IllegalStateException::class.java) {
             computeVersionCode(git, "fl", date)
         }
-        assertThat(exception).hasMessageThat().isEqualTo("Version code can only be computed on main, release and hotfix branches as well as tags")
+        assertThat(exception).hasMessageThat().isEqualTo(
+            "Version code can only be computed on main, release and hotfix branches as well as tags",
+        )
     }
 
     @Test
@@ -293,7 +295,9 @@ internal class ComputeVersionCodeTest {
         val exception = assertThrows(IllegalStateException::class.java) {
             computeVersionCode(git, "fl", date)
         }
-        assertThat(exception).hasMessageThat().isEqualTo("More than 8999 commits found since the last release was created")
+        assertThat(exception).hasMessageThat().isEqualTo(
+            "More than 8999 commits found since the last release was created",
+        )
     }
 
     @Test

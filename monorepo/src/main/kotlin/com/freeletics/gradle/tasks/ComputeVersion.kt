@@ -26,7 +26,7 @@ internal fun computeVersionCode(git: Git, gitTagName: String, localDate: LocalDa
     val version = versionFromReleaseOrHotfixBranch(git, gitTagName) ?: versionFromTag(
         git,
         gitTagName,
-        exactMatch = true
+        exactMatch = true,
     )
     if (version != null) {
         // if we are on a release branch or building a tagged commit use the version to compute the version code

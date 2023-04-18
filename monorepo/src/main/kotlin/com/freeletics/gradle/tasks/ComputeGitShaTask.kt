@@ -51,7 +51,7 @@ public abstract class ComputeGitShaTask : DefaultTask() {
                     BuildConfigField(
                         type = "String",
                         value = "\"${it.asFile.readText()}\"",
-                        comment = null
+                        comment = null,
                     )
                 }
             }

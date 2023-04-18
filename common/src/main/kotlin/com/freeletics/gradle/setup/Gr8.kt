@@ -4,8 +4,6 @@ import com.gradleup.gr8.Gr8Extension
 import org.gradle.api.Project
 import org.gradle.api.attributes.Usage
 import org.gradle.api.attributes.Usage.JAVA_API
-import org.gradle.api.attributes.plugin.GradlePluginApiVersion
-import org.gradle.api.internal.artifacts.dsl.dependencies.GradlePluginVariantsSupport
 
 internal fun Project.setupGr8() {
     val shadeConfiguration = configurations.create("shade")

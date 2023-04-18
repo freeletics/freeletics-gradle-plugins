@@ -11,6 +11,8 @@ into 4 groups:
   with both the monorepo and the common plugins)
 - [settings-plugin](settings-plugin/README.md) which is applied to `settings.gradle` file (can be used in combination 
   with both the monorepo and the common plugins)
+- [scripts](scripts/README.md) collection of ready to use command line scripts that can be
+  used from `.main.kts` scripts
 
 # License
 

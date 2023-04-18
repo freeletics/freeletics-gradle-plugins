@@ -121,7 +121,7 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
             "implementation",
             "kapt",
             "ksp",
-            "runtimeOnly"
+            "runtimeOnly",
         )
     }
 }

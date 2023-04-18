@@ -14,7 +14,7 @@ public abstract class FreeleticsPublishOssPlugin : Plugin<Project> {
 
         val extension = target.extensions.findByName("freeletics") as FreeleticsBaseExtension
         extension.explicitApi()
-        
+
         target.extensions.configure(MavenPublishBaseExtension::class.java) {
             it.publishToMavenCentral(SonatypeHost.DEFAULT, automaticRelease = true)
             it.signAllPublications()
