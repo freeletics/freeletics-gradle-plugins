@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+## 0.3.2 **[2023-04-19]**
+
+- Don't pass jvm specific compiler args to multiplatform compile tasks
+- Fix `includeMad` in settings plugin
+- Ignore unused dependency warning for `() -> java.io.File?` caused by KGP 1.8.20
+
+
 ## 0.3.1 **[2023-04-17]**
 
 - Fixes exception when running `generatePluginVersion`
