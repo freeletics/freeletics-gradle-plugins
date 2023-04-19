@@ -61,6 +61,9 @@ public abstract class RootPlugin : Plugin<Project> {
                             // added by the MoshiX plugin
                             "com.squareup.moshi:moshi",
                             "dev.zacsweers.moshix:moshi-sealed-runtime",
+                            // added by KGP since 1.8.20
+                            // https://github.com/autonomousapps/dependency-analysis-android-gradle-plugin/issues/884
+                            "() -> java.io.File?",
                         )
                     }
 
