@@ -77,30 +77,38 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
             }
 
             compilerOptions(project) {
-                if (this is KotlinJvmCompilerOptions) {
-                    jvmTarget.set(project.jvmTarget)
-                }
                 getVersionOrNull("kotlin-language")?.let {
                     languageVersion.set(KotlinVersion.fromVersion(it))
                 }
+
                 allWarningsAsErrors.set(!booleanProperty("fgp.kotlin.allowWarnings", false).get())
+
                 freeCompilerArgs.addAll(
                     // In this mode, some deprecations and bug-fixes for unstable code take effect immediately.
                     "-progressive",
-                    // https://blog.jetbrains.com/kotlin/2020/07/kotlin-1-4-m3-generating-default-methods-in-interfaces/
-                    "-Xjvm-default=all",
-                    // https://youtrack.jetbrains.com/issue/KT-22292
-                    "-Xassertions=jvm",
-                    // Enabling default nullability annotations
-                    "-Xjsr305=strict",
-                    // Enhance not null annotated type parameter's types to definitely not null types (@NotNull T => T & Any)
-                    "-Xenhance-type-parameter-types-to-def-not-null",
                     // Support inferring type arguments based on only self upper bounds of the corresponding type parameters
                     // https://kotlinlang.org/docs/whatsnew1530.html#improvements-to-type-inference-for-recursive-generic-types
                     "-Xself-upper-bound-inference",
-                    // Enable faster jar file system
-                    "-Xuse-fast-jar-file-system",
                 )
+
+                if (this is KotlinJvmCompilerOptions) {
+                    jvmTarget.set(project.jvmTarget)
+
+                    freeCompilerArgs.addAll(
+                        // https://blog.jetbrains.com/kotlin/2020/07/kotlin-1-4-m3-generating-default-methods-in-interfaces/
+                        "-Xjvm-default=all",
+                        // https://youtrack.jetbrains.com/issue/KT-22292
+                        "-Xassertions=jvm",
+                        // Enabling default nullability annotations
+                        "-Xjsr305=strict",
+                        // Enhance not null annotated type parameter's types to definitely not null types (@NotNull T => T & Any)
+                        "-Xenhance-type-parameter-types-to-def-not-null",
+                    )
+
+                    if (booleanProperty("fgp.kotlin.fastJarFs", false).get()) {
+                        freeCompilerArgs.add("-Xuse-fast-jar-file-system")
+                    }
+                }
             }
         }
     }
