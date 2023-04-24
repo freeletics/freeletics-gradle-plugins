@@ -1,9 +1,11 @@
 package com.freeletics.gradle.scripts
 
-import com.pinterest.ktlint.core.KtLintRuleEngine
-import com.pinterest.ktlint.core.LintError
-import com.pinterest.ktlint.core.api.EditorConfigDefaults
-import com.pinterest.ktlint.core.api.KtLintParseException
+import com.pinterest.ktlint.rule.engine.api.Code
+import com.pinterest.ktlint.rule.engine.api.EditorConfigDefaults
+import com.pinterest.ktlint.rule.engine.api.KtLintParseException
+import com.pinterest.ktlint.rule.engine.api.KtLintRuleEngine
+import com.pinterest.ktlint.rule.engine.api.LintError
+import com.pinterest.ktlint.rule.engine.core.api.RuleId
 import com.pinterest.ktlint.ruleset.standard.StandardRuleSetProvider
 import java.nio.file.Path
 import kotlin.io.path.writeText
@@ -15,12 +17,13 @@ internal class KtLintFormatter(
 ) {
     private val engine = KtLintRuleEngine(
         ruleProviders = StandardRuleSetProvider().getRuleProviders(),
-        editorConfigDefaults = EditorConfigDefaults.load(editorConfig),
+        editorConfigDefaults = EditorConfigDefaults.load(editorConfig, emptySet()),
     )
 
     internal fun format(path: Path) = channelFlow {
         try {
-            val formattedContent = engine.format(path) { error, corrected ->
+            val code = Code.fromPath(path)
+            val formattedContent = engine.format(code) { error, corrected ->
                 check(trySendBlocking(KtLintError(path, error, corrected)).isSuccess)
             }
             path.writeText(formattedContent)
@@ -28,7 +31,7 @@ internal class KtLintFormatter(
             val error = LintError(
                 line = e.line,
                 col = e.col,
-                ruleId = "file-parsing",
+                ruleId = RuleId("standard:file-parsing"),
                 detail = e.message ?: "Failed to parse file",
                 canBeAutoCorrected = false,
             )
