@@ -1,6 +1,10 @@
 package com.freeletics.gradle.scripts
 
-import com.pinterest.ktlint.rule.engine.api.*
+import com.pinterest.ktlint.rule.engine.api.Code
+import com.pinterest.ktlint.rule.engine.api.EditorConfigDefaults
+import com.pinterest.ktlint.rule.engine.api.KtLintParseException
+import com.pinterest.ktlint.rule.engine.api.KtLintRuleEngine
+import com.pinterest.ktlint.rule.engine.api.LintError
 import com.pinterest.ktlint.rule.engine.core.api.RuleId
 import com.pinterest.ktlint.ruleset.standard.StandardRuleSetProvider
 import java.nio.file.Path
