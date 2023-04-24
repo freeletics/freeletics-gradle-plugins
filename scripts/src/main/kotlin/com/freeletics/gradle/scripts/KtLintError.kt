@@ -1,6 +1,6 @@
 package com.freeletics.gradle.scripts
 
-import com.pinterest.ktlint.core.LintError
+import com.pinterest.ktlint.rule.engine.api.LintError
 import java.nio.file.Path
 
 internal data class KtLintError(
