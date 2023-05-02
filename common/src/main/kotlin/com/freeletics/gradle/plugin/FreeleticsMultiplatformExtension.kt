@@ -83,6 +83,7 @@ public abstract class FreeleticsMultiplatformExtension(project: Project) : Freel
             }
 
             linuxX64()
+            linuxArm64()
 
             iosArm64()
             iosX64()
@@ -95,11 +96,18 @@ public abstract class FreeleticsMultiplatformExtension(project: Project) : Freel
 
             tvosArm64()
             tvosX64()
+            tvosSimulatorArm64()
 
             watchosArm32()
             watchosArm64()
+            watchosDeviceArm64()
             watchosX64()
             watchosSimulatorArm64()
+
+            androidNativeArm32()
+            androidNativeArm64()
+            androidNativeX86()
+            androidNativeX64()
 
             val nativeMain = sourceSets.create("nativeMain") { sourceSet ->
                 sourceSet.dependsOn(sourceSets.getByName("commonMain"))
