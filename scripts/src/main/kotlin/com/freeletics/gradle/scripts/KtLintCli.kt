@@ -11,7 +11,7 @@ import java.nio.file.Paths
 import kotlin.io.path.absolute
 import kotlin.system.exitProcess
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.runBlocking
@@ -41,7 +41,7 @@ public class KtLintCli : CliktCommand(
         help = "When this flag is passed, the script will do nothing. Can be used to eagerly compile it",
     ).flag()
 
-    @OptIn(FlowPreview::class)
+    @OptIn(ExperimentalCoroutinesApi::class)
     override fun run(): Unit = runBlocking(Dispatchers.IO) {
         if (init) {
             return@runBlocking
