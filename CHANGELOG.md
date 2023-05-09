@@ -1,9 +1,14 @@
 Change Log
 ==========
 
-## 0.3.4 **UNRELEASED**
+## 0.3.5 **UNRELEASED**
 
 - 
+
+
+## 0.3.4 *(2023-05-09)*
+
+- fix issue with the `standard_final-newline` ktlint rule
 
 
 ## 0.3.3 *(2023-05-08)*
