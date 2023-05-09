@@ -2,6 +2,7 @@ package com.freeletics.gradle.plugin
 
 import com.android.build.api.dsl.ApplicationDefaultConfig
 import com.android.build.api.variant.HasAndroidTestBuilder
+import com.android.build.api.variant.HasUnitTestBuilder
 import com.freeletics.gradle.setup.configure
 import com.freeletics.gradle.setup.defaultTestSetup
 import com.freeletics.gradle.util.android
@@ -113,7 +114,10 @@ public abstract class FreeleticsAndroidBasePlugin : Plugin<Project> {
 
         androidComponents {
             beforeVariants(selector().withBuildType("release")) {
-                it.enableUnitTest = false
+                val unitTestBuilder: HasUnitTestBuilder? = it as? HasUnitTestBuilder
+                if (unitTestBuilder != null) {
+                    unitTestBuilder.enableUnitTest = false
+                }
             }
         }
     }
