@@ -22,7 +22,8 @@ internal class KtLintFormatter(
 
     internal fun format(path: Path) = channelFlow {
         try {
-            val code = Code.fromPath(path)
+            // need to use fromFile instead of fromPath because the latter drops the final new line
+            val code = Code.fromFile(path.toFile())
             val formattedContent = engine.format(code) { error, corrected ->
                 check(trySendBlocking(KtLintError(path, error, corrected)).isSuccess)
             }
