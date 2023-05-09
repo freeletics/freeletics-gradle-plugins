@@ -1,19 +1,30 @@
 Change Log
 ==========
 
-## 0.3.2 **[2023-04-19]**
+## 0.3.4 **UNRELEASED**
+
+- 
+
+
+## 0.3.3 *(2023-05-08)*
+
+- Support ktlint 0.49.0
+- `addCommonTargets` will now add all [tier 1, 2 and 3 Kotlin/Native targets](https://kotlinlang.org/docs/native-target-support.html)
+
+
+## 0.3.2 *(2023-04-19)*
 
 - Don't pass jvm specific compiler args to multiplatform compile tasks
 - Fix `includeMad` in settings plugin
 - Ignore unused dependency warning for `() -> java.io.File?` caused by KGP 1.8.20
 
 
-## 0.3.1 **[2023-04-17]**
+## 0.3.1 *(2023-04-17)*
 
 - Fixes exception when running `generatePluginVersion`
 
 
-## 0.3.0 **[2023-04-17]**
+## 0.3.0 *(2023-04-17)*
 
 - Changes for Kotlin 1.8.20 and AGP 8.0
 - Enable `STABLE_CONFIGURATION_CACHE` feature preview by default, can be disabled with `fgp.stableConfigurationCache=false`
@@ -30,19 +41,19 @@ Change Log
 - Added `com.freeletics.gradle:scripts` which contains classes to run ktlint from a kts script
 
 
-## 0.2.3 **[2023-03-24]**
+## 0.2.3 *(2023-03-24)*
 
 - Make uploading native symbols to Crashlytics optional by adding a boolean parameter to `enableCrashReporting(...)`. This
   defaults to `false`.
 - When using the oss publish plugin automatically apply Dokka and disable Dokka for `-SNAPSHOT` builds.
 
 
-## 0.2.2 **[2023-03-22]**
+## 0.2.2 *(2023-03-22)*
 
 - don't create a `clean` task in the root plugin
 
 
-## 0.2.1 **[2023-03-22]**
+## 0.2.1 *(2023-03-22)*
 
 #### Common
 
@@ -55,6 +66,6 @@ Change Log
 - stop allowing nav modules to depend on legacy modules
 
 
-## 0.2.0 **[2023-03-13]**
+## 0.2.0 *(2023-03-13)*
 
 - initial release
