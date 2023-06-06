@@ -20,7 +20,7 @@ gradle-enterprise = "3.13.3"
 gradle-toolchain = "0.5.0"
 gr8 = "0.9"
 publish = "0.25.2"
-dokka = "1.8.10"
+dokka = "1.8.20"
 
 clikt = "3.5.2"
 ktlint = "0.49.1"
