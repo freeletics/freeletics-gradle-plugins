@@ -43,6 +43,14 @@
         "^com.freeletics.gradle"
       ],
       groupName: "Freeletics Gradle Plugin"
-    }
+    },
+    {
+      matchPackagePatterns: [
+        "^org.jetbrains.kotlin",
+        "com.google.devtools.ksp",
+        "androidx.compose.compiler:compiler",
+      ],
+      groupName: "Kotlin and Compose Compiler"
+    }   
   ]
 }
