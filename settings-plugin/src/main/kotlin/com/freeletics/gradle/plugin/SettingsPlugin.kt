@@ -17,7 +17,7 @@ public abstract class SettingsPlugin : Plugin<Settings> {
         target.plugins.apply(FoojayToolchainsPlugin::class.java)
         target.plugins.apply(GradleEnterprisePlugin::class.java)
 
-        target.extensions.create("freeletics", SettingsExtension::class.java, target)
+        val extension = target.extensions.create("freeletics", SettingsExtension::class.java, target)
 
         target.extensions.configure(GradleEnterpriseExtension::class.java) {
             it.buildScan { scan ->
@@ -37,14 +37,14 @@ public abstract class SettingsPlugin : Plugin<Settings> {
 
         target.enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-        if (target.providers.gradleProperty("fgp.stableConfigurationCache").getOrElse("true").toBoolean()) {
+        if (target.booleanProperty("fgp.stableConfigurationCache", true)) {
             target.enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
         }
 
         target.dependencyResolutionManagement { management ->
             @Suppress("UnstableApiUsage")
             management.repositories { handler ->
-                val internalUrl = target.providers.gradleProperty("freeleticsAndroidArtifactsUrl").orNull
+                val internalUrl = target.stringProperty("freeleticsAndroidArtifactsUrl")
                 if (internalUrl != null) {
                     handler.exclusiveContent { content ->
                         content.forRepository {
@@ -103,7 +103,7 @@ public abstract class SettingsPlugin : Plugin<Settings> {
             }
 
             // TODO https://youtrack.jetbrains.com/issue/KT-51379
-            val mpp = target.providers.gradleProperty("fgp.kotlin.multiplatformProject").getOrElse("false").toBoolean()
+            val mpp = target.booleanProperty("fgp.kotlin.multiplatformProject", false)
             if (!mpp) {
                 @Suppress("UnstableApiUsage")
                 management.repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
@@ -112,41 +112,34 @@ public abstract class SettingsPlugin : Plugin<Settings> {
 
         target.buildCache {
             it.local { cache ->
-                cache.isEnabled = target.providers.gradleProperty("fgp.buildcache.local").getOrElse("true").toBoolean()
+                cache.isEnabled = target.booleanProperty("fgp.buildcache.local", true)
             }
 
-            if (target.providers.gradleProperty("fgp.buildcache.remote").orNull.toBoolean()) {
+            if (target.booleanProperty("fgp.buildcache.remote", false)) {
                 it.remote(HttpBuildCache::class.java) { cache ->
-                    cache.setUrl(target.providers.gradleProperty("fgp.buildcache.url").get())
-                    cache.isPush = target.providers.gradleProperty("fgp.buildcache.push").orNull.toBoolean()
+                    cache.setUrl(target.stringProperty("fgp.buildcache.url")!!)
+                    cache.isPush = target.booleanProperty("fgp.buildcache.push", false)
                     cache.isEnabled = true
 
                     cache.credentials { credentials ->
-                        credentials.username = target.providers.gradleProperty("fgp.buildcache.username").get()
-                        credentials.password = target.providers.gradleProperty("fgp.buildcache.password").get()
+                        credentials.username = target.stringProperty("fgp.buildcache.username")!!
+                        credentials.password = target.stringProperty("fgp.buildcache.password")!!
                     }
                 }
             }
         }
 
-        val root = target.rootDir
-        root.walkTopDown()
-            // skip hidden directories as well as directories called build, gradle or src
-            .onEnter {
-                it == root || (
-                    !it.isHidden && it.name != "build" && it.name != "gradle" && it.name != "src" &&
-                        it.name != "buildSrc" && !it.resolve("settings.gradle").exists() &&
-                        !it.resolve("settings.gradle.kts").exists()
-                    )
-            }
-            .filter { it.name.endsWith(".gradle") || it.name.endsWith(".gradle.kts") }
-            .forEach {
-                val relativePath = it.parent.substringAfter(root.canonicalPath)
-                if (relativePath.isNotEmpty()) {
-                    val projectName = relativePath.replace("/", ":")
-                    target.include(projectName)
-                    target.project(projectName).buildFileName = it.name
-                }
-            }
+        val autoDiscover = target.booleanProperty("fgp.discoverProjects.automatically", true)
+        if (autoDiscover) {
+            extension.discoverProjects()
+        }
+    }
+
+    private fun Settings.stringProperty(name: String): String? {
+        return providers.gradleProperty(name).get()
+    }
+
+    private fun Settings.booleanProperty(name: String, default: Boolean): Boolean {
+        return providers.gradleProperty(name).map { it.toBoolean() }.orElse(default).get()
     }
 }

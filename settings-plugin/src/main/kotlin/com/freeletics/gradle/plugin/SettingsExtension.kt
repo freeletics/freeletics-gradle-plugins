@@ -1,8 +1,68 @@
 package com.freeletics.gradle.plugin
 
+import java.io.File
 import org.gradle.api.initialization.Settings
 
 public abstract class SettingsExtension(private val settings: Settings) {
+
+    /**
+     * Automatically find and include Gradle projects in this build. It will start from the root folder and find any
+     * project where the build file name matches the path, e.g. `:example` should have `example.gradle` as build file
+     * and `:foo:bar` should have `foo-bar.gradle.
+     *
+     * This does not support nested projects. E.g. `foo:api` and `foo:impl` are generally fine, but if `:foo` also
+     * is a project (has a build file) then these 2 are not considered.
+     */
+    public fun discoverProjects() {
+        val root = settings.rootDir
+        val rootPath = root.canonicalPath
+        root.listFiles()!!.forEach {
+            discoverProjectsIn(it, rootPath)
+        }
+    }
+
+    /**
+     * Automatically find and include Gradle projects in this build. It will only search in the given folders and find
+     * any project where the build file name matches the path, e.g. `:example` should have `example.gradle` as build
+     * file and `:foo:bar` should have `foo-bar.gradle.
+     *
+     * This does not support nested projects. E.g. `foo:api` and `foo:impl` are generally fine, but if `:foo` also
+     * is a project (has a build file) then these 2 are not considered.
+     */
+    public fun discoverProjectsIn(vararg directories: String) {
+        val root = settings.rootDir
+        val rootPath = root.canonicalPath
+        directories.forEach {
+            discoverProjectsIn(root.resolve(it), rootPath)
+        }
+    }
+
+    private val gradleFileRegex = Regex(".+\\.gradle(\\.kts)?")
+    private val ignoredDirectories = listOf("build", "gradle")
+
+    private fun discoverProjectsIn(directory: File, rootPath: String) {
+        if (!directory.isDirectory || directory.isHidden || ignoredDirectories.contains(directory.name)) {
+            return
+        }
+
+        val files = directory.listFiles()!!.toList()
+        val gradleFiles = files.filter { gradleFileRegex.matches(it.name) }
+        if (gradleFiles.any { it.startsWith("settings.gradle") }) {
+            return
+        } else if (gradleFiles.isNotEmpty()) {
+            val buildFile = gradleFiles.single()
+            val relativePath = buildFile.parent.substringAfter(rootPath)
+            if (relativePath.isNotEmpty()) {
+                val projectName = relativePath.replace("/", ":")
+                settings.include(projectName)
+                settings.project(projectName).buildFileName = buildFile.name
+            }
+        } else {
+            files.forEach {
+                discoverProjectsIn(it, rootPath)
+            }
+        }
+    }
 
     /**
      * @param androidXBuildId   buildId for androidx snapshot artifacts. Can be taken from here:
