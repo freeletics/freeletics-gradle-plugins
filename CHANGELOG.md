@@ -1,10 +1,10 @@
 Change Log
 ==========
 
-## 0.3.6 **UNRELEASED**
+## 0.3.7 **UNRELEASED**
 
 
-## 0.3.5 *(2023-06-27)*
+## 0.3.6 *(2023-06-27)*
 
 - adjust auto discovery to work better with Gradle 8.1 config cache
     - make it possible to disable the default auto discovery
