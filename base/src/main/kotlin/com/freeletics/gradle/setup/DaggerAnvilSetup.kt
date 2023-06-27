@@ -20,7 +20,7 @@ internal fun Project.configureDagger(mode: DaggerMode) {
         add("api", getDependency("inject"))
         add("api", getDependency("anvil-annotations"))
         add("api", getDependency("dagger"))
-        val whetstoneScope = getDependencyOrNull("fl-whetstone-scope")
+        val whetstoneScope = getDependencyOrNull("mad-whetstone-scope")
         if (whetstoneScope != null) {
             add("api", whetstoneScope)
         }
@@ -28,7 +28,7 @@ internal fun Project.configureDagger(mode: DaggerMode) {
 
     if (mode == DaggerMode.ANVIL_WITH_WHETSTONE) {
         dependencies.apply {
-            add("anvil", getDependency("fl-whetstone-compiler"))
+            add("anvil", getDependency("mad-whetstone-compiler"))
         }
     }
 
