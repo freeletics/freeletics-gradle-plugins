@@ -53,8 +53,33 @@ public abstract class SettingsExtension(private val settings: Settings) {
         }
     }
 
+    /**
+     * Replace any usage of MAD `navigator-compose` with `navigator-experimental` to try out the
+     * experimental navigation implementation.
+     *
+     * When using an included build the `experimentalNavigation` parameter on [includeMad] should be used instead.
+     */
+    public fun useMadExperimentalNavigation() {
+        settings.gradle.beforeProject { project ->
+            project.configurations.configureEach { configuration ->
+                configuration.resolutionStrategy.eachDependency {
+                    if (it.requested.group == "com.freeletics.mad" && it.requested.name == "navigator-compose") {
+                        it.useTarget("com.freeletics.mad:navigator-experimental:${it.requested.version}")
+                    }
+                }
+            }
+        }
+
+    }
+
+    /**
+     * Include a local clone of MAD in this build.
+     *
+     * When [experimentalNavigation] is `true` any usage of MAD `navigator-compose` will be replaced with
+     * `navigator-experimental` to try out the experimental navigation implementation.
+     */
     @JvmOverloads
-    public fun includeMad(path: String = "../mad") {
+    public fun includeMad(path: String = "../mad", experimentalNavigation: Boolean = false) {
         settings.includeBuild(path) { build ->
             build.dependencySubstitution {
                 it.substitute(it.module("com.freeletics.mad:state-machine"))
@@ -67,8 +92,13 @@ public abstract class SettingsExtension(private val settings: Settings) {
                     .using(it.project(":navigator:runtime"))
                 it.substitute(it.module("com.freeletics.mad:navigator-androidx-nav"))
                     .using(it.project(":navigator:androidx-nav"))
-                it.substitute(it.module("com.freeletics.mad:navigator-compose"))
-                    .using(it.project(":navigator:runtime-compose"))
+                if (experimentalNavigation) {
+                    it.substitute(it.module("com.freeletics.mad:navigator-compose"))
+                        .using(it.project(":navigator:runtime-compose"))
+                } else {
+                    it.substitute(it.module("com.freeletics.mad:navigator-compose"))
+                        .using(it.project(":navigator:runtime-experimental"))
+                }
                 it.substitute(it.module("com.freeletics.mad:navigator-experimental"))
                     .using(it.project(":navigator:runtime-experimental"))
                 it.substitute(it.module("com.freeletics.mad:navigator-fragment"))
@@ -91,6 +121,11 @@ public abstract class SettingsExtension(private val settings: Settings) {
                     .using(it.project(":whetstone:scope"))
                 it.substitute(it.module("com.freeletics.mad:whetstone-compiler"))
                     .using(it.project(":whetstone:compiler"))
+
+                if (experimentalNavigation) {
+                    it.substitute(it.project(":navigator:runtime-compose"))
+                        .using(it.project(":navigator:runtime-experimental"))
+                }
             }
         }
     }
