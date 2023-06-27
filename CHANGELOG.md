@@ -1,9 +1,17 @@
 Change Log
 ==========
 
-## 0.3.5 **UNRELEASED**
+## 0.3.6 **UNRELEASED**
 
-- 
+
+## 0.3.5 *(2023-06-27)*
+
+- adjust auto discovery to work better with Gradle 8.1 config cache
+    - make it possible to disable the default auto discovery
+    - add `discoverProjects` to settings extension which works like the default discovery
+    - add `discoverProjectsIn` to settings extension which allows only search specified folders for proects
+- change expected `fl-whetstone-...` version catalog names to `mad-whetstone-...`
+- make it possible to enable mad experimental navigation through settings extension (`useMadExperimentalNavigation()` and `experimentalNavigation` parameter on `inlu)
 
 
 ## 0.3.4 *(2023-05-09)*
