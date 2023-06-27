@@ -51,7 +51,6 @@ public abstract class FreeleticsAndroidBasePlugin : Plugin<Project> {
             }
 
             // default all features to false, they will be enabled through FreeleticsAndroidExtension
-            @Suppress("UnstableApiUsage")
             buildFeatures {
                 androidResources = false
                 viewBinding = false
