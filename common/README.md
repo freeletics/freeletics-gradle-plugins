@@ -60,8 +60,8 @@ dagger = { module = "com.google.dagger:dagger", version = "..." }
 # only for `useDaggerWithComponent()`
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version = "..." }
 # only for `useDaggerWithWhetstone()`
-fl-whetstone-scope = { module = "com.freeletics.mad:whetstone-scope", version = "..." }
-fl-whetstone-compiler = { module = "com.freeletics.mad:whetstone-compiler", version = "..." }
+mad-whetstone-scope = { module = "com.freeletics.mad:whetstone-scope", version = "..." }
+mad-whetstone-compiler = { module = "com.freeletics.mad:whetstone-compiler", version = "..." }
 ```
 
 

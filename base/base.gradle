@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.fl.jvm)
+    alias(libs.plugins.fgp.jvm)
 }
 
 dependencies {

@@ -2,7 +2,7 @@
 java-target = "11"
 java-toolchain = "19"
 
-fl-gradle = "0.3.4"
+fgp = "0.3.4"
 
 gradle-api = "8.1"
 kotlin = "1.8.22"
@@ -62,11 +62,11 @@ junit = { module = "junit:junit", version.ref = "junit" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
 
 [plugins]
-fl-root = { id = "com.freeletics.gradle.root", version.ref = "fl-gradle" }
-fl-settings = { id = "com.freeletics.gradle.settings", version.ref = "fl-gradle" }
-fl-gradle = { id = "com.freeletics.gradle.common.gradle", version.ref = "fl-gradle" }
-fl-jvm = { id = "com.freeletics.gradle.common.jvm", version.ref = "fl-gradle" }
-fl-publish = { id = "com.freeletics.gradle.common.publish.oss", version.ref = "fl-gradle" }
+fgp-root = { id = "com.freeletics.gradle.root", version.ref = "fgp" }
+fgp-settings = { id = "com.freeletics.gradle.settings", version.ref = "fgp" }
+fgp-gradle = { id = "com.freeletics.gradle.common.gradle", version.ref = "fgp" }
+fgp-jvm = { id = "com.freeletics.gradle.common.jvm", version.ref = "fgp" }
+fgp-publish = { id = "com.freeletics.gradle.common.publish.oss", version.ref = "fgp" }
 
 android = { id = "com.android.application", version.ref = "android-gradle" }
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
