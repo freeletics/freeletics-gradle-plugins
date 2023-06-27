@@ -53,7 +53,7 @@ public abstract class SettingsExtension(private val settings: Settings) {
             val buildFile = gradleFiles.single()
             val relativePath = buildFile.parent.substringAfter(rootPath)
             if (relativePath.isNotEmpty()) {
-                val projectName = relativePath.replace("/", ":")
+                val projectName = relativePath.replace(File.pathSeparator, ":")
                 settings.include(projectName)
                 settings.project(projectName).buildFileName = buildFile.name
             }
