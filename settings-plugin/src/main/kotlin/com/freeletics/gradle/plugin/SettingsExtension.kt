@@ -69,7 +69,6 @@ public abstract class SettingsExtension(private val settings: Settings) {
                 }
             }
         }
-
     }
 
     /**
