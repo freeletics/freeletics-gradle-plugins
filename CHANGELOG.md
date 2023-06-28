@@ -1,7 +1,13 @@
 Change Log
 ==========
 
-## 0.3.7 **UNRELEASED**
+## 0.3.8 **UNRELEASED**
+
+
+## 0.3.7 *(2023-06-28)*
+
+- fix auto project discovery failing with error
+- fix some properties being required by the settings plugin unintenionally
 
 
 ## 0.3.6 *(2023-06-27)*
