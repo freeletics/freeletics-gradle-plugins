@@ -136,7 +136,7 @@ public abstract class SettingsPlugin : Plugin<Settings> {
     }
 
     private fun Settings.stringProperty(name: String): String? {
-        return providers.gradleProperty(name).get()
+        return providers.gradleProperty(name).orNull
     }
 
     private fun Settings.booleanProperty(name: String, default: Boolean): Boolean {
