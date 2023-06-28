@@ -47,7 +47,7 @@ public abstract class SettingsExtension(private val settings: Settings) {
 
         val files = directory.listFiles()!!.toList()
         val gradleFiles = files.filter { gradleFileRegex.matches(it.name) }
-        if (gradleFiles.any { it.startsWith("settings.gradle") }) {
+        if (gradleFiles.any { it.name.startsWith("settings.gradle") }) {
             return
         } else if (gradleFiles.isNotEmpty()) {
             val buildFile = gradleFiles.single()
@@ -153,10 +153,10 @@ public abstract class SettingsExtension(private val settings: Settings) {
                     .using(it.project(":navigator:androidx-nav"))
                 if (experimentalNavigation) {
                     it.substitute(it.module("com.freeletics.mad:navigator-compose"))
-                        .using(it.project(":navigator:runtime-compose"))
+                        .using(it.project(":navigator:runtime-experimental"))
                 } else {
                     it.substitute(it.module("com.freeletics.mad:navigator-compose"))
-                        .using(it.project(":navigator:runtime-experimental"))
+                        .using(it.project(":navigator:runtime-compose"))
                 }
                 it.substitute(it.module("com.freeletics.mad:navigator-experimental"))
                     .using(it.project(":navigator:runtime-experimental"))
