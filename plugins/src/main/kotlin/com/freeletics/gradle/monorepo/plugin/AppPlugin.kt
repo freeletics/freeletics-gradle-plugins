@@ -50,6 +50,11 @@ public abstract class AppPlugin : Plugin<Project> {
                 }
             }
 
+            androidResources {
+                @Suppress("UnstableApiUsage")
+                generateLocaleConfig = true
+            }
+
             buildTypes {
                 named("debug") {
                     it.applicationIdSuffix = ".debug"
