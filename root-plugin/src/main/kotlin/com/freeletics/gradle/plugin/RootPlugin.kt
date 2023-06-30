@@ -46,7 +46,7 @@ public abstract class RootPlugin : Plugin<Project> {
                             // to remove useDagger from the module
                             "javax.inject:javax.inject",
                             "com.squareup.anvil:annotations",
-                            "com.freeletics.mad:whetstone-scope",
+                            "com.freeletics.khonshu:codegen-scope",
                             // added by KGP since 1.8.20
                             // https://github.com/autonomousapps/dependency-analysis-android-gradle-plugin/issues/884
                             "() -> java.io.File?",
@@ -58,7 +58,7 @@ public abstract class RootPlugin : Plugin<Project> {
                             // Dagger is always added as "api", but some modules only use it in for example debugApi
                             "javax.inject:javax.inject",
                             "com.squareup.anvil:annotations",
-                            "com.freeletics.mad:whetstone-scope",
+                            "com.freeletics.khonshu:codegen-scope",
                             "com.google.dagger:dagger",
                             "com.google.dagger:dagger-compiler",
                             // added by the MoshiX plugin

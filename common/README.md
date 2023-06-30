@@ -36,15 +36,15 @@ freeletics {
 
 It is possible to easily configure [Dagger][3] and [Anvil][4] with the following methods. Of the 3 available options 
 choose the one that is most appropriate for a module. The simple `useDagger` is the most performant one because it
-does not require KAPT. There is also a method to configure the [Whetstone][5] Anvil plugin.
+does not require KAPT. There is also a method to configure the [Khonshu][5] Anvil plugin.
 
 ```groovy
 freeletics {
     // applies Anvil and will use it for all code generation (KAPT is not used)
     // for modules with @Component interfaces use `useDaggerWithComponent()` instead 
     useDagger()
-    // same as the above but will also add the Whetstone Anvil plugin
-    useDaggerWithWhetstone()
+    // same as the above but will also add the Khonshu Anvil plugin
+    useDaggerWithKhonshu()
     // applies Anvil and KAPT
     useDaggerWithComponent()
 }
@@ -59,9 +59,9 @@ anvil-annotations = { module = "com.squareup.anvil:annotations", version = "..."
 dagger = { module = "com.google.dagger:dagger", version = "..." }
 # only for `useDaggerWithComponent()`
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version = "..." }
-# only for `useDaggerWithWhetstone()`
-mad-whetstone-scope = { module = "com.freeletics.mad:whetstone-scope", version = "..." }
-mad-whetstone-compiler = { module = "com.freeletics.mad:whetstone-compiler", version = "..." }
+# only for `useDaggerWithKhonshu()`
+khonshu-codegen-scope = { module = "com.freeletics.khonshu:codegen-scope", version = "..." }
+khonshu-codegen-compiler = { module = "com.freeletics.khonshu:codegen-compiler", version = "..." }
 ```
 
 
@@ -387,4 +387,4 @@ freeletics {
 [2]: https://github.com/ZacSweers/MoshiX
 [3]: https://github.com/google/dagger
 [4]: https://github.com/square/anvil
-[5]: https://freeletics.github.io/mad/whetstone/get-started/
+[5]: https://freeletics.github.io/khonshu/codegen/get-started/

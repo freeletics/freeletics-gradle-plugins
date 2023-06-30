@@ -114,17 +114,17 @@ public abstract class SettingsExtension(private val settings: Settings) {
     }
 
     /**
-     * Replace any usage of MAD `navigator-compose` with `navigator-experimental` to try out the
+     * Replace any usage of Khonshu `navigator-compose` with `navigation-experimental` to try out the
      * experimental navigation implementation.
      *
-     * When using an included build the `experimentalNavigation` parameter on [includeMad] should be used instead.
+     * When using an included build the `experimentalNavigation` parameter on [includeKhonshu] should be used instead.
      */
-    public fun useMadExperimentalNavigation() {
+    public fun useKhonshuExperimentalNavigation() {
         settings.gradle.beforeProject { project ->
             project.configurations.configureEach { configuration ->
                 configuration.resolutionStrategy.eachDependency {
-                    if (it.requested.group == "com.freeletics.mad" && it.requested.name == "navigator-compose") {
-                        it.useTarget("com.freeletics.mad:navigator-experimental:${it.requested.version}")
+                    if (it.requested.group == "com.freeletics.khonshu" && it.requested.name == "navigation-compose") {
+                        it.useTarget("com.freeletics.khonshu:navigation-experimental:${it.requested.version}")
                     }
                 }
             }
@@ -132,58 +132,54 @@ public abstract class SettingsExtension(private val settings: Settings) {
     }
 
     /**
-     * Include a local clone of MAD in this build.
+     * Include a local clone of Khonshu in this build.
      *
-     * When [experimentalNavigation] is `true` any usage of MAD `navigator-compose` will be replaced with
-     * `navigator-experimental` to try out the experimental navigation implementation.
+     * When [experimentalNavigation] is `true` any usage of Khonshu `navigation-compose` will be replaced with
+     * `navigation-experimental` to try out the experimental navigation implementation.
      */
     @JvmOverloads
-    public fun includeMad(path: String = "../mad", experimentalNavigation: Boolean = false) {
+    public fun includeKhonshu(path: String = "../khonshu", experimentalNavigation: Boolean = false) {
         settings.includeBuild(path) { build ->
             build.dependencySubstitution {
                 it.substitute(it.module("com.freeletics.mad:state-machine"))
-                    .using(it.project(":state-machine:runtime"))
-                it.substitute(it.module("com.freeletics.mad:state-machine-testing"))
-                    .using(it.project(":state-machine:testing"))
-                it.substitute(it.module("com.freeletics.mad:text-resource"))
+                    .using(it.project(":state-machine-legacy"))
+                it.substitute(it.module("com.freeletics.khonshu:state-machine"))
+                    .using(it.project(":state-machine"))
+                it.substitute(it.module("com.freeletics.khonshu:state-machine-testing"))
+                    .using(it.project(":state-machine-testing"))
+                it.substitute(it.module("com.freeletics.khonshu:text-resource"))
                     .using(it.project(":text-resource"))
-                it.substitute(it.module("com.freeletics.mad:navigator"))
-                    .using(it.project(":navigator:runtime"))
-                it.substitute(it.module("com.freeletics.mad:navigator-androidx-nav"))
-                    .using(it.project(":navigator:androidx-nav"))
+                it.substitute(it.module("com.freeletics.khonshu:navigation"))
+                    .using(it.project(":navigation"))
+                it.substitute(it.module("com.freeletics.khonshu:navigation-androidx-nav"))
+                    .using(it.project(":navigation-androidx"))
                 if (experimentalNavigation) {
-                    it.substitute(it.module("com.freeletics.mad:navigator-compose"))
-                        .using(it.project(":navigator:runtime-experimental"))
+                    it.substitute(it.module("com.freeletics.khonshu:navigation-compose"))
+                        .using(it.project(":navigation-experimental"))
                 } else {
-                    it.substitute(it.module("com.freeletics.mad:navigator-compose"))
-                        .using(it.project(":navigator:runtime-compose"))
+                    it.substitute(it.module("com.freeletics.khonshu:navigation-compose"))
+                        .using(it.project(":navigation-compose"))
                 }
-                it.substitute(it.module("com.freeletics.mad:navigator-experimental"))
-                    .using(it.project(":navigator:runtime-experimental"))
-                it.substitute(it.module("com.freeletics.mad:navigator-fragment"))
-                    .using(it.project(":navigator:runtime-fragment"))
-                it.substitute(it.module("com.freeletics.mad:navigator-testing"))
-                    .using(it.project(":navigator:testing"))
-                it.substitute(it.module("com.freeletics.mad:whetstone-navigation"))
-                    .using(it.project(":whetstone:navigation"))
-                it.substitute(it.module("com.freeletics.mad:whetstone-navigation-compose"))
-                    .using(it.project(":whetstone:navigation-compose"))
-                it.substitute(it.module("com.freeletics.mad:whetstone-navigation-fragment"))
-                    .using(it.project(":whetstone:navigation-fragment"))
-                it.substitute(it.module("com.freeletics.mad:whetstone-runtime"))
-                    .using(it.project(":whetstone:runtime"))
-                it.substitute(it.module("com.freeletics.mad:whetstone-runtime-compose"))
-                    .using(it.project(":whetstone:runtime-compose"))
-                it.substitute(it.module("com.freeletics.mad:whetstone-runtime-fragment"))
-                    .using(it.project(":whetstone:runtime-fragment"))
-                it.substitute(it.module("com.freeletics.mad:whetstone-scope"))
-                    .using(it.project(":whetstone:scope"))
-                it.substitute(it.module("com.freeletics.mad:whetstone-compiler"))
-                    .using(it.project(":whetstone:compiler"))
+                it.substitute(it.module("com.freeletics.khonshu:navigation-experimental"))
+                    .using(it.project(":nnavigation-experimental"))
+                it.substitute(it.module("com.freeletics.khonshu:navigation-fragment"))
+                    .using(it.project(":navigation-fragment"))
+                it.substitute(it.module("com.freeletics.khonshu:navigation-testing"))
+                    .using(it.project(":navigation-testing"))
+                it.substitute(it.module("com.freeletics.khonshu:codegen-runtime"))
+                    .using(it.project(":codegen"))
+                it.substitute(it.module("com.freeletics.khonshu:codegen-compose"))
+                    .using(it.project(":codegen-compose"))
+                it.substitute(it.module("com.freeletics.khonshu:codegen-fragment"))
+                    .using(it.project(":codegen-fragment"))
+                it.substitute(it.module("com.freeletics.khonshu:codegen-scope"))
+                    .using(it.project(":codegen-scope"))
+                it.substitute(it.module("com.freeletics.khonshu:codegen-compiler"))
+                    .using(it.project(":codegen-compiler"))
 
                 if (experimentalNavigation) {
-                    it.substitute(it.project(":navigator:runtime-compose"))
-                        .using(it.project(":navigator:runtime-experimental"))
+                    it.substitute(it.project(":navigation-compose"))
+                        .using(it.project(":navigation-experimental"))
                 }
             }
         }

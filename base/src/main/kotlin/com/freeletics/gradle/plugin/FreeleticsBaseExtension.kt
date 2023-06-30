@@ -36,8 +36,8 @@ public abstract class FreeleticsBaseExtension(protected val project: Project) {
         project.configureDagger(DaggerMode.ANVIL_ONLY)
     }
 
-    fun useDaggerWithWhetstone() {
-        project.configureDagger(DaggerMode.ANVIL_WITH_WHETSTONE)
+    fun useDaggerWithKhonshu() {
+        project.configureDagger(DaggerMode.ANVIL_WITH_KHONSHU)
     }
 
     fun useDaggerWithComponent() {
@@ -46,7 +46,7 @@ public abstract class FreeleticsBaseExtension(protected val project: Project) {
 
     enum class DaggerMode {
         ANVIL_ONLY,
-        ANVIL_WITH_WHETSTONE,
+        ANVIL_WITH_KHONSHU,
         ANVIL_WITH_FULL_DAGGER,
     }
 }

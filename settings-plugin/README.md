@@ -63,12 +63,12 @@ fgp.buildcache.password=...
 
 ### Included builds
 
-With the following snippet it is possible to configure an included build for [MAD][4] abd [FlowRedux][5] Freeletics 
+With the following snippet it is possible to configure an included build for [Khonshu][4] abd [FlowRedux][5] Freeletics 
 open source projects.
 
 ```groovy
 freeletics {
-    includeMad("path/to/cloned/mad/repository") // path can be omitted if it is ../mad
+    includeKhonshu("path/to/cloned/khonshu/repository") // path can be omitted if it is ../khonshu
     includeFlowRedux("path/to/cloned/flowredux/repository") // path can be omitted if it is ../flowredux
 }
 ```
@@ -83,5 +83,5 @@ freeletics {
 [1]: https://github.com/gradle/foojay-toolchains
 [2]: https://docs.gradle.org/current/userguide/declaring_dependencies.html#sec:type-safe-project-accessors
 [3]: https://youtrack.jetbrains.com/issue/KT-51379
-[4]: https://github.com/freeletics/mad
+[4]: https://github.com/freeletics/khonshu
 [5]: https://github.com/freeletics/flowredux
