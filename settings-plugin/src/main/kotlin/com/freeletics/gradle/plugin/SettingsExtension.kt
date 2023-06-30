@@ -161,7 +161,7 @@ public abstract class SettingsExtension(private val settings: Settings) {
                         .using(it.project(":navigation-compose"))
                 }
                 it.substitute(it.module("com.freeletics.khonshu:navigation-experimental"))
-                    .using(it.project(":nnavigation-experimental"))
+                    .using(it.project(":navigation-experimental"))
                 it.substitute(it.module("com.freeletics.khonshu:navigation-fragment"))
                     .using(it.project(":navigation-fragment"))
                 it.substitute(it.module("com.freeletics.khonshu:navigation-testing"))
