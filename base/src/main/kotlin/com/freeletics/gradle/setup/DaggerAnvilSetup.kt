@@ -20,15 +20,15 @@ internal fun Project.configureDagger(mode: DaggerMode) {
         add("api", getDependency("inject"))
         add("api", getDependency("anvil-annotations"))
         add("api", getDependency("dagger"))
-        val whetstoneScope = getDependencyOrNull("mad-whetstone-scope")
-        if (whetstoneScope != null) {
-            add("api", whetstoneScope)
+        val khonshuScope = getDependencyOrNull("khonshu-codegen-scope")
+        if (khonshuScope != null) {
+            add("api", khonshuScope)
         }
     }
 
-    if (mode == DaggerMode.ANVIL_WITH_WHETSTONE) {
+    if (mode == DaggerMode.ANVIL_WITH_KHONSHU) {
         dependencies.apply {
-            add("anvil", getDependency("mad-whetstone-compiler"))
+            add("anvil", getDependency("khonshu-codegen-compiler"))
         }
     }
 
