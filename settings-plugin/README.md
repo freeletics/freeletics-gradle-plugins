@@ -63,7 +63,7 @@ fgp.buildcache.password=...
 
 ### Included builds
 
-With the following snippet it is possible to configure an included build for [Khonshu][4] abd [FlowRedux][5] Freeletics 
+With the following snippet it is possible to configure an included build for [Khonshu][4] and [FlowRedux][5] Freeletics 
 open source projects.
 
 ```groovy
