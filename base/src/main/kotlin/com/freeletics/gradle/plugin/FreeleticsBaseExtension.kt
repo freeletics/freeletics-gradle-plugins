@@ -11,11 +11,6 @@ public abstract class FreeleticsBaseExtension(protected val project: Project) {
     fun explicitApi() {
         project.kotlin {
             explicitApi()
-
-            // TODO for Android projects the above isn't enough https://youtrack.jetbrains.com/issue/KT-37652
-            compilerOptions(project) {
-                freeCompilerArgs.add("-Xexplicit-api=strict")
-            }
         }
     }
 
