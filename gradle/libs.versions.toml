@@ -19,7 +19,7 @@ bestpractices = "0.9"
 gradle-enterprise = "3.13.4"
 gradle-toolchain = "0.5.0"
 gr8 = "0.9"
-publish = "0.25.2"
+publish = "0.25.3"
 dokka = "1.8.20"
 
 clikt = "3.5.4"
