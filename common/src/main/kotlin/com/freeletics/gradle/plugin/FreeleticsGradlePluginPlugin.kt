@@ -2,8 +2,10 @@ package com.freeletics.gradle.plugin
 
 import com.freeletics.gradle.setup.setupGr8
 import com.freeletics.gradle.tasks.GenerateVersionClass
+import com.freeletics.gradle.util.compilerOptions
 import com.freeletics.gradle.util.getDependency
 import com.freeletics.gradle.util.java
+import com.freeletics.gradle.util.kotlin
 import com.freeletics.gradle.util.stringProperty
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -19,6 +21,12 @@ public abstract class FreeleticsGradlePluginPlugin : Plugin<Project> {
         target.plugins.apply("com.autonomousapps.plugin-best-practices-plugin")
 
         target.extensions.create("freeletics", FreeleticsJvmExtension::class.java)
+
+        target.kotlin {
+            compilerOptions(target) {
+                freeCompilerArgs.add("-Xsam-conversions=class")
+            }
+        }
 
         target.generateVersionTask()
         target.setupGr8()
