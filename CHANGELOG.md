@@ -1,7 +1,12 @@
 Change Log
 ==========
 
-## 0.3.8 **UNRELEASED**
+## 0.3.9 **UNRELEASED**
+
+
+## 0.3.8 *(2023-07-10)*
+
+- adjust APIs and expected version catalog names for MAD -> Khonshu renaming
 
 
 ## 0.3.7 *(2023-06-28)*
@@ -32,6 +37,7 @@ Change Log
 
 
 ## 0.3.2 *(2023-04-19)*
+
 
 - Don't pass jvm specific compiler args to multiplatform compile tasks
 - Fix `includeMad` in settings plugin
