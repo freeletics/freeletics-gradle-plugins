@@ -4,6 +4,7 @@ import com.freeletics.gradle.util.kotlinMultiplatform
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFrameworkConfig
 import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
@@ -14,6 +15,25 @@ public abstract class FreeleticsMultiplatformExtension(project: Project) : Freel
     public fun addJvmTarget(configure: KotlinJvmTarget.() -> Unit = { }) {
         project.kotlinMultiplatform {
             jvm(configure = configure)
+        }
+    }
+
+    @JvmOverloads
+    public fun addAndroidTarget(
+        publish: Boolean = false,
+        configure: KotlinAndroidTarget.() -> Unit = { }
+    ) {
+        project.plugins.apply("com.android.library")
+        project.plugins.apply(FreeleticsAndroidBasePlugin::class.java)
+
+        project.kotlinMultiplatform {
+            android {
+                if (publish) {
+                    publishAllLibraryVariants()
+                }
+
+                configure()
+            }
         }
     }
 
@@ -74,7 +94,7 @@ public abstract class FreeleticsMultiplatformExtension(project: Project) : Freel
         }
     }
 
-    public fun addCommonTargets() {
+    public fun addCommonTargets(androidNativeTargets: Boolean = true) {
         project.kotlinMultiplatform {
             jvm()
 
@@ -104,10 +124,12 @@ public abstract class FreeleticsMultiplatformExtension(project: Project) : Freel
             watchosX64()
             watchosSimulatorArm64()
 
-            androidNativeArm32()
-            androidNativeArm64()
-            androidNativeX86()
-            androidNativeX64()
+            if (androidNativeTargets) {
+                androidNativeArm32()
+                androidNativeArm64()
+                androidNativeX86()
+                androidNativeX64()
+            }
 
             val nativeMain = sourceSets.create("nativeMain") { sourceSet ->
                 sourceSet.dependsOn(sourceSets.getByName("commonMain"))

@@ -275,14 +275,18 @@ The following extension methods make it easy to add multiplatform targets to the
 
 ```groovy
 freeletics {
+    // adds all targets that a also supported by the coroutines project
+    // has a `androidNativeTargets` boolean parameter to control adding androidNative* targets (defaults to enabled)
+    addCommonTargets()
     // adds jvm as a target
     addJvmTarget()
+    // adds Android as a target and automatically adds the Android Library plugin and common Android config
+    // has a `publish` boolean parameter to control adding whether the target should be published (defaults to enabled)
+    addAndroidTarget()
     // adds `iosArm64`, `iosX64`, `iosSimulatorArm64` as targets and creates shared iosMain and iosTest source sets
     addIosTargets("frameworkName")
     // same as above but will also configure everything to create a XCFramework
     addIosTargets("frameworkName", true)
-    // adds all targets that a also supported by the coroutines project
-    addCommonTargets()
 }
 ```
 
