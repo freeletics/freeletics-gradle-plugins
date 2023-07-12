@@ -75,11 +75,7 @@ public abstract class SettingsPlugin : Plugin<Settings> {
                         // androidx.compose.compiler but not dev versions because they come from a different repository
                         it.includeVersionByRegex("^androidx.compose.compiler\$", ".*", "^((?!-dev-k).)*\$")
 
-                        it.includeGroup("com.google.android.exoplayer")
-                        it.includeGroup("com.google.android.material")
-                        it.includeGroup("com.google.android.gms")
-                        it.includeGroup("com.google.android.play")
-                        it.includeGroup("com.google.android.datatransport")
+                        it.includeGroupByRegex("^com.google.android.*")
                         it.includeGroup("com.google.firebase")
                         it.includeGroup("com.google.testing.platform")
                         it.includeGroup("com.google.android.apps.common.testing.accessibility.framework")
