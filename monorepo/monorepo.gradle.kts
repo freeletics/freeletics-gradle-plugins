@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.accessors.runtime.addConfiguredDependencyTo
+
 plugins {
     alias(libs.plugins.fgp.gradle)
     alias(libs.plugins.fgp.publish)
@@ -10,10 +12,10 @@ dependencies {
     compileOnly(libs.crashlytics.gradle)
     compileOnly(libs.licensee)
 
-    add("shadeClassPath", variantOf(libs.kotlin.gradle) { classifier('gradle76') }) {
-        exclude(group: "org.jetbrains.kotlin", module: "kotlin-gradle-plugin-api")
+    addConfiguredDependencyTo(this, "shadeClassPath", variantOf(libs.kotlin.gradle) { classifier("gradle76") }) {
+        exclude("org.jetbrains.kotlin", "kotlin-gradle-plugin-api")
     }
-    add("shadeClassPath", variantOf(libs.kotlin.gradle.api) { classifier('gradle76') })
+    add("shadeClassPath", variantOf(libs.kotlin.gradle.api) { classifier("gradle76") })
     add("shadeClassPath", libs.ksp)
     add("shadeClassPath", libs.anvil.gradle)
     add("shadeClassPath", libs.moshix.gradle)
@@ -24,47 +26,47 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        monoAppPlugin {
+        create("monoAppPlugin") {
             id = "com.freeletics.gradle.app"
             implementationClass = "com.freeletics.gradle.plugin.AppPlugin"
         }
 
-        monoCoreAndroidPlugin {
+        create("monoCoreAndroidPlugin") {
             id = "com.freeletics.gradle.core-android"
             implementationClass = "com.freeletics.gradle.plugin.CoreAndroidPlugin"
         }
 
-        monoCoreKotlinPlugin {
+        create("monoCoreKotlinPlugin") {
             id = "com.freeletics.gradle.core-kotlin"
             implementationClass = "com.freeletics.gradle.plugin.CoreKotlinPlugin"
         }
 
-        monoDomainAndroidPlugin {
+        create("monoDomainAndroidPlugin") {
             id = "com.freeletics.gradle.domain-android"
             implementationClass = "com.freeletics.gradle.plugin.DomainAndroidPlugin"
         }
 
-        monoDomainKotlinPlugin {
+        create("monoDomainKotlinPlugin") {
             id = "com.freeletics.gradle.domain-kotlin"
             implementationClass = "com.freeletics.gradle.plugin.DomainKotlinPlugin"
         }
 
-        monoFeaturePlugin {
+        create("monoFeaturePlugin") {
             id = "com.freeletics.gradle.feature"
             implementationClass = "com.freeletics.gradle.plugin.FeaturePlugin"
         }
 
-        monoNavPlugin {
+        create("monoNavPlugin") {
             id = "com.freeletics.gradle.nav"
             implementationClass = "com.freeletics.gradle.plugin.NavPlugin"
         }
 
-        monoLegacyAndroidPlugin {
+        create("monoLegacyAndroidPlugin") {
             id = "com.freeletics.gradle.legacy-android"
             implementationClass = "com.freeletics.gradle.plugin.LegacyAndroidPlugin"
         }
 
-        monoLegacyKotlinPlugin {
+        create("monoLegacyKotlinPlugin") {
             id = "com.freeletics.gradle.legacy-kotlin"
             implementationClass = "com.freeletics.gradle.plugin.LegacyKotlinPlugin"
         }

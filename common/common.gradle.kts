@@ -6,10 +6,10 @@ plugins {
 dependencies {
     add("shade", project.projects.base)
 
-    compileOnly(variantOf(libs.kotlin.gradle) { classifier('gradle76') }) {
-        exclude(group: "org.jetbrains.kotlin", module: "kotlin-gradle-plugin-api")
+    compileOnly(variantOf(libs.kotlin.gradle) { classifier("gradle76") }) {
+        exclude("org.jetbrains.kotlin", "kotlin-gradle-plugin-api")
     }
-    compileOnly(variantOf(libs.kotlin.gradle.api) { classifier('gradle76') })
+    compileOnly(variantOf(libs.kotlin.gradle.api) { classifier("gradle76") })
     compileOnly(libs.dependency.analysis)
     compileOnly(libs.gr8)
     compileOnly(libs.publish)
@@ -22,37 +22,37 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        commonAndroidPlugin {
+        create("commonAndroidPlugin") {
             id = "com.freeletics.gradle.common.android"
             implementationClass = "com.freeletics.gradle.plugin.FreeleticsAndroidPlugin"
         }
 
-        commonAndroidAppPlugin {
+        create("commonAndroidAppPlugin") {
             id = "com.freeletics.gradle.common.android.app"
             implementationClass = "com.freeletics.gradle.plugin.FreeleticsAndroidAppPlugin"
         }
 
-        commonJvmPlugin {
+        create("commonJvmPlugin") {
             id = "com.freeletics.gradle.common.jvm"
             implementationClass = "com.freeletics.gradle.plugin.FreeleticsJvmPlugin"
         }
 
-        commonMultiplatformPlugin {
+        create("commonMultiplatformPlugin") {
             id = "com.freeletics.gradle.common.multiplatform"
             implementationClass = "com.freeletics.gradle.plugin.FreeleticsMultiplatformPlugin"
         }
 
-        commonGradlePlugin {
+        create("commonGradlePlugin") {
             id = "com.freeletics.gradle.common.gradle"
             implementationClass = "com.freeletics.gradle.plugin.FreeleticsGradlePluginPlugin"
         }
 
-        commonPublishInternalPlugin {
+        create("commonPublishInternalPlugin") {
             id = "com.freeletics.gradle.common.publish.internal"
             implementationClass = "com.freeletics.gradle.plugin.FreeleticsPublishInternalPlugin"
         }
 
-        commonPublishOssPlugin {
+        create("commonPublishOssPlugin") {
             id = "com.freeletics.gradle.common.publish.oss"
             implementationClass = "com.freeletics.gradle.plugin.FreeleticsPublishOssPlugin"
         }
