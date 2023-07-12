@@ -14,6 +14,7 @@ dependencies {
     compileOnly(libs.gr8)
     compileOnly(libs.publish)
 
+    add("shadeClassPath", libs.android.gradle)
     add("shadeClassPath", libs.android.gradle.api)
     add("shadeClassPath", libs.ksp)
     add("shadeClassPath", libs.anvil.gradle)
