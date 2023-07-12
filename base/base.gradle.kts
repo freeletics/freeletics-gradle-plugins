@@ -4,10 +4,10 @@ plugins {
 
 dependencies {
     compileOnly(libs.gradle.api)
-    compileOnly(variantOf(libs.kotlin.gradle) { classifier('gradle76') }) {
-        exclude(group: "org.jetbrains.kotlin", module: "kotlin-gradle-plugin-api")
+    compileOnly(variantOf(libs.kotlin.gradle) { classifier("gradle76") }) {
+        exclude("org.jetbrains.kotlin", "kotlin-gradle-plugin-api")
     }
-    compileOnly(variantOf(libs.kotlin.gradle.api) { classifier('gradle76') })
+    compileOnly(variantOf(libs.kotlin.gradle.api) { classifier("gradle76") })
     compileOnly(libs.android.gradle.api)
     compileOnly(libs.ksp)
     compileOnly(libs.anvil.gradle)

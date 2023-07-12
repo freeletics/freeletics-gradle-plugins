@@ -10,7 +10,7 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        plugin {
+        create("settingsPlugin") {
             id = "com.freeletics.gradle.settings"
             implementationClass = "com.freeletics.gradle.plugin.SettingsPlugin"
         }

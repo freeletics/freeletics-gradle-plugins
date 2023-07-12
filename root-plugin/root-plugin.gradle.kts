@@ -9,7 +9,7 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        plugin {
+        create("rootPlugin") {
             id = "com.freeletics.gradle.root"
             implementationClass = "com.freeletics.gradle.plugin.RootPlugin"
         }
