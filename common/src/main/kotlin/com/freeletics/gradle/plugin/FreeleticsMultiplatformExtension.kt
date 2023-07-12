@@ -21,7 +21,7 @@ public abstract class FreeleticsMultiplatformExtension(project: Project) : Freel
     @JvmOverloads
     public fun addAndroidTarget(
         publish: Boolean = false,
-        configure: KotlinAndroidTarget.() -> Unit = { }
+        configure: KotlinAndroidTarget.() -> Unit = { },
     ) {
         project.plugins.apply("com.android.library")
         project.plugins.apply(FreeleticsAndroidBasePlugin::class.java)
