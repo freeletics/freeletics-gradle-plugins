@@ -13,11 +13,17 @@ public abstract class SettingsExtension(private val settings: Settings) {
      * This does not support nested projects. E.g. `foo:api` and `foo:impl` are generally fine, but if `:foo` also
      * is a project (has a build file) then these 2 are not considered.
      */
-    public fun discoverProjects() {
+    @JvmOverloads
+    public fun discoverProjects(kts: Boolean = true) {
+        val extensions = if (kts) listOf("gradle.kts") else listOf("gradle")
+        discoverProjects(extensions)
+    }
+
+    internal fun discoverProjects(extensions: List<String>) {
         val root = settings.rootDir
         val rootPath = root.canonicalPath
         root.listFiles()!!.forEach {
-            discoverProjectsIn(it, rootPath)
+            discoverProjectsIn(it, extensions, rootPath, depth = 1)
         }
     }
 
@@ -29,37 +35,42 @@ public abstract class SettingsExtension(private val settings: Settings) {
      * This does not support nested projects. E.g. `foo:api` and `foo:impl` are generally fine, but if `:foo` also
      * is a project (has a build file) then these 2 are not considered.
      */
-    public fun discoverProjectsIn(vararg directories: String) {
+    @JvmOverloads
+    public fun discoverProjectsIn(kts: Boolean = true, vararg directories: String) {
+        val extensions = if (kts) listOf("gradle.kts") else listOf("gradle")
         val root = settings.rootDir
         val rootPath = root.canonicalPath
         directories.forEach {
-            discoverProjectsIn(root.resolve(it), rootPath)
+            discoverProjectsIn(root.resolve(it), extensions, rootPath, depth = 1)
         }
     }
 
-    private val gradleFileRegex = Regex(".+\\.gradle(\\.kts)?")
     private val ignoredDirectories = listOf("build", "gradle")
 
-    private fun discoverProjectsIn(directory: File, rootPath: String) {
+    private fun discoverProjectsIn(directory: File, extensions: List<String>, rootPath: String, depth: Int) {
         if (!directory.isDirectory || directory.isHidden || ignoredDirectories.contains(directory.name)) {
             return
         }
 
-        val files = directory.listFiles()!!.toList()
-        val gradleFiles = files.filter { gradleFileRegex.matches(it.name) }
-        if (gradleFiles.any { it.name.startsWith("settings.gradle") }) {
-            return
-        } else if (gradleFiles.isNotEmpty()) {
-            val buildFile = gradleFiles.single()
-            val relativePath = buildFile.parent.substringAfter(rootPath)
-            if (relativePath.isNotEmpty()) {
-                val projectName = relativePath.replace(File.separator, ":")
-                settings.include(projectName)
-                settings.project(projectName).buildFileName = buildFile.name
+        val relativePath = directory.path.substringAfter(rootPath)
+        if (relativePath.isNotEmpty()) {
+            val projectName = relativePath.replace(File.separator, ":")
+            extensions.forEach { extension ->
+                val expectedBuildFileName = "${projectName.drop(1).replace(":", "-")}.$extension"
+                if (directory.resolve(expectedBuildFileName).exists()) {
+                    settings.include(projectName)
+                    settings.project(projectName).buildFileName = expectedBuildFileName
+                    return
+                }
             }
-        } else {
-            files.forEach {
-                discoverProjectsIn(it, rootPath)
+        }
+
+        if (depth < 3) {
+            val files = directory.listFiles()!!.toList()
+            if (files.none { it.name.startsWith("settings.gradle") }) {
+                files.forEach {
+                    discoverProjectsIn(it, extensions, rootPath, depth + 1)
+                }
             }
         }
     }

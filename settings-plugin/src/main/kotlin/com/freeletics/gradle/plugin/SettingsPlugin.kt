@@ -127,7 +127,7 @@ public abstract class SettingsPlugin : Plugin<Settings> {
 
         val autoDiscover = target.booleanProperty("fgp.discoverProjects.automatically", true)
         if (autoDiscover) {
-            extension.discoverProjects()
+            extension.discoverProjects(listOf("gradle", "gradle.kts"))
         }
     }
 
