@@ -1,10 +1,10 @@
 package com.freeletics.gradle.setup
 
-import com.freeletics.gradle.monorepoplugins.VERSION
 import com.freeletics.gradle.tasks.ProcessGoogleResourcesTask.Companion.registerProcessGoogleResourcesTask
 import com.freeletics.gradle.util.androidApp
 import com.freeletics.gradle.util.androidComponentsApp
 import com.freeletics.gradle.util.computeInfoFromGit
+import com.freeletics.gradle.util.getVersion
 import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
@@ -33,7 +33,7 @@ internal fun Project.configureCrashlytics(uploadNativeSymbols: Boolean) {
         }
     }
 
-    project.dependencies.add("releaseApi", "com.freeletics.gradle:minify-crashlytics:$VERSION")
+    project.dependencies.add("releaseApi", "com.freeletics.gradle:minify-crashlytics:${project.getVersion("fgp")}")
 
     androidComponentsApp {
         onVariants { variant ->
