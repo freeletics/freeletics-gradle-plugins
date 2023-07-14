@@ -1,7 +1,6 @@
 package com.freeletics.gradle.plugin
 
 import com.android.build.api.variant.VariantOutputConfiguration
-import com.freeletics.gradle.monorepoplugins.VERSION
 import com.freeletics.gradle.setup.configureCrashlytics
 import com.freeletics.gradle.setup.configureLicensee
 import com.freeletics.gradle.tasks.ComputeGitShaTask.Companion.mapOutput
@@ -20,6 +19,7 @@ import com.freeletics.gradle.util.androidApp
 import com.freeletics.gradle.util.androidComponentsApp
 import com.freeletics.gradle.util.defaultEnvironment
 import com.freeletics.gradle.util.environmentBuildConfigFields
+import com.freeletics.gradle.util.getVersion
 import java.io.File
 import org.gradle.api.Project
 
@@ -51,7 +51,7 @@ public abstract class AppExtension(project: Project) : FreeleticsAndroidExtensio
             }
         }
 
-        project.dependencies.add("api", "com.freeletics.gradle:minify-common:$VERSION")
+        project.dependencies.add("api", "com.freeletics.gradle:minify-common:${project.getVersion("fgp")}")
     }
 
     public fun checkLicenses() {

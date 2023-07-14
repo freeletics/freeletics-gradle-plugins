@@ -18,3 +18,12 @@ dependencyAnalysis {
         }
     }
 }
+
+// TODO remove after FGP 0.3.9+ was released
+subprojects {
+    plugins.withId("com.freeletics.gradle.common.gradle") {
+        tasks.named("generatePluginVersion").configure {
+            enabled = false
+        }
+    }
+}
