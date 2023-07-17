@@ -36,6 +36,7 @@ internal fun Project.configureDagger(mode: DaggerMode) {
         val processorConfiguration = configureProcessing(
             "dagger.experimentalDaggerErrorMessages" to "enabled",
             "dagger.strictMultibindingValidation" to "enabled",
+            "dagger.warnIfInjectionFactoryNotGeneratedUpstream" to "enabled",
         )
 
         dependencies.apply {
