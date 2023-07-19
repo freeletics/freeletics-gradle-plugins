@@ -3,8 +3,13 @@ package com.freeletics.gradle.plugin
 import com.android.build.api.variant.HasAndroidTestBuilder
 import com.freeletics.gradle.setup.configurePaparazzi
 import com.freeletics.gradle.setup.configureProcessing
-import com.freeletics.gradle.util.*
+import com.freeletics.gradle.util.android
+import com.freeletics.gradle.util.androidComponents
 import com.freeletics.gradle.util.androidResources
+import com.freeletics.gradle.util.getDependency
+import com.freeletics.gradle.util.getVersion
+import com.freeletics.gradle.util.kotlin
+import com.freeletics.gradle.util.stringProperty
 import org.gradle.api.Project
 
 public abstract class FreeleticsAndroidExtension(project: Project) : FreeleticsBaseExtension(project) {
