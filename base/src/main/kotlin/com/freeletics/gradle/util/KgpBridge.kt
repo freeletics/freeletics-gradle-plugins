@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 // TODO can be removed after KotlinMultiplatformExtension supports `compilerOptions`
 //  which should happen in 1.9.20 https://youtrack.jetbrains.com/issue/KT-55515
 public sealed class KotlinProjectExtensionDelegate(
-    private val extension: KotlinProjectExtension
+    private val extension: KotlinProjectExtension,
 ) {
     fun explicitApi() = extension.explicitApi()
     fun jvmToolchain(action: Action<JavaToolchainSpec>) = extension.jvmToolchain(action)
@@ -32,7 +32,7 @@ public sealed class KotlinProjectExtensionDelegate(
 }
 
 public class KotlinAndroidProjectExtensionDelegate(
-    private val extension: KotlinAndroidProjectExtension
+    private val extension: KotlinAndroidProjectExtension,
 ) : KotlinProjectExtensionDelegate(extension) {
     override fun compilerOptions(configure: KotlinCommonCompilerOptions.() -> Unit) {
         extension.compilerOptions(configure)
@@ -40,7 +40,7 @@ public class KotlinAndroidProjectExtensionDelegate(
 }
 
 public class KotlinJvmProjectExtensionDelegate(
-    private val extension: KotlinJvmProjectExtension
+    private val extension: KotlinJvmProjectExtension,
 ) : KotlinProjectExtensionDelegate(extension) {
     override fun compilerOptions(configure: KotlinCommonCompilerOptions.() -> Unit) {
         extension.compilerOptions(configure)
@@ -48,7 +48,7 @@ public class KotlinJvmProjectExtensionDelegate(
 }
 public class KotlinMultiplatformProjectExtensionDelegate(
     private val project: Project,
-    extension: KotlinMultiplatformExtension
+    extension: KotlinMultiplatformExtension,
 ) : KotlinProjectExtensionDelegate(extension) {
 
     override fun compilerOptions(configure: KotlinCommonCompilerOptions.() -> Unit) {
