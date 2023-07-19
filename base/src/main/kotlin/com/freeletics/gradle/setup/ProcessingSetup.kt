@@ -1,6 +1,5 @@
 package com.freeletics.gradle.setup
 
-import com.freeletics.gradle.util.booleanProperty
 import com.google.devtools.ksp.gradle.KspExtension
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
