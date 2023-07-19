@@ -1,6 +1,7 @@
 package com.freeletics.gradle.setup
 
 import com.freeletics.gradle.plugin.FreeleticsBaseExtension.DaggerMode
+import com.freeletics.gradle.util.booleanProperty
 import com.freeletics.gradle.util.getDependency
 import com.freeletics.gradle.util.getDependencyOrNull
 import com.squareup.anvil.plugin.AnvilExtension
@@ -32,8 +33,10 @@ internal fun Project.configureDagger(mode: DaggerMode) {
         }
     }
 
+    val useKsp = booleanProperty("fgp.kotlin.daggerKsp", false)
     if (mode == DaggerMode.ANVIL_WITH_FULL_DAGGER) {
         val processorConfiguration = configureProcessing(
+            useKsp = useKsp.get(),
             "dagger.experimentalDaggerErrorMessages" to "enabled",
             "dagger.strictMultibindingValidation" to "enabled",
             "dagger.warnIfInjectionFactoryNotGeneratedUpstream" to "enabled",

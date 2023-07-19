@@ -15,7 +15,7 @@ import org.gradle.api.Project
 public abstract class FreeleticsAndroidExtension(project: Project) : FreeleticsBaseExtension(project) {
 
     fun useRoom() {
-        val processorConfiguration = project.configureProcessing()
+        val processorConfiguration = project.configureProcessing(useKsp = true)
 
         project.dependencies.apply {
             add("api", project.getDependency("androidx-room-runtime"))
