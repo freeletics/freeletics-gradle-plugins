@@ -1,7 +1,6 @@
 package com.freeletics.gradle.plugin
 
 import com.freeletics.gradle.setup.setupGr8
-import com.freeletics.gradle.util.compilerOptions
 import com.freeletics.gradle.util.getDependency
 import com.freeletics.gradle.util.kotlin
 import org.gradle.api.Plugin
@@ -20,7 +19,7 @@ public abstract class FreeleticsGradlePluginPlugin : Plugin<Project> {
         target.extensions.create("freeletics", FreeleticsJvmExtension::class.java)
 
         target.kotlin {
-            compilerOptions(target) {
+            compilerOptions {
                 freeCompilerArgs.add("-Xsam-conversions=class")
             }
         }

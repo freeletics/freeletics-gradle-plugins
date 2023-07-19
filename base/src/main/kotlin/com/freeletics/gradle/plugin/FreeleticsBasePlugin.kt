@@ -1,7 +1,6 @@
 package com.freeletics.gradle.plugin
 
 import com.freeletics.gradle.util.booleanProperty
-import com.freeletics.gradle.util.compilerOptions
 import com.freeletics.gradle.util.getVersionOrNull
 import com.freeletics.gradle.util.java
 import com.freeletics.gradle.util.javaToolchainVersion
@@ -76,20 +75,19 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                 toolchain.vendor.set(JvmVendorSpec.AZUL)
             }
 
-            compilerOptions(project) {
+            compilerOptions {
                 getVersionOrNull("kotlin-language")?.let {
                     languageVersion.set(KotlinVersion.fromVersion(it))
                 }
 
                 allWarningsAsErrors.set(!booleanProperty("fgp.kotlin.allowWarnings", false).get())
 
-                freeCompilerArgs.addAll(
-                    // In this mode, some deprecations and bug-fixes for unstable code take effect immediately.
-                    "-progressive",
-                    // Support inferring type arguments based on only self upper bounds of the corresponding type parameters
-                    // https://kotlinlang.org/docs/whatsnew1530.html#improvements-to-type-inference-for-recursive-generic-types
-                    "-Xself-upper-bound-inference",
-                )
+                // In this mode, some deprecations and bug-fixes for unstable code take effect immediately.
+                progressiveMode.set(true)
+
+                // Support inferring type arguments based on only self upper bounds of the corresponding type parameters
+                // https://kotlinlang.org/docs/whatsnew1530.html#improvements-to-type-inference-for-recursive-generic-types
+                freeCompilerArgs.add("-Xself-upper-bound-inference")
 
                 if (this is KotlinJvmCompilerOptions) {
                     jvmTarget.set(project.jvmTarget)
@@ -101,11 +99,13 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                         "-Xassertions=jvm",
                         // Enabling default nullability annotations
                         "-Xjsr305=strict",
+                        // https://kotlinlang.org/docs/whatsnew1520.html#support-for-jspecify-nullness-annotations
+                        "-Xjspecify-annotations=strict",
                         // Enhance not null annotated type parameter's types to definitely not null types (@NotNull T => T & Any)
                         "-Xenhance-type-parameter-types-to-def-not-null",
                     )
 
-                    if (booleanProperty("fgp.kotlin.fastJarFs", false).get()) {
+                    if (project.booleanProperty("fgp.kotlin.fastJarFs", false).get()) {
                         freeCompilerArgs.add("-Xuse-fast-jar-file-system")
                     }
                 }

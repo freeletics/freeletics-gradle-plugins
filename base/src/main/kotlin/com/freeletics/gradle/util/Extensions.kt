@@ -6,12 +6,10 @@ import com.android.build.api.dsl.LibraryExtension
 import com.android.build.api.variant.AndroidComponentsExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.api.variant.LibraryAndroidComponentsExtension
+import com.freeletics.gradle.util.KotlinProjectExtensionDelegate.Companion.kotlinProjectExtensionDelegate
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPluginExtension
-import org.jetbrains.kotlin.gradle.dsl.KotlinCommonCompilerOptions
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 public fun Project.java(action: JavaPluginExtension.() -> Unit) {
     extensions.configure(JavaPluginExtension::class.java) {
@@ -19,22 +17,13 @@ public fun Project.java(action: JavaPluginExtension.() -> Unit) {
     }
 }
 
-public fun Project.kotlin(action: KotlinProjectExtension.() -> Unit) {
-    extensions.configure(KotlinProjectExtension::class.java) {
-        it.action()
-    }
+public fun Project.kotlin(action: KotlinProjectExtensionDelegate.() -> Unit) {
+    kotlinProjectExtensionDelegate().action()
 }
 
 public fun Project.kotlinMultiplatform(action: KotlinMultiplatformExtension.() -> Unit) {
     extensions.configure(KotlinMultiplatformExtension::class.java) {
         it.action()
-    }
-}
-
-@Suppress("UnusedReceiverParameter") // until KGP provides something like this
-public fun KotlinProjectExtension.compilerOptions(project: Project, action: KotlinCommonCompilerOptions.() -> Unit) {
-    project.tasks.withType(KotlinCompilationTask::class.java).configureEach {
-        it.compilerOptions(action)
     }
 }
 

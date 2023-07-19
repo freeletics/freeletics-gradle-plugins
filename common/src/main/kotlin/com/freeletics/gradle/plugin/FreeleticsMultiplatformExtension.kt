@@ -27,7 +27,7 @@ public abstract class FreeleticsMultiplatformExtension(project: Project) : Freel
         project.plugins.apply(FreeleticsAndroidBasePlugin::class.java)
 
         project.kotlinMultiplatform {
-            android {
+            androidTarget {
                 if (publish) {
                     publishAllLibraryVariants()
                 }
@@ -57,8 +57,8 @@ public abstract class FreeleticsMultiplatformExtension(project: Project) : Freel
             }
 
             iosArm64 {
-                compilations.getByName("main").source(iosMain)
-                compilations.getByName("test").source(iosTest)
+                compilations.getByName("main").defaultSourceSet.dependsOn(iosMain)
+                compilations.getByName("test").defaultSourceSet.dependsOn(iosTest)
 
                 binaries.framework {
                     baseName = frameworkName
@@ -69,8 +69,8 @@ public abstract class FreeleticsMultiplatformExtension(project: Project) : Freel
             }
 
             iosX64 {
-                compilations.getByName("main").source(iosMain)
-                compilations.getByName("test").source(iosTest)
+                compilations.getByName("main").defaultSourceSet.dependsOn(iosMain)
+                compilations.getByName("test").defaultSourceSet.dependsOn(iosTest)
 
                 binaries.framework {
                     baseName = frameworkName
@@ -81,8 +81,8 @@ public abstract class FreeleticsMultiplatformExtension(project: Project) : Freel
             }
 
             iosSimulatorArm64 {
-                compilations.getByName("main").source(iosMain)
-                compilations.getByName("test").source(iosTest)
+                compilations.getByName("main").defaultSourceSet.dependsOn(iosMain)
+                compilations.getByName("test").defaultSourceSet.dependsOn(iosTest)
 
                 binaries.framework {
                     baseName = frameworkName
@@ -140,8 +140,8 @@ public abstract class FreeleticsMultiplatformExtension(project: Project) : Freel
 
             targets.configureEach {
                 if (it.platformType == KotlinPlatformType.native) {
-                    it.compilations.getByName("main").source(nativeMain)
-                    it.compilations.getByName("test").source(nativeTest)
+                    it.compilations.getByName("main").defaultSourceSet.dependsOn(nativeMain)
+                    it.compilations.getByName("test").defaultSourceSet.dependsOn(nativeTest)
                 }
             }
         }

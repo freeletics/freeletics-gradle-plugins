@@ -6,7 +6,6 @@ import com.freeletics.gradle.setup.configureProcessing
 import com.freeletics.gradle.util.android
 import com.freeletics.gradle.util.androidComponents
 import com.freeletics.gradle.util.androidResources
-import com.freeletics.gradle.util.compilerOptions
 import com.freeletics.gradle.util.getDependency
 import com.freeletics.gradle.util.getVersion
 import com.freeletics.gradle.util.kotlin
@@ -54,7 +53,7 @@ public abstract class FreeleticsAndroidExtension(project: Project) : FreeleticsB
         val suppressComposeCompilerCheck = project.stringProperty("fgp.compose.kotlinVersion").orNull
         if (suppressComposeCompilerCheck != null) {
             project.kotlin {
-                compilerOptions(project) {
+                compilerOptions {
                     freeCompilerArgs.addAll(
                         "-P",
                         "plugin:androidx.compose.compiler.plugins.kotlin:" +
