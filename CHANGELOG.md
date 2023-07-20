@@ -1,7 +1,24 @@
 Change Log
 ==========
 
-## 0.3.9 **UNRELEASED**
+## 0.4.1 **UNRELEASED**
+
+
+## 0.4.0 *(2023-07-19)*
+
+- now requires Kotlin 1.9.0
+- `useRoom` will now use KSP
+- the `fgp.kotlin.ksp` property was removed
+- new `fgp.kotlin.daggerKsp` property to use KSP with Dagger
+- `discoverProjects` and `discoverProjectsIn` now have a boolean parameter to declare
+  whether kts build files are used or nor
+- project auto-disovery works better with the configuration cache by scanning less
+  directories and limiting the project depth (project auto discovery generally does
+  not work well with Gradle 8.1 and 8.2 because of a performance issue)
+- when enabling Dagger the new `dagger.warnIfInjectionFactoryNotGeneratedUpstream` flag
+  is enabled automatically
+- Multiplatform: new `addAndroidTarget` method to add Android as a target
+- Multiplatform: new `addCommonTargets` now as a parameter to skip androidNative* targets
 
 
 ## 0.3.8 *(2023-07-10)*
