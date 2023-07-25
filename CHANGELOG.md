@@ -18,7 +18,7 @@ Change Log
 - when enabling Dagger the new `dagger.warnIfInjectionFactoryNotGeneratedUpstream` flag
   is enabled automatically
 - Multiplatform: new `addAndroidTarget` method to add Android as a target
-- Multiplatform: new `addCommonTargets` now as a parameter to skip androidNative* targets
+- Multiplatform: `addCommonTargets` now has a parameter to skip adding `androidNative*` targets
 
 
 ## 0.3.8 *(2023-07-10)*
