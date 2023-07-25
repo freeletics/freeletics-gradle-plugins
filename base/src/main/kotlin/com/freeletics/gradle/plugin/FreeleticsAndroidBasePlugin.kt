@@ -113,10 +113,7 @@ public abstract class FreeleticsAndroidBasePlugin : Plugin<Project> {
 
         androidComponents {
             beforeVariants(selector().withBuildType("release")) {
-                val unitTestBuilder: HasUnitTestBuilder? = it as? HasUnitTestBuilder
-                if (unitTestBuilder != null) {
-                    unitTestBuilder.enableUnitTest = false
-                }
+                (it as? HasUnitTestBuilder)?.enableUnitTest = false
             }
         }
     }
