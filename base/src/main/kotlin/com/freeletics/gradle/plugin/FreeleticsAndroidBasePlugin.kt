@@ -2,6 +2,7 @@ package com.freeletics.gradle.plugin
 
 import com.android.build.api.dsl.ApplicationDefaultConfig
 import com.android.build.api.variant.HasAndroidTestBuilder
+import com.android.build.api.variant.HasUnitTestBuilder
 import com.freeletics.gradle.setup.configure
 import com.freeletics.gradle.setup.defaultTestSetup
 import com.freeletics.gradle.util.android
@@ -50,7 +51,6 @@ public abstract class FreeleticsAndroidBasePlugin : Plugin<Project> {
             }
 
             // default all features to false, they will be enabled through FreeleticsAndroidExtension
-            @Suppress("UnstableApiUsage")
             buildFeatures {
                 androidResources = false
                 viewBinding = false
@@ -113,7 +113,7 @@ public abstract class FreeleticsAndroidBasePlugin : Plugin<Project> {
 
         androidComponents {
             beforeVariants(selector().withBuildType("release")) {
-                it.enableUnitTest = false
+                (it as? HasUnitTestBuilder)?.enableUnitTest = false
             }
         }
     }

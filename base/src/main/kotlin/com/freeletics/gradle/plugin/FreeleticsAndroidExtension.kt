@@ -42,7 +42,6 @@ public abstract class FreeleticsAndroidExtension(project: Project) : FreeleticsB
     fun enableCompose() {
         val project = this.project
         project.android {
-            @Suppress("UnstableApiUsage")
             buildFeatures.compose = true
 
             composeOptions {
@@ -66,28 +65,24 @@ public abstract class FreeleticsAndroidExtension(project: Project) : FreeleticsB
 
     fun enableViewBinding() {
         project.android {
-            @Suppress("UnstableApiUsage")
             buildFeatures.viewBinding = true
         }
     }
 
     fun enableAndroidResources() {
         project.android {
-            @Suppress("UnstableApiUsage")
             buildFeatures.androidResources = true
         }
     }
 
     fun enableBuildConfig() {
         project.android {
-            @Suppress("UnstableApiUsage")
             buildFeatures.buildConfig = true
         }
     }
 
     fun enableResValues() {
         project.android {
-            @Suppress("UnstableApiUsage")
             buildFeatures.resValues = true
         }
     }

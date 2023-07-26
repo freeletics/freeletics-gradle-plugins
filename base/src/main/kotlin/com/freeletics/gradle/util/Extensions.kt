@@ -27,7 +27,7 @@ public fun Project.kotlinMultiplatform(action: KotlinMultiplatformExtension.() -
     }
 }
 
-public fun Project.android(action: CommonExtension<*, *, *, *>.() -> Unit) {
+public fun Project.android(action: CommonExtension<*, *, *, *, *>.() -> Unit) {
     extensions.configure(CommonExtension::class.java) {
         it.action()
     }
