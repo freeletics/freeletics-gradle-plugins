@@ -152,8 +152,6 @@ public abstract class SettingsExtension(private val settings: Settings) {
     public fun includeKhonshu(path: String = "../khonshu", experimentalNavigation: Boolean = false) {
         settings.includeBuild(path) { build ->
             build.dependencySubstitution {
-                it.substitute(it.module("com.freeletics.mad:state-machine"))
-                    .using(it.project(":state-machine-legacy"))
                 it.substitute(it.module("com.freeletics.khonshu:state-machine"))
                     .using(it.project(":state-machine"))
                 it.substitute(it.module("com.freeletics.khonshu:state-machine-testing"))
