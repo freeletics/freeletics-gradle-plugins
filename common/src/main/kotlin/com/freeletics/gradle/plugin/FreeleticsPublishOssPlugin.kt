@@ -30,7 +30,7 @@ public abstract class FreeleticsPublishOssPlugin : Plugin<Project> {
                 }
 
                 it.plugins.withId("com.android.library") {
-                    if (!target.plugins.hasPlugin("org.jetbrains.multiplatform")) {
+                    if (!target.plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")) {
                         target.tasks.named("javaDocReleaseGeneration").configure { task ->
                             task.enabled = false
                         }
