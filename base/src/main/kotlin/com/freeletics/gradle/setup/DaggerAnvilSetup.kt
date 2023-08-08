@@ -8,14 +8,17 @@ import com.squareup.anvil.plugin.AnvilExtension
 import org.gradle.api.Project
 
 internal fun Project.configureDagger(mode: DaggerMode) {
-    plugins.apply("com.squareup.anvil")
+    val daggerKsp = booleanProperty("fgp.kotlin.daggerKsp", false)
+    val anvilKsp = booleanProperty("fgp.kotlin.anvilKsp", false)
+    val khonshuKsp = booleanProperty("fgp.kotlin.khonshuKsp", false)
 
-    extensions.configure(AnvilExtension::class.java) {
+    applyAnvil(
+        useKsp = anvilKsp.get(),
         // only full dagger modules use dagger compiler all others use anvil to generate factories
-        it.generateDaggerFactories.set(mode != DaggerMode.ANVIL_WITH_FULL_DAGGER)
+        generateDaggerFactories = mode != DaggerMode.ANVIL_WITH_FULL_DAGGER,
         // we ony do component merging when using dagger to generate components
-        it.disableComponentMerging.set(mode != DaggerMode.ANVIL_WITH_FULL_DAGGER)
-    }
+        disableComponentMerging = mode != DaggerMode.ANVIL_WITH_FULL_DAGGER
+    )
 
     dependencies.apply {
         add("api", getDependency("inject"))
@@ -28,22 +31,48 @@ internal fun Project.configureDagger(mode: DaggerMode) {
     }
 
     if (mode == DaggerMode.ANVIL_WITH_KHONSHU) {
+        val configuration = if (khonshuKsp.get()) {
+            configureProcessing(useKsp = true)
+        } else {
+            "anvil"
+        }
+
         dependencies.apply {
-            add("anvil", getDependency("khonshu-codegen-compiler"))
+            add(configuration, getDependency("khonshu-codegen-compiler"))
         }
     }
 
-    val useKsp = booleanProperty("fgp.kotlin.daggerKsp", false)
     if (mode == DaggerMode.ANVIL_WITH_FULL_DAGGER) {
         val processorConfiguration = configureProcessing(
-            useKsp = useKsp.get(),
+            useKsp = daggerKsp.get(),
             "dagger.experimentalDaggerErrorMessages" to "enabled",
             "dagger.strictMultibindingValidation" to "enabled",
             "dagger.warnIfInjectionFactoryNotGeneratedUpstream" to "enabled",
         )
 
         dependencies.apply {
-            add(processorConfiguration, getDependency("dagger.compiler"))
+            add(processorConfiguration, getDependency("dagger-compiler"))
+        }
+    }
+}
+
+private fun Project.applyAnvil(useKsp: Boolean, generateDaggerFactories: Boolean, disableComponentMerging: Boolean) {
+    if (useKsp) {
+        configureProcessing(
+            useKsp = true,
+            "generate-dagger-factories" to "$disableComponentMerging",
+            "disable-component-merging" to "$generateDaggerFactories",
+        )
+
+        dependencies.apply {
+            add("ksp", getDependency("anvil-compiler"))
+        }
+    } else {
+        plugins.apply("com.squareup.anvil")
+
+        extensions.configure(AnvilExtension::class.java) {
+            it.generateDaggerFactories.set(generateDaggerFactories)
+            it.disableComponentMerging.set(disableComponentMerging)
         }
     }
 }
