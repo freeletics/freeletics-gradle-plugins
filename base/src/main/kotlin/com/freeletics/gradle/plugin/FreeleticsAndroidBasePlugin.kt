@@ -9,6 +9,7 @@ import com.freeletics.gradle.util.android
 import com.freeletics.gradle.util.androidComponents
 import com.freeletics.gradle.util.androidResources
 import com.freeletics.gradle.util.dataBinding
+import com.freeletics.gradle.util.freeleticsExtension
 import com.freeletics.gradle.util.getDependencyOrNull
 import com.freeletics.gradle.util.getVersion
 import com.freeletics.gradle.util.getVersionOrNull
@@ -22,6 +23,8 @@ public abstract class FreeleticsAndroidBasePlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         target.plugins.apply(FreeleticsBasePlugin::class.java)
+
+        target.freeleticsExtension.extensions.create("android", FreeleticsAndroidExtension::class.java)
 
         target.androidSetup()
         target.configureLint()

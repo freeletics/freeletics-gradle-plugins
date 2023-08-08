@@ -1,6 +1,7 @@
 package com.freeletics.gradle.plugin
 
 import com.freeletics.gradle.setup.defaultTestSetup
+import com.freeletics.gradle.util.freeleticsExtension
 import com.freeletics.gradle.util.java
 import com.freeletics.gradle.util.javaTargetVersion
 import org.gradle.api.Plugin
@@ -12,6 +13,8 @@ public abstract class FreeleticsJvmBasePlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         target.plugins.apply(FreeleticsBasePlugin::class.java)
+
+        target.freeleticsExtension.extensions.create("jvm", FreeleticsJvmExtension::class.java)
 
         target.java {
             sourceCompatibility = target.javaTargetVersion

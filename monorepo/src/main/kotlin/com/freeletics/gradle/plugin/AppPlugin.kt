@@ -8,6 +8,8 @@ import com.freeletics.gradle.util.ProjectType
 import com.freeletics.gradle.util.androidApp
 import com.freeletics.gradle.util.androidComponents
 import com.freeletics.gradle.util.appType
+import com.freeletics.gradle.util.freeleticsAndroidExtension
+import com.freeletics.gradle.util.freeleticsExtension
 import com.freeletics.gradle.util.stringProperty
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -19,12 +21,12 @@ public abstract class AppPlugin : Plugin<Project> {
         target.plugins.apply(FreeleticsAndroidBasePlugin::class.java)
         target.plugins.apply("com.autonomousapps.dependency-analysis")
 
-        val extension = target.extensions.create("freeletics", AppExtension::class.java)
+        target.freeleticsExtension.extensions.create("app", AppExtension::class.java)
 
-        extension.minSdkVersion(target.appType()?.minSdkVersion(target))
-        extension.enableBuildConfig()
-        extension.enableAndroidResources()
-        extension.enableResValues()
+        target.freeleticsAndroidExtension.minSdkVersion(target.appType()?.minSdkVersion(target))
+        target.freeleticsAndroidExtension.enableBuildConfig()
+        target.freeleticsAndroidExtension.enableAndroidResources()
+        target.freeleticsAndroidExtension.enableResValues()
 
         target.androidApp {
             signingConfigs {
@@ -67,6 +69,7 @@ public abstract class AppPlugin : Plugin<Project> {
                 baseline = target.file("lint-baseline.xml")
             }
 
+            @Suppress("UnstableApiUsage")
             testOptions {
                 // include test resources in app module to be able to test the manifest
                 unitTests.isIncludeAndroidResources = true

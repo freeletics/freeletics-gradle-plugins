@@ -5,6 +5,7 @@ import com.freeletics.gradle.setup.addDefaultDependencies
 import com.freeletics.gradle.setup.addTestDependencies
 import com.freeletics.gradle.tasks.CheckDependencyRulesTask.Companion.registerCheckDependencyRulesTasks
 import com.freeletics.gradle.util.ProjectType
+import com.freeletics.gradle.util.freeleticsAndroidExtension
 import com.freeletics.gradle.util.projectType
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -16,10 +17,8 @@ public abstract class LegacyAndroidPlugin : Plugin<Project> {
         target.plugins.apply(FreeleticsAndroidBasePlugin::class.java)
         target.plugins.apply("com.autonomousapps.dependency-analysis")
 
-        val extension = target.extensions.create("freeletics", FreeleticsAndroidExtension::class.java)
-
-        extension.enableAndroidResources()
-        extension.enableParcelize()
+        target.freeleticsAndroidExtension.enableAndroidResources()
+        target.freeleticsAndroidExtension.enableParcelize()
 
         target.dependencies.apply {
             addDefaultDependencies(target)

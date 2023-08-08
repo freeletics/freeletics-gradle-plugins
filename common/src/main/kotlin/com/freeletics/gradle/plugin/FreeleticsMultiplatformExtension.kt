@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFrameworkConfig
 import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 
-public abstract class FreeleticsMultiplatformExtension(project: Project) : FreeleticsBaseExtension(project) {
+public abstract class FreeleticsMultiplatformExtension(private val project: Project) {
 
     @JvmOverloads
     public fun addJvmTarget(configure: KotlinJvmTarget.() -> Unit = { }) {

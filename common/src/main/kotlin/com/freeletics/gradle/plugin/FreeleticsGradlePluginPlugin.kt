@@ -16,8 +16,6 @@ public abstract class FreeleticsGradlePluginPlugin : Plugin<Project> {
         target.plugins.apply("com.autonomousapps.dependency-analysis")
         target.plugins.apply("com.autonomousapps.plugin-best-practices-plugin")
 
-        target.extensions.create("freeletics", FreeleticsJvmExtension::class.java)
-
         target.kotlin {
             compilerOptions {
                 freeCompilerArgs.add("-Xsam-conversions=class")
