@@ -4,6 +4,7 @@ import com.gradle.enterprise.gradleplugin.GradleEnterpriseExtension
 import com.gradle.enterprise.gradleplugin.GradleEnterprisePlugin
 import org.gradle.api.Plugin
 import org.gradle.api.credentials.AwsCredentials
+import org.gradle.api.credentials.PasswordCredentials
 import org.gradle.api.initialization.Settings
 import org.gradle.api.initialization.resolve.RepositoriesMode
 import org.gradle.caching.http.HttpBuildCache
@@ -44,14 +45,34 @@ public abstract class SettingsPlugin : Plugin<Settings> {
         target.dependencyResolutionManagement { management ->
             @Suppress("UnstableApiUsage")
             management.repositories { handler ->
-                val internalUrl = target.stringProperty("freeleticsAndroidArtifactsUrl")
-                if (internalUrl != null) {
+                val internalS3Url = target.stringProperty("freeleticsAndroidArtifactsUrl")
+                if (internalS3Url != null) {
                     handler.exclusiveContent { content ->
                         content.forRepository {
                             handler.maven {
                                 it.name = "freeleticsAndroidArtifacts"
-                                it.setUrl(internalUrl)
+                                it.setUrl(internalS3Url)
                                 it.credentials(AwsCredentials::class.java)
+                            }
+                        }
+
+                        content.filter {
+                            it.includeGroupByRegex("^com\\.freeletics\\.internal.*")
+                            // manually uploaded because only published on jitpack
+                            it.includeModule("com.github.kamikat.moshi-jsonapi", "core")
+                            it.includeModule("com.github.kamikat.moshi-jsonapi", "retrofit-converter")
+                        }
+                    }
+                }
+
+                val internalUrl = target.stringProperty("internalArtifactsUrl")
+                if (internalUrl != null) {
+                    handler.exclusiveContent { content ->
+                        content.forRepository {
+                            handler.maven {
+                                it.name = "internalArtifacts"
+                                it.setUrl(internalUrl)
+                                it.credentials(PasswordCredentials::class.java)
                             }
                         }
 
