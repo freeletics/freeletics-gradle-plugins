@@ -10,7 +10,5 @@ public abstract class FreeleticsAndroidAppPlugin : Plugin<Project> {
         target.plugins.apply("org.jetbrains.kotlin.android")
         target.plugins.apply(FreeleticsAndroidBasePlugin::class.java)
         target.plugins.apply("com.autonomousapps.dependency-analysis")
-
-        target.extensions.create("freeletics", FreeleticsAndroidExtension::class.java)
     }
 }
