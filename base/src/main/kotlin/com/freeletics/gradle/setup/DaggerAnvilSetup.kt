@@ -17,7 +17,7 @@ internal fun Project.configureDagger(mode: DaggerMode) {
         // only full dagger modules use dagger compiler all others use anvil to generate factories
         generateDaggerFactories = mode != DaggerMode.ANVIL_WITH_FULL_DAGGER,
         // we ony do component merging when using dagger to generate components
-        disableComponentMerging = mode != DaggerMode.ANVIL_WITH_FULL_DAGGER
+        disableComponentMerging = mode != DaggerMode.ANVIL_WITH_FULL_DAGGER,
     )
 
     dependencies.apply {
