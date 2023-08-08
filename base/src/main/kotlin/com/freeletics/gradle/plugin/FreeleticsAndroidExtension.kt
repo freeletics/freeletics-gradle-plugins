@@ -1,11 +1,9 @@
 package com.freeletics.gradle.plugin
 
 import com.android.build.api.dsl.LibraryExtension
-import com.android.build.api.variant.HasAndroidTestBuilder
 import com.freeletics.gradle.setup.configurePaparazzi
 import com.freeletics.gradle.setup.configureProcessing
 import com.freeletics.gradle.util.android
-import com.freeletics.gradle.util.androidComponents
 import com.freeletics.gradle.util.androidResources
 import com.freeletics.gradle.util.getDependency
 import com.freeletics.gradle.util.getVersion
@@ -117,34 +115,6 @@ public abstract class FreeleticsAndroidExtension(private val project: Project) {
     fun consumerProguardFiles(vararg files: String) {
         project.android {
             (this as LibraryExtension).defaultConfig.consumerProguardFiles(*files)
-        }
-    }
-
-    @JvmOverloads
-    fun enableAndroidTests(
-        testInstrumentationRunner: String = "androidx.test.runner.AndroidJUnitRunner",
-        testInstrumentationRunnerArguments: Map<String, String> = mapOf("clearPackageData" to "'true'"),
-        execution: String = "ANDROIDX_TEST_ORCHESTRATOR",
-        animationsDisabled: Boolean = true,
-
-    ) {
-        project.android {
-            defaultConfig {
-                this.testInstrumentationRunner = testInstrumentationRunner
-                this.testInstrumentationRunnerArguments += testInstrumentationRunnerArguments
-            }
-
-            @Suppress("UnstableApiUsage")
-            testOptions {
-                this.execution = execution
-                this.animationsDisabled = animationsDisabled
-            }
-        }
-
-        project.androidComponents {
-            beforeVariants(selector().withBuildType("debug")) {
-                (it as HasAndroidTestBuilder).enableAndroidTest = true
-            }
         }
     }
 }
