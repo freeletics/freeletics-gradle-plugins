@@ -160,14 +160,6 @@ freeletics {
         resValue("type", "name", "value")
         // create a res value with separate values for debug and release
         resValue("type", "name", "debug value", "release value")
-        // enable Android Tests for the debug build type (release will stay disabled)
-        // the parameters are optional
-        enableAndroidTests(
-                "testInstrumentationRunner", // defaults to `androidx.test.runner.AndroidJUnitRunner`
-                "testInstrumentationRunnerArguments", // defaults to `mapOf("clearPackageData" to "'true'")`
-                "execution", // defaults to `ANDROIDX_TEST_ORCHESTRATOR`
-                "animationsDisabled", // defaults to `true`
-        )
     }
 }
 ```
