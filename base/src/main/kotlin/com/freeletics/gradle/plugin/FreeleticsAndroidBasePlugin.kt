@@ -11,14 +11,12 @@ import com.freeletics.gradle.util.androidResources
 import com.freeletics.gradle.util.dataBinding
 import com.freeletics.gradle.util.getDependencyOrNull
 import com.freeletics.gradle.util.getVersion
+import com.freeletics.gradle.util.getVersionOrNull
 import com.freeletics.gradle.util.javaTargetVersion
 import com.freeletics.gradle.util.stringProperty
-import java.lang.reflect.Method
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.testing.Test
-import org.slf4j.ILoggerFactory
-import org.slf4j.LoggerFactory
 
 public abstract class FreeleticsAndroidBasePlugin : Plugin<Project> {
 
@@ -29,20 +27,17 @@ public abstract class FreeleticsAndroidBasePlugin : Plugin<Project> {
         target.configureLint()
         target.configureUnitTests()
         target.disableAndroidTests()
-
-        // TODO workaround for excessive logging, can be removed with 7.4.2
-        //  https://issuetracker.google.com/issues/247906487#comment10
-        val loggerFactory: ILoggerFactory = LoggerFactory.getILoggerFactory()
-        val addNoOpLogger: Method = loggerFactory.javaClass.getDeclaredMethod("addNoOpLogger", String::class.java)
-        addNoOpLogger.isAccessible = true
-        addNoOpLogger.invoke(loggerFactory, "com.android.build.api.component.impl.MutableListBackedUpWithListProperty")
-        addNoOpLogger.invoke(loggerFactory, "com.android.build.api.component.impl.MutableMapBackedUpWithMapProperty")
     }
 
     private fun Project.androidSetup() {
         val desugarLibrary = project.getDependencyOrNull("android.desugarjdklibs")
         android {
             namespace = pathBasedAndroidNamespace()
+
+            val buildTools = getVersionOrNull("android.buildTools")
+            if (buildTools != null) {
+                buildToolsVersion = buildTools
+            }
 
             compileSdk = getVersion("android.compile").toInt()
             defaultConfig.minSdk = getVersion("android.min").toInt()
