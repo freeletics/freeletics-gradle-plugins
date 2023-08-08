@@ -3,6 +3,10 @@ package com.freeletics.gradle.plugin
 import java.io.File
 import org.gradle.api.initialization.Settings
 
+public fun Settings.freeletics(configure: SettingsExtension.() -> Unit) {
+    extensions.configure(SettingsExtension::class.java, configure)
+}
+
 public abstract class SettingsExtension(private val settings: Settings) {
 
     /**
