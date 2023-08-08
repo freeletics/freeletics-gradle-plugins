@@ -1,5 +1,6 @@
 package com.freeletics.gradle.plugin
 
+import com.android.build.api.dsl.LibraryExtension
 import com.android.build.api.variant.HasAndroidTestBuilder
 import com.freeletics.gradle.setup.configurePaparazzi
 import com.freeletics.gradle.setup.configureProcessing
@@ -110,6 +111,12 @@ public abstract class FreeleticsAndroidExtension(private val project: Project) {
         project.android {
             buildTypes.getByName("debug").resValue(type, name, debugValue)
             buildTypes.getByName("release").resValue(type, name, releaseValue)
+        }
+    }
+
+    fun consumerProguardFiles(vararg files: String) {
+        project.android {
+            (this as LibraryExtension).defaultConfig.consumerProguardFiles(*files)
         }
     }
 
