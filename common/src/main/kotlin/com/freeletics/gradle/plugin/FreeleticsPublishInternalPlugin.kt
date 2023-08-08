@@ -21,7 +21,7 @@ public abstract class FreeleticsPublishInternalPlugin : Plugin<Project> {
     }
 
     private fun Project.addInternalRepo() {
-        val internalUrl = stringProperty("internalArtifactsUrl").orNull
+        val internalUrl = stringProperty("fgp.internalArtifacts.url").orNull
         if (internalUrl != null) {
             extensions.configure(PublishingExtension::class.java) { publishing ->
                 publishing.repositories { repositories ->
