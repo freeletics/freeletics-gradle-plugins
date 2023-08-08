@@ -14,7 +14,7 @@ The following configuration is available in all the project types listed in the 
 ```groovy
 freeletics {
     // enable explicit api mode
-    explicitApi()   
+    explicitApi()
     // opt in to experimental APIs for this project
     optIn("...", "...")
 }
@@ -27,21 +27,21 @@ through a compiler plugin and also adds the required dependencies on Moshi.
 
 ```groovy
 freeletics {
-    // the boolean will determine whether moshix-sealed is enabled as well, false if not specified 
+    // the boolean will determine whether moshix-sealed is enabled as well, false if not specified
     useMoshi(true)
 }
 ```
 
 ### Dagger/Anvil
 
-It is possible to easily configure [Dagger][3] and [Anvil][4] with the following methods. Of the 3 available options 
+It is possible to easily configure [Dagger][3] and [Anvil][4] with the following methods. Of the 3 available options
 choose the one that is most appropriate for a module. The simple `useDagger` is the most performant one because it
 does not require KAPT. There is also a method to configure the [Khonshu][5] Anvil plugin.
 
 ```groovy
 freeletics {
     // applies Anvil and will use it for all code generation (KAPT is not used)
-    // for modules with @Component interfaces use `useDaggerWithComponent()` instead 
+    // for modules with @Component interfaces use `useDaggerWithComponent()` instead
     useDagger()
     // same as the above but will also add the Khonshu Anvil plugin
     useDaggerWithKhonshu()
@@ -122,9 +122,11 @@ android-min = "26"
 android-target = "33"
 # the Android compileSdkVersion to use
 android-compile = "33"
+# optional, the Android build tools version to use
+android-buildTools = "33.0.2"
 
 [libraries]
-# if this is present coreLibraryDesugaring will be enabled and this dependency is automatically added 
+# if this is present coreLibraryDesugaring will be enabled and this dependency is automatically added
 android-desugarjdklibs = { module = "com.android.tools:desugar_jdk_libs", version = "..." }
 ```
 
@@ -179,13 +181,13 @@ freeletics {
 
 ### Room
 
-To easily add room as a dependency and apply KSP or KAPT the following extension method can be used. By default ksp is 
+To easily add room as a dependency and apply KSP or KAPT the following extension method can be used. By default ksp is
 used, to use kapt set this gradle.property: `fgp.kotlin.ksp=false`.
 
 ```groovy
 freeletics {
     // add room as a dependency and configure kapt/ksp
-    // 
+    //
     // requires `androidx-room-runtime` and `androidx-room-compiler` to be present in the version catalog
     useRoom()
 }
@@ -306,7 +308,7 @@ General features:
 - configures unit tests
     - reports are written to `<repo>/build/reports/tests` to make collecting them easier
 - generates a `VERSION` constant that contains the current plugin version
-  - can be used if the plugin needs to add dependencies on other artifacts published together with the plugin 
+  - can be used if the plugin needs to add dependencies on other artifacts published together with the plugin
   - uses the `GROUP` and `POM_ARTIFACT_ID` Gradle properties for the package name
 - configures [GR8][1] for shading
 
