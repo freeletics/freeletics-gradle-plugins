@@ -4,6 +4,8 @@ import com.freeletics.gradle.setup.addDefaultDependencies
 import com.freeletics.gradle.setup.addTestDependencies
 import com.freeletics.gradle.tasks.CheckDependencyRulesTask.Companion.registerCheckDependencyRulesTasks
 import com.freeletics.gradle.util.ProjectType
+import com.freeletics.gradle.util.freeleticsExtension
+import com.freeletics.gradle.util.freeleticsJvmExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -13,8 +15,9 @@ public abstract class DomainKotlinPlugin : Plugin<Project> {
         target.plugins.apply(FreeleticsJvmBasePlugin::class.java)
         target.plugins.apply("com.autonomousapps.dependency-analysis")
 
-        val extension = target.extensions.create("freeletics", DomainKotlinExtension::class.java)
-        extension.useAndroidLint()
+        val extension = target.freeleticsExtension.extensions.create("legacy", LegacyExtension::class.java)
+
+        target.freeleticsJvmExtension.useAndroidLint()
 
         target.dependencies.apply {
             addDefaultDependencies(target)

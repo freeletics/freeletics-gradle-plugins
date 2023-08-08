@@ -1,6 +1,7 @@
 package com.freeletics.gradle.plugin
 
 import com.freeletics.gradle.setup.configurePom
+import com.freeletics.gradle.util.freeleticsExtension
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import com.vanniktech.maven.publish.SonatypeHost
 import org.gradle.api.Plugin
@@ -12,8 +13,7 @@ public abstract class FreeleticsPublishOssPlugin : Plugin<Project> {
         target.plugins.apply("org.jetbrains.dokka")
         target.plugins.apply("com.vanniktech.maven.publish")
 
-        val extension = target.extensions.findByName("freeletics") as FreeleticsBaseExtension
-        extension.explicitApi()
+        target.freeleticsExtension.explicitApi()
 
         target.extensions.configure(MavenPublishBaseExtension::class.java) {
             it.publishToMavenCentral(SonatypeHost.DEFAULT, automaticRelease = true)
@@ -30,7 +30,7 @@ public abstract class FreeleticsPublishOssPlugin : Plugin<Project> {
                 }
 
                 it.plugins.withId("com.android.library") {
-                    if (!target.plugins.hasPlugin("org.jetbrains.multiplatform")) {
+                    if (!target.plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")) {
                         target.tasks.named("javaDocReleaseGeneration").configure { task ->
                             task.enabled = false
                         }

@@ -12,7 +12,7 @@ import com.freeletics.gradle.util.kotlin
 import com.freeletics.gradle.util.stringProperty
 import org.gradle.api.Project
 
-public abstract class FreeleticsAndroidExtension(project: Project) : FreeleticsBaseExtension(project) {
+public abstract class FreeleticsAndroidExtension(private val project: Project) {
 
     fun useRoom() {
         val processorConfiguration = project.configureProcessing(useKsp = true)

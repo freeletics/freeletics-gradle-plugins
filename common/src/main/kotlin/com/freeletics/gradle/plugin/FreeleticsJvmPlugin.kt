@@ -9,7 +9,5 @@ public abstract class FreeleticsJvmPlugin : Plugin<Project> {
         target.plugins.apply("org.jetbrains.kotlin.jvm")
         target.plugins.apply(FreeleticsJvmBasePlugin::class.java)
         target.plugins.apply("com.autonomousapps.dependency-analysis")
-
-        target.extensions.create("freeletics", FreeleticsJvmExtension::class.java)
     }
 }

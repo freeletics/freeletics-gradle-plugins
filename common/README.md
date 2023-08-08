@@ -14,7 +14,7 @@ The following configuration is available in all the project types listed in the 
 ```groovy
 freeletics {
     // enable explicit api mode
-    explicitApi()   
+    explicitApi()
     // opt in to experimental APIs for this project
     optIn("...", "...")
 }
@@ -27,21 +27,21 @@ through a compiler plugin and also adds the required dependencies on Moshi.
 
 ```groovy
 freeletics {
-    // the boolean will determine whether moshix-sealed is enabled as well, false if not specified 
+    // the boolean will determine whether moshix-sealed is enabled as well, false if not specified
     useMoshi(true)
 }
 ```
 
 ### Dagger/Anvil
 
-It is possible to easily configure [Dagger][3] and [Anvil][4] with the following methods. Of the 3 available options 
+It is possible to easily configure [Dagger][3] and [Anvil][4] with the following methods. Of the 3 available options
 choose the one that is most appropriate for a module. The simple `useDagger` is the most performant one because it
 does not require KAPT. There is also a method to configure the [Khonshu][5] Anvil plugin.
 
 ```groovy
 freeletics {
     // applies Anvil and will use it for all code generation (KAPT is not used)
-    // for modules with @Component interfaces use `useDaggerWithComponent()` instead 
+    // for modules with @Component interfaces use `useDaggerWithComponent()` instead
     useDagger()
     // same as the above but will also add the Khonshu Anvil plugin
     useDaggerWithKhonshu()
@@ -55,8 +55,9 @@ Add the following to the `libs` version catalog:
 [libraries]
 # these will be automatically added as dependencies
 inject = { module = "javax.inject:javax.inject", version = "..." }
-anvil-annotations = { module = "com.squareup.anvil:annotations", version = "..." }
 dagger = { module = "com.google.dagger:dagger", version = "..." }
+anvil-annotations = { module = "com.squareup.anvil:annotations", version = "..." }
+anvil-compiler = { module = "com.squareup.anvil:compiler", version = "..." }
 # only for `useDaggerWithComponent()`
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version = "..." }
 # only for `useDaggerWithKhonshu()`
@@ -122,9 +123,11 @@ android-min = "26"
 android-target = "33"
 # the Android compileSdkVersion to use
 android-compile = "33"
+# optional, the Android build tools version to use
+android-buildTools = "33.0.2"
 
 [libraries]
-# if this is present coreLibraryDesugaring will be enabled and this dependency is automatically added 
+# if this is present coreLibraryDesugaring will be enabled and this dependency is automatically added
 android-desugarjdklibs = { module = "com.android.tools:desugar_jdk_libs", version = "..." }
 ```
 
@@ -134,36 +137,38 @@ The plugin will by default disable most Android build features and offers an ext
 
 ```groovy
 freeletics {
-    // apply the Kotlin parcelize plugin
-    enableParcelize()
-    // enables Compose and configures the compiler
-    // requires `androidx.compose.compiler` to be present in the libs version catalog
-    // supports suppressing the Kotlin version check by setting `fgp.compose.kotlinVersion=<kotlin-version>`
-    enableCompose()
-    // enables Android resource support
-    enableAndroidResources()
-    // enables ViewBinding generation
-    enableViewBinding()
-    // enables BuildConfig generation
-    enableBuildConfig()
-    // create a BuildConfig field with the given value
-    buildConfigField("type", "name", "value")
-    // create a BuildConfig field with separate values for debug and release
-    buildConfigField("type", "name", "debug value", "release value")
-    // enables res values generation
-    enableResValues()
-    // create a res value with the given value
-    resValue("type", "name", "value")
-    // create a res value with separate values for debug and release
-    resValue("type", "name", "debug value", "release value")
-    // enable Android Tests for the debug build type (release will stay disabled)
-    // the parameters are optional
-    enableAndroidTests(
-        "testInstrumentationRunner", // defaults to `androidx.test.runner.AndroidJUnitRunner`
-        "testInstrumentationRunnerArguments", // defaults to `mapOf("clearPackageData" to "'true'")`
-        "execution", // defaults to `ANDROIDX_TEST_ORCHESTRATOR`
-        "animationsDisabled", // defaults to `true`
-    )
+    android {
+        // apply the Kotlin parcelize plugin
+        enableParcelize()
+        // enables Compose and configures the compiler
+        // requires `androidx.compose.compiler` to be present in the libs version catalog
+        // supports suppressing the Kotlin version check by setting `fgp.compose.kotlinVersion=<kotlin-version>`
+        enableCompose()
+        // enables Android resource support
+        enableAndroidResources()
+        // enables ViewBinding generation
+        enableViewBinding()
+        // enables BuildConfig generation
+        enableBuildConfig()
+        // create a BuildConfig field with the given value
+        buildConfigField("type", "name", "value")
+        // create a BuildConfig field with separate values for debug and release
+        buildConfigField("type", "name", "debug value", "release value")
+        // enables res values generation
+        enableResValues()
+        // create a res value with the given value
+        resValue("type", "name", "value")
+        // create a res value with separate values for debug and release
+        resValue("type", "name", "debug value", "release value")
+        // enable Android Tests for the debug build type (release will stay disabled)
+        // the parameters are optional
+        enableAndroidTests(
+                "testInstrumentationRunner", // defaults to `androidx.test.runner.AndroidJUnitRunner`
+                "testInstrumentationRunnerArguments", // defaults to `mapOf("clearPackageData" to "'true'")`
+                "execution", // defaults to `ANDROIDX_TEST_ORCHESTRATOR`
+                "animationsDisabled", // defaults to `true`
+        )
+    }
 }
 ```
 
@@ -173,21 +178,25 @@ To apply the paparazzi plugin and configure it call:
 
 ```groovy
 freeletics {
-    usePaparazzi()
+    android {
+        usePaparazzi()
+    }
 }
 ```
 
 ### Room
 
-To easily add room as a dependency and apply KSP or KAPT the following extension method can be used. By default ksp is 
+To easily add room as a dependency and apply KSP or KAPT the following extension method can be used. By default ksp is
 used, to use kapt set this gradle.property: `fgp.kotlin.ksp=false`.
 
 ```groovy
 freeletics {
-    // add room as a dependency and configure kapt/ksp
-    // 
-    // requires `androidx-room-runtime` and `androidx-room-compiler` to be present in the version catalog
-    useRoom()
+    android {
+        // add room as a dependency and configure ksp
+        //
+        // requires `androidx-room-runtime` and `androidx-room-compiler` to be present in the version catalog
+        useRoom()
+    }
 }
 ```
 
@@ -232,7 +241,9 @@ To apply the Android Lint plugin and configure it call:
 
 ```groovy
 freeletics {
-    useAndroidLint()
+    jvm {
+        useAndroidLint()
+    }
 }
 ```
 
@@ -275,18 +286,20 @@ The following extension methods make it easy to add multiplatform targets to the
 
 ```groovy
 freeletics {
-    // adds all targets that a also supported by the coroutines project
-    // has a `androidNativeTargets` boolean parameter to control adding androidNative* targets (defaults to enabled)
-    addCommonTargets()
-    // adds jvm as a target
-    addJvmTarget()
-    // adds Android as a target and automatically adds the Android Library plugin and common Android config
-    // has a `publish` boolean parameter to control adding whether the target should be published (defaults to enabled)
-    addAndroidTarget()
-    // adds `iosArm64`, `iosX64`, `iosSimulatorArm64` as targets and creates shared iosMain and iosTest source sets
-    addIosTargets("frameworkName")
-    // same as above but will also configure everything to create a XCFramework
-    addIosTargets("frameworkName", true)
+    multiplatform {
+        // adds all targets that a also supported by the coroutines project
+        // has a `androidNativeTargets` boolean parameter to control adding androidNative* targets (defaults to enabled)
+        addCommonTargets()
+        // adds jvm as a target
+        addJvmTarget()
+        // adds Android as a target and automatically adds the Android Library plugin and common Android config
+        // has a `publish` boolean parameter to control adding whether the target should be published (defaults to enabled)
+        addAndroidTarget(true)
+        // adds `iosArm64`, `iosX64`, `iosSimulatorArm64` as targets and creates shared iosMain and iosTest source sets
+        addIosTargets("frameworkName")
+        // same as above but will also configure everything to create a XCFramework
+        addIosTargets("frameworkName", true)
+    }
 }
 ```
 
@@ -306,7 +319,7 @@ General features:
 - configures unit tests
     - reports are written to `<repo>/build/reports/tests` to make collecting them easier
 - generates a `VERSION` constant that contains the current plugin version
-  - can be used if the plugin needs to add dependencies on other artifacts published together with the plugin 
+  - can be used if the plugin needs to add dependencies on other artifacts published together with the plugin
   - uses the `GROUP` and `POM_ARTIFACT_ID` Gradle properties for the package name
 - configures [GR8][1] for shading
 
@@ -316,8 +329,6 @@ General features:
 plugins {
     id("com.freeletics.gradle.common.gradle").version("<latest-version>")
 }
-
-dependencies
 ```
 
 Add the following to `gradle.properties`:
@@ -382,7 +393,9 @@ To apply the Android Lint plugin and configure it call:
 
 ```groovy
 freeletics {
-    useAndroidLint()
+    jvm {
+        useAndroidLint()
+    }
 }
 ```
 
