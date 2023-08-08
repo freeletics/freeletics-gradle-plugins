@@ -65,7 +65,7 @@ public abstract class SettingsPlugin : Plugin<Settings> {
                     }
                 }
 
-                val internalUrl = target.stringProperty("internalArtifactsUrl")
+                val internalUrl = target.stringProperty("fgp.internalArtifacts.url")
                 if (internalUrl != null) {
                     handler.exclusiveContent { content ->
                         content.forRepository {
