@@ -1,7 +1,19 @@
 Change Log
 ==========
 
-## 0.4.1 **UNRELEASED**
+## 0.5.1 **UNRELEASED**
+
+
+## 0.5.0 *(2023-08-09)*
+
+- Moved Android/JVM/Multiplatform specific DSL methods into sub-extensions.
+- It's now possible to change the Android build tools version by setting `android.buildTools` 
+  in the version catalog.
+- Add workaround to incremental build issue in Android's merge Java resources task.
+- Removed `enableAndroidTests` from the DSL.
+- Added flags to use Moshi, Anvil and Khoshu through KSP.
+- Addded `consumerProguardFile` to Android DSL.
+- Adapt `includeKhonshu` for the latest release.
 
 
 ## 0.4.0 *(2023-07-19)*
