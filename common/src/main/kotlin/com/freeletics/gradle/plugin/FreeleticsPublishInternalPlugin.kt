@@ -4,7 +4,6 @@ import com.freeletics.gradle.setup.configurePom
 import com.freeletics.gradle.util.stringProperty
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.credentials.AwsCredentials
 import org.gradle.api.credentials.PasswordCredentials
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.tasks.AbstractPublishToMaven

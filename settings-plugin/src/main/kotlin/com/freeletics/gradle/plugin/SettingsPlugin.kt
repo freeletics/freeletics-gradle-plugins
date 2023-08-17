@@ -3,7 +3,6 @@ package com.freeletics.gradle.plugin
 import com.gradle.enterprise.gradleplugin.GradleEnterpriseExtension
 import com.gradle.enterprise.gradleplugin.GradleEnterprisePlugin
 import org.gradle.api.Plugin
-import org.gradle.api.credentials.AwsCredentials
 import org.gradle.api.credentials.PasswordCredentials
 import org.gradle.api.initialization.Settings
 import org.gradle.api.initialization.resolve.RepositoriesMode
