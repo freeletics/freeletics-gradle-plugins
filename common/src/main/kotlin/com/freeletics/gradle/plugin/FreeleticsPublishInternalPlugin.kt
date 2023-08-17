@@ -15,7 +15,6 @@ public abstract class FreeleticsPublishInternalPlugin : Plugin<Project> {
         target.plugins.apply("com.vanniktech.maven.publish")
 
         target.addInternalRepo()
-        target.addInternalS3Repo()
         target.disablePublishingIosArtifacts()
         target.configurePom(includeLicense = false)
     }
@@ -29,21 +28,6 @@ public abstract class FreeleticsPublishInternalPlugin : Plugin<Project> {
                         it.name = "internalArtifacts"
                         it.setUrl(internalUrl)
                         it.credentials(PasswordCredentials::class.java)
-                    }
-                }
-            }
-        }
-    }
-
-    private fun Project.addInternalS3Repo() {
-        val internalUrl = stringProperty("freeleticsAndroidArtifactsUrl").orNull
-        if (internalUrl != null) {
-            extensions.configure(PublishingExtension::class.java) { publishing ->
-                publishing.repositories { repositories ->
-                    repositories.maven { repo ->
-                        repo.name = "freeleticsAndroidArtifacts"
-                        repo.setUrl(internalUrl)
-                        repo.credentials(AwsCredentials::class.java)
                     }
                 }
             }
