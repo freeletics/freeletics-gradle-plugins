@@ -3,7 +3,6 @@ package com.freeletics.gradle.plugin
 import com.gradle.enterprise.gradleplugin.GradleEnterpriseExtension
 import com.gradle.enterprise.gradleplugin.GradleEnterprisePlugin
 import org.gradle.api.Plugin
-import org.gradle.api.credentials.AwsCredentials
 import org.gradle.api.credentials.PasswordCredentials
 import org.gradle.api.initialization.Settings
 import org.gradle.api.initialization.resolve.RepositoriesMode
@@ -45,26 +44,6 @@ public abstract class SettingsPlugin : Plugin<Settings> {
         target.dependencyResolutionManagement { management ->
             @Suppress("UnstableApiUsage")
             management.repositories { handler ->
-                val internalS3Url = target.stringProperty("freeleticsAndroidArtifactsUrl")
-                if (internalS3Url != null) {
-                    handler.exclusiveContent { content ->
-                        content.forRepository {
-                            handler.maven {
-                                it.name = "freeleticsAndroidArtifacts"
-                                it.setUrl(internalS3Url)
-                                it.credentials(AwsCredentials::class.java)
-                            }
-                        }
-
-                        content.filter {
-                            it.includeGroupByRegex("^com\\.freeletics\\.internal.*")
-                            // manually uploaded because only published on jitpack
-                            it.includeModule("com.github.kamikat.moshi-jsonapi", "core")
-                            it.includeModule("com.github.kamikat.moshi-jsonapi", "retrofit-converter")
-                        }
-                    }
-                }
-
                 val internalUrl = target.stringProperty("fgp.internalArtifacts.url")
                 if (internalUrl != null) {
                     handler.exclusiveContent { content ->
