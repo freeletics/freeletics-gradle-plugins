@@ -15,8 +15,8 @@ internal fun Project.configureMoshi(sealed: Boolean) {
             add("implementation", getDependency("moshi"))
             add("ksp", getDependency("moshi-codegen"))
             if (sealed) {
-                add("implementation", getDependency("moshix"))
-                add("ksp", getDependency("moshix-codegen"))
+                add("implementation", getDependency("moshix-sealed"))
+                add("ksp", getDependency("moshix-sealed-codegen"))
             }
         }
     } else {
