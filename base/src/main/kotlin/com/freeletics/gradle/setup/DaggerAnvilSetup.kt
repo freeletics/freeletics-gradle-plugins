@@ -16,7 +16,7 @@ internal fun Project.configureDagger(mode: DaggerMode) {
     // apply it at all and let Anvil handle the factory generation. There
     // is no advantage to do that when running Anvil through KSP since KSP
     // is applied anyways so there is no additional overhead for running Dagger.
-    val applyDaggerProcessor = mode == DaggerMode.ANVIL_WITH_FULL_DAGGER || anvilKsp.get()
+    val applyDaggerProcessor = mode == DaggerMode.ANVIL_WITH_FULL_DAGGER || (anvilKsp.get() && daggerKsp.get())
 
     applyAnvil(
         // when Dagger KSP is used, Anvil needs to be used through KSP as well
