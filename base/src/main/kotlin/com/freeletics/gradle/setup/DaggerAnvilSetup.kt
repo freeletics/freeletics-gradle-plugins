@@ -12,10 +12,16 @@ internal fun Project.configureDagger(mode: DaggerMode) {
     val anvilKsp = booleanProperty("fgp.kotlin.anvilKsp", false)
     val khonshuKsp = booleanProperty("fgp.kotlin.khonshuKsp", false)
 
+    // When not requiring Dagger's component generation we usually don't
+    // apply it at all and let Anvil handle the factory generation. There
+    // is no advantage to do that when running Anvil through KSP since KSP
+    // is applied anyways so there is no additional overhead for running Dagger.
+    val applyDaggerProcessor = mode == DaggerMode.ANVIL_WITH_FULL_DAGGER || anvilKsp.get()
+
     applyAnvil(
-        useKsp = anvilKsp.get(),
-        // only full dagger modules use dagger compiler all others use anvil to generate factories
-        generateDaggerFactories = mode != DaggerMode.ANVIL_WITH_FULL_DAGGER,
+        // when Dagger KSP is used, Anvil needs to be used through KSP as well
+        useKsp = (applyDaggerProcessor && daggerKsp.get()) || anvilKsp.get(),
+        generateDaggerFactories = !applyDaggerProcessor,
         // we ony do component merging when using dagger to generate components
         disableComponentMerging = mode != DaggerMode.ANVIL_WITH_FULL_DAGGER,
     )
@@ -42,7 +48,7 @@ internal fun Project.configureDagger(mode: DaggerMode) {
         }
     }
 
-    if (mode == DaggerMode.ANVIL_WITH_FULL_DAGGER) {
+    if (applyDaggerProcessor) {
         val processorConfiguration = configureProcessing(
             useKsp = daggerKsp.get(),
             "dagger.experimentalDaggerErrorMessages" to "enabled",
@@ -60,8 +66,8 @@ private fun Project.applyAnvil(useKsp: Boolean, generateDaggerFactories: Boolean
     if (useKsp) {
         configureProcessing(
             useKsp = true,
-            "generate-dagger-factories" to "$disableComponentMerging",
-            "disable-component-merging" to "$generateDaggerFactories",
+            "generate-dagger-factories" to "$generateDaggerFactories",
+            "disable-component-merging" to "$disableComponentMerging",
         )
 
         dependencies.apply {
