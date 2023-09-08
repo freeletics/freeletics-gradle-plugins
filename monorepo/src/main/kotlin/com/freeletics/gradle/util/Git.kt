@@ -12,7 +12,6 @@ internal interface Git {
     fun commitSha(): String
     fun commitTimestamp(): String
     fun describe(match: String, exactMatch: Boolean): String
-    fun commitsSince(date: LocalDate): Int
 }
 
 internal class RealGit(
@@ -37,11 +36,6 @@ internal class RealGit(
         } else {
             run("describe", "--match", match)
         }
-    }
-
-    override fun commitsSince(date: LocalDate): Int {
-        val formattedDate = date.format(DateTimeFormatter.ISO_LOCAL_DATE)
-        return run("rev-list", "--count", "HEAD", "--since=\"$formattedDate\"").toInt()
     }
 
     private fun run(vararg command: String): String {
