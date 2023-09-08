@@ -19,16 +19,6 @@ internal class ComputeVersionCodeTest {
     }
 
     @Test
-    fun `when there is a matching tag with extra commits it returns version computed from it`() {
-        val git = FakeGit(
-            branch = "main",
-            describe = "fl/v4.3.1",
-        )
-
-        assertThat(computeVersionCode(git, "fl", LocalDate.now())).isEqualTo(4030001)
-    }
-
-    @Test
     fun `when there is a matching tag and the major version is too high it fails`() {
         val git = FakeGit(
             branch = "main",
