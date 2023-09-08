@@ -140,14 +140,18 @@ freeletics {
 
 The version information can come from:
 - a tag for the current commit in the format of `<short-app-name>/v<app-version>` -> `<app-version>` is used as version name
-- a branch format of `release/<short-app-name>/<app-version>` -> `<app-version>` is used as version name
-- a branch format of `hotfix/<short-app-name>/<app-version>` -> `<app-version>` is used as version name
 - otherwise the output of `git describe` (`<short-app-name>/v<last-app-version>-<commits-since-tag>-<current-commit-sha>`) is used which would result in `<last-app-version>-<commits-since-tag>-<current-commit-sha>`
 
 The version code is then computed by taking the version and applying the following formula
 ```md
-<major> * 1_000_000 + <minor> * 10_000 + <patch> * 100 + <commits since last week sunday>
+<major> * 1_000_000 + <minor> * 10_000 + <patch>
 ```
+
+For builds on the main branch when the current commit is not tagged, the following formula is used:
+```md
+<major> * 1_000_000 + <minor> * 10_000 + <day_of_week> * 1_000 + <commits since last release>
+```
+
 
 Also creates `BuildConfig.GIT_SHA1`, `BuildConfig.BUILD_TIMESTAMP` fields containing information from the current commit.
 

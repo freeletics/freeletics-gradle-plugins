@@ -3,19 +3,16 @@ package com.freeletics.gradle.util
 import java.io.File
 import java.io.IOException
 import java.lang.RuntimeException
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.concurrent.TimeUnit
 
-internal interface Git {
-    fun branch(): String
-    fun commitSha(): String
-    fun commitTimestamp(): String
-    fun describe(match: String, exactMatch: Boolean): String
-    fun commitsSince(date: LocalDate): Int
+public interface Git {
+    public fun branch(): String
+    public fun commitSha(): String
+    public fun commitTimestamp(): String
+    public fun describe(match: String, exactMatch: Boolean): String
 }
 
-internal class RealGit(
+public class RealGit(
     private val rootDir: File,
 ) : Git {
 
@@ -37,11 +34,6 @@ internal class RealGit(
         } else {
             run("describe", "--match", match)
         }
-    }
-
-    override fun commitsSince(date: LocalDate): Int {
-        val formattedDate = date.format(DateTimeFormatter.ISO_LOCAL_DATE)
-        return run("rev-list", "--count", "HEAD", "--since=\"$formattedDate\"").toInt()
     }
 
     private fun run(vararg command: String): String {
