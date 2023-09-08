@@ -7,7 +7,7 @@ public abstract class UpdateLicensesTask : Copy() {
     internal companion object {
         fun Project.registerUpdateLicensesTask() {
             tasks.register("updateLicenses", UpdateLicensesTask::class.java) { task ->
-                task.from("$buildDir/reports/licensee/release/artifacts.json")
+                task.from(project.layout.buildDirectory.file("reports/licensee/release/artifacts.json"))
                 task.into("src/main/assets")
 
                 task.rename("artifacts.json", "license_acknowledgements.json")
