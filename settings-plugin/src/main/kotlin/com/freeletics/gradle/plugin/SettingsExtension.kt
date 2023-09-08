@@ -181,12 +181,6 @@ public abstract class SettingsExtension(private val settings: Settings) {
                     .using(it.project(":navigation-testing"))
                 it.substitute(it.module("com.freeletics.khonshu:codegen-runtime"))
                     .using(it.project(":codegen"))
-                it.substitute(it.module("com.freeletics.khonshu:codegen-compose"))
-                    .using(it.project(":codegen-compose"))
-                it.substitute(it.module("com.freeletics.khonshu:codegen-fragment"))
-                    .using(it.project(":codegen-fragment"))
-                it.substitute(it.module("com.freeletics.khonshu:codegen-scope"))
-                    .using(it.project(":codegen-scope"))
                 it.substitute(it.module("com.freeletics.khonshu:codegen-compiler"))
                     .using(it.project(":codegen-compiler"))
 

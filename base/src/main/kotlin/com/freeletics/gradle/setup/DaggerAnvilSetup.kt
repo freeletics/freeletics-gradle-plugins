@@ -29,11 +29,8 @@ internal fun Project.configureDagger(mode: DaggerMode) {
     dependencies.apply {
         add("api", getDependency("inject"))
         add("api", getDependency("anvil-annotations"))
+        add("api", getDependency("anvil-annotations-optional"))
         add("api", getDependency("dagger"))
-        val khonshuScope = getDependencyOrNull("khonshu-codegen-scope")
-        if (khonshuScope != null) {
-            add("api", khonshuScope)
-        }
     }
 
     if (mode == DaggerMode.ANVIL_WITH_KHONSHU) {
