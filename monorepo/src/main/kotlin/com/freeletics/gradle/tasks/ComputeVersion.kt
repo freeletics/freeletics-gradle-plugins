@@ -42,7 +42,7 @@ public fun computeVersionCode(git: Git, gitTagName: String, localDate: LocalDate
             "Version code can only be computed on the main branch and tagged commits"
         }
 
-        // Untagged builds will use the las last week's version for the computed build number.
+        // Untagged builds will use the last version for the computed build number.
         // Patch is always 0 in this case however it will set the digit for thousands at least to 1 (this digit
         // is unused by regular releases). This guarantees that a nighly build will always have a higher build number
         // than last week's release (including hotfixes) but one that is lower than then the release created at the
