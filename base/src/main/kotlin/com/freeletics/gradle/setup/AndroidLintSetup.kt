@@ -2,7 +2,6 @@ package com.freeletics.gradle.setup
 
 import com.android.build.api.dsl.Lint
 import org.gradle.api.Project
-import org.gradle.api.file.Directory
 import org.gradle.api.file.RegularFile
 import org.gradle.api.provider.Provider
 
