@@ -2,7 +2,6 @@ package com.freeletics.gradle.tasks
 
 import com.freeletics.gradle.util.Git
 import java.time.LocalDate
-import java.time.temporal.WeekFields
 
 /**
  * Get the app version name, which is computed using the branch name or `git describe`.
@@ -67,7 +66,7 @@ internal fun computeVersionCode(git: Git, gitTagName: String, localDate: LocalDa
         checkVersions(major, minor, patch)
 
         // Monday = 1000, Sunday = 7000
-        val dayOfWeek  = localDate.dayOfWeek.value * 1_000
+        val dayOfWeek = localDate.dayOfWeek.value * 1_000
         // the returned version has 7.4.0-32-g5e2416d73f as format where the 32 is the commit count since the tag
         val commitsSinceLastRelease = suffixParts[1].toInt()
         check(commitsSinceLastRelease < 1_000) { "More than 999 commits found since the last release was created" }
@@ -106,11 +105,11 @@ private fun versionFromTag(
     git: Git,
     gitTagName: String,
     initialRelease: Boolean = false,
-    exactMatch: Boolean = false
+    exactMatch: Boolean = false,
 ): String? {
     val patchVersion = if (initialRelease) "0" else "[0-9][0-9]?[0-9]?"
     // match will filter tags to consider based on a regex
-    val describe = git.describe(match = "\"$gitTagName/v[1-9][0-9]\\.[0-9][0-9]*\\.$patchVersion\"\$", exactMatch)
+    val describe = git.describe(match = "\"$gitTagName/v[1-9][0-9]\\.[0-9][0-9]*\\.$patchVersion\$\"", exactMatch)
 
     if (describe.isBlank()) {
         return null

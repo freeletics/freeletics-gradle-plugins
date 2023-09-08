@@ -3,8 +3,6 @@ package com.freeletics.gradle.util
 import java.io.File
 import java.io.IOException
 import java.lang.RuntimeException
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.concurrent.TimeUnit
 
 internal interface Git {
