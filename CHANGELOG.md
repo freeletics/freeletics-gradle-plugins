@@ -1,13 +1,22 @@
 Change Log
 ==========
 
-## 0.5.1 **UNRELEASED**
+## 0.6.1 **UNRELEASED**
+
+
+## 0.6.0 *(2023-09-08)*
+
+- Updated logic of how version code and name are calculated to only consider tags. Branch names
+  and the commit count are not considered anymore.
+- Updated experimental options to use Dagger, Anvil and Khonshu through KSP.
+- Ktlint 1.0.0
+- Updated dependencies.
 
 
 ## 0.5.0 *(2023-08-09)*
 
 - Moved Android/JVM/Multiplatform specific DSL methods into sub-extensions.
-- It's now possible to change the Android build tools version by setting `android.buildTools` 
+- It's now possible to change the Android build tools version by setting `android.buildTools`
   in the version catalog.
 - Add workaround to incremental build issue in Android's merge Java resources task.
 - Removed `enableAndroidTests` from the DSL.
@@ -86,10 +95,10 @@ Change Log
   - Stop trying to load snapshots from maven central
   - Only load snapshots from snapshot repositories
   - Added ability to pass an AndroidX snapshot repository id to the `snapshot` function
-  - Fix compose compiler snapshots not working because of exclusiveContent 
+  - Fix compose compiler snapshots not working because of exclusiveContent
 - `com.freeletics.gradle.common.publish.oss`: automatically enable `explicitApi` mode
 - Fix configuration caching for `generatePluginVersion` task
-- Improved gr8 config to reduce warnings 
+- Improved gr8 config to reduce warnings
 - Kotlin compiler options are now configured for `KotlinCompilationTask` instead of `KotlinCompile`
   which will include compilation of non jvm targets
 - Added `com.freeletics.gradle:scripts` which contains classes to run ktlint from a kts script
