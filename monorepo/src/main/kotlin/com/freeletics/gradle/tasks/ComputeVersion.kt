@@ -110,7 +110,7 @@ private fun versionFromTag(
 ): String? {
     val patchVersion = if (initialRelease) "0" else "[0-9][0-9]?[0-9]?"
     // match will filter tags to consider based on a regex
-    val describe = git.describe(match = "\"$gitTagName/v[1-9][0-9]\\.[0-9][0-9.]?\\.$patchVersion\"\$", exactMatch)
+    val describe = git.describe(match = "\"$gitTagName/v[1-9][0-9]\\.[0-9][0-9]*\\.$patchVersion\"\$", exactMatch)
 
     if (describe.isBlank()) {
         return null
