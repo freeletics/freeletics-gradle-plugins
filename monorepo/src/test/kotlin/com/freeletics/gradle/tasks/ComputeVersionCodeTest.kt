@@ -9,7 +9,7 @@ import org.junit.Test
 internal class ComputeVersionCodeTest {
 
     @Test
-    fun `when there is a matching tag it returns version computed from it`() {
+    fun `when there is a matching tag it returns version code computed from it`() {
         val git = FakeGit(
             branch = "main",
             describe = "fl/v4.3.1",
