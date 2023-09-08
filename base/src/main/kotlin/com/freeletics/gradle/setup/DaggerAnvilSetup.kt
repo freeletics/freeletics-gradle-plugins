@@ -3,7 +3,6 @@ package com.freeletics.gradle.setup
 import com.freeletics.gradle.plugin.FreeleticsExtension.DaggerMode
 import com.freeletics.gradle.util.booleanProperty
 import com.freeletics.gradle.util.getDependency
-import com.freeletics.gradle.util.getDependencyOrNull
 import com.squareup.anvil.plugin.AnvilExtension
 import org.gradle.api.Project
 
