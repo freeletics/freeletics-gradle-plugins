@@ -29,7 +29,6 @@ public class RealGit(
     }
 
     override fun describe(match: String, exactMatch: Boolean): String {
-        println("$match $exactMatch")
         return if (exactMatch) {
             run("describe", "--match", match, "--exact-match")
         } else {
