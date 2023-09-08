@@ -6,7 +6,7 @@ import java.time.LocalDate
 /**
  * Get the app version name, which is computed using the branch name or `git describe`.
  */
-internal fun computeVersionName(git: Git, gitTagName: String): String {
+public fun computeVersionName(git: Git, gitTagName: String): String {
     val version = versionFromTag(git, gitTagName)
     checkNotNull(version) { "Did not find a previous release/tag" }
     return version
@@ -15,7 +15,7 @@ internal fun computeVersionName(git: Git, gitTagName: String): String {
 /**
  * Get the app version name, which is computed using the branch name or `git describe`.
  */
-internal fun computeVersionCode(git: Git, gitTagName: String, localDate: LocalDate): Int {
+public fun computeVersionCode(git: Git, gitTagName: String, localDate: LocalDate): Int {
     val major: Int
     val minor: Int
     val patch: Int
@@ -107,9 +107,9 @@ private fun versionFromTag(
     initialRelease: Boolean = false,
     exactMatch: Boolean = false,
 ): String? {
-    val patchVersion = if (initialRelease) "0" else "[0-9][0-9]?[0-9]?"
+    val patchVersion = if (initialRelease) "0" else "[0-9]*"
     // match will filter tags to consider based on a regex
-    val describe = git.describe(match = "\"$gitTagName/v[1-9][0-9]\\.[0-9][0-9]*\\.$patchVersion\$\"", exactMatch)
+    val describe = git.describe(match = "\"$gitTagName/v[1-9][0-9]\\.[0-9]*\\.$patchVersion\"", exactMatch)
 
     if (describe.isBlank()) {
         return null

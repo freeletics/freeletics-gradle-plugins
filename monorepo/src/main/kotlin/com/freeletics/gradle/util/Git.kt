@@ -5,14 +5,14 @@ import java.io.IOException
 import java.lang.RuntimeException
 import java.util.concurrent.TimeUnit
 
-internal interface Git {
-    fun branch(): String
-    fun commitSha(): String
-    fun commitTimestamp(): String
-    fun describe(match: String, exactMatch: Boolean): String
+public interface Git {
+    public fun branch(): String
+    public fun commitSha(): String
+    public fun commitTimestamp(): String
+    public fun describe(match: String, exactMatch: Boolean): String
 }
 
-internal class RealGit(
+public class RealGit(
     private val rootDir: File,
 ) : Git {
 
@@ -29,6 +29,7 @@ internal class RealGit(
     }
 
     override fun describe(match: String, exactMatch: Boolean): String {
+        println("$match $exactMatch")
         return if (exactMatch) {
             run("describe", "--match", match, "--exact-match")
         } else {
