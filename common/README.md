@@ -57,11 +57,11 @@ Add the following to the `libs` version catalog:
 inject = { module = "javax.inject:javax.inject", version = "..." }
 dagger = { module = "com.google.dagger:dagger", version = "..." }
 anvil-annotations = { module = "com.squareup.anvil:annotations", version = "..." }
+anvil-annotations-optional = { module = "com.squareup.anvil:annotations-optional", version = "..." }
 anvil-compiler = { module = "com.squareup.anvil:compiler", version = "..." }
 # only for `useDaggerWithComponent()`
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version = "..." }
 # only for `useDaggerWithKhonshu()`
-khonshu-codegen-scope = { module = "com.freeletics.khonshu:codegen-scope", version = "..." }
 khonshu-codegen-compiler = { module = "com.freeletics.khonshu:codegen-compiler", version = "..." }
 ```
 
