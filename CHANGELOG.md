@@ -1,7 +1,12 @@
 Change Log
 ==========
 
-## 0.6.1 **UNRELEASED**
+## 0.6.2 **UNRELEASED**
+
+
+## 0.6.1 *(2023-09-11)*
+
+- Downgrade Ktlint because of [KT-60813](https://youtrack.jetbrains.com/issue/KT-60813).
 
 
 ## 0.6.0 *(2023-09-08)*
