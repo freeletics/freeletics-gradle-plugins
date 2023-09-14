@@ -5,6 +5,7 @@ import com.freeletics.gradle.setup.configurePaparazzi
 import com.freeletics.gradle.setup.configureProcessing
 import com.freeletics.gradle.util.android
 import com.freeletics.gradle.util.androidResources
+import com.freeletics.gradle.util.compilerOptions
 import com.freeletics.gradle.util.getDependency
 import org.gradle.api.Project
 

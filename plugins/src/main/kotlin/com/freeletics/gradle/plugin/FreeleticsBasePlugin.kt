@@ -3,6 +3,7 @@ package com.freeletics.gradle.plugin
 import com.freeletics.gradle.util.addMaybe
 import com.freeletics.gradle.util.booleanProperty
 import com.freeletics.gradle.util.getBundleOrNull
+import com.freeletics.gradle.util.compilerOptions
 import com.freeletics.gradle.util.getVersionOrNull
 import com.freeletics.gradle.util.java
 import com.freeletics.gradle.util.javaToolchainVersion

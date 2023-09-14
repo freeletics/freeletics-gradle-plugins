@@ -1,6 +1,7 @@
 package com.freeletics.gradle.plugin
 
 import com.freeletics.gradle.setup.setupGr8
+import com.freeletics.gradle.util.compilerOptions
 import com.freeletics.gradle.util.getDependency
 import com.freeletics.gradle.util.kotlin
 import org.gradle.api.Plugin
