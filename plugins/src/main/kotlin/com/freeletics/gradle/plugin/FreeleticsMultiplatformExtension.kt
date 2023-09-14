@@ -3,7 +3,6 @@ package com.freeletics.gradle.plugin
 import com.freeletics.gradle.util.kotlinMultiplatform
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType
-import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFrameworkConfig
@@ -46,17 +45,7 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
             null
         }
         project.kotlinMultiplatform {
-            val iosMain = sourceSets.create("iosMain") { sourceSet ->
-                sourceSet.dependsOn(sourceSets.getByName("commonMain"))
-            }
-            val iosTest = sourceSets.create("iosTest") { sourceSet ->
-                sourceSet.dependsOn(sourceSets.getByName("commonTest"))
-            }
-
             iosArm64 {
-                compilations.getByName("main").defaultSourceSet.dependsOn(iosMain)
-                compilations.getByName("test").defaultSourceSet.dependsOn(iosTest)
-
                 binaries.framework {
                     baseName = frameworkName
                     xcFramework?.add(this)
@@ -66,9 +55,6 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
             }
 
             iosX64 {
-                compilations.getByName("main").defaultSourceSet.dependsOn(iosMain)
-                compilations.getByName("test").defaultSourceSet.dependsOn(iosTest)
-
                 binaries.framework {
                     baseName = frameworkName
                     xcFramework?.add(this)
@@ -78,9 +64,6 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
             }
 
             iosSimulatorArm64 {
-                compilations.getByName("main").defaultSourceSet.dependsOn(iosMain)
-                compilations.getByName("test").defaultSourceSet.dependsOn(iosTest)
-
                 binaries.framework {
                     baseName = frameworkName
                     xcFramework?.add(this)
@@ -126,20 +109,6 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
                 androidNativeArm64()
                 androidNativeX86()
                 androidNativeX64()
-            }
-
-            val nativeMain = sourceSets.create("nativeMain") { sourceSet ->
-                sourceSet.dependsOn(sourceSets.getByName("commonMain"))
-            }
-            val nativeTest = sourceSets.create("nativeTest") { sourceSet ->
-                sourceSet.dependsOn(sourceSets.getByName("commonTest"))
-            }
-
-            targets.configureEach {
-                if (it.platformType == KotlinPlatformType.native) {
-                    it.compilations.getByName("main").defaultSourceSet.dependsOn(nativeMain)
-                    it.compilations.getByName("test").defaultSourceSet.dependsOn(nativeTest)
-                }
             }
         }
     }
