@@ -1,9 +1,7 @@
 package com.freeletics.gradle.monorepo.setup
 
-import com.android.build.api.AndroidPluginVersion
 import com.android.build.api.variant.AndroidComponentsExtension
 import com.freeletics.gradle.monorepo.util.capitalize
-import com.freeletics.gradle.util.androidPluginVersion
 import org.gradle.api.Project
 
 internal fun Project.disableAndroidApplicationTasks() {
@@ -108,10 +106,6 @@ private val lintTasksToDisableJvm
         "updateLintBaselineJvm",
         "lintVital",
         "lintVitalJvm",
-        if (androidPluginVersion >= AndroidPluginVersion(8, 3, 0)) {
-            "lintVitalAnalyzeJvmMain"
-        } else {
-            "lintVitalAnalyzeJvm"
-        },
+        "lintVitalAnalyzeJvmMain",
         "lintVitalReportJvm",
     )
