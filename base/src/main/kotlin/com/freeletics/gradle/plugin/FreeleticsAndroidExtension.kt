@@ -13,7 +13,7 @@ import org.gradle.api.Project
 
 public abstract class FreeleticsAndroidExtension(private val project: Project) {
 
-    fun useRoom() {
+    public fun useRoom() {
         val processorConfiguration = project.configureProcessing(useKsp = true)
 
         project.dependencies.apply {
@@ -22,11 +22,11 @@ public abstract class FreeleticsAndroidExtension(private val project: Project) {
         }
     }
 
-    fun usePaparazzi() {
+    public fun usePaparazzi() {
         project.configurePaparazzi()
     }
 
-    fun minSdkVersion(minSdkVersion: Int?) {
+    public fun minSdkVersion(minSdkVersion: Int?) {
         if (minSdkVersion != null) {
             project.android {
                 defaultConfig.minSdk = minSdkVersion
@@ -34,11 +34,11 @@ public abstract class FreeleticsAndroidExtension(private val project: Project) {
         }
     }
 
-    fun enableParcelize() {
+    public fun enableParcelize() {
         project.plugins.apply("org.jetbrains.kotlin.plugin.parcelize")
     }
 
-    fun enableCompose() {
+    public fun enableCompose() {
         val project = this.project
         project.android {
             buildFeatures.compose = true
@@ -62,57 +62,57 @@ public abstract class FreeleticsAndroidExtension(private val project: Project) {
         }
     }
 
-    fun enableViewBinding() {
+    public fun enableViewBinding() {
         project.android {
             buildFeatures.viewBinding = true
         }
     }
 
-    fun enableAndroidResources() {
+    public fun enableAndroidResources() {
         project.android {
             buildFeatures.androidResources = true
         }
     }
 
-    fun enableBuildConfig() {
+    public fun enableBuildConfig() {
         project.android {
             buildFeatures.buildConfig = true
         }
     }
 
-    fun enableResValues() {
+    public fun enableResValues() {
         project.android {
             buildFeatures.resValues = true
         }
     }
 
-    fun buildConfigField(type: String, name: String, value: String) {
+    public fun buildConfigField(type: String, name: String, value: String) {
         project.android {
             defaultConfig.buildConfigField(type, name, value)
         }
     }
 
-    fun buildConfigField(type: String, name: String, debugValue: String, releaseValue: String) {
+    public fun buildConfigField(type: String, name: String, debugValue: String, releaseValue: String) {
         project.android {
             buildTypes.getByName("debug").buildConfigField(type, name, debugValue)
             buildTypes.getByName("release").buildConfigField(type, name, releaseValue)
         }
     }
 
-    fun resValue(type: String, name: String, value: String) {
+    public fun resValue(type: String, name: String, value: String) {
         project.android {
             defaultConfig.resValue(type, name, value)
         }
     }
 
-    fun resValue(type: String, name: String, debugValue: String, releaseValue: String) {
+    public fun resValue(type: String, name: String, debugValue: String, releaseValue: String) {
         project.android {
             buildTypes.getByName("debug").resValue(type, name, debugValue)
             buildTypes.getByName("release").resValue(type, name, releaseValue)
         }
     }
 
-    fun consumerProguardFiles(vararg files: String) {
+    public fun consumerProguardFiles(vararg files: String) {
         project.android {
             (this as LibraryExtension).defaultConfig.consumerProguardFiles(*files)
         }

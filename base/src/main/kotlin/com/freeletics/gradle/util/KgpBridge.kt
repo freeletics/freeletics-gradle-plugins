@@ -15,12 +15,16 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 public sealed class KotlinProjectExtensionDelegate(
     private val extension: KotlinProjectExtension,
 ) {
-    fun explicitApi() = extension.explicitApi()
-    fun jvmToolchain(action: Action<JavaToolchainSpec>) = extension.jvmToolchain(action)
-    abstract fun compilerOptions(configure: KotlinCommonCompilerOptions.() -> Unit)
+    public fun explicitApi() {
+        extension.explicitApi()
+    }
+    public fun jvmToolchain(action: Action<JavaToolchainSpec>) {
+        extension.jvmToolchain(action)
+    }
+    public abstract fun compilerOptions(configure: KotlinCommonCompilerOptions.() -> Unit)
 
-    companion object {
-        internal fun Project.kotlinProjectExtensionDelegate(): KotlinProjectExtensionDelegate {
+    internal companion object {
+        fun Project.kotlinProjectExtensionDelegate(): KotlinProjectExtensionDelegate {
             return when (val extension = extensions.getByName("kotlin")) {
                 is KotlinJvmProjectExtension -> KotlinJvmProjectExtensionDelegate(extension)
                 is KotlinAndroidProjectExtension -> KotlinAndroidProjectExtensionDelegate(extension)
