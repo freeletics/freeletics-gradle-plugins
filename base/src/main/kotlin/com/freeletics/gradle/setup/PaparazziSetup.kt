@@ -14,6 +14,7 @@ internal fun Project.configurePaparazzi() {
         it.include("**/delta-*")
     }
 
+    // run the copy task after the test task, finalizedBy will even run if the test task fails
     tasks.withType(Test::class.java).configureEach {
         it.finalizedBy(copyFailures)
     }
