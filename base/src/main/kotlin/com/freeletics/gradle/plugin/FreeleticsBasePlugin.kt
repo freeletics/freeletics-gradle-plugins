@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 public abstract class FreeleticsBasePlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
-        target.extensions.create("freeletics", FreeleticsExtension::class.java)
+        target.extensions.create("freeletics", FreeleticsBaseExtension::class.java)
 
         target.makeJarsReproducible()
         target.applyPlatformConstraints()

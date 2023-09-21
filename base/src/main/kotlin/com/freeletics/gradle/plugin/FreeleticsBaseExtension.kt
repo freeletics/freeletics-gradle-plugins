@@ -6,15 +6,15 @@ import com.freeletics.gradle.util.kotlin
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
 
-public abstract class FreeleticsExtension(private val project: Project) : ExtensionAware {
+public abstract class FreeleticsBaseExtension(private val project: Project) : ExtensionAware {
 
-    fun explicitApi() {
+    public fun explicitApi() {
         project.kotlin {
             explicitApi()
         }
     }
 
-    fun optIn(vararg classes: String) {
+    public fun optIn(vararg classes: String) {
         project.kotlin {
             compilerOptions {
                 optIn.addAll(*classes)
@@ -23,23 +23,23 @@ public abstract class FreeleticsExtension(private val project: Project) : Extens
     }
 
     @JvmOverloads
-    fun useMoshi(sealed: Boolean = false) {
+    public fun useMoshi(sealed: Boolean = false) {
         project.configureMoshi(sealed)
     }
 
-    fun useDagger() {
+    public fun useDagger() {
         project.configureDagger(DaggerMode.ANVIL_ONLY)
     }
 
-    fun useDaggerWithKhonshu() {
+    public fun useDaggerWithKhonshu() {
         project.configureDagger(DaggerMode.ANVIL_WITH_KHONSHU)
     }
 
-    fun useDaggerWithComponent() {
+    public fun useDaggerWithComponent() {
         project.configureDagger(DaggerMode.ANVIL_WITH_FULL_DAGGER)
     }
 
-    enum class DaggerMode {
+    internal enum class DaggerMode {
         ANVIL_ONLY,
         ANVIL_WITH_KHONSHU,
         ANVIL_WITH_FULL_DAGGER,

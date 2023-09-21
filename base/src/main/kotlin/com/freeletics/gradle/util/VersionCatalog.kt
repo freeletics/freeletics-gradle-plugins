@@ -31,8 +31,8 @@ public fun Project.getVersionOrNull(name: String): String? {
 public val Project.javaTargetVersion: JavaVersion
     get() = JavaVersion.toVersion(getVersion("java-target"))
 
-public val Project.jvmTarget
+public val Project.jvmTarget: JvmTarget
     get() = JvmTarget.fromTarget(getVersion("java-target"))
 
-public val Project.javaToolchainVersion
+public val Project.javaToolchainVersion: JavaLanguageVersion
     get() = JavaLanguageVersion.of(getVersion("java-toolchain"))

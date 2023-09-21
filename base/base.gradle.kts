@@ -2,6 +2,10 @@ plugins {
     alias(libs.plugins.fgp.jvm)
 }
 
+freeletics {
+    explicitApi()
+}
+
 dependencies {
     compileOnly(libs.gradle.api)
     compileOnly(variantOf(libs.kotlin.gradle) { classifier("gradle76") }) {
