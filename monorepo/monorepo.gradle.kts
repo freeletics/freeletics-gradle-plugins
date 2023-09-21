@@ -12,6 +12,7 @@ dependencies {
     compileOnly(libs.crashlytics.gradle)
     compileOnly(libs.licensee)
 
+    add("shadeClassPath", libs.android.gradle)
     addConfiguredDependencyTo(this, "shadeClassPath", variantOf(libs.kotlin.gradle) { classifier("gradle76") }) {
         exclude("org.jetbrains.kotlin", "kotlin-gradle-plugin-api")
     }
@@ -19,6 +20,7 @@ dependencies {
     add("shadeClassPath", libs.ksp)
     add("shadeClassPath", libs.anvil.gradle)
     add("shadeClassPath", libs.moshix.gradle)
+    add("shadeClassPath", libs.paparazzi.gradle)
 
     testImplementation(libs.junit)
     testImplementation(libs.truth)
