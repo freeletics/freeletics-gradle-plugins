@@ -12,6 +12,7 @@ import org.gradle.api.tasks.testing.Test
 public abstract class FreeleticsJvmBasePlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
+        target.plugins.apply("org.jetbrains.kotlin.jvm")
         target.plugins.apply(FreeleticsBasePlugin::class.java)
 
         target.freeleticsExtension.extensions.create("jvm", FreeleticsJvmExtension::class.java)

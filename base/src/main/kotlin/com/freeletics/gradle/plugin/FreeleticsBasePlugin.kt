@@ -16,6 +16,8 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 public abstract class FreeleticsBasePlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
+        target.plugins.apply("com.autonomousapps.dependency-analysis")
+
         target.extensions.create("freeletics", FreeleticsBaseExtension::class.java)
 
         target.makeJarsReproducible()
