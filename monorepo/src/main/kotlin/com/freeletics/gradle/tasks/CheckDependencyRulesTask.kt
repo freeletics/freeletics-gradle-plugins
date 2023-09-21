@@ -25,10 +25,10 @@ public abstract class CheckDependencyRulesTask : DefaultTask() {
     public abstract val projectPath: Property<String>
 
     @get:Input
-    public abstract val allowedProjectTypes: ListProperty<ProjectType>
+    public abstract val allowedProjectTypes: ListProperty<String>
 
     @get:Input
-    public abstract val allowedDependencyProjectTypes: ListProperty<ProjectType>
+    public abstract val allowedDependencyProjectTypes: ListProperty<String>
 
     @get:Input
     public abstract val artifactIds: Property<ResolvedComponentResult>
@@ -60,8 +60,8 @@ public abstract class CheckDependencyRulesTask : DefaultTask() {
                 checkDependencyRules(
                     projectPath = projectPath,
                     dependencyPath = it.projectPath,
-                    allowedProjectTypes = allowedProjectTypes.get(),
-                    allowedDependencyProjectTypes = allowedDependencyProjectTypes.get(),
+                    allowedProjectTypes = allowedProjectTypes.get().map(ProjectType::valueOf),
+                    allowedDependencyProjectTypes = allowedDependencyProjectTypes.get().map(ProjectType::valueOf),
                 )
             }
             .toList()
@@ -108,11 +108,9 @@ public abstract class CheckDependencyRulesTask : DefaultTask() {
             allowedDependencyProjectTypes: List<ProjectType>,
         ): TaskProvider<CheckDependencyRulesTask> {
             return tasks.register("${configuration.name}CheckDependencyRules", CheckDependencyRulesTask::class.java) {
-                it.projectPath.set(objects.property(String::class.java).value(path))
-                it.allowedProjectTypes.set(objects.listProperty(ProjectType::class.java).value(allowedProjectTypes))
-                it.allowedDependencyProjectTypes.set(
-                    objects.listProperty(ProjectType::class.java).value(allowedDependencyProjectTypes),
-                )
+                it.projectPath.set(path)
+                it.allowedProjectTypes.addAll(allowedProjectTypes.map(ProjectType::name))
+                it.allowedDependencyProjectTypes.addAll(allowedDependencyProjectTypes.map(ProjectType::name))
                 it.artifactIds.set(configuration.incoming.resolutionResult.rootComponent)
                 it.outputFile.set(layout.buildDirectory.file("reports/dependency-rules/${configuration.name}.txt"))
             }
