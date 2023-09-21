@@ -5,6 +5,7 @@ import com.freeletics.gradle.setup.configurePaparazzi
 import com.freeletics.gradle.setup.configureProcessing
 import com.freeletics.gradle.util.android
 import com.freeletics.gradle.util.androidResources
+import com.freeletics.gradle.util.booleanProperty
 import com.freeletics.gradle.util.getDependency
 import com.freeletics.gradle.util.getVersion
 import com.freeletics.gradle.util.kotlin
@@ -56,6 +57,40 @@ public abstract class FreeleticsAndroidExtension(private val project: Project) {
                         "-P",
                         "plugin:androidx.compose.compiler.plugins.kotlin:" +
                             "suppressKotlinVersionCompatibilityCheck=$suppressComposeCompilerCheck",
+                    )
+                }
+            }
+        }
+
+        val enableMetrics = project.booleanProperty("fgp.compose.enableCompilerMetrics", false)
+        if (enableMetrics.get()) {
+            val metricsFolderAbsolutePath = project.layout.buildDirectory
+                .file("compose-metrics")
+                .map { it.asFile.absolutePath }
+                .get()
+
+            project.kotlin {
+                compilerOptions {
+                    freeCompilerArgs.addAll(
+                        "-P",
+                        "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=$metricsFolderAbsolutePath",
+                    )
+                }
+            }
+        }
+
+        val enableReports = project.booleanProperty("fgp.compose.enableCompilerReports", false)
+        if (enableReports.get()) {
+            val reportsFolderAbsolutePath = project.layout.buildDirectory
+                .file("compose-reports")
+                .map { it.asFile.absolutePath }
+                .get()
+
+            project.kotlin {
+                compilerOptions {
+                    freeCompilerArgs.addAll(
+                        "-P",
+                        "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=$reportsFolderAbsolutePath",
                     )
                 }
             }
