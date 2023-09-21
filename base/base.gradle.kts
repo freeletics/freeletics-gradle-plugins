@@ -16,4 +16,5 @@ dependencies {
     compileOnly(libs.ksp)
     compileOnly(libs.anvil.gradle)
     compileOnly(libs.moshix.gradle)
+    compileOnly(libs.paparazzi.gradle)
 }

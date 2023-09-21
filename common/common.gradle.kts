@@ -19,6 +19,7 @@ dependencies {
     add("shadeClassPath", libs.ksp)
     add("shadeClassPath", libs.anvil.gradle)
     add("shadeClassPath", libs.moshix.gradle)
+    add("shadeClassPath", libs.paparazzi.gradle)
 }
 
 gradlePlugin {
