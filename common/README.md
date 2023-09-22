@@ -143,8 +143,10 @@ freeletics {
         // apply the Kotlin parcelize plugin
         enableParcelize()
         // enables Compose and configures the compiler
-        // requires `androidx.compose.compiler` to be present in the libs version catalog
-        // supports suppressing the Kotlin version check by setting `fgp.compose.kotlinVersion=<kotlin-version>`
+        // - requires `androidx.compose.compiler` to be present in the libs version catalog
+        // - supports suppressing the Kotlin version check by setting `fgp.compose.kotlinVersion=<kotlin-version>`
+        // - set `fgp.compose.enableCompilerMetrics=true` and/or `fgp.compose.enableCompiler=true` to receive compose
+        //   compiler metrics and/or reports, they will be located in the modules build folder
         enableCompose()
         // enables Android resource support
         enableAndroidResources()
