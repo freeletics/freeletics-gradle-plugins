@@ -17,6 +17,7 @@ dependencies {
         exclude("org.jetbrains.kotlin", "kotlin-gradle-plugin-api")
     }
     add("shadeClassPath", variantOf(libs.kotlin.gradle.api) { classifier("gradle76") })
+    add("shadeClassPath", libs.compose.gradle)
     add("shadeClassPath", libs.ksp)
     add("shadeClassPath", libs.anvil.gradle)
     add("shadeClassPath", libs.moshix.gradle)
