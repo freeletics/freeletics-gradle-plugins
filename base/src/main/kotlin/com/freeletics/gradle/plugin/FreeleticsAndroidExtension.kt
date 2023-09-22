@@ -5,6 +5,7 @@ import com.freeletics.gradle.setup.configurePaparazzi
 import com.freeletics.gradle.setup.configureProcessing
 import com.freeletics.gradle.util.android
 import com.freeletics.gradle.util.androidResources
+import com.freeletics.gradle.util.booleanProperty
 import com.freeletics.gradle.util.getDependency
 import com.freeletics.gradle.util.getVersion
 import com.freeletics.gradle.util.kotlin
@@ -14,7 +15,11 @@ import org.gradle.api.Project
 public abstract class FreeleticsAndroidExtension(private val project: Project) {
 
     public fun useRoom() {
-        val processorConfiguration = project.configureProcessing(useKsp = true)
+        val generateKotlin = project.booleanProperty("fgp.room.generateKotlin", true).get()
+        val processorConfiguration = project.configureProcessing(
+            useKsp = true,
+            "room.generateKotlin" to generateKotlin.toString(),
+        )
 
         project.dependencies.apply {
             add("api", project.getDependency("androidx-room-runtime"))
