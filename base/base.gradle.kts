@@ -13,6 +13,7 @@ dependencies {
     }
     compileOnly(variantOf(libs.kotlin.gradle.api) { classifier("gradle76") })
     compileOnly(libs.android.gradle.api)
+    compileOnly(libs.compose.gradle)
     compileOnly(libs.ksp)
     compileOnly(libs.anvil.gradle)
     compileOnly(libs.moshix.gradle)

@@ -7,9 +7,6 @@ import com.freeletics.gradle.util.android
 import com.freeletics.gradle.util.androidResources
 import com.freeletics.gradle.util.booleanProperty
 import com.freeletics.gradle.util.getDependency
-import com.freeletics.gradle.util.getVersion
-import com.freeletics.gradle.util.kotlin
-import com.freeletics.gradle.util.stringProperty
 import org.gradle.api.Project
 
 public abstract class FreeleticsAndroidExtension(private val project: Project) {
@@ -41,64 +38,6 @@ public abstract class FreeleticsAndroidExtension(private val project: Project) {
 
     public fun enableParcelize() {
         project.plugins.apply("org.jetbrains.kotlin.plugin.parcelize")
-    }
-
-    public fun enableCompose() {
-        val project = this.project
-        project.android {
-            buildFeatures.compose = true
-
-            composeOptions {
-                kotlinCompilerExtensionVersion = project.getVersion("androidx.compose.compiler")
-            }
-        }
-
-        val suppressComposeCompilerCheck = project.stringProperty("fgp.compose.kotlinVersion").orNull
-        if (suppressComposeCompilerCheck != null) {
-            project.kotlin {
-                compilerOptions {
-                    freeCompilerArgs.addAll(
-                        "-P",
-                        "plugin:androidx.compose.compiler.plugins.kotlin:" +
-                            "suppressKotlinVersionCompatibilityCheck=$suppressComposeCompilerCheck",
-                    )
-                }
-            }
-        }
-
-        val enableMetrics = project.booleanProperty("fgp.compose.enableCompilerMetrics", false)
-        if (enableMetrics.get()) {
-            val metricsFolderAbsolutePath = project.layout.buildDirectory
-                .file("compose-metrics")
-                .map { it.asFile.absolutePath }
-                .get()
-
-            project.kotlin {
-                compilerOptions {
-                    freeCompilerArgs.addAll(
-                        "-P",
-                        "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=$metricsFolderAbsolutePath",
-                    )
-                }
-            }
-        }
-
-        val enableReports = project.booleanProperty("fgp.compose.enableCompilerReports", false)
-        if (enableReports.get()) {
-            val reportsFolderAbsolutePath = project.layout.buildDirectory
-                .file("compose-reports")
-                .map { it.asFile.absolutePath }
-                .get()
-
-            project.kotlin {
-                compilerOptions {
-                    freeCompilerArgs.addAll(
-                        "-P",
-                        "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=$reportsFolderAbsolutePath",
-                    )
-                }
-            }
-        }
     }
 
     public fun enableViewBinding() {

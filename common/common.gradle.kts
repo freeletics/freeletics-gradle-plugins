@@ -16,6 +16,7 @@ dependencies {
 
     add("shadeClassPath", libs.android.gradle)
     add("shadeClassPath", libs.android.gradle.api)
+    add("shadeClassPath", libs.compose.gradle)
     add("shadeClassPath", libs.ksp)
     add("shadeClassPath", libs.anvil.gradle)
     add("shadeClassPath", libs.moshix.gradle)

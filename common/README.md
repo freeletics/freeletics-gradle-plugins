@@ -20,6 +20,37 @@ freeletics {
 }
 ```
 
+### Compose
+
+This will enable Compose on the project and works on Android, JVM and multiplatform projects. For the latter 2 the
+`org.jetbrains.compose` plugin needs to be on the classpath.
+
+```groovy
+freeletics {
+    // requires `androidx.compose.compiler` to be present in the libs version catalog
+    // supports suppressing the Kotlin version check by setting `fgp.compose.kotlinVersion=<kotlin-version>`
+    useCompose()
+}
+```
+
+Add the following to the `libs` version catalog:
+```toml
+[libraries]
+# for Android projects
+androidx-compose-compiler = { module = "androidx.compose.compiler:compiler", version = "..." }
+# for non-Android or multiplatform projects
+jetbrains-compose-compiler = { module = "org.jetbrains.compose.compiler:compiler", version = "..." }
+```
+
+There are a few optional Gradle properties for certain compose compiler options:
+```properties
+# Suppress the Kotlin version in the compiler for the given Kotlin version
+fgp.compose.kotlinVersion=<kotlin-version>
+# Set these to enable compiler metrics and/or reports, they will be located in the modules build folder
+fgp.compose.enableCompilerMetrics=true
+fgp.compose.enableCompilerReports=true
+```
+
 ### Moshi
 
 The following method will apply the [MoshiX plugin][2] (`dev.zacsweers.moshix`) which will enable Moshi code generation
@@ -142,12 +173,6 @@ freeletics {
     android {
         // apply the Kotlin parcelize plugin
         enableParcelize()
-        // enables Compose and configures the compiler
-        // - requires `androidx.compose.compiler` to be present in the libs version catalog
-        // - supports suppressing the Kotlin version check by setting `fgp.compose.kotlinVersion=<kotlin-version>`
-        // - set `fgp.compose.enableCompilerMetrics=true` and/or `fgp.compose.enableCompiler=true` to receive compose
-        //   compiler metrics and/or reports, they will be located in the modules build folder
-        enableCompose()
         // enables Android resource support
         enableAndroidResources()
         // enables ViewBinding generation
@@ -182,21 +207,21 @@ freeletics {
 
 ### Room
 
-To easily add room as a dependency and apply KSP or KAPT the following extension method can be used. By default ksp is
-used, to use kapt set this gradle.property: `fgp.kotlin.ksp=false`.
+To easily add room as a dependency and apply KSP the following extension method can be used.
 
 ```groovy
 freeletics {
     android {
-        // add room as a dependency and configure ksp
-        //
-        // requires `androidx-room-runtime` and `androidx-room-compiler` to be present in the version catalog
         useRoom()
     }
 }
 ```
 
-Requires `androidx-room-runtime` and `androidx-room-compiler` to be present in the `libs` version catalog.
+Add the following to the `libs` version catalog:
+```toml
+androidx-room-runtime = { module = "androidx.room:room-runtime", version = "..." }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version = "..." }
+```
 
 
 ## Kotlin/JVM Library projects
