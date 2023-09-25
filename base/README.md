@@ -1,4 +1,4 @@
-# Common plugins
+# Base plugins
 
 This is a collection of plugins that provide a set of defaults and automatic configuration together with extensions
 to make configuring projects easy.
@@ -126,9 +126,9 @@ General features:
 ```groovy
 plugins {
     // for library projects
-    id("com.freeletics.gradle.common.android").version("<latest-version>")
+    id("com.freeletics.gradle.android").version("<latest-version>")
     // for app projects
-    id("com.freeletics.gradle.common.android.app").version("<latest-version>")
+    id("com.freeletics.gradle.android.app").version("<latest-version>")
 }
 ```
 
@@ -240,7 +240,7 @@ General features:
 
 ```groovy
 plugins {
-    id("com.freeletics.gradle.common.jvm").version("<latest-version>")
+    id("com.freeletics.gradle.jvm").version("<latest-version>")
 }
 ```
 
@@ -285,7 +285,7 @@ General features:
 
 ```groovy
 plugins {
-    id("com.freeletics.gradle.common.multiplatform").version("<latest-version>")
+    id("com.freeletics.gradle.multiplatform").version("<latest-version>")
 }
 ```
 
@@ -348,7 +348,7 @@ General features:
 
 ```groovy
 plugins {
-    id("com.freeletics.gradle.common.gradle").version("<latest-version>")
+    id("com.freeletics.gradle.gradle").version("<latest-version>")
 }
 ```
 

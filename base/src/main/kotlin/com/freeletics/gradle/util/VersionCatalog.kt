@@ -28,11 +28,11 @@ public fun Project.getVersionOrNull(name: String): String? {
     return libs.findVersion(name).orElseGet { null }?.requiredVersion
 }
 
-public val Project.javaTargetVersion: JavaVersion
+internal val Project.javaTargetVersion: JavaVersion
     get() = JavaVersion.toVersion(getVersion("java-target"))
 
-public val Project.jvmTarget: JvmTarget
+internal val Project.jvmTarget: JvmTarget
     get() = JvmTarget.fromTarget(getVersion("java-target"))
 
-public val Project.javaToolchainVersion: JavaLanguageVersion
+internal val Project.javaToolchainVersion: JavaLanguageVersion
     get() = JavaLanguageVersion.of(getVersion("java-toolchain"))

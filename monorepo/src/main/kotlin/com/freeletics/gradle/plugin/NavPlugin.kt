@@ -12,7 +12,7 @@ import org.gradle.api.Project
 
 public abstract class NavPlugin : Plugin<Project> {
     override fun apply(target: Project) {
-        target.plugins.apply(FreeleticsAndroidBasePlugin::class.java)
+        target.plugins.apply(FreeleticsAndroidPlugin::class.java)
 
         target.freeleticsAndroidExtension.minSdkVersion(target.appType()?.minSdkVersion(target))
         target.freeleticsAndroidExtension.enableParcelize()

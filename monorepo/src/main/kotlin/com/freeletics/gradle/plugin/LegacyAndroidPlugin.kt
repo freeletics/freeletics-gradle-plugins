@@ -12,7 +12,7 @@ import org.gradle.api.Project
 
 public abstract class LegacyAndroidPlugin : Plugin<Project> {
     override fun apply(target: Project) {
-        target.plugins.apply(FreeleticsAndroidBasePlugin::class.java)
+        target.plugins.apply(FreeleticsAndroidPlugin::class.java)
 
         target.freeleticsAndroidExtension.enableAndroidResources()
         target.freeleticsAndroidExtension.enableParcelize()

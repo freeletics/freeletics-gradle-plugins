@@ -14,7 +14,7 @@ import org.gradle.api.Project
 
 public abstract class DomainAndroidPlugin : Plugin<Project> {
     override fun apply(target: Project) {
-        target.plugins.apply(FreeleticsAndroidBasePlugin::class.java)
+        target.plugins.apply(FreeleticsAndroidPlugin::class.java)
 
         val extension = target.freeleticsExtension.extensions.create("legacy", LegacyExtension::class.java)
 

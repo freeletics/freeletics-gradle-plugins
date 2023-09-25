@@ -5,11 +5,12 @@ into 4 groups:
 
 - [monorepo plugins](monorepo/README.md) which are specific to the structure of the Freeletics Android mono repository,
   provide more defaults and are more opinionated
-- [common plugins](common/README.md) which share the same basic configuration of the monorepo plugins but don't require
-  a specific module structure. We are using these for some secondary repositories.
+- [base plugins](base/README.md) which share the same basic configuration of the monorepo plugins but don't require
+  a specific module structure. These are used internally by the monoroepo plugins and we are using these for open source
+  some projects (like this one) and some secondary projects.
 - [root-plugin](root-plugin/README.md) which is applied to the root `build.gradle` file (can be used in combination
   with both the monorepo and the common plugins)
-- [settings-plugin](settings-plugin/README.md) which is applied to `settings.gradle` file (can be used in combination 
+- [settings-plugin](settings-plugin/README.md) which is applied to `settings.gradle` file (can be used in combination
   with both the monorepo and the common plugins)
 - [scripts](scripts/README.md) collection of ready to use command line scripts that can be
   used from `.main.kts` scripts
