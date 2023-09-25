@@ -22,6 +22,10 @@ import org.gradle.api.tasks.testing.Test
 public abstract class FreeleticsAndroidBasePlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
+        if (!target.plugins.hasPlugin("com.android.application")) {
+            target.plugins.apply("com.android.library")
+        }
+        target.plugins.apply("org.jetbrains.kotlin.android")
         target.plugins.apply(FreeleticsBasePlugin::class.java)
 
         target.freeleticsExtension.extensions.create("android", FreeleticsAndroidExtension::class.java)

@@ -11,7 +11,6 @@ public abstract class FreeleticsMultiplatformPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.plugins.apply("org.jetbrains.kotlin.multiplatform")
         target.plugins.apply(FreeleticsBasePlugin::class.java)
-        target.plugins.apply("com.autonomousapps.dependency-analysis")
 
         target.freeleticsExtension.extensions.create("multiplatform", FreeleticsMultiplatformExtension::class.java)
 

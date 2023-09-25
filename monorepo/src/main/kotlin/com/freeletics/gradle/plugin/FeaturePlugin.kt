@@ -13,10 +13,7 @@ import org.gradle.api.Project
 
 public abstract class FeaturePlugin : Plugin<Project> {
     override fun apply(target: Project) {
-        target.plugins.apply("com.android.library")
-        target.plugins.apply("org.jetbrains.kotlin.android")
         target.plugins.apply(FreeleticsAndroidBasePlugin::class.java)
-        target.plugins.apply("com.autonomousapps.dependency-analysis")
 
         val extension = target.freeleticsExtension.extensions.create("legacy", LegacyExtension::class.java)
 
