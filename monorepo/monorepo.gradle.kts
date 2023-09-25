@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-    add("shade", project.projects.base)
+    api(project.projects.base)
 
     compileOnly(libs.android.gradle.api)
     compileOnly(libs.crashlytics.gradle)
@@ -22,6 +22,7 @@ dependencies {
     add("shadeClassPath", libs.anvil.gradle)
     add("shadeClassPath", libs.moshix.gradle)
     add("shadeClassPath", libs.paparazzi.gradle)
+    add("shadeClassPath", libs.publish)
 
     testImplementation(libs.junit)
     testImplementation(libs.truth)
@@ -35,22 +36,22 @@ gradlePlugin {
         }
 
         create("monoCoreAndroidPlugin") {
-            id = "com.freeletics.gradle.core-android"
+            id = "com.freeletics.gradle.core.android"
             implementationClass = "com.freeletics.gradle.plugin.CoreAndroidPlugin"
         }
 
         create("monoCoreKotlinPlugin") {
-            id = "com.freeletics.gradle.core-kotlin"
+            id = "com.freeletics.gradle.core.kotlin"
             implementationClass = "com.freeletics.gradle.plugin.CoreKotlinPlugin"
         }
 
         create("monoDomainAndroidPlugin") {
-            id = "com.freeletics.gradle.domain-android"
+            id = "com.freeletics.gradle.domain.android"
             implementationClass = "com.freeletics.gradle.plugin.DomainAndroidPlugin"
         }
 
         create("monoDomainKotlinPlugin") {
-            id = "com.freeletics.gradle.domain-kotlin"
+            id = "com.freeletics.gradle.domain.kotlin"
             implementationClass = "com.freeletics.gradle.plugin.DomainKotlinPlugin"
         }
 
@@ -65,12 +66,12 @@ gradlePlugin {
         }
 
         create("monoLegacyAndroidPlugin") {
-            id = "com.freeletics.gradle.legacy-android"
+            id = "com.freeletics.gradle.legacy.android"
             implementationClass = "com.freeletics.gradle.plugin.LegacyAndroidPlugin"
         }
 
         create("monoLegacyKotlinPlugin") {
-            id = "com.freeletics.gradle.legacy-kotlin"
+            id = "com.freeletics.gradle.legacy.kotlin"
             implementationClass = "com.freeletics.gradle.plugin.LegacyKotlinPlugin"
         }
     }

@@ -16,7 +16,7 @@ import org.gradle.api.Project
 
 public abstract class AppPlugin : Plugin<Project> {
     override fun apply(target: Project) {
-        target.plugins.apply(FreeleticsAndroidAppBasePlugin::class.java)
+        target.plugins.apply(FreeleticsAndroidAppPlugin::class.java)
 
         target.freeleticsExtension.extensions.create("app", AppExtension::class.java)
 

@@ -23,7 +23,7 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
         publish: Boolean = false,
         configure: KotlinAndroidTarget.() -> Unit = { },
     ) {
-        project.plugins.apply(FreeleticsAndroidBasePlugin::class.java)
+        project.plugins.apply(FreeleticsAndroidPlugin::class.java)
 
         project.kotlinMultiplatform {
             androidTarget {

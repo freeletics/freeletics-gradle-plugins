@@ -2,6 +2,7 @@ package com.freeletics.gradle.plugin
 
 import com.freeletics.gradle.setup.configurePom
 import com.freeletics.gradle.util.freeleticsExtension
+import com.freeletics.gradle.util.stringProperty
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import com.vanniktech.maven.publish.SonatypeHost
 import org.gradle.api.Plugin
@@ -14,24 +15,29 @@ public abstract class FreeleticsPublishOssPlugin : Plugin<Project> {
         target.plugins.apply("com.vanniktech.maven.publish")
 
         target.freeleticsExtension.explicitApi()
+        target.configureMavenCentral()
+        target.configurePom(includeLicense = false)
+        target.configureDokka()
+    }
 
-        target.extensions.configure(MavenPublishBaseExtension::class.java) {
+    private fun Project.configureMavenCentral() {
+        extensions.configure(MavenPublishBaseExtension::class.java) {
             it.publishToMavenCentral(SonatypeHost.DEFAULT, automaticRelease = true)
             it.signAllPublications()
         }
+    }
 
-        target.configurePom(includeLicense = true)
-
+    private fun Project.configureDokka() {
         // if the version is a snapshot version disable dokka tasks to speed up the build
-        if (target.findProperty("VERSION_NAME")?.toString()?.endsWith("-SNAPSHOT") == true) {
-            target.afterEvaluate {
-                target.tasks.named("dokkaHtml").configure { task ->
+        if (stringProperty("VERSION_NAME").orNull?.toString()?.endsWith("-SNAPSHOT") == true) {
+            afterEvaluate {
+                tasks.named("dokkaHtml").configure { task ->
                     task.enabled = false
                 }
 
                 it.plugins.withId("com.android.library") {
-                    if (!target.plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")) {
-                        target.tasks.named("javaDocReleaseGeneration").configure { task ->
+                    if (!plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")) {
+                        tasks.named("javaDocReleaseGeneration").configure { task ->
                             task.enabled = false
                         }
                     }

@@ -19,7 +19,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.testing.Test
 
-public abstract class FreeleticsAndroidBasePlugin : Plugin<Project> {
+public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         if (!target.plugins.hasPlugin("com.android.application")) {

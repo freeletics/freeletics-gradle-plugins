@@ -10,7 +10,7 @@ import org.gradle.api.Project
 
 public abstract class CoreKotlinPlugin : Plugin<Project> {
     override fun apply(target: Project) {
-        target.plugins.apply(FreeleticsJvmBasePlugin::class.java)
+        target.plugins.apply(FreeleticsJvmPlugin::class.java)
 
         target.freeleticsJvmExtension.useAndroidLint()
 
