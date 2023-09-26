@@ -70,22 +70,22 @@ gradlePlugin {
         }
 
         create("monoCoreAndroidPlugin") {
-            id = "com.freeletics.gradle.core-android"
+            id = "com.freeletics.gradle.core.android"
             implementationClass = "com.freeletics.gradle.monorepo.plugin.CoreAndroidPlugin"
         }
 
         create("monoCoreKotlinPlugin") {
-            id = "com.freeletics.gradle.core-kotlin"
+            id = "com.freeletics.gradle.core.kotlin"
             implementationClass = "com.freeletics.gradle.monorepo.plugin.CoreKotlinPlugin"
         }
 
         create("monoDomainAndroidPlugin") {
-            id = "com.freeletics.gradle.domain-android"
+            id = "com.freeletics.gradle.domain.android"
             implementationClass = "com.freeletics.gradle.monorepo.plugin.DomainAndroidPlugin"
         }
 
         create("monoDomainKotlinPlugin") {
-            id = "com.freeletics.gradle.domain-kotlin"
+            id = "com.freeletics.gradle.domain.kotlin"
             implementationClass = "com.freeletics.gradle.monorepo.plugin.DomainKotlinPlugin"
         }
 
@@ -100,12 +100,12 @@ gradlePlugin {
         }
 
         create("monoLegacyAndroidPlugin") {
-            id = "com.freeletics.gradle.legacy-android"
+            id = "com.freeletics.gradle.legacy.android"
             implementationClass = "com.freeletics.gradle.monorepo.plugin.LegacyAndroidPlugin"
         }
 
         create("monoLegacyKotlinPlugin") {
-            id = "com.freeletics.gradle.legacy-kotlin"
+            id = "com.freeletics.gradle.legacy.kotlin"
             implementationClass = "com.freeletics.gradle.monorepo.plugin.LegacyKotlinPlugin"
         }
     }
