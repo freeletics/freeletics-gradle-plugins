@@ -47,7 +47,7 @@ moshix-gradle = { module = "dev.zacsweers.moshix:moshi-gradle-plugin", version.r
 paparazzi-gradle = { module = "com.freeletics.fork.paparazzi:paparazzi-gradle-plugin", version.ref = "paparazzi" }
 
 licensee = { module = "app.cash.licensee:licensee-gradle-plugin", version.ref = "licensee" }
-crashlytics-gradle = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "crashlytics-gradle" }
+crashlytics = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "crashlytics-gradle" }
 
 dependency-analysis = { module = "com.autonomousapps:dependency-analysis-gradle-plugin", version.ref = "dependency-analysis" }
 
