@@ -7,7 +7,7 @@ public abstract class UpdateLicensesTask : Copy() {
     internal companion object {
         fun Project.registerUpdateLicensesTask() {
             tasks.register("updateLicenses", UpdateLicensesTask::class.java) { task ->
-                task.from(project.layout.buildDirectory.file("reports/licensee/release/artifacts.json"))
+                task.from(project.layout.buildDirectory.file("reports/licensee/androidRelease/artifacts.json"))
                 task.into("src/main/assets")
 
                 task.rename("artifacts.json", "license_acknowledgements.json")
@@ -16,7 +16,7 @@ public abstract class UpdateLicensesTask : Copy() {
                     if (line.contains("\"version\": \"")) "" else line
                 }
 
-                task.dependsOn("licenseeRelease")
+                task.dependsOn("licenseeAndroidRelease")
             }
         }
     }
