@@ -25,7 +25,9 @@ public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
         if (!target.plugins.hasPlugin("com.android.application")) {
             target.plugins.apply("com.android.library")
         }
-        target.plugins.apply("org.jetbrains.kotlin.android")
+        if (!target.plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")) {
+            target.plugins.apply("org.jetbrains.kotlin.android")
+        }
         target.plugins.apply(FreeleticsBasePlugin::class.java)
 
         target.freeleticsExtension.extensions.create("android", FreeleticsAndroidExtension::class.java)
