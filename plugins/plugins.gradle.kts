@@ -30,37 +30,37 @@ dependencies {
 gradlePlugin {
     plugins {
         create("commonAndroidPlugin") {
-            id = "com.freeletics.gradle.common.android"
+            id = "com.freeletics.gradle.android"
             implementationClass = "com.freeletics.gradle.plugin.FreeleticsAndroidPlugin"
         }
 
         create("commonAndroidAppPlugin") {
-            id = "com.freeletics.gradle.common.android.app"
+            id = "com.freeletics.gradle.android.app"
             implementationClass = "com.freeletics.gradle.plugin.FreeleticsAndroidAppPlugin"
         }
 
         create("commonJvmPlugin") {
-            id = "com.freeletics.gradle.common.jvm"
+            id = "com.freeletics.gradle.jvm"
             implementationClass = "com.freeletics.gradle.plugin.FreeleticsJvmPlugin"
         }
 
         create("commonMultiplatformPlugin") {
-            id = "com.freeletics.gradle.common.multiplatform"
+            id = "com.freeletics.gradle.multiplatform"
             implementationClass = "com.freeletics.gradle.plugin.FreeleticsMultiplatformPlugin"
         }
 
         create("commonGradlePlugin") {
-            id = "com.freeletics.gradle.common.gradle"
+            id = "com.freeletics.gradle.gradle"
             implementationClass = "com.freeletics.gradle.plugin.FreeleticsGradlePluginPlugin"
         }
 
         create("commonPublishInternalPlugin") {
-            id = "com.freeletics.gradle.common.publish.internal"
+            id = "com.freeletics.gradle.publish.internal"
             implementationClass = "com.freeletics.gradle.plugin.FreeleticsPublishInternalPlugin"
         }
 
         create("commonPublishOssPlugin") {
-            id = "com.freeletics.gradle.common.publish.oss"
+            id = "com.freeletics.gradle.publish.oss"
             implementationClass = "com.freeletics.gradle.plugin.FreeleticsPublishOssPlugin"
         }
 
