@@ -2,7 +2,7 @@
 java-target = "11"
 java-toolchain = "19"
 
-fgp = "0.6.1"
+fgp = "0.7.0"
 
 gradle-api = "8.3"
 kotlin = "1.9.10"
@@ -68,9 +68,9 @@ truth = { module = "com.google.truth:truth", version.ref = "truth" }
 [plugins]
 fgp-root = { id = "com.freeletics.gradle.root", version.ref = "fgp" }
 fgp-settings = { id = "com.freeletics.gradle.settings", version.ref = "fgp" }
-fgp-gradle = { id = "com.freeletics.gradle.common.gradle", version.ref = "fgp" }
-fgp-jvm = { id = "com.freeletics.gradle.common.jvm", version.ref = "fgp" }
-fgp-publish = { id = "com.freeletics.gradle.common.publish.oss", version.ref = "fgp" }
+fgp-gradle = { id = "com.freeletics.gradle.gradle", version.ref = "fgp" }
+fgp-jvm = { id = "com.freeletics.gradle.jvm", version.ref = "fgp" }
+fgp-publish = { id = "com.freeletics.gradle.publish.oss", version.ref = "fgp" }
 
 android = { id = "com.android.application", version.ref = "android-gradle" }
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
