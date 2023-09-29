@@ -16,7 +16,7 @@ public abstract class FreeleticsPublishOssPlugin : Plugin<Project> {
 
         target.freeleticsExtension.explicitApi()
         target.configureMavenCentral()
-        target.configurePom(includeLicense = false)
+        target.configurePom(includeLicense = true)
         target.configureDokka()
     }
 
