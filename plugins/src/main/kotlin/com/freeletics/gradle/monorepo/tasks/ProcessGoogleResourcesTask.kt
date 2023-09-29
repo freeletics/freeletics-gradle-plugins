@@ -9,7 +9,7 @@ import org.gradle.api.tasks.Internal
 
 public abstract class ProcessGoogleResourcesTask : Copy() {
     // the Crashlytics plugin needs this property
-    @Internal
+    @get:Internal
     public var intermediateDir: File? = null
 
     internal companion object {
