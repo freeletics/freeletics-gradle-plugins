@@ -1,7 +1,31 @@
 Change Log
 ==========
 
-## 0.6.2 **UNRELEASED**
+## 0.7.2 **UNRELEASED**
+
+
+## 0.7.1 *(2023-09-29)*
+
+- For KMP libraries with an Android target only publish the `release` variant by default.
+- Fix error caused by `ProcessGoogleResourcesTask`.
+
+
+## 0.7.0 *(2023-09-28)*
+
+- Consolidated the Gradle plugins into one module and merged common with base plugins. As a result
+  the `common` was removed from plugin ids. For example `com.freeletics.gradle.common.jvm` is now
+  `com.freeletics.gradle.jvm`.
+- Plugin ids that previously used a `-` now use a `.`, e.g. `com.freeletics.gradle.core-android` is now
+  `com.freeletics.gradle.core.android`.
+- `enableCompose()` in the `android` block was replaced with a top level `useCompose()` function that
+  applies the Jetbrains Compose plugin for non Android projects.
+- It's now possible to easily get Compose compiler reports by setting `fgp.compose.enableCompilerMetrics=true` 
+  and/or `fgp.compose.enableCompilerReports=true`.
+- The `useRoom()` option will now automatically enable Room's Kotlin codegen.
+- Paparazzi verify deltas are now automatically copied to the root projects `build/reports` directory.
+- Support for Licensee 1.8.0.
+- Support for Khonshu 0.17.0.
+- Fix configuration cache compatibility of `checkDependencyRules`
 
 
 ## 0.6.1 *(2023-09-11)*

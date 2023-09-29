@@ -14,9 +14,7 @@
 -keepattributes Signature,Exceptions,*Annotation*,InnerClasses,PermittedSubclasses,EnclosingMethod,Deprecated,SourceFile,LineNumberTable
 
 # Keep your public API so that it's callable from scripts
--keep class com.freeletics.gradle.plugin.*Extension { *; }
--keep class com.freeletics.gradle.plugin.*Plugin { *; }
--keep class com.freeletics.gradle.tasks.** { *; }
+-keep class com.freeletics.gradle.** { public *; }
 
 # No need to obfuscate class names
 -dontobfuscate
