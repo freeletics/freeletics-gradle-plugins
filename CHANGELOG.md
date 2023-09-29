@@ -1,13 +1,14 @@
 Change Log
 ==========
 
-## 0.7.2 **UNRELEASED**
+## 0.7.3 **UNRELEASED**
 
 
-## 0.7.1 *(2023-09-29)*
+## 0.7.2 *(2023-09-29)*
 
 - For KMP libraries with an Android target only publish the `release` variant by default.
 - Fix error caused by `ProcessGoogleResourcesTask`.
+- Fix OSS publish plugin not including licenses.
 
 
 ## 0.7.0 *(2023-09-28)*
@@ -19,7 +20,7 @@ Change Log
   `com.freeletics.gradle.core.android`.
 - `enableCompose()` in the `android` block was replaced with a top level `useCompose()` function that
   applies the Jetbrains Compose plugin for non Android projects.
-- It's now possible to easily get Compose compiler reports by setting `fgp.compose.enableCompilerMetrics=true` 
+- It's now possible to easily get Compose compiler reports by setting `fgp.compose.enableCompilerMetrics=true`
   and/or `fgp.compose.enableCompilerReports=true`.
 - The `useRoom()` option will now automatically enable Room's Kotlin codegen.
 - Paparazzi verify deltas are now automatically copied to the root projects `build/reports` directory.
