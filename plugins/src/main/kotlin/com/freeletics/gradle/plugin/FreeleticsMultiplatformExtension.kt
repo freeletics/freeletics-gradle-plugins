@@ -20,16 +20,14 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
 
     @JvmOverloads
     public fun addAndroidTarget(
-        publish: Boolean = false,
+        variantsToPublish: List<String>? = listOf("release"),
         configure: KotlinAndroidTarget.() -> Unit = { },
     ) {
         project.plugins.apply(FreeleticsAndroidPlugin::class.java)
 
         project.kotlinMultiplatform {
             androidTarget {
-                if (publish) {
-                    publishAllLibraryVariants()
-                }
+                publishLibraryVariants = variantsToPublish
 
                 configure()
             }
