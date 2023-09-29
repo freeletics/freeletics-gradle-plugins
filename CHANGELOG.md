@@ -1,7 +1,13 @@
 Change Log
 ==========
 
-## 0.7.1 **UNRELEASED**
+## 0.7.2 **UNRELEASED**
+
+
+## 0.7.1 *(2023-09-29)*
+
+- For KMP libraries with an Android target only publish the `release` variant by default.
+- Fix error caused by `ProcessGoogleResourcesTask`.
 
 
 ## 0.7.0 *(2023-09-28)*
