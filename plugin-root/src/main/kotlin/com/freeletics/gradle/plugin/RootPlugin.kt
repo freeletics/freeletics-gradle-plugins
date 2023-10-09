@@ -78,40 +78,40 @@ public abstract class RootPlugin : Plugin<Project> {
                 }
             }
 
-            analysis.dependencies { dependencies ->
-                dependencies.bundle("androidx-compose-runtime") {
+            analysis.structure { structure ->
+                structure.bundle("androidx-compose-runtime") {
                     it.primary("androidx.compose.runtime:runtime")
                     it.includeGroup("androidx.compose.runtime")
                 }
-                dependencies.bundle("androidx-compose-ui") {
+                structure.bundle("androidx-compose-ui") {
                     it.primary("androidx.compose.ui:ui")
                     it.includeGroup("androidx.compose.ui")
                     it.includeDependency("androidx.compose.runtime:runtime-saveable")
                 }
-                dependencies.bundle("androidx-compose-foundation") {
+                structure.bundle("androidx-compose-foundation") {
                     it.primary("androidx.compose.foundation:foundation")
                     it.includeGroup("androidx.compose.animation")
                     it.includeGroup("androidx.compose.foundation")
                 }
-                dependencies.bundle("androidx-compose-material") {
+                structure.bundle("androidx-compose-material") {
                     it.primary("androidx.compose.material:material")
                     it.includeGroup("androidx.compose.material")
                 }
-                dependencies.bundle("androidx-compose-material3") {
+                structure.bundle("androidx-compose-material3") {
                     it.primary("androidx.compose.material3:material3")
                     it.includeGroup("androidx.compose.material3")
                 }
 
-                dependencies.bundle("dagger") {
+                structure.bundle("dagger") {
                     it.includeDependency("javax.inject:javax.inject")
                     it.includeDependency("com.google.dagger:dagger")
                 }
 
-                dependencies.bundle("kotest") {
+                structure.bundle("kotest") {
                     it.includeGroup("io.kotest")
                 }
 
-                dependencies.bundle("paparazzi") {
+                structure.bundle("paparazzi") {
                     it.primary("com.freeletics.fork.paparazzi:paparazzi")
                     it.includeGroup("app.cash.paparazzi")
                     it.includeGroup("com.freeletics.fork.paparazzi")
