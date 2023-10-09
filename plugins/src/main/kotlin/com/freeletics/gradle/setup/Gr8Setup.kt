@@ -32,6 +32,8 @@ internal fun Project.setupGr8() {
         it.exclude(mapOf("group" to "org.jetbrains", "module" to "annotations"))
         // included in gradle-api and would cause duplicate class issues
         it.exclude(mapOf("group" to "javax.inject", "module" to "javax.inject"))
+        // included in gradle-api and would cause duplicate class issues
+        it.exclude(mapOf("group" to "com.google.code.findbugs", "module" to "jsr305"))
     }
 
     extensions.configure(Gr8Extension::class.java) { extension ->
