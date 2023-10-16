@@ -3,6 +3,8 @@ package com.freeletics.gradle.setup
 import org.gradle.api.tasks.testing.Test
 
 internal fun Test.defaultTestSetup() {
+    useJUnitPlatform()
+
     val projectName = project.path
         .replace("projects", "")
         .replaceFirst(":", "")
