@@ -1,6 +1,8 @@
 package com.freeletics.gradle.plugin
 
+import com.freeletics.gradle.util.addMaybe
 import com.freeletics.gradle.util.booleanProperty
+import com.freeletics.gradle.util.getBundleOrNull
 import com.freeletics.gradle.util.getVersionOrNull
 import com.freeletics.gradle.util.java
 import com.freeletics.gradle.util.javaToolchainVersion
@@ -22,6 +24,8 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
 
         target.makeJarsReproducible()
         target.applyPlatformConstraints()
+        target.addDefaultDependencies()
+        target.addDefaultTestDependencies()
         target.configureJava()
         target.configureKotlin()
     }
@@ -61,6 +65,16 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
             }
         }
         return false
+    }
+
+    internal fun Project.addDefaultDependencies() {
+        dependencies.addMaybe("implementation", getBundleOrNull("default-all"))
+        dependencies.addMaybe("compileOnly", getBundleOrNull("default-all-compile"))
+    }
+    internal fun Project.addDefaultTestDependencies() {
+        dependencies.addMaybe("testImplementation", getBundleOrNull("default-testing"))
+        dependencies.addMaybe("testCompileOnly", getBundleOrNull("default-testing-compile"))
+        dependencies.addMaybe("testRuntimeOnly", getBundleOrNull("default-testing-runtime"))
     }
 
     private fun Project.configureJava() {

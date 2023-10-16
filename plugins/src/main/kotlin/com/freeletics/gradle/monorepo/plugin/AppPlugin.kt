@@ -1,8 +1,5 @@
 package com.freeletics.gradle.monorepo.plugin
 
-import com.freeletics.gradle.monorepo.setup.addAndroidDependencies
-import com.freeletics.gradle.monorepo.setup.addDefaultDependencies
-import com.freeletics.gradle.monorepo.setup.addTestDependencies
 import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.registerCheckDependencyRulesTasks
 import com.freeletics.gradle.monorepo.util.ProjectType
 import com.freeletics.gradle.monorepo.util.appType
@@ -108,12 +105,6 @@ public abstract class AppPlugin : Plugin<Project> {
                     "META-INF/DEPENDENCIES.txt",
                 )
             }
-        }
-
-        target.dependencies.apply {
-            addDefaultDependencies(target)
-            addAndroidDependencies(target)
-            addTestDependencies(target)
         }
 
         target.registerCheckDependencyRulesTasks(

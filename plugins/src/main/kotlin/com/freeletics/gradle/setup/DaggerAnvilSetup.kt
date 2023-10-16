@@ -1,9 +1,9 @@
 package com.freeletics.gradle.setup
 
 import com.freeletics.gradle.plugin.FreeleticsBaseExtension.DaggerMode
+import com.freeletics.gradle.util.addMaybe
 import com.freeletics.gradle.util.booleanProperty
 import com.freeletics.gradle.util.getDependency
-import com.freeletics.gradle.util.getDependencyOrNull
 import com.squareup.anvil.plugin.AnvilExtension
 import org.gradle.api.Project
 
@@ -31,10 +31,7 @@ internal fun Project.configureDagger(mode: DaggerMode) {
         add("api", getDependency("anvil-annotations"))
         add("api", getDependency("anvil-annotations-optional"))
         add("api", getDependency("dagger"))
-        val khonshuCodegen = getDependencyOrNull("khonshu-codegen-runtime")
-        if (khonshuCodegen != null) {
-            add("api", khonshuCodegen)
-        }
+        addMaybe("api", getDependency("khonshu-codegen-runtime"))
     }
 
     if (mode == DaggerMode.ANVIL_WITH_KHONSHU) {
