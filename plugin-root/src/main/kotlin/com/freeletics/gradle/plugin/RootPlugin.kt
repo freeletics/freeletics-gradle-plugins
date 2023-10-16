@@ -83,6 +83,13 @@ public abstract class RootPlugin : Plugin<Project> {
                         )
                     }
 
+                    project.onUsedTransitiveDependencies {
+                        it.exclude(
+                            // added by the Parcelize plugin
+                            "org.jetbrains.kotlin:kotlin-parcelize-runtime",
+                        )
+                    }
+
                     project.onRedundantPlugins {
                         // needs to be set separately from onAny which does not apply here
                         it.severity("fail")
