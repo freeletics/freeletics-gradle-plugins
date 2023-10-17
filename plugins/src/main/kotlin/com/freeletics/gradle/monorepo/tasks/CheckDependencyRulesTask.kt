@@ -87,7 +87,7 @@ public abstract class CheckDependencyRulesTask : DefaultTask() {
             allowedDependencyProjectTypes: List<ProjectType>,
         ) {
             val checkDependencyRules = tasks.register("checkDependencyRules")
-            
+
             tasks.named("check").configure {
                 it.dependsOn(checkDependencyRules)
             }
