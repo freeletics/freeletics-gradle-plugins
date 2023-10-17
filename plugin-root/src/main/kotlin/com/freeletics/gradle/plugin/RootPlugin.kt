@@ -36,14 +36,19 @@ public abstract class RootPlugin : Plugin<Project> {
         val catalogs = target.extensions.getByType(VersionCatalogsExtension::class.java)
 
         target.dependencies.constraints { constraints ->
-            catalogs.forEach { catalog ->
+            catalogs.forEach catalogForEach@ { catalog ->
                 catalog.libraryAliases.forEach { libraryAlias ->
                     val library = catalog.findLibrary(libraryAlias).get().get()
+                    val module = library.module
+                    val version = library.versionConstraint.requiredVersion
+
+                    if (module.group == "com.google.guava") {
+                        return@forEach
+                    }
+
                     constraints.add("api", library)
 
                     // if this is a ktx library also add the non ktx artifact to the platform
-                    val module = library.module
-                    val version = library.versionConstraint.requiredVersion
                     if (module.name.endsWith("-ktx")) {
                         constraints.add("api", "${module.group}:${module.name.replace("-ktx", "")}:$version")
                     }
