@@ -36,7 +36,7 @@ public abstract class RootPlugin : Plugin<Project> {
         val catalogs = target.extensions.getByType(VersionCatalogsExtension::class.java)
 
         target.dependencies.constraints { constraints ->
-            catalogs.forEach catalogForEach@ { catalog ->
+            catalogs.forEach catalogForEach@{ catalog ->
                 catalog.libraryAliases.forEach { libraryAlias ->
                     val library = catalog.findLibrary(libraryAlias).get().get()
                     val module = library.module
