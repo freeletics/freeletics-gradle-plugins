@@ -97,6 +97,8 @@ default-testing = [ ... ]
 default-testing-compile = [ ... ]
 # any dependency in this bundle is automatically added to all modules as testRuntimeOnly dependency
 default-testing-runtime = [ ... ]
+# any dependency in this bundle is automatically added to all modules as lintChecks dependency
+default-lint = [ ... ]
 ```
 
 ## `app`

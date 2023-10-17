@@ -1,6 +1,8 @@
 package com.freeletics.gradle.setup
 
 import com.android.build.api.dsl.Lint
+import com.freeletics.gradle.util.addMaybe
+import com.freeletics.gradle.util.getBundleOrNull
 import org.gradle.api.Project
 import org.gradle.api.file.RegularFile
 import org.gradle.api.provider.Provider
@@ -26,6 +28,8 @@ internal fun Lint.configure(project: Project) {
     htmlOutput = project.reportsFile("lint-result.html").get().asFile
     textReport = true
     textOutput = project.reportsFile("lint-result.txt").get().asFile
+
+    project.dependencies.addMaybe("lintChecks", project.getBundleOrNull("default-lint"))
 }
 
 private fun Project.reportsFile(name: String): Provider<RegularFile> {
