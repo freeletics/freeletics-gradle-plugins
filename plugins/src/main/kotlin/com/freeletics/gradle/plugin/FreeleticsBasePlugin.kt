@@ -36,8 +36,7 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
     }
 
     private fun Project.applyPlatformConstraints() {
-        val platformProject = findProject(":tooling:platform") ?: return
-        val platformDependency = dependencies.enforcedPlatform(platformProject)
+        val platformDependency = dependencies.enforcedPlatform(rootProject)
         configurations.configureEach { config ->
             if (isPlatformConfigurationName(config.name)) {
                 config.dependencies.add(platformDependency)
@@ -49,7 +48,7 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
     private fun isPlatformConfigurationName(name: String): Boolean {
         // Kapt, ksp and compileOnly are special cases since they can be combined with others
         if (name.startsWith("kapt", ignoreCase = true) ||
-            name.startsWith("kapt", ignoreCase = true) ||
+            name.startsWith("ksp", ignoreCase = true) ||
             name == "compileOnly"
         ) {
             return true

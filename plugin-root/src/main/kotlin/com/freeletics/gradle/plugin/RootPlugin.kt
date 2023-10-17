@@ -10,6 +10,12 @@ public abstract class RootPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.plugins.apply("com.autonomousapps.dependency-analysis")
 
+        ensureJdkVersionAndVendor(target)
+        createPlatform(target)
+        configureDependencyAnalysis(target)
+    }
+
+    private fun ensureJdkVersionAndVendor(target: Project) {
         val libs = target.extensions.getByType(VersionCatalogsExtension::class.java).named("libs")
         val expectedJavaVersion = libs.findVersion("java-gradle").orElseGet { null }?.requiredVersion
         if (expectedJavaVersion != null) {
@@ -22,7 +28,45 @@ public abstract class RootPlugin : Plugin<Project> {
                 throw RuntimeException("The Azul Zulu JDK should be used to run Gradle")
             }
         }
+    }
 
+    private fun createPlatform(target: Project) {
+        target.plugins.apply("java-platform")
+
+        val catalogs = target.extensions.getByType(VersionCatalogsExtension::class.java)
+
+        target.dependencies.constraints { constraints ->
+            catalogs.forEach { catalog ->
+                catalog.libraryAliases.forEach { libraryAlias ->
+                    val library = catalog.findLibrary(libraryAlias).get().get()
+                    constraints.add("api", library)
+
+                    // if this is a ktx library also add the non ktx artifact to the platform
+                    val module = library.module
+                    val version = library.versionConstraint.requiredVersion
+                    if (module.name.endsWith("-ktx")) {
+                        constraints.add("api", "${module.group}:${module.name.replace("-ktx", "")}:$version")
+                    }
+                    // for KMP modules where the platform artifact is specified also add the common artifact
+                    if (module.name.endsWith("-jvm")) {
+                        constraints.add("api", "${module.group}:${module.name.replace("-jvm", "")}:$version")
+                    }
+                    // for KMP modules where the platform artifact is specified also add the common artifact
+                    if (module.name.endsWith("-android")) {
+                        constraints.add("api", "${module.group}:${module.name.replace("-android", "")}:$version")
+                    }
+                    // add all Kotlin stdlib variations
+                    if (module.group == "org.jetbrains.kotlin" && module.name == "kotlin-stdlib") {
+                        constraints.add("api", "${module.group}:${module.name}-common:$version")
+                        constraints.add("api", "${module.group}:${module.name}-jdk7:$version")
+                        constraints.add("api", "${module.group}:${module.name}-jdk8:$version")
+                    }
+                }
+            }
+        }
+    }
+
+    private fun configureDependencyAnalysis(target: Project) {
         target.extensions.configure(DependencyAnalysisExtension::class.java) { analysis ->
             analysis.issues { issues ->
                 issues.all { project ->
