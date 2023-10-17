@@ -88,6 +88,10 @@ public abstract class CheckDependencyRulesTask : DefaultTask() {
         ) {
             val checkDependencyRules = tasks.register("checkDependencyRules")
 
+            tasks.named("check").configure {
+                it.dependsOn(checkDependencyRules)
+            }
+
             configurations.configureEach {
                 if (it.name.contains("compileClasspath", ignoreCase = true)) {
                     val configurationCheck = registerCheckDependencyRulesTask(
