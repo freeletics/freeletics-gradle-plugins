@@ -2,7 +2,6 @@ package com.freeletics.gradle.monorepo.plugin
 
 import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.registerCheckDependencyRulesTasks
 import com.freeletics.gradle.monorepo.util.ProjectType
-import com.freeletics.gradle.monorepo.util.projectType
 import com.freeletics.gradle.plugin.FreeleticsAndroidPlugin
 import com.freeletics.gradle.util.freeleticsAndroidExtension
 import org.gradle.api.Plugin
@@ -24,7 +23,7 @@ public abstract class LegacyAndroidPlugin : Plugin<Project> {
                 ProjectType.DOMAIN_TESTING,
                 ProjectType.FEATURE_NAV,
                 ProjectType.LEGACY,
-            )
+            ),
         )
     }
 }
