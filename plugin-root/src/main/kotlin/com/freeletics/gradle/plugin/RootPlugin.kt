@@ -73,29 +73,41 @@ public abstract class RootPlugin : Plugin<Project> {
                     project.ignoreKtx(true)
                     project.onAny {
                         it.severity("fail")
+                    }
+
+                    val catalogs = target.extensions.getByType(VersionCatalogsExtension::class.java)
+                    catalogs.forEach { catalog ->
+                        catalog.bundleAliases.forEach { bundleAlias ->
+                            if (bundleAlias.startsWith("default.")) {
+                                val bundle = catalog.findBundle(bundleAlias).get().get()
+                                project.onUnusedDependencies { issue ->
+                                    bundle.forEach { dependency ->
+                                        issue.exclude("${dependency.module.group}:${dependency.module.name}")
+                                    }
+                                }
+                                project.onIncorrectConfiguration { issue ->
+                                    bundle.forEach { dependency ->
+                                        issue.exclude("${dependency.module.group}:${dependency.module.name}")
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    project.onUnusedDependencies {
                         it.exclude(
                             // added by the Kotlin plugin
                             "org.jetbrains.kotlin:kotlin-stdlib",
-                            // default dependencies for all modules
-                            "junit:junit",
-                            "io.kotest:kotest-runner-junit4-jvm",
-                            "io.kotest:kotest-assertions-core-jvm",
-                            // default dependencies for all Android modules
-                            "androidx.core:core-ktx",
-                            "com.jakewharton.timber:timber",
                             // parcelize is enabled on all Android modules
                             "org.jetbrains.kotlin:kotlin-parcelize-runtime",
-                            // added automatically but only standard Dagger annotations might be used
-                            // the dagger runtime is not listed here and it being marked as unused is the indicator
+                            // added automatically when enabling Dagger but not all of them might be used
+                            // the Dagger runtime is not listed here and it being marked as unused is the indicator
                             // to remove useDagger from the module
                             "javax.inject:javax.inject",
                             "com.squareup.anvil:annotations",
                             "com.squareup.anvil:annotations-optional",
                             "com.freeletics.khonshu:codegen-runtime",
                             "com.freeletics.khonshu:codegen-scope",
-                            // added by KGP since 1.8.20
-                            // https://github.com/autonomousapps/dependency-analysis-android-gradle-plugin/issues/884
-                            "() -> java.io.File?",
                         )
                     }
 
@@ -112,6 +124,13 @@ public abstract class RootPlugin : Plugin<Project> {
                             // added by the MoshiX plugin
                             "com.squareup.moshi:moshi",
                             "dev.zacsweers.moshix:moshi-sealed-runtime",
+                        )
+                    }
+
+                    project.onUsedTransitiveDependencies {
+                        it.exclude(
+                            // added by the Parcelize plugin
+                            "org.jetbrains.kotlin:kotlin-parcelize-runtime",
                         )
                     }
 

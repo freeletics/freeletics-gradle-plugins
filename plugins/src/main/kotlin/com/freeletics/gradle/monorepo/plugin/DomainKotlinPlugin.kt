@@ -1,7 +1,5 @@
 package com.freeletics.gradle.monorepo.plugin
 
-import com.freeletics.gradle.monorepo.setup.addDefaultDependencies
-import com.freeletics.gradle.monorepo.setup.addTestDependencies
 import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.registerCheckDependencyRulesTasks
 import com.freeletics.gradle.monorepo.util.ProjectType
 import com.freeletics.gradle.plugin.FreeleticsJvmPlugin
@@ -17,11 +15,6 @@ public abstract class DomainKotlinPlugin : Plugin<Project> {
         val extension = target.freeleticsExtension.extensions.create("legacy", LegacyExtension::class.java)
 
         target.freeleticsJvmExtension.useAndroidLint()
-
-        target.dependencies.apply {
-            addDefaultDependencies(target)
-            addTestDependencies(target)
-        }
 
         target.afterEvaluate {
             target.registerCheckDependencyRulesTasks(

@@ -5,11 +5,13 @@ import com.android.build.api.variant.HasAndroidTestBuilder
 import com.android.build.api.variant.HasUnitTestBuilder
 import com.freeletics.gradle.setup.configure
 import com.freeletics.gradle.setup.defaultTestSetup
+import com.freeletics.gradle.util.addMaybe
 import com.freeletics.gradle.util.android
 import com.freeletics.gradle.util.androidComponents
 import com.freeletics.gradle.util.androidResources
 import com.freeletics.gradle.util.dataBinding
 import com.freeletics.gradle.util.freeleticsExtension
+import com.freeletics.gradle.util.getBundleOrNull
 import com.freeletics.gradle.util.getDependencyOrNull
 import com.freeletics.gradle.util.getVersion
 import com.freeletics.gradle.util.getVersionOrNull
@@ -33,6 +35,7 @@ public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
         target.freeleticsExtension.extensions.create("android", FreeleticsAndroidExtension::class.java)
 
         target.androidSetup()
+        target.addDefaultAndroidDependencies()
         target.configureLint()
         target.configureUnitTests()
         target.disableAndroidTests()
@@ -74,8 +77,17 @@ public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
             }
         }
 
-        if (desugarLibrary != null) {
-            dependencies.add("coreLibraryDesugaring", desugarLibrary)
+        dependencies.addMaybe("coreLibraryDesugaring", desugarLibrary)
+    }
+
+    private fun Project.addDefaultAndroidDependencies() {
+        val bundle = getBundleOrNull("default-android")
+        if (bundle != null) {
+            dependencies.add("implementation", bundle)
+        }
+        val compileBundle = getBundleOrNull("default-android-compile")
+        if (compileBundle != null) {
+            dependencies.add("testCompileOnly", compileBundle)
         }
     }
 

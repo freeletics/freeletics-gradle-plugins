@@ -1,8 +1,5 @@
 package com.freeletics.gradle.monorepo.plugin
 
-import com.freeletics.gradle.monorepo.setup.addAndroidDependencies
-import com.freeletics.gradle.monorepo.setup.addDefaultDependencies
-import com.freeletics.gradle.monorepo.setup.addTestDependencies
 import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.registerCheckDependencyRulesTasks
 import com.freeletics.gradle.monorepo.util.ProjectType
 import com.freeletics.gradle.plugin.FreeleticsAndroidPlugin
@@ -15,12 +12,6 @@ public abstract class CoreAndroidPlugin : Plugin<Project> {
         target.plugins.apply(FreeleticsAndroidPlugin::class.java)
 
         target.freeleticsAndroidExtension.enableParcelize()
-
-        target.dependencies.apply {
-            addDefaultDependencies(target)
-            addAndroidDependencies(target)
-            addTestDependencies(target)
-        }
 
         target.registerCheckDependencyRulesTasks(
             allowedProjectTypes = listOf(

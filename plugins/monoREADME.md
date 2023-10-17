@@ -79,10 +79,24 @@ android-compile = "34"
 [libraries]
 # if this is present coreLibraryDesugaring will be enabled and this dependency is automatically added
 android-desugarjdklibs = { module = "com.android.tools:desugar_jdk_libs", version = "..." }
-# default dependencies
-androidx-annotations = { module = "androidx.annotation:annotation", version = "..." }
-androidx-core = { module = "androidx.annotation:core-ktx", version = "..." }
-timber = { module = "com.jakewharton.timber:timber", version = "..." }
+
+
+# the following bundles are optional but provide a way to add default dependencies to all modules
+[bundles]
+# any dependency in this bundle is automatically added to all modules as implementation dependency
+default-all = [ ... ]
+# any dependency in this bundle is automatically added to all modules as compileOnly dependency
+default-all-compile = [ ... ]
+# any dependency in this bundle is automatically added to all Android modules as implementation dependency
+default-android = [ ... ]
+# any dependency in this bundle is automatically added to all Android modules as compileOnly dependency
+default-android-compile = [ ... ]
+# any dependency in this bundle is automatically added to all modules as testImplementation dependency
+default-testing = [ ... ]
+# any dependency in this bundle is automatically added to all modules as testCompileOnly dependency
+default-testing-compile = [ ... ]
+# any dependency in this bundle is automatically added to all modules as testRuntimeOnly dependency
+default-testing-runtime = [ ... ]
 ```
 
 ## `app`
