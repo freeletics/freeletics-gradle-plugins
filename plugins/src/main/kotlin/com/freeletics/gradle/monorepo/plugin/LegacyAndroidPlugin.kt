@@ -1,5 +1,6 @@
 package com.freeletics.gradle.monorepo.plugin
 
+import com.freeletics.gradle.monorepo.setup.disableAndroidLibraryTasks
 import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.registerCheckDependencyRulesTasks
 import com.freeletics.gradle.monorepo.util.ProjectType
 import com.freeletics.gradle.plugin.FreeleticsAndroidPlugin
@@ -25,5 +26,7 @@ public abstract class LegacyAndroidPlugin : Plugin<Project> {
                 ProjectType.LEGACY,
             ),
         )
+
+        target.disableAndroidLibraryTasks()
     }
 }
