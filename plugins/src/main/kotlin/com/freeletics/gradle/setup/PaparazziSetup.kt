@@ -1,6 +1,5 @@
 package com.freeletics.gradle.setup
 
-import app.cash.paparazzi.gradle.PaparazziPlugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.testing.Test
@@ -19,9 +18,10 @@ internal fun Project.configurePaparazzi() {
         it.finalizedBy(copyFailures)
     }
 
-    tasks.withType(PaparazziPlugin.PaparazziTask::class.java).configureEach {
-        if (it.name.startsWith("verify")) {
-            it.dependsOn(copyFailures)
-        }
+    val verify = tasks.named("verifyPaparazzi") {
+        it.dependsOn(copyFailures)
+    }
+    tasks.named("check").configure {
+        it.dependsOn(verify)
     }
 }
