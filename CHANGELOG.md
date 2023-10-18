@@ -1,7 +1,24 @@
 Change Log
 ==========
 
-## 0.7.3 **UNRELEASED**
+## 0.8.1 **UNRELEASED**
+
+
+## 0.8.0 *(2023-10-18)*
+
+- Default dependencies are now defined through the `default-all`, `default-all-compile`,
+  `default-android` and `default-android-compile` bundles which are automatically added
+  to all modules if the bundle exists.
+- Default test dependencies are now defined through the `default-test`,
+  `default-test-compile` and `default-test-runtime` bundles.
+- Default lint check dependencies are now defined through the `default-lint` bundle.
+- The root plugin is now automatically applying the `java-platform` plugin and adds all
+  version catalog entries to the platform. The monorepo plugins are also automatically
+  using the rootProject as platform.
+- The `check` task now depends on `checkDependencyRules` and `verifyPaparazzi`.
+- Disable the `assemble*` and lint reporting tasks for libraries in the monorepo plugins
+  to avoid accidentally running too many tasks when running something like `./gradlew assemble`,
+  `./gradlew check`, `./gradlew build` or `./gradlew lint`.
 
 
 ## 0.7.2 *(2023-09-29)*
