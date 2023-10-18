@@ -4,7 +4,7 @@ java-toolchain = "19"
 
 fgp = "0.7.2"
 
-gradle-api = "8.3"
+gradle-api = "8.4"
 kotlin = "1.9.10"
 coroutines = "1.7.3"
 android-gradle = "8.1.2"
