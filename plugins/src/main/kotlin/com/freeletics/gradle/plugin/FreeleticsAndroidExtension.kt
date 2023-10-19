@@ -5,17 +5,15 @@ import com.freeletics.gradle.setup.configurePaparazzi
 import com.freeletics.gradle.setup.configureProcessing
 import com.freeletics.gradle.util.android
 import com.freeletics.gradle.util.androidResources
-import com.freeletics.gradle.util.booleanProperty
 import com.freeletics.gradle.util.getDependency
 import org.gradle.api.Project
 
 public abstract class FreeleticsAndroidExtension(private val project: Project) {
 
     public fun useRoom() {
-        val generateKotlin = project.booleanProperty("fgp.room.generateKotlin", true).get()
         val processorConfiguration = project.configureProcessing(
             useKsp = true,
-            "room.generateKotlin" to generateKotlin.toString(),
+            "room.generateKotlin" to "true",
         )
 
         project.dependencies.apply {
