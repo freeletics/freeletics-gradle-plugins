@@ -12,10 +12,9 @@ import org.gradle.api.Project
 public abstract class FreeleticsAndroidExtension(private val project: Project) {
 
     public fun useRoom() {
-        val generateKotlin = project.booleanProperty("fgp.room.generateKotlin", true).get()
         val processorConfiguration = project.configureProcessing(
             useKsp = true,
-            "room.generateKotlin" to generateKotlin.toString(),
+            "room.generateKotlin" to "true",
         )
 
         project.dependencies.apply {
