@@ -1,5 +1,6 @@
 package com.freeletics.gradle.monorepo.plugin
 
+import com.freeletics.gradle.monorepo.setup.disableKotlinLibraryTasks
 import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.registerCheckDependencyRulesTasks
 import com.freeletics.gradle.monorepo.util.ProjectType
 import com.freeletics.gradle.plugin.FreeleticsJvmPlugin
@@ -37,5 +38,7 @@ public abstract class DomainKotlinPlugin : Plugin<Project> {
                 ),
             )
         }
+
+        target.disableKotlinLibraryTasks()
     }
 }
