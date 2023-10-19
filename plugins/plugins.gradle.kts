@@ -29,6 +29,7 @@ dependencies {
 
     add("shadeClassPath", libs.android.gradle)
 
+    testImplementation(libs.junit)
     testImplementation(libs.truth)
 }
 
