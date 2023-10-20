@@ -1,7 +1,14 @@
 Change Log
 ==========
 
-## 0.8.1 **UNRELEASED**
+## 0.8.2 **UNRELEASED**
+
+
+## 0.8.1 *(2023-10-20)*
+
+- Only use the root project as `java-platform` on projects using the monorepo
+  plugins
+- Don't make `khonshu-codegen-runtime` dependency required for `useDagger()`.
 
 
 ## 0.8.0 *(2023-10-18)*
