@@ -29,7 +29,7 @@ pluginManagement {
 }
 
 plugins {
-    id("com.freeletics.gradle.settings").version("0.8.0")
+    id("com.freeletics.gradle.settings").version("0.8.1")
 }
 
 rootProject.name = "freeletics-gradle-plugins"
