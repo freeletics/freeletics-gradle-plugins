@@ -1,5 +1,6 @@
 package com.freeletics.gradle.monorepo.plugin
 
+import com.freeletics.gradle.monorepo.setup.applyPlatformConstraints
 import com.freeletics.gradle.monorepo.setup.disableAndroidApplicationTasks
 import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.registerCheckDependencyRulesTasks
 import com.freeletics.gradle.monorepo.util.ProjectType
@@ -124,6 +125,7 @@ public abstract class AppPlugin : Plugin<Project> {
             ),
         )
 
+        target.applyPlatformConstraints()
         target.disableAndroidApplicationTasks()
     }
 }
