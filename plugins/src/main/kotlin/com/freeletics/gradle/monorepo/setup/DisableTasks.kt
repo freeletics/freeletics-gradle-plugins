@@ -58,7 +58,7 @@ private val androidLibraryLintTasksToDisable = listOf(
     "lint",
     "lint{VARIANT}",
     "lintReport{VARIANT}",
-    "copy{VARIANT}AndroidLintReports",
+    "copy{VARIANT}LintReports",
     // fix
     "lintFix",
     "lintFix{VARIANT}",
@@ -80,7 +80,7 @@ private val androidAppLintTasksToDisableExceptOneVariant = listOf(
     // report
     "lint{VARIANT}",
     "lintReport{VARIANT}",
-    "copy{VARIANT}AndroidLintReports",
+    "copy{VARIANT}LintReports",
     // fix
     "lintFix{VARIANT}",
     // baseline
@@ -91,12 +91,16 @@ private val androidAppLintTasksToDisableExceptOneVariant = listOf(
 // is created in the app module
 private val lintTasksToDisableJvm = listOf(
     "lint",
-    "lintReport",
-    "copyAndroidLintReports",
+    "lintJvm",
+    "lintReportJvm",
+    "copyJvmLintReports",
     "lintFix",
+    "lintFixJvm",
     "updateLintBaseline",
+    "updateLintBaselineJvm",
     // TODO these shouldn't be created by AGP in the first place
     "lintVital",
-    "lintVitalAnalyze",
-    "lintVitalReport",
+    "lintVitalJvm",
+    "lintVitalAnalyzeJvm",
+    "lintVitalReportJvm",
 )
