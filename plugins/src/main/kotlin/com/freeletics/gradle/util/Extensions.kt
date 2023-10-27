@@ -10,14 +10,10 @@ import com.freeletics.gradle.plugin.FreeleticsAndroidExtension
 import com.freeletics.gradle.plugin.FreeleticsBaseExtension
 import com.freeletics.gradle.plugin.FreeleticsJvmExtension
 import com.freeletics.gradle.plugin.FreeleticsMultiplatformExtension
+import com.freeletics.gradle.util.KotlinProjectExtensionDelegate.Companion.kotlinProjectExtensionDelegate
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPluginExtension
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
-import org.jetbrains.kotlin.gradle.dsl.KotlinCommonCompilerOptions
-import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
 
 internal val Project.freeleticsExtension: FreeleticsBaseExtension
     get() = extensions.getByType(FreeleticsBaseExtension::class.java)
@@ -37,31 +33,13 @@ internal fun Project.java(action: JavaPluginExtension.() -> Unit) {
     }
 }
 
-public fun Project.kotlin(action: KotlinProjectExtension.() -> Unit) {
-    extensions.configure(KotlinProjectExtension::class.java) {
-        it.action()
-    }
+internal fun Project.kotlin(action: KotlinProjectExtensionDelegate.() -> Unit) {
+    kotlinProjectExtensionDelegate().action()
 }
 
 internal fun Project.kotlinMultiplatform(action: KotlinMultiplatformExtension.() -> Unit) {
     extensions.configure(KotlinMultiplatformExtension::class.java) {
         it.action()
-    }
-}
-
-@OptIn(ExperimentalKotlinGradlePluginApi::class)
-internal fun KotlinProjectExtension.compilerOptions(applyConfiguration: KotlinCommonCompilerOptions.() -> Unit) {
-   when (this) {
-        is KotlinJvmProjectExtension -> compilerOptions.applyConfiguration()
-        is KotlinAndroidProjectExtension -> compilerOptions.applyConfiguration()
-        is KotlinMultiplatformExtension -> {
-            compilerOptions.applyConfiguration()
-            // also apply to each target because the block might contain target specific configuration
-            targets.configureEach {
-                it.compilerOptions.applyConfiguration()
-            }
-        }
-        else -> throw IllegalStateException("Unsupported Kotlin extension ${this::class}")
     }
 }
 

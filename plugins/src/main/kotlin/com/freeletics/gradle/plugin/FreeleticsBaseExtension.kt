@@ -3,7 +3,6 @@ package com.freeletics.gradle.plugin
 import com.freeletics.gradle.setup.configureDagger
 import com.freeletics.gradle.setup.configureMoshi
 import com.freeletics.gradle.setup.setupCompose
-import com.freeletics.gradle.util.compilerOptions
 import com.freeletics.gradle.util.kotlin
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
@@ -19,7 +18,7 @@ public abstract class FreeleticsBaseExtension(private val project: Project) : Ex
     public fun optIn(vararg classes: String) {
         project.kotlin {
             compilerOptions {
-                optIn.addAll(classes.toList())
+                optIn.addAll(*classes)
             }
         }
     }
