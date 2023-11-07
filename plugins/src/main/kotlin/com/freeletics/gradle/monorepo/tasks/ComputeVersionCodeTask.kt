@@ -3,7 +3,6 @@ package com.freeletics.gradle.monorepo.tasks
 import com.freeletics.gradle.monorepo.util.RealGit
 import com.freeletics.gradle.monorepo.util.computeInfoFromGit
 import java.io.File
-import java.time.LocalDate
 import java.time.LocalDateTime
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project

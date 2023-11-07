@@ -109,6 +109,7 @@ internal class ComputeVersionCodeTest {
 
         assertThat(computeVersionCode(git, "fl", date)).isEqualTo(24044500)
     }
+
     @Test
     fun `v24+, when there is no tag it returns version computed from last tag and current day - friday evening`() {
         val date = LocalDate.of(2022, 11, 11).atTime(19, 35) // friday

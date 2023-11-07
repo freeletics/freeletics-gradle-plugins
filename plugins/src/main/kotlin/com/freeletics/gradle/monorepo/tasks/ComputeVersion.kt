@@ -1,7 +1,6 @@
 package com.freeletics.gradle.monorepo.tasks
 
 import com.freeletics.gradle.monorepo.util.Git
-import java.time.LocalDate
 import java.time.LocalDateTime
 
 /**
