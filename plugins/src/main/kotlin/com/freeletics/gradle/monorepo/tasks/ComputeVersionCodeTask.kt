@@ -3,7 +3,7 @@ package com.freeletics.gradle.monorepo.tasks
 import com.freeletics.gradle.monorepo.util.RealGit
 import com.freeletics.gradle.monorepo.util.computeInfoFromGit
 import java.io.File
-import java.time.LocalDate
+import java.time.LocalDateTime
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
 import org.gradle.api.file.RegularFileProperty
@@ -32,7 +32,7 @@ public abstract class ComputeVersionCodeTask : DefaultTask() {
     public fun action() {
         val versionCode = if (computeFromGit.get()) {
             val git = RealGit(gitRootDirectory.get())
-            computeVersionCode(git, gitTagName.get(), LocalDate.now())
+            computeVersionCode(git, gitTagName.get(), LocalDateTime.now())
         } else {
             Int.MAX_VALUE
         }
