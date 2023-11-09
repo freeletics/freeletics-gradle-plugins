@@ -17,6 +17,7 @@ public abstract class FeaturePlugin : Plugin<Project> {
 
         val extension = target.freeleticsExtension.extensions.create("legacy", LegacyExtension::class.java)
 
+        target.freeleticsExtension.useCompose()
         target.freeleticsAndroidExtension.minSdkVersion(target.appType()?.minSdkVersion(target))
         target.freeleticsAndroidExtension.enableAndroidResources()
         target.freeleticsAndroidExtension.enableParcelize()
