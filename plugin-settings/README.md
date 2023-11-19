@@ -18,9 +18,9 @@ to work is that the build file is named after the path. For example the project 
 called `foo-bar.gradle.kts` (or `foo-bar.gradle`). `.gradle.kts` discoverability is enabled by default and `.gradle`
 discoverability can be enabled with:
 
-```kotlin
+```groovy
 freeletics {
-    it.discoverProjects(kts = false)
+    discoverProjects(kts = false)
 }
 ```
 
