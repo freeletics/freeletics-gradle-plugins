@@ -27,7 +27,8 @@ freeletics {
 Mixing `.gradle.kts` and `.gradle` files for automatic discoverability is not supported.
 
 Instead of using project root directory as a base for automatic discoverability it is possible to only include
-certain subdirectories with:
+certain subdirectories by adding `fgp.discoverProjects.automatically=false` to project's `gradle.properties` and adding
+the following:
 
 ```kotlin
 freeletics {
