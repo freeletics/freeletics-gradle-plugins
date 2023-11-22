@@ -12,10 +12,31 @@ plugins {
 
 ### Project discovery
 
-The plugin will automatically discover all projects by finding their build files and include them. This means it is 
-not necessary anymore to manually add `include("...")` for each project to `settings.gradle`. The requirement for this
+The plugin will automatically discover all projects by finding their build files and include them. This means it is
+not necessary anymore to manually add `include("...")` for each project to `settings.gradle.kts`. The requirement for this
 to work is that the build file is named after the path. For example the project `:foo:bar` should have a build file
-called `foo-bar.gradle` (or `foo-bar.gradle.kts`).
+called `foo-bar.gradle.kts` (or `foo-bar.gradle`). `.gradle.kts` discoverability is enabled by default and `.gradle`
+discoverability can be enabled with:
+
+```groovy
+freeletics {
+    discoverProjects(kts = false)
+}
+```
+
+Mixing `.gradle.kts` and `.gradle` files for automatic discoverability is not supported.
+
+Instead of using project root directory as a base for automatic discoverability it is possible to only include
+certain subdirectories by adding `fgp.discoverProjects.automatically=false` to project's `gradle.properties` and adding
+the following:
+
+```kotlin
+freeletics {
+    it.discoverProjectsIn(
+        directories = arrayOf("app", "features")
+    )
+}
+```
 
 ### `dependencyResolutionManagement`
 
@@ -27,7 +48,7 @@ The following repositories are automatically added to `dependencyResolutionManag
   - requires `freeleticsAndroidArtifactsAccessKey` and `freeleticsAndroidArtifactsSecretKey` properties to be set with valid S3 credentials
 
 By default the project will also be configured to fail when repositories are defined on a project instead of through
-`dependencyResolutionManagement`. This can be disabled by setting `fgp.kotlin.multiplatformProject=true` if the 
+`dependencyResolutionManagement`. This can be disabled by setting `fgp.kotlin.multiplatformProject=true` if the
 repository has Kotlin Multiplatform projects because of [this issue][3].
 
 #### Snapshots
@@ -63,7 +84,7 @@ fgp.buildcache.password=...
 
 ### Included builds
 
-With the following snippet it is possible to configure an included build for [Khonshu][4] and [FlowRedux][5] Freeletics 
+With the following snippet it is possible to configure an included build for [Khonshu][4] and [FlowRedux][5] Freeletics
 open source projects.
 
 ```groovy
@@ -77,7 +98,7 @@ freeletics {
 
 - enables the [type safe project accessor feature preview][2]
 - configures the jvm toolchain management for auto provisioning using the [Foojay Toolchains Plugin][1]
-- configures the Gradle enterprise plugin 
+- configures the Gradle enterprise plugin
 
 
 [1]: https://github.com/gradle/foojay-toolchains
