@@ -2,6 +2,9 @@ package com.freeletics.gradle.plugin
 
 import com.freeletics.gradle.util.kotlinMultiplatform
 import org.gradle.api.Project
+import org.gradle.api.publish.PublishingExtension
+import org.gradle.api.publish.maven.MavenPublication
+import org.gradle.api.tasks.bundling.Zip
 import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
@@ -44,6 +47,7 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
         } else {
             null
         }
+
         project.kotlinMultiplatform {
             iosArm64 {
                 binaries.framework {
@@ -70,6 +74,33 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
                 }
 
                 configure()
+            }
+        }
+
+        if (xcFramework != null) {
+            project.plugins.withType(FreeleticsPublishInternalPlugin::class.java) {
+                val framework = "$frameworkName.xcframework"
+                val frameworkRoot = project.layout.buildDirectory.dir("XCFrameworks/release")
+                val assembleTask = "assemble${frameworkName}ReleaseXCFramework"
+
+                val frameworkZip = project.tasks.register("${assembleTask}Zip", Zip::class.java) {
+                    it.dependsOn(assembleTask)
+
+                    it.from(frameworkRoot.map { root -> root.dir(framework) })
+                    it.into(framework)
+                    it.archiveBaseName.set(framework)
+                    it.destinationDirectory.set(frameworkRoot)
+                    it.isPreserveFileTimestamps = false
+                    it.isReproducibleFileOrder = true
+                }
+
+                project.extensions.configure(PublishingExtension::class.java) { publishing ->
+                    publishing.publications.create("${frameworkName}XcFramework", MavenPublication::class.java) {
+                        it.artifact(frameworkZip) { artifact ->
+                            artifact.extension = "zip"
+                        }
+                    }
+                }
             }
         }
     }
