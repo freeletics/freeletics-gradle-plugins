@@ -120,7 +120,6 @@ public abstract class AppPlugin : Plugin<Project> {
                 ProjectType.DOMAIN_TESTING,
                 ProjectType.FEATURE_IMPLEMENTATION,
                 ProjectType.FEATURE_NAV,
-                ProjectType.LEGACY_APP,
                 ProjectType.LEGACY,
             ),
         )

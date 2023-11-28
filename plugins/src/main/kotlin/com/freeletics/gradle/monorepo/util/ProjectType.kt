@@ -16,7 +16,6 @@ internal enum class ProjectType(
     FEATURE_IMPLEMENTATION(":feature:*:implementation"),
 
     // TODO phase out
-    LEGACY_APP(":legacy-freeletics:app"),
     LEGACY(":legacy-freeletics:*"),
 }
 
@@ -35,7 +34,6 @@ internal fun String.toProjectType(): ProjectType {
         startsWith(":domain") && endsWith(":testing") -> ProjectType.DOMAIN_TESTING
         startsWith(":feature") && endsWith(":implementation") -> ProjectType.FEATURE_IMPLEMENTATION
         startsWith(":feature") && endsWith(":nav") -> ProjectType.FEATURE_NAV
-        this == ":legacy-freeletics:app" -> ProjectType.LEGACY_APP
         startsWith(":legacy-freeletics:") -> ProjectType.LEGACY
         else -> throw IllegalStateException("Unknown project type $this")
     }
