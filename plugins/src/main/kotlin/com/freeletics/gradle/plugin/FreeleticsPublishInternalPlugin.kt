@@ -26,7 +26,10 @@ public abstract class FreeleticsPublishInternalPlugin : Plugin<Project> {
                     repositories.maven {
                         it.name = "internalArtifacts"
                         it.setUrl(internalUrl)
-                        it.credentials(PasswordCredentials::class.java)
+                        // allows using the internal url property to specify a local folder for testing
+                        if (!internalUrl.startsWith("file:")) {
+                            it.credentials(PasswordCredentials::class.java)
+                        }
                     }
                 }
             }
@@ -34,15 +37,9 @@ public abstract class FreeleticsPublishInternalPlugin : Plugin<Project> {
     }
 
     private fun Project.disablePublishingIosArtifacts() {
-        extensions.configure(PublishingExtension::class.java) { publishing ->
-            publishing.publications.configureEach { publication ->
-                if (publication.name.contains("ios", ignoreCase = true)) {
-                    tasks.withType(AbstractPublishToMaven::class.java).configureEach {
-                        if (it.publication == publication) {
-                            it.onlyIf { false }
-                        }
-                    }
-                }
+        tasks.withType(AbstractPublishToMaven::class.java).configureEach {
+            if (it.name.contains("ios", ignoreCase = true)) {
+                it.onlyIf { false }
             }
         }
     }
