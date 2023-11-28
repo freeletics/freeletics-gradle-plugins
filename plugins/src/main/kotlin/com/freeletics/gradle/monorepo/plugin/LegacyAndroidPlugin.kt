@@ -17,7 +17,7 @@ public abstract class LegacyAndroidPlugin : Plugin<Project> {
         target.freeleticsAndroidExtension.enableParcelize()
 
         target.registerCheckDependencyRulesTasks(
-            allowedProjectTypes = listOf(ProjectType.LEGACY, ProjectType.LEGACY_APP),
+            allowedProjectTypes = listOf(ProjectType.LEGACY),
             allowedDependencyProjectTypes = listOfNotNull(
                 ProjectType.CORE_API,
                 ProjectType.CORE_TESTING,
