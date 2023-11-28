@@ -54,7 +54,7 @@ public abstract class AppPlugin : Plugin<Project> {
 
             androidResources {
                 @Suppress("UnstableApiUsage")
-                generateLocaleConfig = target.androidPluginVersion >= AndroidPluginVersion(8, 2, 0).rc(1)
+                generateLocaleConfig = androidPluginVersion >= AndroidPluginVersion(8, 2, 0)
             }
 
             buildTypes {

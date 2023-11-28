@@ -65,7 +65,7 @@ private val Project.androidLibraryLintTasksToDisable get() = listOf(
     "lint",
     "lint{VARIANT}",
     "lintReport{VARIANT}",
-    if (androidPluginVersion >= AndroidPluginVersion(8, 2, 0).rc(1)) {
+    if (androidPluginVersion >= AndroidPluginVersion(8, 2, 0)) {
         "copy{VARIANT}LintReports"
     } else {
         "copy{VARIANT}AndroidLintReports"
@@ -85,13 +85,13 @@ private val androidLibraryLintTasksToDisableExceptOneVariant = listOf(
 )
 
 // disable debug variant of these tasks, we're only running on release
-private val Project.androidAppLintTasksToDisableExceptOneVariant get() = listOf(
+private val androidAppLintTasksToDisableExceptOneVariant get() = listOf(
     // analyze
     "lintAnalyze{VARIANT}",
     // report
     "lint{VARIANT}",
     "lintReport{VARIANT}",
-    if (androidPluginVersion >= AndroidPluginVersion(8, 2, 0).rc(1)) {
+    if (androidPluginVersion >= AndroidPluginVersion(8, 2, 0)) {
         "copy{VARIANT}LintReports"
     } else {
         "copy{VARIANT}AndroidLintReports"
@@ -104,8 +104,8 @@ private val Project.androidAppLintTasksToDisableExceptOneVariant get() = listOf(
 
 // same as the Android library tasks, only keep analyze and the report
 // is created in the app module
-private val Project.lintTasksToDisableJvm
-    get() = if (androidPluginVersion >= AndroidPluginVersion(8, 2, 0).rc(1)) {
+private val lintTasksToDisableJvm
+    get() = if (androidPluginVersion >= AndroidPluginVersion(8, 2, 0)) {
         listOf(
             "lint",
             "lintJvm",
@@ -117,10 +117,10 @@ private val Project.lintTasksToDisableJvm
             "updateLintBaselineJvm",
             "lintVital",
             "lintVitalJvm",
-            if (androidPluginVersion >= AndroidPluginVersion(8, 3, 0).alpha(14)) {
-                "lintVitalAnalyzeJvm"
-            } else {
+            if (androidPluginVersion >= AndroidPluginVersion(8, 3, 0)) {
                 "lintVitalAnalyzeJvmMain"
+            } else {
+                "lintVitalAnalyzeJvm"
             },
             "lintVitalReportJvm",
         )
