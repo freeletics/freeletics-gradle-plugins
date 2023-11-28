@@ -101,6 +101,7 @@ public abstract class RootPlugin : Plugin<Project> {
 
                     project.onUnusedDependencies {
                         it.exclude(
+                            "() -> kotlin.Any?",
                             // added by the Kotlin plugin
                             "org.jetbrains.kotlin:kotlin-stdlib",
                             // parcelize is enabled on all Android modules
@@ -118,6 +119,8 @@ public abstract class RootPlugin : Plugin<Project> {
 
                     project.onIncorrectConfiguration {
                         it.exclude(
+                            // added by the Kotlin plugin
+                            "org.jetbrains.kotlin:kotlin-stdlib",
                             // Dagger is always added as "api", but some modules only use it in for example debugApi
                             "javax.inject:javax.inject",
                             "com.squareup.anvil:annotations",
