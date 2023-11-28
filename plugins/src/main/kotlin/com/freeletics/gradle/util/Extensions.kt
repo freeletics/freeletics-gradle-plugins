@@ -1,5 +1,7 @@
 package com.freeletics.gradle.util
 
+import com.android.Version
+import com.android.build.api.AndroidPluginVersion
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.LibraryExtension
@@ -42,6 +44,12 @@ internal fun Project.kotlinMultiplatform(action: KotlinMultiplatformExtension.()
         it.action()
     }
 }
+
+internal val androidPluginVersion: AndroidPluginVersion
+    get() {
+        val parts = Version.ANDROID_GRADLE_PLUGIN_VERSION.split("-")[0].split(".")
+        return AndroidPluginVersion(parts[0].toInt(), parts[1].toInt(), parts[2].toInt())
+    }
 
 internal fun Project.android(action: CommonExtension<*, *, *, *, *>.() -> Unit) {
     extensions.configure(CommonExtension::class.java) {

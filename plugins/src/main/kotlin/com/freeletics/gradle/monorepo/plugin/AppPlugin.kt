@@ -1,5 +1,6 @@
 package com.freeletics.gradle.monorepo.plugin
 
+import com.android.build.api.AndroidPluginVersion
 import com.freeletics.gradle.monorepo.setup.applyPlatformConstraints
 import com.freeletics.gradle.monorepo.setup.disableAndroidApplicationTasks
 import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.registerCheckDependencyRulesTasks
@@ -8,6 +9,7 @@ import com.freeletics.gradle.monorepo.util.appType
 import com.freeletics.gradle.plugin.FreeleticsAndroidAppPlugin
 import com.freeletics.gradle.util.androidApp
 import com.freeletics.gradle.util.androidComponents
+import com.freeletics.gradle.util.androidPluginVersion
 import com.freeletics.gradle.util.freeleticsAndroidExtension
 import com.freeletics.gradle.util.freeleticsExtension
 import com.freeletics.gradle.util.stringProperty
@@ -48,6 +50,11 @@ public abstract class AppPlugin : Plugin<Project> {
                         it.enableV4Signing = true
                     }
                 }
+            }
+
+            androidResources {
+                @Suppress("UnstableApiUsage")
+                generateLocaleConfig = androidPluginVersion >= AndroidPluginVersion(8, 2, 0)
             }
 
             buildTypes {

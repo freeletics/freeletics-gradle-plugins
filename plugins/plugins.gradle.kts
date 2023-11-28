@@ -10,6 +10,7 @@ configurations.named("shadeClassPath").configure {
 
 dependencies {
     compileOnly(libs.android.gradle.api)
+    compileOnly(libs.android.tools.common)
 
     compileOnly(variantOf(libs.kotlin.gradle) { classifier("gradle76") }) {
         exclude("org.jetbrains.kotlin", "kotlin-gradle-plugin-api")

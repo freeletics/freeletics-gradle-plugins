@@ -8,6 +8,7 @@ gradle-api = "8.4"
 kotlin = "1.9.21"
 coroutines = "1.7.3"
 android-gradle = "8.1.4"
+android-gradle-common = "31.1.4"
 jb-compose="1.5.11"
 ksp="1.9.21-1.0.15"
 anvil = "2.4.8"
@@ -39,6 +40,7 @@ kotlin-gradle-api = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin-api", 
 
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "android-gradle" }
 android-gradle-api = { module = "com.android.tools.build:gradle-api", version.ref = "android-gradle" }
+android-tools-common = { module = "com.android.tools:common", version.ref = "android-gradle-common" }
 
 compose-gradle = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "jb-compose" }
 ksp = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin",  version.ref = "ksp" }
