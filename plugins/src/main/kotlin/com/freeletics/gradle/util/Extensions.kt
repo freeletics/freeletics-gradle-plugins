@@ -1,5 +1,6 @@
 package com.freeletics.gradle.util
 
+import com.android.build.api.AndroidPluginVersion
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.LibraryExtension
@@ -60,6 +61,9 @@ internal fun Project.androidApp(action: ApplicationExtension.() -> Unit) {
         it.action()
     }
 }
+
+internal val Project.androidPluginVersion: AndroidPluginVersion
+    get() = extensions.getByType(AndroidComponentsExtension::class.java).pluginVersion
 
 internal fun Project.androidComponents(action: AndroidComponentsExtension<*, *, *>.() -> Unit) {
     extensions.configure(AndroidComponentsExtension::class.java) {
