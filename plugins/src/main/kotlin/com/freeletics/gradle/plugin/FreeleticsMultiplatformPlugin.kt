@@ -2,6 +2,7 @@ package com.freeletics.gradle.plugin
 
 import com.freeletics.gradle.setup.defaultTestSetup
 import com.freeletics.gradle.util.freeleticsExtension
+import com.freeletics.gradle.util.kotlin
 import com.freeletics.gradle.util.kotlinMultiplatform
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -17,6 +18,12 @@ public abstract class FreeleticsMultiplatformPlugin : Plugin<Project> {
 
         target.kotlinMultiplatform {
             applyDefaultHierarchyTemplate()
+        }
+
+        target.kotlin {
+            compilerOptions {
+                freeCompilerArgs.add("-Xexpect-actual-classes")
+            }
         }
 
         target.tasks.withType(Test::class.java).configureEach(Test::defaultTestSetup)
