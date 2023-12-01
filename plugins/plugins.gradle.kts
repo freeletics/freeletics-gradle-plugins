@@ -16,6 +16,7 @@ dependencies {
         exclude("org.jetbrains.kotlin", "kotlin-gradle-plugin-api")
     }
     compileOnly(variantOf(libs.kotlin.gradle.api) { classifier("gradle76") })
+    compileOnly(libs.kotlin.native.utils)
 
     compileOnly(libs.compose.gradle)
     compileOnly(libs.ksp)

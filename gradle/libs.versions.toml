@@ -37,6 +37,7 @@ kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "
 coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm", version.ref = "coroutines" }
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-gradle-api = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin-api", version.ref = "kotlin" }
+kotlin-native-utils = { module = "org.jetbrains.kotlin:kotlin-native-utils", version.ref = "kotlin" }
 
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "android-gradle" }
 android-gradle-api = { module = "com.android.tools.build:gradle-api", version.ref = "android-gradle" }
