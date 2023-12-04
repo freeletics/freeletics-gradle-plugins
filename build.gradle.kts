@@ -1,5 +1,3 @@
-import com.vanniktech.maven.publish.MavenPublishBaseExtension
-
 plugins {
     alias(libs.plugins.kotlin) apply(false)
     alias(libs.plugins.dependency.analysis) apply(false)
