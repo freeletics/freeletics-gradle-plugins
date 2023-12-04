@@ -14,6 +14,7 @@ public abstract class FreeleticsPublishInternalPlugin : Plugin<Project> {
         target.plugins.apply("com.vanniktech.maven.publish")
 
         target.addInternalRepo()
+        target.addLocalRepo()
         target.disablePublishingIosArtifacts()
         target.configurePom(includeLicense = false)
     }
@@ -26,10 +27,21 @@ public abstract class FreeleticsPublishInternalPlugin : Plugin<Project> {
                     repositories.maven {
                         it.name = "internalArtifacts"
                         it.setUrl(internalUrl)
-                        // allows using the internal url property to specify a local folder for testing
-                        if (!internalUrl.startsWith("file:")) {
-                            it.credentials(PasswordCredentials::class.java)
-                        }
+                        it.credentials(PasswordCredentials::class.java)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun Project.addLocalRepo() {
+        val localPath = stringProperty("fgp.publishToFolder").orNull
+        if (localPath != null) {
+            extensions.configure(PublishingExtension::class.java) { publishing ->
+                publishing.repositories { repositories ->
+                    repositories.maven {
+                        it.name = "local"
+                        it.setUrl(localPath)
                     }
                 }
             }
