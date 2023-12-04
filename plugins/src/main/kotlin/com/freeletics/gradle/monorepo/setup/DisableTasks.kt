@@ -60,16 +60,12 @@ private val androidLibraryTasksToDisable = listOf(
 // for libraries remove all reporting tasks so that they only
 // have the analyze task since we have an aggregated report at
 // the app level
-private val Project.androidLibraryLintTasksToDisable get() = listOf(
+private val androidLibraryLintTasksToDisable get() = listOf(
     // report
     "lint",
     "lint{VARIANT}",
     "lintReport{VARIANT}",
-    if (androidPluginVersion >= AndroidPluginVersion(8, 2, 0)) {
-        "copy{VARIANT}LintReports"
-    } else {
-        "copy{VARIANT}AndroidLintReports"
-    },
+    "copy{VARIANT}LintReports",
     // fix
     "lintFix",
     "lintFix{VARIANT}",
@@ -91,11 +87,7 @@ private val androidAppLintTasksToDisableExceptOneVariant get() = listOf(
     // report
     "lint{VARIANT}",
     "lintReport{VARIANT}",
-    if (androidPluginVersion >= AndroidPluginVersion(8, 2, 0)) {
-        "copy{VARIANT}LintReports"
-    } else {
-        "copy{VARIANT}AndroidLintReports"
-    },
+    "copy{VARIANT}LintReports",
     // fix
     "lintFix{VARIANT}",
     // baseline
@@ -105,34 +97,21 @@ private val androidAppLintTasksToDisableExceptOneVariant get() = listOf(
 // same as the Android library tasks, only keep analyze and the report
 // is created in the app module
 private val lintTasksToDisableJvm
-    get() = if (androidPluginVersion >= AndroidPluginVersion(8, 2, 0)) {
-        listOf(
-            "lint",
-            "lintJvm",
-            "lintReportJvm",
-            "copyJvmLintReports",
-            "lintFix",
-            "lintFixJvm",
-            "updateLintBaseline",
-            "updateLintBaselineJvm",
-            "lintVital",
-            "lintVitalJvm",
-            if (androidPluginVersion >= AndroidPluginVersion(8, 3, 0)) {
-                "lintVitalAnalyzeJvmMain"
-            } else {
-                "lintVitalAnalyzeJvm"
-            },
-            "lintVitalReportJvm",
-        )
-    } else {
-        listOf(
-            "lint",
-            "lintReport",
-            "copyAndroidLintReports",
-            "lintFix",
-            "updateLintBaseline",
-            "lintVital",
-            "lintVitalAnalyze",
-            "lintVitalReport",
-        )
-    }
+    get() = listOf(
+        "lint",
+        "lintJvm",
+        "lintReportJvm",
+        "copyJvmLintReports",
+        "lintFix",
+        "lintFixJvm",
+        "updateLintBaseline",
+        "updateLintBaselineJvm",
+        "lintVital",
+        "lintVitalJvm",
+        if (androidPluginVersion >= AndroidPluginVersion(8, 3, 0)) {
+            "lintVitalAnalyzeJvmMain"
+        } else {
+            "lintVitalAnalyzeJvm"
+        },
+        "lintVitalReportJvm",
+    )
