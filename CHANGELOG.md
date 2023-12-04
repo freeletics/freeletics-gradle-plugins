@@ -1,7 +1,23 @@
 Change Log
 ==========
 
-## 0.8.2 **UNRELEASED**
+## 0.9.1 **UNRELEASED**
+
+
+## 0.9.0 *(2023-12-01)*
+
+- Updated to Gradle 8.5.
+- Updated to Kotlin 1.9.20.
+- Updated to AGP 8.5.
+- Support for AGP 8.3.0 alpha.
+- `com.freeletics.gradle.app` now enables `generateLocaleConfig` by default.
+- The build number logic has been changed from major version 24 on (2024 releases), see
+  [#205](https://github.com/freeletics/freeletics-gradle-plugins/pull/205) for more details.
+- Removed parts of the legacy project config in monorepo plugins
+- Updated to Kotlin 1.9.20 and enabled the default hierarchy template for multiplatform projects.
+- `addIosTargets` with enabled XcFrameworks and `com.freeletics.gradle.publish.internal` applied
+  will automatically set up everything to publish the framework (as zip) to Maven repositories
+- Suppress compiler warning about expect/actual classes being experimental
 
 
 ## 0.8.1 *(2023-10-20)*
