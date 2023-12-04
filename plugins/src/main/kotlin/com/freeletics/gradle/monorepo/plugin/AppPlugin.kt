@@ -7,9 +7,9 @@ import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.r
 import com.freeletics.gradle.monorepo.util.ProjectType
 import com.freeletics.gradle.monorepo.util.appType
 import com.freeletics.gradle.plugin.FreeleticsAndroidAppPlugin
-import com.freeletics.gradle.util.androidPluginVersion
 import com.freeletics.gradle.util.androidApp
 import com.freeletics.gradle.util.androidComponents
+import com.freeletics.gradle.util.androidPluginVersion
 import com.freeletics.gradle.util.freeleticsAndroidExtension
 import com.freeletics.gradle.util.freeleticsExtension
 import com.freeletics.gradle.util.stringProperty
