@@ -75,11 +75,11 @@ public abstract class RootPlugin : Plugin<Project> {
         target.extensions.configure(DependencyAnalysisExtension::class.java) { analysis ->
             analysis.issues { issues ->
                 issues.all { project ->
-                    project.ignoreKtx(true)
                     project.onAny {
                         it.severity("fail")
                     }
 
+                    // add all default dependencies to not report them being unused or in the wrong configuration
                     val catalogs = target.extensions.getByType(VersionCatalogsExtension::class.java)
                     catalogs.forEach { catalog ->
                         catalog.bundleAliases.forEach { bundleAlias ->
@@ -101,7 +101,6 @@ public abstract class RootPlugin : Plugin<Project> {
 
                     project.onUnusedDependencies {
                         it.exclude(
-                            "() -> kotlin.Any?",
                             // added by the Kotlin plugin
                             "org.jetbrains.kotlin:kotlin-stdlib",
                             // parcelize is enabled on all Android modules
@@ -150,6 +149,8 @@ public abstract class RootPlugin : Plugin<Project> {
             }
 
             analysis.structure { structure ->
+                structure.ignoreKtx(true)
+
                 structure.bundle("androidx-compose-runtime") {
                     it.primary("androidx.compose.runtime:runtime")
                     it.includeGroup("androidx.compose.runtime")
