@@ -28,7 +28,7 @@ clikt = "4.2.1"
 ktlint = "0.50.0"
 
 junit = "4.13.2"
-truth = "1.1.5"
+truth = "1.2.0"
 
 [libraries]
 gradle-api = { module = "dev.gradleplugins:gradle-api", version.ref = "gradle-api" }
