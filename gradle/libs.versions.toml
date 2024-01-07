@@ -24,7 +24,7 @@ gr8 = "0.10"
 publish = "0.26.0"
 dokka = "1.9.10"
 
-clikt = "4.2.1"
+clikt = "4.2.2"
 ktlint = "0.50.0"
 
 junit = "4.13.2"
