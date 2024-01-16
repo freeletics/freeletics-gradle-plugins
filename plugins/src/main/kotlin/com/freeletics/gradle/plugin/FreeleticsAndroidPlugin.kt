@@ -81,13 +81,15 @@ public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
     }
 
     private fun Project.addDefaultAndroidDependencies() {
-        val bundle = getBundleOrNull("default-android")
-        if (bundle != null) {
-            dependencies.add("implementation", bundle)
-        }
-        val compileBundle = getBundleOrNull("default-android-compile")
-        if (compileBundle != null) {
-            dependencies.add("testCompileOnly", compileBundle)
+        if (!project.plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")) {
+            val bundle = getBundleOrNull("default-android")
+            if (bundle != null) {
+                dependencies.add("implementation", bundle)
+            }
+            val compileBundle = getBundleOrNull("default-android-compile")
+            if (compileBundle != null) {
+                dependencies.add("testCompileOnly", compileBundle)
+            }
         }
     }
 
