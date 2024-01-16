@@ -39,13 +39,17 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
     }
 
     private fun Project.addDefaultDependencies() {
-        dependencies.addMaybe("implementation", getBundleOrNull("default-all"))
-        dependencies.addMaybe("compileOnly", getBundleOrNull("default-all-compile"))
+        if (!project.plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")) {
+            dependencies.addMaybe("implementation", getBundleOrNull("default-all"))
+            dependencies.addMaybe("compileOnly", getBundleOrNull("default-all-compile"))
+        }
     }
     private fun Project.addDefaultTestDependencies() {
-        dependencies.addMaybe("testImplementation", getBundleOrNull("default-testing"))
-        dependencies.addMaybe("testCompileOnly", getBundleOrNull("default-testing-compile"))
-        dependencies.addMaybe("testRuntimeOnly", getBundleOrNull("default-testing-runtime"))
+        if (!project.plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")) {
+            dependencies.addMaybe("testImplementation", getBundleOrNull("default-testing"))
+            dependencies.addMaybe("testCompileOnly", getBundleOrNull("default-testing-compile"))
+            dependencies.addMaybe("testRuntimeOnly", getBundleOrNull("default-testing-runtime"))
+        }
     }
 
     private fun Project.configureJava() {
