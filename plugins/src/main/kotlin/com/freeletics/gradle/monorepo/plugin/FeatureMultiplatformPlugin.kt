@@ -38,7 +38,7 @@ public abstract class FeatureMultiplatformPlugin : Plugin<Project> {
             )
         }
 
-        target.applyPlatformConstraints()
+        // TODO target.applyPlatformConstraints()
         // TODO target.disableAndroidLibraryTasks()
     }
 }

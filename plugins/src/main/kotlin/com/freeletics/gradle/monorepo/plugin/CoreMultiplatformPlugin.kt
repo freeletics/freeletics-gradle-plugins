@@ -33,7 +33,7 @@ public abstract class CoreMultiplatformPlugin : Plugin<Project> {
             ),
         )
 
-        target.applyPlatformConstraints()
+        // TODO target.applyPlatformConstraints()
         // TODO target.disableKotlinLibraryTasks()
     }
 }

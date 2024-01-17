@@ -33,7 +33,7 @@ public abstract class DomainMultiplatformPlugin : Plugin<Project> {
             ),
         )
 
-        target.applyPlatformConstraints()
+        // TODO target.applyPlatformConstraints()
         // TODO target.disableKotlinLibraryTasks()
     }
 }
