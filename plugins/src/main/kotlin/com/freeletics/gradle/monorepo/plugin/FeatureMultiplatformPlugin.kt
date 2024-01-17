@@ -18,7 +18,7 @@ public abstract class FeatureMultiplatformPlugin : Plugin<Project> {
         target.plugins.apply(FreeleticsMultiplatformPlugin::class.java)
 
         target.freeleticsMultiplatformExtension.addAndroidTarget()
-        target.freeleticsMultiplatformExtension.addIosTargets(target.path.substring(1).replace(":", "-"))
+        target.freeleticsMultiplatformExtension.addIosTargets()
 
         target.freeleticsExtension.useCompose()
         target.freeleticsAndroidExtension.minSdkVersion(target.appType()?.minSdkVersion(target))
@@ -38,7 +38,7 @@ public abstract class FeatureMultiplatformPlugin : Plugin<Project> {
             )
         }
 
-        target.applyPlatformConstraints()
+        // TODO target.applyPlatformConstraints()
         // TODO target.disableAndroidLibraryTasks()
     }
 }

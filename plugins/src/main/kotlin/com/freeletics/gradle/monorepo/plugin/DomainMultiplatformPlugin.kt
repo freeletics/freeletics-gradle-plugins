@@ -15,7 +15,7 @@ public abstract class DomainMultiplatformPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.plugins.apply(FreeleticsMultiplatformPlugin::class.java)
 
-        target.freeleticsMultiplatformExtension.addIosTargets(target.path.substring(1).replace(":", "-"))
+        target.freeleticsMultiplatformExtension.addIosTargets()
         target.freeleticsMultiplatformExtension.addAndroidTarget()
         // TODO target.freeleticsJvmExtension.useAndroidLint()
 
@@ -33,7 +33,7 @@ public abstract class DomainMultiplatformPlugin : Plugin<Project> {
             ),
         )
 
-        target.applyPlatformConstraints()
+        // TODO target.applyPlatformConstraints()
         // TODO target.disableKotlinLibraryTasks()
     }
 }
