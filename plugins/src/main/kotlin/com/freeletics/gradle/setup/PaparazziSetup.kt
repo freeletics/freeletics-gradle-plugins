@@ -35,8 +35,10 @@ internal fun Project.configurePaparazzi() {
                     objects.named(TargetJvmEnvironment::class.java, TargetJvmEnvironment.STANDARD_JVM),
                 )
             }
-            constraint.because("LayoutLib and sdk-common depend on Guava's -jre published variant." +
-                "See https://github.com/cashapp/paparazzi/issues/906.")
+            constraint.because(
+                "LayoutLib and sdk-common depend on Guava's -jre published variant." +
+                    "See https://github.com/cashapp/paparazzi/issues/906.",
+            )
         }
     }
 }
