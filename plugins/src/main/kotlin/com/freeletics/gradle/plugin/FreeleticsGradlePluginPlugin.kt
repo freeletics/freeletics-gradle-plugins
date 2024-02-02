@@ -9,7 +9,6 @@ public abstract class FreeleticsGradlePluginPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.plugins.apply("java-gradle-plugin")
         target.plugins.apply(FreeleticsJvmPlugin::class.java)
-        target.plugins.apply("com.gradleup.gr8")
 
         target.kotlin {
             compilerOptions {

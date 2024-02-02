@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## 0.10.1 *(2024-02-02)*
+
+- Actually don't apply gr8 anymore.
+
+
 ## 0.10.0 *(2024-02-02)*
 
 - `com.freeletics.gradle.gradle` does not apply gr8 and best-practices anymore.
