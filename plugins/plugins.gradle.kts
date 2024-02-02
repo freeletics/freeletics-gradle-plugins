@@ -24,7 +24,6 @@ dependencies {
     compileOnly(libs.moshix.gradle)
     compileOnly(libs.paparazzi.gradle)
     compileOnly(libs.dependency.analysis)
-    compileOnly(libs.gr8)
     compileOnly(libs.publish)
     compileOnly(libs.licensee)
     compileOnly(libs.crashlytics)

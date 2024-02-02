@@ -57,7 +57,6 @@ dependency-analysis = { module = "com.autonomousapps:dependency-analysis-gradle-
 gradle-enterprise = { module = "com.gradle:gradle-enterprise-gradle-plugin", version.ref = "gradle-enterprise" }
 gradle-toolchain = { module = "org.gradle.toolchains:foojay-resolver", version.ref = "gradle-toolchain" }
 
-gr8 = { module = "com.gradleup:gr8-plugin", version.ref = "gr8" }
 publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish"}
 
 clikt = { module = "com.github.ajalt.clikt:clikt-jvm", version.ref = "clikt" }
