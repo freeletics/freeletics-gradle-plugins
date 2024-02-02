@@ -354,9 +354,7 @@ freeletics {
 Applies:
 - `java-gradle-plugin`
 - `org.jetbrains.kotlin.jvm`
-- `com.gradleup.gr8`
 - `com.autonomousapps.dependency-analysis`
-- `com.autonomousapps.plugin-best-practices-plugin`
 
 General features:
 - configures Java target and Java/Kotlin toolchain versions from the version catalog
@@ -366,7 +364,6 @@ General features:
 - generates a `VERSION` constant that contains the current plugin version
   - can be used if the plugin needs to add dependencies on other artifacts published together with the plugin
   - uses the `GROUP` and `POM_ARTIFACT_ID` Gradle properties for the package name
-- configures [GR8][1] for shading
 
 ### Setup
 
@@ -374,16 +371,6 @@ General features:
 plugins {
     id("com.freeletics.gradle.gradle").version("<latest-version>")
 }
-```
-
-Add the following to `gradle.properties`:
-```properties
-kotlin.stdlib.default.dependency=false
-
-# used for the package name of the generated VERSION constant, usually also used for publishing
-GROUP=com.example
-POM_ARTIFACT_ID=gradle-plugin
-VERSION_NAME=1.0.0
 ```
 
 Add the following to the `libs` version catalog:
@@ -396,40 +383,6 @@ java-toolchain = "17"
 
 # optional, the Kotlin language version to use
 kotlin-language = "1.8"
-
-[libraries]
-# will automatically be added and shaded
-kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version = "..." }
-# the Gradle API to build against, will be automatically added as a compileOnly dependency
-gradle-api = { module = "dev.gradleplugins:gradle-api", version = "..." }
-```
-
-Create a file called `rules.pro` in the root of the project and/or next to the projects build file containing (in
-a multi project setup it is possible to split the config and put the shared parts into the root `rules.pro` file):
-```
-# Allow to make some classes public so that we can repackage them without breaking package-private members
--allowaccessmodification
-
-# Keep kotlin metadata so that the Kotlin compiler knows about top level functions and other things
--keep class kotlin.Metadata { *; }
-
-# Keep FunctionX because they are used in the public API of Gradle/AGP/KGP
--keep class kotlin.jvm.functions.** { *; }
-
-# Keep Unit for kts compatibility, functions in a Gradle extension returning a relocated Unit won't work
--keep class kotlin.Unit
-
-# We need to keep type arguments (Signature) for Gradle to be able to instantiate abstract models like `Property`
--keepattributes Signature,Exceptions,*Annotation*,InnerClasses,PermittedSubclasses,EnclosingMethod,Deprecated,SourceFile,LineNumberTable
-
-# Keep your public API so that it's callable from scripts
--keep class com.example.** { *; }
-
-# No need to obfuscate class names
--dontobfuscate
-
-# Package that shaded classes are moved to
--repackageclasses com.example.relocated
 ```
 
 ### Android Lint
@@ -445,7 +398,6 @@ freeletics {
 ```
 
 
-[1]: https://github.com/GradleUp/gr8
 [2]: https://github.com/ZacSweers/MoshiX
 [3]: https://github.com/google/dagger
 [4]: https://github.com/square/anvil

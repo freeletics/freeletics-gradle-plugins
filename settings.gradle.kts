@@ -19,8 +19,6 @@ pluginManagement {
             filter {
                 includeGroupByRegex("com.gradle.*")
                 includeGroupByRegex("org.gradle.*")
-                includeGroup("com.autonomousapps.plugin-best-practices-plugin")
-                includeModule("com.autonomousapps", "plugin-best-practices-plugin")
             }
         }
 
@@ -29,7 +27,7 @@ pluginManagement {
 }
 
 plugins {
-    id("com.freeletics.gradle.settings").version("0.9.0")
+    id("com.freeletics.gradle.settings").version("0.10.1")
 }
 
 rootProject.name = "freeletics-gradle-plugins"
