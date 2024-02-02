@@ -1,1 +1,0 @@
--repackageclasses  com.freeletics.gradle.rootplugin.relocated

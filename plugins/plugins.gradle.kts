@@ -3,21 +3,12 @@ plugins {
     alias(libs.plugins.fgp.publish)
 }
 
-configurations.named("shadeClassPath").configure {
-    // included in gradle-api and would cause duplicate class issues
-    exclude(mapOf("group" to "com.google.code.findbugs", "module" to "jsr305"))
-}
-
 dependencies {
     compileOnly(libs.android.gradle.api)
     compileOnly(libs.android.tools.common)
-
-    compileOnly(variantOf(libs.kotlin.gradle) { classifier("gradle76") }) {
-        exclude("org.jetbrains.kotlin", "kotlin-gradle-plugin-api")
-    }
-    compileOnly(variantOf(libs.kotlin.gradle.api) { classifier("gradle76") })
+    compileOnly(libs.kotlin.gradle)
+    compileOnly(libs.kotlin.gradle.api)
     compileOnly(libs.kotlin.native.utils)
-
     compileOnly(libs.compose.gradle)
     compileOnly(libs.ksp)
     compileOnly(libs.anvil.gradle)
@@ -27,8 +18,6 @@ dependencies {
     compileOnly(libs.publish)
     compileOnly(libs.licensee)
     compileOnly(libs.crashlytics)
-
-    add("shadeClassPath", libs.android.gradle)
 
     testImplementation(libs.junit)
     testImplementation(libs.truth)

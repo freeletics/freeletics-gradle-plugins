@@ -19,8 +19,6 @@ pluginManagement {
             filter {
                 includeGroupByRegex("com.gradle.*")
                 includeGroupByRegex("org.gradle.*")
-                includeGroup("com.autonomousapps.plugin-best-practices-plugin")
-                includeModule("com.autonomousapps", "plugin-best-practices-plugin")
             }
         }
 
