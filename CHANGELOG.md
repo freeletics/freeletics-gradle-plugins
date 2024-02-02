@@ -1,7 +1,10 @@
 Change Log
 ==========
 
-## 0.9.1 **UNRELEASED**
+## 0.10.0 *(2024-02-02)*
+
+- `com.freeletics.gradle.gradle` does not apply gr8 and best-practices anymore.
+- Updated dependencies.
 
 
 ## 0.9.0 *(2023-12-01)*
