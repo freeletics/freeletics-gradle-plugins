@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFrameworkConfig
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 import org.jetbrains.kotlin.konan.target.HostManager
 
@@ -128,6 +129,9 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
             js(KotlinJsCompilerType.IR) {
                 nodejs()
             }
+
+            @OptIn(ExperimentalWasmDsl::class)
+            wasmJs()
 
             linuxX64()
             linuxArm64()
