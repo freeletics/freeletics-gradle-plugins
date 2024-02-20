@@ -64,9 +64,8 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
                 binaries.framework {
                     baseName = frameworkName
                     xcFramework?.add(this)
+                    configure(this)
                 }
-
-                configure()
             }
 
             iosSimulatorArm64 {
