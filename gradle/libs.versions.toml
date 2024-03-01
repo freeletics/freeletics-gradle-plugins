@@ -6,8 +6,8 @@ fgp = "0.11.0"
 
 kotlin = "1.9.22"
 coroutines = "1.8.0"
-android-gradle = "8.2.2"
-android-gradle-common = "31.2.2"
+android-gradle = "8.3.0"
+android-gradle-common = "31.3.0"
 jb-compose="1.6.0"
 ksp="1.9.22-1.0.18"
 anvil = "2.4.9"
@@ -29,7 +29,7 @@ truth = "1.4.1"
 
 [libraries]
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm", version.ref = "coroutines" }
+coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-gradle-api = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin-api", version.ref = "kotlin" }
 kotlin-native-utils = { module = "org.jetbrains.kotlin:kotlin-native-utils", version.ref = "kotlin" }

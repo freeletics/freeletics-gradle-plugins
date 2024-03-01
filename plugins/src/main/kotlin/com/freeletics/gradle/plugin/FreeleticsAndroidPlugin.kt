@@ -138,7 +138,8 @@ public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
         androidComponents {
             beforeVariants {
                 if (it is HasAndroidTestBuilder) {
-                    it.enableAndroidTest = false
+                    @Suppress("UnstableApiUsage")
+                    it.androidTest.enable = false
                 }
             }
         }
