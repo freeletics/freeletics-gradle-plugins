@@ -51,7 +51,7 @@ internal val androidPluginVersion: AndroidPluginVersion
         return AndroidPluginVersion(parts[0].toInt(), parts[1].toInt(), parts[2].toInt())
     }
 
-internal fun Project.android(action: CommonExtension<*, *, *, *, *>.() -> Unit) {
+internal fun Project.android(action: CommonExtension<*, *, *, *, *, *>.() -> Unit) {
     extensions.configure(CommonExtension::class.java) {
         it.action()
     }
