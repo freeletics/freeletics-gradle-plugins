@@ -1,7 +1,22 @@
 Change Log
 ==========
 
-## 0.9.1 **UNRELEASED**
+## 0.11.0 *(2024-02-21)*
+
+- `addCommonTargets` now adds the `wasmJs` target.
+- `addIosTargets` doesn't add `iosX64` anymore.
+- expose the created framework for `addIosTargets`.
+
+
+## 0.10.1 *(2024-02-02)*
+
+- Actually don't apply gr8 anymore.
+
+
+## 0.10.0 *(2024-02-02)*
+
+- `com.freeletics.gradle.gradle` does not apply gr8 and best-practices anymore.
+- Updated dependencies.
 
 
 ## 0.9.0 *(2023-12-01)*

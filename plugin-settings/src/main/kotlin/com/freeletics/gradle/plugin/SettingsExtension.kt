@@ -164,8 +164,6 @@ public abstract class SettingsExtension(private val settings: Settings) {
                     .using(it.project(":text-resource"))
                 it.substitute(it.module("com.freeletics.khonshu:navigation"))
                     .using(it.project(":navigation"))
-                it.substitute(it.module("com.freeletics.khonshu:navigation-androidx-nav"))
-                    .using(it.project(":navigation-androidx"))
                 if (experimentalNavigation) {
                     it.substitute(it.module("com.freeletics.khonshu:navigation-compose"))
                         .using(it.project(":navigation-experimental"))
@@ -175,8 +173,6 @@ public abstract class SettingsExtension(private val settings: Settings) {
                 }
                 it.substitute(it.module("com.freeletics.khonshu:navigation-experimental"))
                     .using(it.project(":navigation-experimental"))
-                it.substitute(it.module("com.freeletics.khonshu:navigation-fragment"))
-                    .using(it.project(":navigation-fragment"))
                 it.substitute(it.module("com.freeletics.khonshu:navigation-testing"))
                     .using(it.project(":navigation-testing"))
                 it.substitute(it.module("com.freeletics.khonshu:codegen-runtime"))

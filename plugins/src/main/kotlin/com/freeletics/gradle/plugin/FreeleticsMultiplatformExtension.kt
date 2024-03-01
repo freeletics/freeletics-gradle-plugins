@@ -7,9 +7,11 @@ import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.tasks.AbstractPublishToMaven
 import org.gradle.api.tasks.bundling.Zip
 import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType
+import org.jetbrains.kotlin.gradle.plugin.mpp.Framework
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFrameworkConfig
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 import org.jetbrains.kotlin.konan.target.HostManager
 
@@ -42,7 +44,7 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
     public fun addIosTargets(
         frameworkName: String,
         createXcFramework: Boolean = false,
-        configure: KotlinNativeTarget.() -> Unit = { },
+        configure: KotlinNativeTarget.(Framework) -> Unit = { },
     ) {
         val xcFramework = if (createXcFramework) {
             XCFrameworkConfig(project, frameworkName)
@@ -55,27 +57,16 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
                 binaries.framework {
                     baseName = frameworkName
                     xcFramework?.add(this)
+                    configure(this)
                 }
-
-                configure()
-            }
-
-            iosX64 {
-                binaries.framework {
-                    baseName = frameworkName
-                    xcFramework?.add(this)
-                }
-
-                configure()
             }
 
             iosSimulatorArm64 {
                 binaries.framework {
                     baseName = frameworkName
                     xcFramework?.add(this)
+                    configure(this)
                 }
-
-                configure()
             }
         }
 
@@ -99,7 +90,7 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
 
                 val publicationName = "${frameworkName}XcFramework"
                 project.extensions.configure(PublishingExtension::class.java) { publishing ->
-                    publishing.publications.create("${frameworkName}XcFramework", MavenPublication::class.java) {
+                    publishing.publications.create(publicationName, MavenPublication::class.java) {
                         // the project.name will be replaced with the real artifact id by the publishing plugin
                         it.artifactId = "${project.name}-xcframework"
                         it.artifact(frameworkZip) { artifact ->
@@ -111,10 +102,6 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
                 project.tasks.withType(AbstractPublishToMaven::class.java).configureEach {
                     if (it.name.contains(publicationName, ignoreCase = true)) {
                         it.onlyIf { HostManager.hostIsMac }
-                    } else {
-                        // for now we accept that a module that publishes an xcframework
-                        // will not publish anything else
-                        it.onlyIf { false }
                     }
                 }
             }
@@ -128,6 +115,9 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
             js(KotlinJsCompilerType.IR) {
                 nodejs()
             }
+
+            @OptIn(ExperimentalWasmDsl::class)
+            wasmJs()
 
             linuxX64()
             linuxArm64()

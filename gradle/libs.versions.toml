@@ -2,25 +2,22 @@
 java-target = "11"
 java-toolchain = "19"
 
-fgp = "0.9.0"
+fgp = "0.11.0"
 
-gradle-api = "8.4"
 kotlin = "1.9.22"
-coroutines = "1.7.3"
+coroutines = "1.8.0"
 android-gradle = "8.3.0"
 android-gradle-common = "31.3.0"
-jb-compose="1.5.11"
-ksp="1.9.22-1.0.16"
+jb-compose="1.6.0"
+ksp="1.9.22-1.0.18"
 anvil = "2.4.9"
 moshix = "0.25.1"
-paparazzi = "1.3.1-fl02"
-licensee = "1.8.0"
+paparazzi = "1.3.2-fl05"
+licensee = "1.9.1"
 crashlytics-gradle = "2.9.8"
-dependency-analysis = "1.28.0"
-bestpractices = "0.10"
-gradle-enterprise = "3.16.1"
+dependency-analysis = "1.30.0"
+gradle-enterprise = "3.16.2"
 gradle-toolchain = "0.8.0"
-gr8 = "0.10"
 publish = "0.27.0"
 dokka = "1.9.10"
 
@@ -28,13 +25,11 @@ clikt = "4.2.2"
 ktlint = "0.50.0"
 
 junit = "4.13.2"
-truth = "1.2.0"
+truth = "1.4.1"
 
 [libraries]
-gradle-api = { module = "dev.gradleplugins:gradle-api", version.ref = "gradle-api" }
-
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm", version.ref = "coroutines" }
+coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-gradle-api = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin-api", version.ref = "kotlin" }
 kotlin-native-utils = { module = "org.jetbrains.kotlin:kotlin-native-utils", version.ref = "kotlin" }
@@ -57,7 +52,6 @@ dependency-analysis = { module = "com.autonomousapps:dependency-analysis-gradle-
 gradle-enterprise = { module = "com.gradle:gradle-enterprise-gradle-plugin", version.ref = "gradle-enterprise" }
 gradle-toolchain = { module = "org.gradle.toolchains:foojay-resolver", version.ref = "gradle-toolchain" }
 
-gr8 = { module = "com.gradleup:gr8-plugin", version.ref = "gr8" }
 publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish"}
 
 clikt = { module = "com.github.ajalt.clikt:clikt-jvm", version.ref = "clikt" }
@@ -79,7 +73,5 @@ android = { id = "com.android.application", version.ref = "android-gradle" }
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 
 dependency-analysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependency-analysis" }
-bestpractices = { id = "com.autonomousapps.plugin-best-practices-plugin", version.ref = "bestpractices" }
-gr8 = { id = "com.gradleup.gr8", version.ref = "gr8" }
 publish = { id = "com.vanniktech.maven.publish", version.ref = "publish" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
