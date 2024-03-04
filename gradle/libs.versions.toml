@@ -19,7 +19,7 @@ dependency-analysis = "1.30.0"
 gradle-enterprise = "3.16.2"
 gradle-toolchain = "0.8.0"
 publish = "0.27.0"
-dokka = "1.9.10"
+dokka = "1.9.20"
 
 clikt = "4.2.2"
 ktlint = "0.50.0"
