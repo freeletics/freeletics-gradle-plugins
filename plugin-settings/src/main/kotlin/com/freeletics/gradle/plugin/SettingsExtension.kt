@@ -93,12 +93,14 @@ public abstract class SettingsExtension(private val settings: Settings) {
                         content.snapshotsOnly()
                     }
                 }
+
                 handler.maven {
                     it.setUrl("https://s01.oss.sonatype.org/content/repositories/snapshots/")
                     it.mavenContent { content ->
                         content.snapshotsOnly()
                     }
                 }
+
                 handler.maven {
                     it.setUrl("https://androidx.dev/storage/compose-compiler/repository/")
                     it.mavenContent { content ->
@@ -106,6 +108,7 @@ public abstract class SettingsExtension(private val settings: Settings) {
                         content.includeVersionByRegex("^androidx.compose.compiler\$", ".*", ".+-dev-k.+")
                     }
                 }
+
                 if (androidXBuildId != null) {
                     handler.maven {
                         it.setUrl("https://androidx.dev/snapshots/builds/$androidXBuildId/artifacts/repository/")
@@ -116,6 +119,7 @@ public abstract class SettingsExtension(private val settings: Settings) {
                         }
                     }
                 }
+
                 handler.maven {
                     it.setUrl("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/bootstrap")
                     it.mavenContent { content ->
@@ -123,25 +127,8 @@ public abstract class SettingsExtension(private val settings: Settings) {
                         content.includeVersionByRegex("^org.jetbrains.kotlin.*", ".*", ".*-(dev|release)-.*")
                     }
                 }
-                handler.mavenLocal()
-            }
-        }
-    }
 
-    /**
-     * Replace any usage of Khonshu `navigator-compose` with `navigation-experimental` to try out the
-     * experimental navigation implementation.
-     *
-     * When using an included build the `experimentalNavigation` parameter on [includeKhonshu] should be used instead.
-     */
-    public fun useKhonshuExperimentalNavigation() {
-        settings.gradle.beforeProject { project ->
-            project.configurations.configureEach { configuration ->
-                configuration.resolutionStrategy.eachDependency {
-                    if (it.requested.group == "com.freeletics.khonshu" && it.requested.name == "navigation-compose") {
-                        it.useTarget("com.freeletics.khonshu:navigation-experimental:${it.requested.version}")
-                    }
-                }
+                handler.mavenLocal()
             }
         }
     }
@@ -153,7 +140,7 @@ public abstract class SettingsExtension(private val settings: Settings) {
      * `navigation-experimental` to try out the experimental navigation implementation.
      */
     @JvmOverloads
-    public fun includeKhonshu(path: String = "../khonshu", experimentalNavigation: Boolean = false) {
+    public fun includeKhonshu(path: String = "../khonshu") {
         settings.includeBuild(path) { build ->
             build.dependencySubstitution {
                 it.substitute(it.module("com.freeletics.khonshu:state-machine"))
@@ -164,13 +151,8 @@ public abstract class SettingsExtension(private val settings: Settings) {
                     .using(it.project(":text-resource"))
                 it.substitute(it.module("com.freeletics.khonshu:navigation"))
                     .using(it.project(":navigation"))
-                if (experimentalNavigation) {
-                    it.substitute(it.module("com.freeletics.khonshu:navigation-compose"))
-                        .using(it.project(":navigation-experimental"))
-                } else {
-                    it.substitute(it.module("com.freeletics.khonshu:navigation-compose"))
-                        .using(it.project(":navigation-compose"))
-                }
+                it.substitute(it.module("com.freeletics.khonshu:navigation-compose"))
+                    .using(it.project(":navigation-compose"))
                 it.substitute(it.module("com.freeletics.khonshu:navigation-experimental"))
                     .using(it.project(":navigation-experimental"))
                 it.substitute(it.module("com.freeletics.khonshu:navigation-testing"))
@@ -179,11 +161,6 @@ public abstract class SettingsExtension(private val settings: Settings) {
                     .using(it.project(":codegen"))
                 it.substitute(it.module("com.freeletics.khonshu:codegen-compiler"))
                     .using(it.project(":codegen-compiler"))
-
-                if (experimentalNavigation) {
-                    it.substitute(it.project(":navigation-compose"))
-                        .using(it.project(":navigation-experimental"))
-                }
             }
         }
     }
