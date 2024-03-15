@@ -40,11 +40,14 @@ internal fun DependencyHandler.addMaybe(name: String, dependency: Any?) {
     }
 }
 
+internal val Project.javaTarget: String
+    get() = getVersion("java-target")
+
 internal val Project.javaTargetVersion: JavaVersion
-    get() = JavaVersion.toVersion(getVersion("java-target"))
+    get() = JavaVersion.toVersion(javaTarget)
 
 internal val Project.jvmTarget: JvmTarget
-    get() = JvmTarget.fromTarget(getVersion("java-target"))
+    get() = JvmTarget.fromTarget(javaTarget)
 
 internal val Project.javaToolchainVersion: JavaLanguageVersion
     get() = JavaLanguageVersion.of(getVersion("java-toolchain"))
