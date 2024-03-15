@@ -1,10 +1,12 @@
 package com.freeletics.gradle.plugin
 
+import com.freeletics.gradle.util.KotlinAndroidProjectExtensionDelegate
 import com.freeletics.gradle.util.addMaybe
 import com.freeletics.gradle.util.booleanProperty
 import com.freeletics.gradle.util.getBundleOrNull
 import com.freeletics.gradle.util.getVersionOrNull
 import com.freeletics.gradle.util.java
+import com.freeletics.gradle.util.javaTarget
 import com.freeletics.gradle.util.javaToolchainVersion
 import com.freeletics.gradle.util.jvmTarget
 import com.freeletics.gradle.util.kotlin
@@ -64,6 +66,8 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                 toolchain.vendor.set(JvmVendorSpec.AZUL)
             }
 
+            val isAndroid = this is KotlinAndroidProjectExtensionDelegate
+
             compilerOptions {
                 getVersionOrNull("kotlin-language")?.let {
                     languageVersion.set(KotlinVersion.fromVersion(it))
@@ -93,6 +97,10 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                         // Enhance not null annotated type parameter's types to definitely not null types (@NotNull T => T & Any)
                         "-Xenhance-type-parameter-types-to-def-not-null",
                     )
+
+                    if (!isAndroid) {
+                        freeCompilerArgs.add("-Xjdk-release=${project.javaTarget}")
+                    }
 
                     if (project.booleanProperty("fgp.kotlin.fastJarFs", false).get()) {
                         freeCompilerArgs.add("-Xuse-fast-jar-file-system")

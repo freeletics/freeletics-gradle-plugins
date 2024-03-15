@@ -4,6 +4,7 @@ import com.freeletics.gradle.setup.defaultTestSetup
 import com.freeletics.gradle.util.freeleticsExtension
 import com.freeletics.gradle.util.java
 import com.freeletics.gradle.util.javaTargetVersion
+import com.freeletics.gradle.util.kotlin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.compile.JavaCompile
