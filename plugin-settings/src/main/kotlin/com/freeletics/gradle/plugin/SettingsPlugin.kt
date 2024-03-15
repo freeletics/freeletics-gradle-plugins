@@ -104,6 +104,15 @@ public abstract class SettingsPlugin : Plugin<Settings> {
                 @Suppress("UnstableApiUsage")
                 management.repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
             }
+
+            val prefix = "fgp.version.override."
+            management.versionCatalogs {
+                val libs = it.maybeCreate("libs")
+                @Suppress("UnstableApiUsage")
+                target.providers.gradlePropertiesPrefixedBy(prefix).get().forEach { (name, version) ->
+                    libs.version(name.substringAfter(prefix), version)
+                }
+            }
         }
 
         target.buildCache {
