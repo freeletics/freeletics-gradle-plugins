@@ -112,12 +112,14 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
         project.kotlinMultiplatform {
             jvm()
 
-            js(KotlinJsCompilerType.IR) {
+            js {
                 nodejs()
             }
 
             @OptIn(ExperimentalWasmDsl::class)
-            wasmJs()
+            wasmJs {
+                nodejs()
+            }
 
             linuxX64()
             linuxArm64()
