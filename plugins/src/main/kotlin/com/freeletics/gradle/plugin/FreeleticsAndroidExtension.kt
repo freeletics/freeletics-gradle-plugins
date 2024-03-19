@@ -10,10 +10,16 @@ import org.gradle.api.Project
 
 public abstract class FreeleticsAndroidExtension(private val project: Project) {
 
-    public fun useRoom() {
+    public fun useRoom(schemaLocation: String? = null) {
+        val processingArguments = buildList {
+            add("room.generateKotlin" to "true")
+            schemaLocation?.let {
+                add("room.schemaLocation" to it)
+            }
+        }
         val processorConfiguration = project.configureProcessing(
             useKsp = true,
-            "room.generateKotlin" to "true",
+            *processingArguments.toTypedArray(),
         )
 
         project.dependencies.apply {
