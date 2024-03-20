@@ -119,8 +119,6 @@ private class RoomSchemaArgProvider(
 ) : CommandLineArgumentProvider {
 
     override fun asArguments(): Iterable<String> {
-        // Note: If you're using KAPT and javac, change the line below to
-        // return listOf("-Aroom.schemaLocation=${schemaDir.path}").
         return listOf("room.schemaLocation=${schemaDir.path}")
     }
 }

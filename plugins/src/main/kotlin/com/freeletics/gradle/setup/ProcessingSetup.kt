@@ -2,7 +2,11 @@ package com.freeletics.gradle.setup
 
 import com.freeletics.gradle.util.android
 import com.google.devtools.ksp.gradle.KspExtension
+import java.io.File
 import org.gradle.api.Project
+import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.PathSensitive
+import org.gradle.api.tasks.PathSensitivity
 import org.gradle.process.CommandLineArgumentProvider
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 
@@ -45,7 +49,7 @@ internal fun Project.configureProcessing(
             }
         }
         val cliArguments = arguments.filterIsInstance<CliArgumentProvider>()
-            .map { it.provider }
+            .map { KaptArgProviderWrapper(it.provider) }
         if (cliArguments.isNotEmpty()) {
             project.android {
                 defaultConfig {
@@ -74,3 +78,14 @@ internal fun argumentProvider(provider: CommandLineArgumentProvider): Processing
 private data class CliArgumentProvider(
     val provider: CommandLineArgumentProvider,
 ) : ProcessingArgument
+
+
+private class KaptArgProviderWrapper(
+    val provider: CommandLineArgumentProvider,
+) : CommandLineArgumentProvider {
+
+    override fun asArguments(): Iterable<String> {
+        // prepends arguments with "-A" for kapt or javac
+        return provider.asArguments().map { "-A$it" }
+    }
+}
