@@ -2,11 +2,7 @@ package com.freeletics.gradle.setup
 
 import com.freeletics.gradle.util.android
 import com.google.devtools.ksp.gradle.KspExtension
-import java.io.File
 import org.gradle.api.Project
-import org.gradle.api.tasks.InputDirectory
-import org.gradle.api.tasks.PathSensitive
-import org.gradle.api.tasks.PathSensitivity
 import org.gradle.process.CommandLineArgumentProvider
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 
@@ -78,7 +74,6 @@ internal fun argumentProvider(provider: CommandLineArgumentProvider): Processing
 private data class CliArgumentProvider(
     val provider: CommandLineArgumentProvider,
 ) : ProcessingArgument
-
 
 private class KaptArgProviderWrapper(
     val provider: CommandLineArgumentProvider,
