@@ -57,9 +57,9 @@ internal fun Project.configureDagger(mode: DaggerMode) {
     if (runDagger) {
         val processorConfiguration = configureProcessing(
             useKsp = runDaggerInKsp,
-            "dagger.experimentalDaggerErrorMessages" to "enabled",
-            "dagger.strictMultibindingValidation" to "enabled",
-            "dagger.warnIfInjectionFactoryNotGeneratedUpstream" to "enabled",
+            basicArgument("dagger.experimentalDaggerErrorMessages" to "enabled"),
+            basicArgument("dagger.strictMultibindingValidation" to "enabled"),
+            basicArgument("dagger.warnIfInjectionFactoryNotGeneratedUpstream" to "enabled"),
         )
 
         dependencies.apply {
