@@ -1,17 +1,28 @@
 package com.freeletics.gradle.setup
 
+import com.freeletics.gradle.util.android
 import com.google.devtools.ksp.gradle.KspExtension
 import org.gradle.api.Project
+import org.gradle.process.CommandLineArgumentProvider
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 
-internal fun Project.configureProcessing(useKsp: Boolean, vararg arguments: Pair<String, String>): String {
+internal fun Project.configureProcessing(
+    useKsp: Boolean,
+    vararg arguments: ProcessingArgument,
+): String {
     if (useKsp) {
         plugins.apply("com.google.devtools.ksp")
 
         if (arguments.isNotEmpty()) {
             extensions.configure(KspExtension::class.java) { extension ->
-                arguments.forEach { (key, value) ->
-                    extension.arg(key, value)
+                arguments.forEach { arg ->
+                    when (arg) {
+                        is BasicArgument ->
+                            extension.arg(arg.key, arg.value)
+
+                        is CliArgumentProvider ->
+                            extension.arg(arg.provider)
+                    }
                 }
             }
         }
@@ -20,14 +31,28 @@ internal fun Project.configureProcessing(useKsp: Boolean, vararg arguments: Pair
     } else {
         plugins.apply("org.jetbrains.kotlin.kapt")
 
-        if (arguments.isNotEmpty()) {
+        val basicArguments = arguments.filterIsInstance<BasicArgument>()
+        if (basicArguments.isNotEmpty()) {
             extensions.configure(KaptExtension::class.java) { extension ->
                 extension.mapDiagnosticLocations = true
                 extension.correctErrorTypes = true
 
                 extension.arguments {
-                    arguments.forEach { (key, value) ->
+                    basicArguments.forEach { (key, value) ->
                         arg(key, value)
+                    }
+                }
+            }
+        }
+        val cliArguments = arguments.filterIsInstance<CliArgumentProvider>()
+            .map { it.provider }
+        if (cliArguments.isNotEmpty()) {
+            project.android {
+                defaultConfig {
+                    javaCompileOptions {
+                        annotationProcessorOptions {
+                            compilerArgumentProviders.addAll(cliArguments)
+                        }
                     }
                 }
             }
@@ -36,3 +61,16 @@ internal fun Project.configureProcessing(useKsp: Boolean, vararg arguments: Pair
         return "kapt"
     }
 }
+
+internal sealed interface ProcessingArgument
+
+internal fun basicArgument(pair: Pair<String, String>): ProcessingArgument = BasicArgument(pair.first, pair.second)
+private data class BasicArgument(
+    val key: String,
+    val value: String,
+) : ProcessingArgument
+
+internal fun argumentProvider(provider: CommandLineArgumentProvider): ProcessingArgument = CliArgumentProvider(provider)
+private data class CliArgumentProvider(
+    val provider: CommandLineArgumentProvider,
+) : ProcessingArgument

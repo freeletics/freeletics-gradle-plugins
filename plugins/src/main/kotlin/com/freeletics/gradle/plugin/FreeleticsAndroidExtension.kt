@@ -1,20 +1,31 @@
 package com.freeletics.gradle.plugin
 
 import com.android.build.api.dsl.LibraryExtension
+import com.freeletics.gradle.setup.argumentProvider
+import com.freeletics.gradle.setup.basicArgument
 import com.freeletics.gradle.setup.configurePaparazzi
 import com.freeletics.gradle.setup.configureProcessing
 import com.freeletics.gradle.util.android
 import com.freeletics.gradle.util.androidResources
 import com.freeletics.gradle.util.getDependency
+import java.io.File
 import org.gradle.api.Project
+import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.PathSensitive
+import org.gradle.api.tasks.PathSensitivity
+import org.gradle.process.CommandLineArgumentProvider
 
 public abstract class FreeleticsAndroidExtension(private val project: Project) {
 
     public fun useRoom(schemaLocation: String? = null) {
         val processingArguments = buildList {
-            add("room.generateKotlin" to "true")
+            add(basicArgument("room.generateKotlin" to "true"))
             schemaLocation?.let {
-                add("room.schemaLocation" to it)
+                add(
+                    argumentProvider(
+                        RoomSchemaArgProvider(schemaDir = File(project.projectDir, schemaLocation)),
+                    ),
+                )
             }
         }
         val processorConfiguration = project.configureProcessing(
@@ -98,5 +109,18 @@ public abstract class FreeleticsAndroidExtension(private val project: Project) {
         project.android {
             (this as LibraryExtension).defaultConfig.consumerProguardFiles(*files)
         }
+    }
+}
+
+private class RoomSchemaArgProvider(
+    @get:InputDirectory
+    @get:PathSensitive(PathSensitivity.RELATIVE)
+    val schemaDir: File,
+) : CommandLineArgumentProvider {
+
+    override fun asArguments(): Iterable<String> {
+        // Note: If you're using KAPT and javac, change the line below to
+        // return listOf("-Aroom.schemaLocation=${schemaDir.path}").
+        return listOf("room.schemaLocation=${schemaDir.path}")
     }
 }
