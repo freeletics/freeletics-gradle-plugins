@@ -247,6 +247,8 @@ androidx-room-runtime = { module = "androidx.room:room-runtime", version = "..."
 androidx-room-compiler = { module = "androidx.room:room-compiler", version = "..." }
 ```
 
+Optional Room `schemaLocation` directory path can be passed to `useRoom` and should be relative to project's root
+directory.
 
 ## Kotlin/JVM Library projects
 
