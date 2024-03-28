@@ -21,7 +21,7 @@ gradle-toolchain = "0.8.0"
 publish = "0.28.0"
 dokka = "1.9.20"
 
-clikt = "4.2.2"
+clikt = "4.3.0"
 ktlint = "0.50.0"
 
 junit = "4.13.2"
