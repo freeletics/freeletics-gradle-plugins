@@ -10,12 +10,16 @@ import com.freeletics.gradle.util.androidResources
 import com.freeletics.gradle.util.getDependency
 import java.io.File
 import org.gradle.api.Project
+import org.gradle.api.provider.Property
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.process.CommandLineArgumentProvider
 
 public abstract class FreeleticsAndroidExtension(private val project: Project) {
+
+    public val debugBuildTypeEnabled: Property<Boolean> = project.objects.property(Boolean::class.java)
+        .convention(false)
 
     public fun useRoom(schemaLocation: String? = null) {
         val processingArguments = buildList {
@@ -68,6 +72,7 @@ public abstract class FreeleticsAndroidExtension(private val project: Project) {
     }
 
     public fun enableBuildConfig() {
+        debugBuildTypeEnabled.value(true)
         project.android {
             buildFeatures.buildConfig = true
         }
@@ -80,12 +85,14 @@ public abstract class FreeleticsAndroidExtension(private val project: Project) {
     }
 
     public fun buildConfigField(type: String, name: String, value: String) {
+        enableBuildConfig()
         project.android {
             defaultConfig.buildConfigField(type, name, value)
         }
     }
 
     public fun buildConfigField(type: String, name: String, debugValue: String, releaseValue: String) {
+        enableBuildConfig()
         project.android {
             buildTypes.getByName("debug").buildConfigField(type, name, debugValue)
             buildTypes.getByName("release").buildConfigField(type, name, releaseValue)
@@ -93,12 +100,15 @@ public abstract class FreeleticsAndroidExtension(private val project: Project) {
     }
 
     public fun resValue(type: String, name: String, value: String) {
+        enableAndroidResources()
         project.android {
             defaultConfig.resValue(type, name, value)
         }
     }
 
     public fun resValue(type: String, name: String, debugValue: String, releaseValue: String) {
+        enableAndroidResources()
+        debugBuildTypeEnabled.value(true)
         project.android {
             buildTypes.getByName("debug").resValue(type, name, debugValue)
             buildTypes.getByName("release").resValue(type, name, releaseValue)

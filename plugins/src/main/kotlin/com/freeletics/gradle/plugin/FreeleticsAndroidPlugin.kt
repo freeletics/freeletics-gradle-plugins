@@ -32,13 +32,24 @@ public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
         }
         target.plugins.apply(FreeleticsBasePlugin::class.java)
 
-        target.freeleticsExtension.extensions.create("android", FreeleticsAndroidExtension::class.java)
+        val extension = target.freeleticsExtension.extensions.create("android", FreeleticsAndroidExtension::class.java)
 
         target.androidSetup()
         target.addDefaultAndroidDependencies()
         target.configureLint()
-        target.configureUnitTests()
+        target.configureUnitTests(extension)
         target.disableAndroidTests()
+
+        target.android {
+            buildTypes {
+                getByName("debug").matchingFallbacks.add("release")
+            }
+        }
+        target.androidComponents {
+            beforeVariants(selector().withBuildType("debug")) {
+                it.enable = extension.debugBuildTypeEnabled.get()
+            }
+        }
     }
 
     private fun Project.androidSetup() {
@@ -119,7 +130,7 @@ public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
         }
     }
 
-    private fun Project.configureUnitTests() {
+    private fun Project.configureUnitTests(extension: FreeleticsAndroidExtension) {
         android {
             @Suppress("UnstableApiUsage")
             testOptions {
@@ -128,8 +139,10 @@ public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
         }
 
         androidComponents {
-            beforeVariants(selector().withBuildType("release")) {
-                (it as? HasUnitTestBuilder)?.enableUnitTest = false
+            beforeVariants {
+                if (it.buildType == "release" && extension.debugBuildTypeEnabled.get()) {
+                    (it as? HasUnitTestBuilder)?.enableUnitTest = false
+                }
             }
         }
     }

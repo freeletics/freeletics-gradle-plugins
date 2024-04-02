@@ -2,16 +2,29 @@ package com.freeletics.gradle.monorepo.setup
 
 import com.android.build.api.variant.AndroidComponentsExtension
 import com.freeletics.gradle.monorepo.util.capitalize
+import com.freeletics.gradle.util.freeleticsAndroidExtension
 import org.gradle.api.Project
 
 internal fun Project.disableAndroidApplicationTasks() {
-    disableAndroidTasks(androidAppLintTasksToDisableExceptOneVariant, "debug")
+    disableAndroidTasks(androidAppLintTasksToDisableExceptOneVariant) {
+        if (freeleticsAndroidExtension.debugBuildTypeEnabled.get()) {
+            "debug"
+        } else {
+            "release"
+        }
+    }
 }
 
 internal fun Project.disableAndroidLibraryTasks() {
     disableAndroidTasks(androidLibraryTasksToDisable)
     disableAndroidTasks(androidLibraryLintTasksToDisable)
-    disableAndroidTasks(androidLibraryLintTasksToDisableExceptOneVariant, "debug")
+    disableAndroidTasks(androidLibraryLintTasksToDisableExceptOneVariant) {
+        if (freeleticsAndroidExtension.debugBuildTypeEnabled.get()) {
+            "debug"
+        } else {
+            "release"
+        }
+    }
 }
 
 internal fun Project.disableKotlinLibraryTasks() {
@@ -19,10 +32,10 @@ internal fun Project.disableKotlinLibraryTasks() {
     disableTasks(lintTasksToDisableJvm)
 }
 
-private fun Project.disableAndroidTasks(names: List<String>, variantToKeep: String = "") {
+private fun Project.disableAndroidTasks(names: List<String>, variantToKeep: () -> String = { "" }) {
     extensions.configure<AndroidComponentsExtension<*, *, *>>("androidComponents") { components ->
         components.onVariants { variant ->
-            if (variant.name != variantToKeep) {
+            if (variant.name != variantToKeep()) {
                 val variantAwareNames = names.map { it.replace("{VARIANT}", variant.name.capitalize()) }
                 disableTasks(variantAwareNames)
             }
