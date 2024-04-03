@@ -99,10 +99,5 @@ gradlePlugin {
             id = "com.freeletics.gradle.legacy.android"
             implementationClass = "com.freeletics.gradle.monorepo.plugin.LegacyAndroidPlugin"
         }
-
-        create("monoLegacyKotlinPlugin") {
-            id = "com.freeletics.gradle.legacy.kotlin"
-            implementationClass = "com.freeletics.gradle.monorepo.plugin.LegacyKotlinPlugin"
-        }
     }
 }
