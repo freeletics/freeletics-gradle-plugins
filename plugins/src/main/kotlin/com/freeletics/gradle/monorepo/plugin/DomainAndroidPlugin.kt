@@ -8,7 +8,6 @@ import com.freeletics.gradle.monorepo.util.appType
 import com.freeletics.gradle.monorepo.util.projectType
 import com.freeletics.gradle.plugin.FreeleticsAndroidPlugin
 import com.freeletics.gradle.util.freeleticsAndroidExtension
-import com.freeletics.gradle.util.freeleticsExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
