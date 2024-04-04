@@ -1,7 +1,7 @@
 package com.freeletics.gradle.plugin
 
-import com.gradle.enterprise.gradleplugin.GradleEnterpriseExtension
-import com.gradle.enterprise.gradleplugin.GradleEnterprisePlugin
+import com.gradle.develocity.agent.gradle.DevelocityConfiguration
+import com.gradle.develocity.agent.gradle.DevelocityPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.credentials.PasswordCredentials
 import org.gradle.api.initialization.Settings
@@ -15,14 +15,14 @@ public abstract class SettingsPlugin : Plugin<Settings> {
 
     override fun apply(target: Settings) {
         target.plugins.apply(FoojayToolchainsPlugin::class.java)
-        target.plugins.apply(GradleEnterprisePlugin::class.java)
+        target.plugins.apply(DevelocityPlugin::class.java)
 
         val extension = target.extensions.create("freeletics", SettingsExtension::class.java, target)
 
-        target.extensions.configure(GradleEnterpriseExtension::class.java) {
+        target.extensions.configure(DevelocityConfiguration::class.java) {
             it.buildScan { scan ->
-                scan.termsOfServiceUrl = "https://gradle.com/terms-of-service"
-                scan.termsOfServiceAgree = "yes"
+                scan.termsOfUseUrl.set("https://gradle.com/terms-of-service")
+                scan.termsOfUseAgree.set("yes")
             }
         }
 

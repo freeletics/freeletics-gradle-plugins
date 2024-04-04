@@ -16,7 +16,7 @@ paparazzi = "1.3.3-fl04"
 licensee = "1.11.0"
 crashlytics-gradle = "2.9.8"
 dependency-analysis = "1.30.0"
-gradle-enterprise = "3.16.2"
+develocity = "3.17"
 gradle-toolchain = "0.8.0"
 publish = "0.28.0"
 dokka = "1.9.20"
@@ -49,7 +49,7 @@ crashlytics = { module = "com.google.firebase:firebase-crashlytics-gradle", vers
 
 dependency-analysis = { module = "com.autonomousapps:dependency-analysis-gradle-plugin", version.ref = "dependency-analysis" }
 
-gradle-enterprise = { module = "com.gradle:gradle-enterprise-gradle-plugin", version.ref = "gradle-enterprise" }
+develocity = { module = "com.gradle:develocity-gradle-plugin", version.ref = "develocity" }
 gradle-toolchain = { module = "org.gradle.toolchains:foojay-resolver", version.ref = "gradle-toolchain" }
 
 publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish"}

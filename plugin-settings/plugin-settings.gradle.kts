@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-    implementation(libs.gradle.enterprise)
+    implementation(libs.develocity)
     implementation(libs.gradle.toolchain)
 }
 
