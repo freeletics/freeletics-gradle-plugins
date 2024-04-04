@@ -32,6 +32,10 @@ public abstract class FreeleticsBaseExtension(private val project: Project) : Ex
         project.configureMoshi(sealed)
     }
 
+    public fun useSerialization() {
+        project.plugins.apply("org.jetbrains.kotlin.plugin.serialization")
+    }
+
     public fun useDagger() {
         project.configureDagger(DaggerMode.ANVIL_ONLY)
     }
