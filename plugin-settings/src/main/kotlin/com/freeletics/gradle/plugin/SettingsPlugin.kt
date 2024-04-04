@@ -2,8 +2,6 @@ package com.freeletics.gradle.plugin
 
 import com.gradle.develocity.agent.gradle.DevelocityConfiguration
 import com.gradle.develocity.agent.gradle.DevelocityPlugin
-import com.gradle.enterprise.gradleplugin.GradleEnterpriseExtension
-import com.gradle.enterprise.gradleplugin.GradleEnterprisePlugin
 import org.gradle.api.Plugin
 import org.gradle.api.credentials.PasswordCredentials
 import org.gradle.api.initialization.Settings
