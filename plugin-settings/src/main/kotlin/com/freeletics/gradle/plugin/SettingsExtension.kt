@@ -135,9 +135,6 @@ public abstract class SettingsExtension(private val settings: Settings) {
 
     /**
      * Include a local clone of Khonshu in this build.
-     *
-     * When [experimentalNavigation] is `true` any usage of Khonshu `navigation-compose` will be replaced with
-     * `navigation-experimental` to try out the experimental navigation implementation.
      */
     @JvmOverloads
     public fun includeKhonshu(path: String = "../khonshu") {

@@ -1,11 +1,23 @@
 Change Log
 ==========
 
+## 0.12.0 *(2024-04-04)*
+
+- Add mechanism to override version catalog versions through Gradle properties. The property should have
+  `fgp.version.override.<name-of-version-in-catalog>` as name.
+- Add support for setting a `room.schemaLocation`.
+- Add support for enabling kotlinx.serialization through `useSerialization()`.
+- Set `-Xjdk-release` option for Kotlin/JVM projects.
+- Update the setup for Anvil KSP to support Anvil 2.5.0.
+- Removed options for Khonshu's experimental navigation.
+- Fixed missing `wasmJs` test targets warning.
+
+
 ## 0.11.0 *(2024-02-21)*
 
 - `addCommonTargets` now adds the `wasmJs` target.
 - `addIosTargets` doesn't add `iosX64` anymore.
-- expose the created framework for `addIosTargets`.
+- Expose the created framework for `addIosTargets`.
 
 
 ## 0.10.1 *(2024-02-02)*
