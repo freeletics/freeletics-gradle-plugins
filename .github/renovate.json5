@@ -33,7 +33,7 @@
     },
     {
       matchPackageNames: [
-        "com.gradle:gradle-enterprise-gradle-plugin"
+        "com.gradle:develocity-gradle-plugin"
       ],
       registryUrls: ["https://plugins.gradle.org/m2/"],
       prBodyNotes: "[Changelog](https://plugins.gradle.org/plugin/com.gradle.enterprise)"
