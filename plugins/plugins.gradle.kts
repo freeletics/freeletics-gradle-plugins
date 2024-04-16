@@ -10,7 +10,7 @@ dependencies {
     compileOnly(libs.kotlin.gradle.api)
     compileOnly(libs.kotlin.native.utils)
     compileOnly(libs.compose.gradle)
-    compileOnly(libs.ksp)
+    compileOnly(libs.ksp.gradle)
     compileOnly(libs.anvil.gradle)
     compileOnly(libs.moshix.gradle)
     compileOnly(libs.paparazzi.gradle)
