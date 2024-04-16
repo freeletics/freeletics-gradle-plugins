@@ -86,6 +86,7 @@ public abstract class SettingsExtension(private val settings: Settings) {
     @JvmOverloads
     public fun snapshots(androidXBuildId: String? = null) {
         settings.dependencyResolutionManagement { management ->
+            @Suppress("UnstableApiUsage")
             management.repositories { handler ->
                 handler.maven {
                     it.setUrl("https://oss.sonatype.org/content/repositories/snapshots/")

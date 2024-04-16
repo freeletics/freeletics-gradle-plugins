@@ -98,13 +98,6 @@ public abstract class SettingsPlugin : Plugin<Settings> {
                 }
             }
 
-            // TODO https://youtrack.jetbrains.com/issue/KT-51379
-            val mpp = target.booleanProperty("fgp.kotlin.multiplatformProject", false)
-            if (!mpp) {
-                @Suppress("UnstableApiUsage")
-                management.repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-            }
-
             val prefix = "fgp.version.override."
             management.versionCatalogs {
                 val libs = it.maybeCreate("libs")
