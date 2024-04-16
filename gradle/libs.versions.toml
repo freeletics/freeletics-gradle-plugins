@@ -8,7 +8,6 @@ kotlin = "2.0.0-RC1"
 coroutines = "1.8.0"
 android-gradle = "8.3.2"
 android-gradle-common = "31.3.2"
-jb-compose="1.6.2"
 ksp="2.0.0-RC1-1.0.20"
 anvil = "2.5.0-beta07"
 moshix = "0.26.0-alpha03"
@@ -34,11 +33,10 @@ kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.
 kotlin-gradle-api = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin-api", version.ref = "kotlin" }
 kotlin-native-utils = { module = "org.jetbrains.kotlin:kotlin-native-utils", version.ref = "kotlin" }
 
-android-gradle = { module = "com.android.tools.build:gradle", version.ref = "android-gradle" }
 android-gradle-api = { module = "com.android.tools.build:gradle-api", version.ref = "android-gradle" }
 android-tools-common = { module = "com.android.tools:common", version.ref = "android-gradle-common" }
 
-compose-gradle = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "jb-compose" }
+compose-gradle = { module = "org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable", version.ref = "kotlin" }
 ksp-gradle = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin",  version.ref = "ksp" }
 anvil-gradle = { module = "com.squareup.anvil:gradle-plugin", version.ref = "anvil" }
 moshix-gradle = { module = "dev.zacsweers.moshix:moshi-gradle-plugin", version.ref = "moshix" }

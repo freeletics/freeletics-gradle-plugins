@@ -69,14 +69,11 @@
       matchPackagePatterns: [
         "org.jetbrains.kotlin",
         "com.google.devtools.ksp",
-        "dev.zacsweers.kctfork",
-        "androidx.compose.compiler",
-        "org.jetbrains.compose.compiler",
       ],
       excludePackagePatterns: [
         "org.jetbrains.kotlinx",
       ],
-      groupName: "Kotlin, KSP and Compose Compiler"
+      groupName: "Kotlin and KSP"
     },
     {
       matchPackagePatterns: [
