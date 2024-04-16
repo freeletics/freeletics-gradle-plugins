@@ -12,10 +12,14 @@ import com.freeletics.gradle.plugin.FreeleticsAndroidExtension
 import com.freeletics.gradle.plugin.FreeleticsBaseExtension
 import com.freeletics.gradle.plugin.FreeleticsJvmExtension
 import com.freeletics.gradle.plugin.FreeleticsMultiplatformExtension
-import com.freeletics.gradle.util.KotlinProjectExtensionDelegate.Companion.kotlinProjectExtensionDelegate
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPluginExtension
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinCommonCompilerOptions
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
 
 internal val Project.freeleticsExtension: FreeleticsBaseExtension
     get() = extensions.getByType(FreeleticsBaseExtension::class.java)
@@ -35,8 +39,21 @@ internal fun Project.java(action: JavaPluginExtension.() -> Unit) {
     }
 }
 
-internal fun Project.kotlin(action: KotlinProjectExtensionDelegate.() -> Unit) {
-    kotlinProjectExtensionDelegate().action()
+internal fun Project.kotlin(action: KotlinProjectExtension.() -> Unit) {
+    (project.extensions.getByName("kotlin") as KotlinProjectExtension).action()
+}
+
+@OptIn(ExperimentalKotlinGradlePluginApi::class)
+internal fun KotlinProjectExtension.compilerOptions(configure: KotlinCommonCompilerOptions.() -> Unit) {
+    when (this) {
+        is KotlinJvmProjectExtension -> compilerOptions(configure)
+        is KotlinAndroidProjectExtension -> compilerOptions(configure)
+        is KotlinMultiplatformExtension -> {
+            compilerOptions(configure)
+            targets.configureEach { compilerOptions(configure) }
+        }
+        else -> throw IllegalStateException("Unsupported kotlin extension ${this::class}")
+    }
 }
 
 internal fun Project.kotlinMultiplatform(action: KotlinMultiplatformExtension.() -> Unit) {

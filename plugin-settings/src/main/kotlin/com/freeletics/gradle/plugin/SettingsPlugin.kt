@@ -5,7 +5,6 @@ import com.gradle.develocity.agent.gradle.DevelocityPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.credentials.PasswordCredentials
 import org.gradle.api.initialization.Settings
-import org.gradle.api.initialization.resolve.RepositoriesMode
 import org.gradle.caching.http.HttpBuildCache
 import org.gradle.kotlin.dsl.jvm
 import org.gradle.toolchains.foojay.FoojayToolchainResolver

@@ -1,8 +1,8 @@
 package com.freeletics.gradle.plugin
 
-import com.freeletics.gradle.util.KotlinAndroidProjectExtensionDelegate
 import com.freeletics.gradle.util.addMaybe
 import com.freeletics.gradle.util.booleanProperty
+import com.freeletics.gradle.util.compilerOptions
 import com.freeletics.gradle.util.getBundleOrNull
 import com.freeletics.gradle.util.getVersionOrNull
 import com.freeletics.gradle.util.java
@@ -14,6 +14,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.jvm.tasks.Jar
 import org.gradle.jvm.toolchain.JvmVendorSpec
+import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
@@ -66,7 +67,7 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                 toolchain.vendor.set(JvmVendorSpec.AZUL)
             }
 
-            val isAndroid = this is KotlinAndroidProjectExtensionDelegate
+            val isAndroid = this is KotlinAndroidProjectExtension
 
             compilerOptions {
                 val version = getVersionOrNull("kotlin-language")

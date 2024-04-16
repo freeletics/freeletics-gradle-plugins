@@ -1,6 +1,7 @@
 package com.freeletics.gradle.setup
 
 import com.freeletics.gradle.util.booleanProperty
+import com.freeletics.gradle.util.compilerOptions
 import com.freeletics.gradle.util.kotlin
 import org.gradle.api.Project
 
