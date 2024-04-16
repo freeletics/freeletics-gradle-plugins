@@ -8,6 +8,7 @@ dependencies {
     compileOnly(libs.android.tools.common)
     compileOnly(libs.kotlin.gradle)
     compileOnly(libs.kotlin.gradle.api)
+    compileOnly(libs.kotlin.gradle.annotations)
     compileOnly(libs.kotlin.native.utils)
     compileOnly(libs.compose.gradle)
     compileOnly(libs.ksp.gradle)
