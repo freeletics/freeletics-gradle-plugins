@@ -4,8 +4,7 @@ plugins {
 }
 
 dependencies {
-    compileOnly(libs.android.gradle.api)
-    compileOnly(libs.android.tools.common)
+    compileOnly(libs.android.gradle)
     compileOnly(libs.kotlin.gradle)
     compileOnly(libs.kotlin.gradle.api)
     compileOnly(libs.kotlin.native.utils)
