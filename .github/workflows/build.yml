@@ -15,9 +15,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Gradle Wrapper Validation
-        uses: gradle/wrapper-validation-action@v2
-
       - name: Install JDK
         uses: actions/setup-java@v4
         with:
@@ -25,6 +22,8 @@ jobs:
           java-version: 19
 
       - uses: gradle/actions/setup-gradle@v3
+        with:
+          validate-wrappers: true
 
       - name: Build with Gradle
         run: ./gradlew build buildHealth --stacktrace
