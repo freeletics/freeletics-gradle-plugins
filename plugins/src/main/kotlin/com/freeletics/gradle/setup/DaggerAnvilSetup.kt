@@ -10,10 +10,13 @@ import com.squareup.anvil.plugin.AnvilExtension
 import org.gradle.api.Project
 
 internal fun Project.configureDagger(mode: DaggerMode) {
-    val anvilKsp = booleanProperty("fgp.kotlin.anvilKsp", false)
-    val daggerKsp = booleanProperty("fgp.kotlin.daggerKsp", false)
-
     val runDagger = mode == ANVIL_WITH_FULL_DAGGER
+    val anvilKsp = if (runDagger) {
+        booleanProperty("fgp.kotlin.anvilKspWithComponent", false)
+    } else {
+        booleanProperty("fgp.kotlin.anvilKsp", false)
+    }
+    val daggerKsp = booleanProperty("fgp.kotlin.daggerKsp", false)
     val runDaggerInKsp = runDagger && daggerKsp.get()
 
     plugins.apply("com.squareup.anvil")
@@ -27,6 +30,7 @@ internal fun Project.configureDagger(mode: DaggerMode) {
         }
         it.generateDaggerFactories.set(!runDagger)
         it.disableComponentMerging.set(!runDagger)
+        it.trackSourceFiles.set(true)
     }
 
     dependencies.apply {
