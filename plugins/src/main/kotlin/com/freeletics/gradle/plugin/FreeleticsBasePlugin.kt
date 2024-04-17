@@ -69,14 +69,14 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
             val isAndroid = this is KotlinAndroidProjectExtensionDelegate
 
             compilerOptions {
-                getVersionOrNull("kotlin-language")?.let {
-                    languageVersion.set(KotlinVersion.fromVersion(it))
-                }
+                val version = getVersionOrNull("kotlin-language")
+                    ?.let(KotlinVersion::fromVersion) ?: KotlinVersion.DEFAULT
+                languageVersion.set(version)
 
                 allWarningsAsErrors.set(!booleanProperty("fgp.kotlin.allowWarnings", false).get())
 
                 // In this mode, some deprecations and bug-fixes for unstable code take effect immediately.
-                progressiveMode.set(true)
+                progressiveMode.set(version >= KotlinVersion.DEFAULT)
 
                 // Support inferring type arguments based on only self upper bounds of the corresponding type parameters
                 // https://kotlinlang.org/docs/whatsnew1530.html#improvements-to-type-inference-for-recursive-generic-types
