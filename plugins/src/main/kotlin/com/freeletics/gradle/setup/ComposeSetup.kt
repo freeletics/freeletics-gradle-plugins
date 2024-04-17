@@ -8,27 +8,17 @@ import com.freeletics.gradle.util.kotlin
 import com.freeletics.gradle.util.stringProperty
 import org.gradle.api.Project
 import org.jetbrains.compose.ComposeExtension
+import org.jetbrains.kotlin.gradle.plugin.KotlinBasePlugin
 
 internal fun Project.setupCompose() {
-    if ((plugins.hasPlugin("com.android.library") || plugins.hasPlugin("com.android.library")) &&
+    if (kotlinGradlePluginVersion().startsWith("2.")) {
+        setupComposeKotlin2()
+    } else if ((plugins.hasPlugin("com.android.library") || plugins.hasPlugin("com.android.application")) &&
         !plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")
     ) {
         setupComposeAndroid()
     } else {
         setupComposeJetbrains()
-    }
-
-    val suppressComposeCompilerCheck = project.stringProperty("fgp.compose.kotlinVersion").orNull
-    if (suppressComposeCompilerCheck != null) {
-        project.kotlin {
-            compilerOptions {
-                freeCompilerArgs.addAll(
-                    "-P",
-                    "plugin:androidx.compose.compiler.plugins.kotlin:" +
-                        "suppressKotlinVersionCompatibilityCheck=$suppressComposeCompilerCheck",
-                )
-            }
-        }
     }
 
     val enableMetrics = project.booleanProperty("fgp.compose.enableCompilerMetrics", false)
@@ -38,7 +28,7 @@ internal fun Project.setupCompose() {
             .map { it.asFile.absolutePath }
             .get()
 
-        project.kotlin {
+        kotlin {
             compilerOptions {
                 freeCompilerArgs.addAll(
                     "-P",
@@ -55,7 +45,7 @@ internal fun Project.setupCompose() {
             .map { it.asFile.absolutePath }
             .get()
 
-        project.kotlin {
+        kotlin {
             compilerOptions {
                 freeCompilerArgs.addAll(
                     "-P",
@@ -66,14 +56,42 @@ internal fun Project.setupCompose() {
     }
 }
 
+private fun Project.kotlinGradlePluginVersion(): String {
+    val id = listOf(
+        "org.jetbrains.kotlin.jvm",
+        "org.jetbrains.kotlin.android",
+        "org.jetbrains.kotlin.multiplatform",
+    ).firstOrNull { plugins.hasPlugin(it) } ?: throw IllegalStateException("No Kotlin plugin found")
+    return (plugins.getPlugin(id) as KotlinBasePlugin).pluginVersion
+}
+
+private fun Project.setupComposeKotlin2() {
+    plugins.apply("org.jetbrains.kotlin.plugin.compose")
+
+    // TODO remove after RC1
+    if (kotlinGradlePluginVersion() == "2.0.0-RC1") {
+        kotlin {
+            compilerOptions {
+                freeCompilerArgs.addAll(
+                    "-P",
+                    "plugin:androidx.compose.compiler.plugins.kotlin:" +
+                        "suppressKotlinVersionCompatibilityCheck=2.0.0-RC1",
+                )
+            }
+        }
+    }
+}
+
 private fun Project.setupComposeAndroid() {
-    project.android {
+    android {
         buildFeatures.compose = true
 
         composeOptions {
             kotlinCompilerExtensionVersion = project.getVersion("androidx.compose.compiler")
         }
     }
+
+    suppressVersionInconsistency()
 }
 
 private fun Project.setupComposeJetbrains() {
@@ -82,5 +100,22 @@ private fun Project.setupComposeJetbrains() {
     extensions.configure(ComposeExtension::class.java) {
         val composeCompiler = getDependency("jetbrains-compose-compiler").get()
         it.kotlinCompilerPlugin.set("${composeCompiler.group}:${composeCompiler.name}:${composeCompiler.version}")
+    }
+
+    suppressVersionInconsistency()
+}
+
+private fun Project.suppressVersionInconsistency() {
+    val suppressComposeCompilerCheck = stringProperty("fgp.compose.kotlinVersion").orNull
+    if (suppressComposeCompilerCheck != null) {
+        kotlin {
+            compilerOptions {
+                freeCompilerArgs.addAll(
+                    "-P",
+                    "plugin:androidx.compose.compiler.plugins.kotlin:" +
+                        "suppressKotlinVersionCompatibilityCheck=$suppressComposeCompilerCheck",
+                )
+            }
+        }
     }
 }
