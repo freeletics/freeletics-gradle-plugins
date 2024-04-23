@@ -23,6 +23,11 @@ public abstract class SettingsPlugin : Plugin<Settings> {
             it.buildScan { scan ->
                 scan.termsOfUseUrl.set("https://gradle.com/terms-of-service")
                 scan.termsOfUseAgree.set("yes")
+                scan.capture {
+                    it.buildLogging.set(false)
+                    it.testLogging.set(false)
+                }
+                scan.publishing.onlyIf { false }
             }
         }
 
