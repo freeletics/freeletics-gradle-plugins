@@ -40,22 +40,30 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
     }
 
     @JvmOverloads
-    public fun addIosTargets(
+    public fun addIosTargets(configure: KotlinNativeTarget.() -> Unit = { }) {
+        project.kotlinMultiplatform {
+            iosArm64 {
+                configure()
+            }
+
+            iosSimulatorArm64 {
+                configure()
+            }
+        }
+    }
+
+    @JvmOverloads
+    public fun addIosTargetsWithXcFramework(
         frameworkName: String,
-        createXcFramework: Boolean = false,
         configure: KotlinNativeTarget.(Framework) -> Unit = { },
     ) {
-        val xcFramework = if (createXcFramework) {
-            XCFrameworkConfig(project, frameworkName)
-        } else {
-            null
-        }
+        val xcFramework = XCFrameworkConfig(project, frameworkName)
 
         project.kotlinMultiplatform {
             iosArm64 {
                 binaries.framework {
                     baseName = frameworkName
-                    xcFramework?.add(this)
+                    xcFramework.add(this)
                     configure(this)
                 }
             }
@@ -63,45 +71,43 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
             iosSimulatorArm64 {
                 binaries.framework {
                     baseName = frameworkName
-                    xcFramework?.add(this)
+                    xcFramework.add(this)
                     configure(this)
                 }
             }
         }
 
-        if (xcFramework != null) {
-            project.plugins.withType(FreeleticsPublishInternalPlugin::class.java) {
-                val framework = "$frameworkName.xcframework"
-                val frameworkRoot = project.layout.buildDirectory.dir("XCFrameworks/release")
-                val assembleTask = "assemble${frameworkName}ReleaseXCFramework"
+        project.plugins.withType(FreeleticsPublishInternalPlugin::class.java) {
+            val framework = "$frameworkName.xcframework"
+            val frameworkRoot = project.layout.buildDirectory.dir("XCFrameworks/release")
+            val assembleTask = "assemble${frameworkName}ReleaseXCFramework"
 
-                val frameworkZip = project.tasks.register("${assembleTask}Zip", Zip::class.java) {
-                    it.dependsOn(assembleTask)
+            val frameworkZip = project.tasks.register("${assembleTask}Zip", Zip::class.java) {
+                it.dependsOn(assembleTask)
+                it.onlyIf { HostManager.hostIsMac }
+
+                it.from(frameworkRoot.map { root -> root.dir(framework) })
+                it.into(framework)
+                it.archiveBaseName.set(framework)
+                it.destinationDirectory.set(frameworkRoot)
+                it.isPreserveFileTimestamps = false
+                it.isReproducibleFileOrder = true
+            }
+
+            val publicationName = "${frameworkName}XcFramework"
+            project.extensions.configure(PublishingExtension::class.java) { publishing ->
+                publishing.publications.create(publicationName, MavenPublication::class.java) {
+                    // the project.name will be replaced with the real artifact id by the publishing plugin
+                    it.artifactId = "${project.name}-xcframework"
+                    it.artifact(frameworkZip) { artifact ->
+                        artifact.extension = "zip"
+                    }
+                }
+            }
+
+            project.tasks.withType(AbstractPublishToMaven::class.java).configureEach {
+                if (it.name.contains(publicationName, ignoreCase = true)) {
                     it.onlyIf { HostManager.hostIsMac }
-
-                    it.from(frameworkRoot.map { root -> root.dir(framework) })
-                    it.into(framework)
-                    it.archiveBaseName.set(framework)
-                    it.destinationDirectory.set(frameworkRoot)
-                    it.isPreserveFileTimestamps = false
-                    it.isReproducibleFileOrder = true
-                }
-
-                val publicationName = "${frameworkName}XcFramework"
-                project.extensions.configure(PublishingExtension::class.java) { publishing ->
-                    publishing.publications.create(publicationName, MavenPublication::class.java) {
-                        // the project.name will be replaced with the real artifact id by the publishing plugin
-                        it.artifactId = "${project.name}-xcframework"
-                        it.artifact(frameworkZip) { artifact ->
-                            artifact.extension = "zip"
-                        }
-                    }
-                }
-
-                project.tasks.withType(AbstractPublishToMaven::class.java).configureEach {
-                    if (it.name.contains(publicationName, ignoreCase = true)) {
-                        it.onlyIf { HostManager.hostIsMac }
-                    }
                 }
             }
         }
