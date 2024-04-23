@@ -55,7 +55,7 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
     @JvmOverloads
     public fun addIosTargetsWithXcFramework(
         frameworkName: String,
-        configure: KotlinNativeTarget.(Framework) -> Unit = { }
+        configure: KotlinNativeTarget.(Framework) -> Unit = { },
     ) {
         val xcFramework = XCFrameworkConfig(project, frameworkName)
 
