@@ -1,6 +1,20 @@
 Change Log
 ==========
 
+## 0.12.1 *(2024-04-24)*
+
+- Add support for using Compose in Kotlin 2.0.0 through the new Compose compiler
+  plugin that is shipped as part of Kotlin.
+- Only enable Kotlin's progressive mode if the language version matches or 
+  exceeds the current Kotlin version.
+- Separate activating Anvil KSP for app modules from library modules. This
+  allows using Anvil KSP and K2 in most of the code base until Anvil KSP
+  is supporting contributed subcomponents.
+- `addIosTargets` now is not creating a framework anymore. `addIosTargetsWithXcFramework`
+  can be used for that instead.
+- Don't publish build scans by default.
+
+
 ## 0.12.0 *(2024-04-04)*
 
 - Add mechanism to override version catalog versions through Gradle properties. The property should have
