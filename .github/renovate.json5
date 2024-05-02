@@ -60,13 +60,6 @@
     },
     {
       matchPackagePatterns: [
-        "com.android.tools.build",
-        "com.android.tools",
-      ],
-      groupName: "Android Gradle Plugin"
-    },
-    {
-      matchPackagePatterns: [
         "org.jetbrains.kotlin",
         "com.google.devtools.ksp",
         "dev.zacsweers.kctfork",

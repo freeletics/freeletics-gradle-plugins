@@ -6,7 +6,7 @@ fgp = "0.12.1"
 
 kotlin = "1.9.23"
 coroutines = "1.8.0"
-android-gradle = "8.3.2"
+android-gradle = "8.4.0"
 android-gradle-common = "31.3.2"
 jb-compose="1.6.2"
 ksp="1.9.23-1.0.20"
@@ -34,10 +34,7 @@ kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.
 kotlin-gradle-api = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin-api", version.ref = "kotlin" }
 kotlin-native-utils = { module = "org.jetbrains.kotlin:kotlin-native-utils", version.ref = "kotlin" }
 
-android-gradle = { module = "com.android.tools.build:gradle", version.ref = "android-gradle" }
-android-gradle-api = { module = "com.android.tools.build:gradle-api", version.ref = "android-gradle" }
-android-tools-common = { module = "com.android.tools:common", version.ref = "android-gradle-common" }
-
+android-gradle = { module = "com.android.tools.build:gradle-api", version.ref = "android-gradle" }
 compose-gradle = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "jb-compose" }
 ksp = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin",  version.ref = "ksp" }
 anvil-gradle = { module = "com.squareup.anvil:gradle-plugin", version.ref = "anvil" }
