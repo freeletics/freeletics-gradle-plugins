@@ -1,6 +1,6 @@
 [versions]
-java-target = "11"
-java-toolchain = "19"
+java-target = "17"
+java-toolchain = "21"
 
 fgp = "0.12.1"
 
