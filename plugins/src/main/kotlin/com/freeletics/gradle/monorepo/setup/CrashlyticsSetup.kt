@@ -1,11 +1,11 @@
 package com.freeletics.gradle.monorepo.setup
 
-import com.freeletics.gradle.monorepo.tasks.ProcessGoogleResourcesTask.Companion.registerProcessGoogleResourcesTask
 import com.freeletics.gradle.monorepo.util.computeInfoFromGit
 import com.freeletics.gradle.util.androidApp
 import com.freeletics.gradle.util.androidComponentsApp
 import com.freeletics.gradle.util.getVersion
 import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
+import com.google.gms.googleservices.GoogleServicesTask.Companion.registerProcessGoogleResourcesTask
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
 
@@ -36,7 +36,7 @@ internal fun Project.configureCrashlytics(uploadNativeSymbols: Boolean) {
     project.dependencies.add("releaseApi", "com.freeletics.gradle:minify-crashlytics:${project.getVersion("fgp")}")
 
     androidComponentsApp {
-        onVariants { variant ->
+        beforeVariants { variant ->
             // dummy task to make the crashlytics plugin work without the google-services plugin
             registerProcessGoogleResourcesTask(variant)
         }
