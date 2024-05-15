@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## 0.12.2 *(2024-05-15)*
+
+- Support for Crashlytics Gradle Plugin 3.0.0.
+
+
 ## 0.12.1 *(2024-04-24)*
 
 - Add support for using Compose in Kotlin 2.0.0 through the new Compose compiler
