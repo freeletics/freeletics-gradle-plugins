@@ -1,5 +1,6 @@
 package com.freeletics.gradle.plugin
 
+import com.freeletics.gradle.util.compilerOptions
 import com.freeletics.gradle.util.kotlin
 import org.gradle.api.Plugin
 import org.gradle.api.Project

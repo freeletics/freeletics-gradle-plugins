@@ -5,7 +5,6 @@ import com.gradle.develocity.agent.gradle.DevelocityPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.credentials.PasswordCredentials
 import org.gradle.api.initialization.Settings
-import org.gradle.api.initialization.resolve.RepositoriesMode
 import org.gradle.caching.http.HttpBuildCache
 import org.gradle.kotlin.dsl.jvm
 import org.gradle.toolchains.foojay.FoojayToolchainResolver
@@ -101,13 +100,6 @@ public abstract class SettingsPlugin : Plugin<Settings> {
                         content.releasesOnly()
                     }
                 }
-            }
-
-            // TODO https://youtrack.jetbrains.com/issue/KT-51379
-            val mpp = target.booleanProperty("fgp.kotlin.multiplatformProject", false)
-            if (!mpp) {
-                @Suppress("UnstableApiUsage")
-                management.repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
             }
 
             val prefix = "fgp.version.override."
