@@ -1,6 +1,6 @@
 [versions]
 java-target = "17"
-java-toolchain = "21"
+java-toolchain = "22"
 
 fgp = "0.12.2"
 
@@ -8,7 +8,6 @@ kotlin = "2.0.0"
 coroutines = "1.8.1"
 android-gradle = "8.4.0"
 android-gradle-common = "31.3.2"
-jb-compose="1.6.2"
 ksp="2.0.0-1.0.21"
 anvil = "2.5.0-beta09"
 moshix = "0.26.0"
@@ -32,11 +31,11 @@ kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "
 coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-gradle-api = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin-api", version.ref = "kotlin" }
+kotlin-gradle-annotations = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin-annotations", version.ref = "kotlin" }
 kotlin-native-utils = { module = "org.jetbrains.kotlin:kotlin-native-utils", version.ref = "kotlin" }
 
 android-gradle = { module = "com.android.tools.build:gradle-api", version.ref = "android-gradle" }
-compose-gradle = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "jb-compose" }
-ksp = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin",  version.ref = "ksp" }
+ksp-gradle = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin",  version.ref = "ksp" }
 anvil-gradle = { module = "com.squareup.anvil:gradle-plugin", version.ref = "anvil" }
 moshix-gradle = { module = "dev.zacsweers.moshix:moshi-gradle-plugin", version.ref = "moshix" }
 paparazzi-gradle = { module = "com.freeletics.fork.paparazzi:paparazzi-gradle-plugin", version.ref = "paparazzi" }
