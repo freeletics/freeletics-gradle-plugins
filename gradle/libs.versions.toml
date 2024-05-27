@@ -6,7 +6,7 @@ fgp = "0.12.2"
 
 kotlin = "1.9.24"
 coroutines = "1.8.1"
-android-gradle = "8.4.0"
+android-gradle = "8.4.1"
 android-gradle-common = "31.3.2"
 jb-compose="1.6.2"
 ksp="1.9.24-1.0.20"
