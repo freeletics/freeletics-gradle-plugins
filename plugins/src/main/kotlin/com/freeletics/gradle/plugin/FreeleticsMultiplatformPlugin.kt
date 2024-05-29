@@ -28,5 +28,21 @@ public abstract class FreeleticsMultiplatformPlugin : Plugin<Project> {
         }
 
         target.tasks.withType(Test::class.java).configureEach(Test::defaultTestSetup)
+
+        target.rootProject.disableDefaultJsRepositories()
+    }
+
+    // TODO remove after https://youtrack.jetbrains.com/issue/KT-68533
+    private fun Project.disableDefaultJsRepositories() {
+        plugins.withType(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin::class.java) {
+            extensions.configure(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension::class.java) {
+                it.downloadBaseUrl = null
+            }
+        }
+        plugins.withType(org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin::class.java) {
+            extensions.configure(org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension::class.java) {
+                it.downloadBaseUrl = null
+            }
+        }
     }
 }
