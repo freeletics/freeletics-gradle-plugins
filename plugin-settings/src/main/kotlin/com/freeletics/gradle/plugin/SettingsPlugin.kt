@@ -3,8 +3,10 @@ package com.freeletics.gradle.plugin
 import com.gradle.develocity.agent.gradle.DevelocityConfiguration
 import com.gradle.develocity.agent.gradle.DevelocityPlugin
 import org.gradle.api.Plugin
+import org.gradle.api.artifacts.dsl.RepositoryHandler
 import org.gradle.api.credentials.PasswordCredentials
 import org.gradle.api.initialization.Settings
+import org.gradle.api.initialization.resolve.RepositoriesMode
 import org.gradle.caching.http.HttpBuildCache
 import org.gradle.kotlin.dsl.jvm
 import org.gradle.toolchains.foojay.FoojayToolchainResolver
@@ -46,6 +48,9 @@ public abstract class SettingsPlugin : Plugin<Settings> {
         }
 
         target.dependencyResolutionManagement { management ->
+            @Suppress("UnstableApiUsage")
+            management.repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+
             @Suppress("UnstableApiUsage")
             management.repositories { handler ->
                 val internalUrl = target.stringProperty("fgp.internalArtifacts.url")
@@ -100,6 +105,8 @@ public abstract class SettingsPlugin : Plugin<Settings> {
                         content.releasesOnly()
                     }
                 }
+
+                handler.jsRepositoryWorkaround()
             }
 
             val prefix = "fgp.version.override."
@@ -143,5 +150,36 @@ public abstract class SettingsPlugin : Plugin<Settings> {
 
     private fun Settings.booleanProperty(name: String, default: Boolean): Boolean {
         return providers.gradleProperty(name).map { it.toBoolean() }.orElse(default).get()
+    }
+
+    // TODO remove after https://youtrack.jetbrains.com/issue/KT-68533
+    private fun RepositoryHandler.jsRepositoryWorkaround() {
+        exclusiveContent { content ->
+            content.forRepository {
+                ivy { ivy ->
+                    ivy.name = "Node Distributions"
+                    ivy.setUrl("https://nodejs.org/dist/")
+                    ivy.patternLayout { it.artifact("v[revision]/[artifact](-v[revision]-[classifier]).[ext]") }
+                    ivy.metadataSources { it.artifact() }
+                    ivy.content { it.includeModule("org.nodejs", "node") }
+                }
+            }
+
+            content.filter { it.includeGroup("org.nodejs") }
+        }
+
+        exclusiveContent { content ->
+            content.forRepository {
+                ivy { ivy ->
+                    ivy.name = "Yarn Distributions"
+                    ivy.setUrl("https://github.com/yarnpkg/yarn/releases/download")
+                    ivy.patternLayout { it.artifact("v[revision]/[artifact](-v[revision]).[ext]") }
+                    ivy.metadataSources { it.artifact() }
+                    ivy.content { it.includeModule("com.yarnpkg", "yarn") }
+                }
+            }
+
+            content.filter { it.includeGroup("com.yarnpkg") }
+        }
     }
 }
