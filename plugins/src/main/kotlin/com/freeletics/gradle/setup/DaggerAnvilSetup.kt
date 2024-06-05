@@ -2,12 +2,15 @@ package com.freeletics.gradle.setup
 
 import com.freeletics.gradle.plugin.FreeleticsBaseExtension.DaggerMode
 import com.freeletics.gradle.plugin.FreeleticsBaseExtension.DaggerMode.ANVIL_WITH_FULL_DAGGER
-import com.freeletics.gradle.util.addMaybe
+import com.freeletics.gradle.util.addApiDependency
+import com.freeletics.gradle.util.addKspDependency
 import com.freeletics.gradle.util.booleanProperty
 import com.freeletics.gradle.util.getDependency
 import com.freeletics.gradle.util.getDependencyOrNull
 import com.squareup.anvil.plugin.AnvilExtension
 import org.gradle.api.Project
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType.androidJvm
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType.jvm
 
 internal fun Project.configureDagger(mode: DaggerMode) {
     val runDagger = mode == ANVIL_WITH_FULL_DAGGER
@@ -33,28 +36,24 @@ internal fun Project.configureDagger(mode: DaggerMode) {
         it.trackSourceFiles.set(true)
     }
 
-    dependencies.apply {
-        add("api", getDependency("inject"))
-        add("api", getDependency("anvil-annotations"))
-        add("api", getDependency("anvil-annotations-optional"))
-        add("api", getDependency("dagger"))
-        addMaybe("api", getDependencyOrNull("khonshu-codegen-runtime"))
-    }
+    addApiDependency(getDependency("inject"), SUPPORTED_PLATFORMS)
+    addApiDependency(getDependency("anvil-annotations"), SUPPORTED_PLATFORMS)
+    addApiDependency(getDependency("anvil-annotations-optional"), SUPPORTED_PLATFORMS)
+    addApiDependency(getDependency("dagger"), SUPPORTED_PLATFORMS)
+    addApiDependency(getDependencyOrNull("khonshu-codegen-runtime"), SUPPORTED_PLATFORMS)
 
     if (mode == DaggerMode.ANVIL_WITH_KHONSHU) {
-        val configuration = if (anvilKsp.get()) {
+        if (anvilKsp.get()) {
             configureProcessing(useKsp = true).also {
                 // TODO workaround for Gradle not being able to resolve this in the ksp config
                 configurations.named(it).configure {
                     it.exclude(mapOf("group" to "org.jetbrains.skiko", "module" to "skiko"))
                 }
             }
-        } else {
-            "anvil"
-        }
 
-        dependencies.apply {
-            add(configuration, getDependency("khonshu-codegen-compiler"))
+            addKspDependency(getDependency("khonshu-codegen-compiler"), SUPPORTED_PLATFORMS)
+        } else {
+            dependencies.add("anvil", getDependency("khonshu-codegen-compiler"))
         }
     }
 
@@ -71,3 +70,5 @@ internal fun Project.configureDagger(mode: DaggerMode) {
         }
     }
 }
+
+private val SUPPORTED_PLATFORMS = setOf(androidJvm, jvm)
