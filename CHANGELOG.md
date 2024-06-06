@@ -1,6 +1,14 @@
 Change Log
 ==========
 
+## 0.13.0 *(2024-06-06)*
+
+- Update Kotlin to 2.0.0.
+- `dependencyResolutionManagement.repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS` is now always
+  enabled. The opt out Gradle property `fgp.kotlin.multiplatformProject` is not used anymore.
+- `useDagger` and `useSerialization` can now be used in multiplatform projects.
+
+
 ## 0.12.2 *(2024-05-15)*
 
 - Support for Crashlytics Gradle Plugin 3.0.0.
