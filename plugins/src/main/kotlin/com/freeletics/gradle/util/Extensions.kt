@@ -13,6 +13,7 @@ import com.freeletics.gradle.plugin.FreeleticsMultiplatformExtension
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPluginExtension
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.HasConfigurableKotlinCompilerOptions
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinCommonCompilerOptions
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
@@ -48,7 +49,9 @@ internal fun KotlinProjectExtension.compilerOptions(configure: KotlinCommonCompi
         is KotlinAndroidProjectExtension -> compilerOptions(configure)
         is KotlinMultiplatformExtension -> {
             compilerOptions(configure)
-            targets.configureEach { compilerOptions(configure) }
+            targets.configureEach {
+                (it as? HasConfigurableKotlinCompilerOptions<*>)?.compilerOptions(configure)
+            }
         }
         else -> throw IllegalStateException("Unsupported kotlin extension ${this::class}")
     }
