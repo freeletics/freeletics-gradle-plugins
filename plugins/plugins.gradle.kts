@@ -11,7 +11,6 @@ dependencies {
     compileOnly(libs.kotlin.native.utils)
     compileOnly(libs.ksp.gradle)
     compileOnly(libs.anvil.gradle)
-    compileOnly(libs.moshix.gradle)
     compileOnly(libs.paparazzi.gradle)
     compileOnly(libs.dependency.analysis)
     compileOnly(libs.publish)

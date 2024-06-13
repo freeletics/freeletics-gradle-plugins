@@ -66,9 +66,6 @@ public abstract class SettingsPlugin : Plugin<Settings> {
 
                         content.filter {
                             it.includeGroupByRegex("^com\\.freeletics\\.internal.*")
-                            // manually uploaded because only published on jitpack
-                            it.includeModule("com.github.kamikat.moshi-jsonapi", "core")
-                            it.includeModule("com.github.kamikat.moshi-jsonapi", "retrofit-converter")
                         }
                     }
                 }

@@ -75,15 +75,14 @@ fgp.compose.enableCompilerMetrics=true
 fgp.compose.enableCompilerReports=true
 ```
 
-### Moshi
+### Kotlinx.serialization
 
-The following method will apply the [MoshiX plugin][2] (`dev.zacsweers.moshix`) which will enable Moshi code generation
-through a compiler plugin and also adds the required dependencies on Moshi.
+The following method will apply the KotlinX Serialization plugin and add a dependency to
+to the core serialization module.
 
 ```groovy
 freeletics {
-    // the boolean will determine whether moshix-sealed is enabled as well, false if not specified
-    useMoshi(true)
+    useSerialization()
 }
 ```
 
@@ -400,7 +399,6 @@ freeletics {
 ```
 
 
-[2]: https://github.com/ZacSweers/MoshiX
 [3]: https://github.com/google/dagger
 [4]: https://github.com/square/anvil
 [5]: https://freeletics.github.io/khonshu/codegen/get-started/

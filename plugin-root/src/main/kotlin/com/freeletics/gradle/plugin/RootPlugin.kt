@@ -128,9 +128,6 @@ public abstract class RootPlugin : Plugin<Project> {
                             "com.freeletics.khonshu:codegen-scope",
                             "com.google.dagger:dagger",
                             "com.google.dagger:dagger-compiler",
-                            // added by the MoshiX plugin
-                            "com.squareup.moshi:moshi",
-                            "dev.zacsweers.moshix:moshi-sealed-runtime",
                         )
                     }
 

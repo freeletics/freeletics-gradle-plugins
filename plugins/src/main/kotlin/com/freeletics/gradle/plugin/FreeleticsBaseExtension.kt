@@ -1,7 +1,6 @@
 package com.freeletics.gradle.plugin
 
 import com.freeletics.gradle.setup.configureDagger
-import com.freeletics.gradle.setup.configureMoshi
 import com.freeletics.gradle.setup.setupCompose
 import com.freeletics.gradle.util.addApiDependency
 import com.freeletics.gradle.util.compilerOptions
@@ -28,11 +27,6 @@ public abstract class FreeleticsBaseExtension(private val project: Project) : Ex
 
     public fun useCompose() {
         project.setupCompose()
-    }
-
-    @JvmOverloads
-    public fun useMoshi(sealed: Boolean = false) {
-        project.configureMoshi(sealed)
     }
 
     public fun useSerialization() {
