@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## 0.14.0 *(2024-06-13)*
+
+- Fixed issue with Kotlin compiler options not being applied to multiplatform targets.
+- Removed `useMoshi`.
+
 ## 0.13.0 *(2024-06-06)*
 
 - Update Kotlin to 2.0.0.
