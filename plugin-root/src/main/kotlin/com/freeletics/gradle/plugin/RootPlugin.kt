@@ -128,9 +128,11 @@ public abstract class RootPlugin : Plugin<Project> {
                             "com.freeletics.khonshu:codegen-scope",
                             "com.google.dagger:dagger",
                             "com.google.dagger:dagger-compiler",
-                            // added by the MoshiX plugin
-                            "com.squareup.moshi:moshi",
-                            "dev.zacsweers.moshix:moshi-sealed-runtime",
+                            // Room is always added as "api", but some modules only use it in for example debugApi
+                            "androidx.room:room-runtime",
+                            // Kotlinx.serialization is always added as "api", but some modules only use it in for example debugApi
+                            "org.jetbrains.kotlinx:kotlinx-serialization-core",
+                            "org.jetbrains.kotlinx:kotlinx-serialization-core-jvm",
                         )
                     }
 
