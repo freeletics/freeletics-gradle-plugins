@@ -1,6 +1,5 @@
 package com.freeletics.gradle.setup
 
-import com.android.build.api.dsl.LibraryExtension
 import com.freeletics.gradle.util.booleanProperty
 import com.freeletics.gradle.util.compilerOptions
 import com.freeletics.gradle.util.kotlin
