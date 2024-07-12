@@ -9,11 +9,6 @@ import org.gradle.api.Project
 internal fun Project.setupCompose() {
     plugins.apply("org.jetbrains.kotlin.plugin.compose")
 
-    // TODO remove after https://issuetracker.google.com/issues/341986306
-    plugins.withId("com.android.library") {
-        extensions.getByType(LibraryExtension::class.java).buildFeatures.compose = true
-    }
-
     val enableMetrics = project.booleanProperty("fgp.compose.enableCompilerMetrics", false)
     if (enableMetrics.get()) {
         val metricsFolderAbsolutePath = project.layout.buildDirectory
