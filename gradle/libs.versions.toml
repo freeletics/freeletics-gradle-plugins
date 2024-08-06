@@ -4,7 +4,7 @@ java-toolchain = "22"
 
 fgp = "0.14.0"
 
-kotlin = "2.0.0"
+kotlin = "2.0.10"
 coroutines = "1.8.1"
 android-gradle = "8.5.1"
 ksp="2.0.0-1.0.24"
