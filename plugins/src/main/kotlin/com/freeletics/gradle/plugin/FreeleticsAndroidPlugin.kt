@@ -63,7 +63,6 @@ public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
                 viewBinding = false
                 resValues = false
                 buildConfig = false
-                compose = false
                 dataBinding = false
                 aidl = false
                 renderScript = false
