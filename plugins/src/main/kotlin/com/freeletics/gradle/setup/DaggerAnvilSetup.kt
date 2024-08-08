@@ -7,6 +7,7 @@ import com.freeletics.gradle.util.addKspDependency
 import com.freeletics.gradle.util.booleanProperty
 import com.freeletics.gradle.util.getDependency
 import com.freeletics.gradle.util.getDependencyOrNull
+import com.freeletics.gradle.util.getVersion
 import com.squareup.anvil.plugin.AnvilExtension
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType.androidJvm
@@ -30,6 +31,7 @@ internal fun Project.configureDagger(mode: DaggerMode) {
                     basicArgument("merging-backend" to "none"),
                 )
 
+                dependencySustitution()
                 addKspDependency(getDependency("anvil-compiler"), SUPPORTED_PLATFORMS)
             } else {
                 plugins.apply("com.squareup.anvil")
@@ -55,6 +57,7 @@ internal fun Project.configureDagger(mode: DaggerMode) {
                     }
                 }
 
+                dependencySustitution()
                 addKspDependency(getDependency("anvil-compiler"), SUPPORTED_PLATFORMS)
                 addKspDependency(getDependency("khonshu-codegen-compiler"), SUPPORTED_PLATFORMS)
             } else {
@@ -81,6 +84,7 @@ internal fun Project.configureDagger(mode: DaggerMode) {
                     basicArgument("dagger.warnIfInjectionFactoryNotGeneratedUpstream" to "enabled"),
                 )
 
+                dependencySustitution()
                 addKspDependency(getDependency("dagger-compiler"), SUPPORTED_PLATFORMS)
                 addKspDependency(getDependency("anvil-compiler"), SUPPORTED_PLATFORMS)
             } else {
@@ -99,6 +103,23 @@ internal fun Project.configureDagger(mode: DaggerMode) {
                 )
                 dependencies.add(processorConfiguration, getDependency("dagger-compiler"))
             }
+        }
+    }
+}
+
+private fun Project.dependencySustitution() {
+    configurations.configureEach { configuration ->
+        configuration.resolutionStrategy.dependencySubstitution {
+            it.substitute(it.module("com.squareup.anvil:annotations"))
+                .using(it.module("dev.zacsweers.anvil:annotations:${getVersion("anvil")}"))
+            it.substitute(it.module("com.squareup.anvil:annotations-optional"))
+                .using(it.module("dev.zacsweers.anvil:annotations-optional:${getVersion("anvil")}"))
+            it.substitute(it.module("com.squareup.anvil:compiler"))
+                .using(it.module("dev.zacsweers.anvil:compiler:${getVersion("anvil")}"))
+            it.substitute(it.module("com.squareup.anvil:compiler-api"))
+                .using(it.module("dev.zacsweers.anvil:compiler-api:${getVersion("anvil")}"))
+            it.substitute(it.module("com.squareup.anvil:compiler-utils"))
+                .using(it.module("dev.zacsweers.anvil:compiler-utils:${getVersion("anvil")}"))
         }
     }
 }
