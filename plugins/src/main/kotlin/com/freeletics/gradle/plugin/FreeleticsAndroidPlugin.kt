@@ -22,7 +22,6 @@ import org.gradle.api.Project
 import org.gradle.api.tasks.testing.Test
 
 public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
-
     override fun apply(target: Project) {
         if (!target.plugins.hasPlugin("com.android.application")) {
             target.plugins.apply("com.android.library")

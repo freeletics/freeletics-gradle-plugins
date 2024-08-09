@@ -15,7 +15,6 @@ import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.TaskProvider
 
 public abstract class ComputeGitTimestampTask : DefaultTask() {
-
     @get:Input
     public abstract val computeFromGit: Property<Boolean>
 

@@ -13,7 +13,6 @@ import org.gradle.toolchains.foojay.FoojayToolchainResolver
 import org.gradle.toolchains.foojay.FoojayToolchainsPlugin
 
 public abstract class SettingsPlugin : Plugin<Settings> {
-
     override fun apply(target: Settings) {
         target.plugins.apply(FoojayToolchainsPlugin::class.java)
         target.plugins.apply(DevelocityPlugin::class.java)

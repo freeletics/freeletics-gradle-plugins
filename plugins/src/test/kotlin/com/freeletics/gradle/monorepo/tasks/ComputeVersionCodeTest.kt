@@ -8,7 +8,6 @@ import org.junit.Assert.assertThrows
 import org.junit.Test
 
 internal class ComputeVersionCodeTest {
-
     private val defaultDate = LocalDateTime.now()
 
     @Test

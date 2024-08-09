@@ -10,7 +10,6 @@ import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
 
 public abstract class FreeleticsBaseExtension(private val project: Project) : ExtensionAware {
-
     public fun explicitApi() {
         project.kotlin {
             explicitApi()

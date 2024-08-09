@@ -9,7 +9,6 @@ import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.tasks.AbstractPublishToMaven
 
 public abstract class FreeleticsPublishInternalPlugin : Plugin<Project> {
-
     override fun apply(target: Project) {
         target.plugins.apply("com.vanniktech.maven.publish")
 

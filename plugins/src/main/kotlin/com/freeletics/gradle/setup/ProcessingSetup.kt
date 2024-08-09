@@ -65,12 +65,14 @@ internal fun Project.configureProcessing(
 internal sealed interface ProcessingArgument
 
 internal fun basicArgument(pair: Pair<String, String>): ProcessingArgument = BasicArgument(pair.first, pair.second)
+
 private data class BasicArgument(
     val key: String,
     val value: String,
 ) : ProcessingArgument
 
 internal fun argumentProvider(provider: CommandLineArgumentProvider): ProcessingArgument = CliArgumentProvider(provider)
+
 private data class CliArgumentProvider(
     val provider: CommandLineArgumentProvider,
 ) : ProcessingArgument
@@ -78,7 +80,6 @@ private data class CliArgumentProvider(
 private class KaptArgProviderWrapper(
     val provider: CommandLineArgumentProvider,
 ) : CommandLineArgumentProvider {
-
     override fun asArguments(): Iterable<String> {
         // prepends arguments with "-A" for kapt or javac
         return provider.asArguments().map { "-A$it" }

@@ -15,7 +15,6 @@ import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 import org.jetbrains.kotlin.konan.target.HostManager
 
 public abstract class FreeleticsMultiplatformExtension(private val project: Project) {
-
     @JvmOverloads
     public fun addJvmTarget(configure: KotlinJvmTarget.() -> Unit = { }) {
         project.kotlinMultiplatform {

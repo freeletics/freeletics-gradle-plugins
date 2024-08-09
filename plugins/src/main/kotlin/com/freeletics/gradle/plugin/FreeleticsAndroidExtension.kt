@@ -16,7 +16,6 @@ import org.gradle.api.tasks.PathSensitivity
 import org.gradle.process.CommandLineArgumentProvider
 
 public abstract class FreeleticsAndroidExtension(private val project: Project) {
-
     public fun useRoom(schemaLocation: String? = null) {
         val processingArguments = buildList {
             add(basicArgument("room.generateKotlin" to "true"))
@@ -117,7 +116,6 @@ private class RoomSchemaArgProvider(
     @get:PathSensitive(PathSensitivity.RELATIVE)
     val schemaDir: File,
 ) : CommandLineArgumentProvider {
-
     override fun asArguments(): Iterable<String> {
         return listOf("room.schemaLocation=${schemaDir.path}")
     }

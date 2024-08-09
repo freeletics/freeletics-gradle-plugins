@@ -19,7 +19,6 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 public abstract class FreeleticsBasePlugin : Plugin<Project> {
-
     override fun apply(target: Project) {
         target.plugins.apply("com.autonomousapps.dependency-analysis")
 
@@ -45,6 +44,7 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
         dependencies.addMaybe("implementation", getBundleOrNull("default-all"))
         dependencies.addMaybe("compileOnly", getBundleOrNull("default-all-compile"))
     }
+
     private fun Project.addDefaultTestDependencies() {
         dependencies.addMaybe("testImplementation", getBundleOrNull("default-testing"))
         dependencies.addMaybe("testCompileOnly", getBundleOrNull("default-testing-compile"))

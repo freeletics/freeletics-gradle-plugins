@@ -8,7 +8,6 @@ public fun Settings.freeletics(configure: SettingsExtension.() -> Unit) {
 }
 
 public abstract class SettingsExtension(private val settings: Settings) {
-
     /**
      * Automatically find and include Gradle projects in this build. It will start from the root folder and find any
      * project where the build file name matches the path, e.g. `:example` should have `example.gradle` as build file
