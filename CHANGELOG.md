@@ -1,10 +1,21 @@
 Change Log
 ==========
 
+## 0.15.0 *(2024-08-09)*
+
+- Update ktlint to 1.3.1.
+- Updated `fgp.kotlin.anvilKsp` and `fgp.kotlin.anvilKspWithComponent` to use the 
+  [Anvil fork](https://github.com/zacsweers/anvil).
+- Removed `fgp.kotlin.daggerKsp`, whether Dagger is used through KSP is now controlled by 
+  `fgp.kotlin.anvilKspWithComponent`.
+- Avoid warning about setting `buildFeatures.compose`.
+
+
 ## 0.14.0 *(2024-06-13)*
 
 - Fixed issue with Kotlin compiler options not being applied to multiplatform targets.
 - Removed `useMoshi`.
+
 
 ## 0.13.0 *(2024-06-06)*
 
