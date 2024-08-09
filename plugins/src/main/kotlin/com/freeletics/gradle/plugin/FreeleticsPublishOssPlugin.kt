@@ -9,7 +9,6 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 
 public abstract class FreeleticsPublishOssPlugin : Plugin<Project> {
-
     override fun apply(target: Project) {
         target.plugins.apply("org.jetbrains.dokka")
         target.plugins.apply("com.vanniktech.maven.publish")

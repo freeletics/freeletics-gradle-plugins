@@ -6,7 +6,6 @@ import org.junit.Assert
 import org.junit.Test
 
 internal class ComputeVersionNameTest {
-
     @Test
     fun `when there is a matching tag`() {
         val git = FakeGit(

@@ -5,9 +5,6 @@ ROOT_DIR="$(dirname "$0")"
 
 JDK_VERSION="$(grep -s 'java-gradle' "$ROOT_DIR/gradle/libs.versions.toml" | cut -d'"' -f2)"
 if [ -z "$JDK_VERSION" ]; then
-  JDK_VERSION="$(grep -s 'java-target' "$ROOT_DIR/gradle/libs.versions.toml" | cut -d'"' -f2)"
-fi
-if [ -z "$JDK_VERSION" ]; then
   JDK_VERSION="22"
 fi
 
