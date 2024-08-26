@@ -97,6 +97,8 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                         "-Xjspecify-annotations=strict",
                         // Enhance not null annotated type parameter's types to definitely not null types (@NotNull T => T & Any)
                         "-Xenhance-type-parameter-types-to-def-not-null",
+                        // https://kotlinlang.org/docs/whatsnew2020.html#data-class-copy-function-to-have-the-same-visibility-as-constructor
+                        "-Xconsistent-data-class-copy-visibility",
                     )
 
                     if (!isAndroid) {
