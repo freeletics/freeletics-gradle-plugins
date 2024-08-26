@@ -1,7 +1,6 @@
 package com.freeletics.gradle.setup
 
 import com.freeletics.gradle.plugin.FreeleticsBaseExtension.DaggerMode
-import com.freeletics.gradle.plugin.FreeleticsBaseExtension.DaggerMode.ANVIL_WITH_FULL_DAGGER
 import com.freeletics.gradle.util.addApiDependency
 import com.freeletics.gradle.util.addKspDependency
 import com.freeletics.gradle.util.booleanProperty
@@ -31,8 +30,8 @@ internal fun Project.configureDagger(mode: DaggerMode) {
                     basicArgument("merging-backend" to "none"),
                 )
 
-                dependencySustitution()
                 addKspDependency(getDependency("anvil-compiler"), SUPPORTED_PLATFORMS)
+                anvilForkDependencySustitution()
             } else {
                 plugins.apply("com.squareup.anvil")
                 extensions.configure(AnvilExtension::class.java) {
@@ -57,9 +56,9 @@ internal fun Project.configureDagger(mode: DaggerMode) {
                     }
                 }
 
-                dependencySustitution()
                 addKspDependency(getDependency("anvil-compiler"), SUPPORTED_PLATFORMS)
                 addKspDependency(getDependency("khonshu-codegen-compiler"), SUPPORTED_PLATFORMS)
+                anvilForkDependencySustitution()
             } else {
                 plugins.apply("com.squareup.anvil")
                 extensions.configure(AnvilExtension::class.java) {
@@ -73,6 +72,7 @@ internal fun Project.configureDagger(mode: DaggerMode) {
         }
         DaggerMode.ANVIL_WITH_FULL_DAGGER -> {
             if (booleanProperty("fgp.kotlin.anvilKspWithComponent", false).get()) {
+                val daggerKsp = booleanProperty("fgp.kotlin.daggerKsp", false).get()
                 configureProcessing(
                     useKsp = true,
                     basicArgument("generate-dagger-factories" to "false"),
@@ -84,9 +84,19 @@ internal fun Project.configureDagger(mode: DaggerMode) {
                     basicArgument("dagger.warnIfInjectionFactoryNotGeneratedUpstream" to "enabled"),
                 )
 
-                dependencySustitution()
-                addKspDependency(getDependency("dagger-compiler"), SUPPORTED_PLATFORMS)
+                if (daggerKsp) {
+                    addKspDependency(getDependency("dagger-compiler"), SUPPORTED_PLATFORMS)
+                } else {
+                    val processorConfiguration = configureProcessing(
+                        useKsp = false,
+                        basicArgument("dagger.experimentalDaggerErrorMessages" to "enabled"),
+                        basicArgument("dagger.strictMultibindingValidation" to "enabled"),
+                        basicArgument("dagger.warnIfInjectionFactoryNotGeneratedUpstream" to "enabled"),
+                    )
+                    dependencies.add(processorConfiguration, getDependency("dagger-compiler"))
+                }
                 addKspDependency(getDependency("anvil-compiler"), SUPPORTED_PLATFORMS)
+                anvilForkDependencySustitution()
             } else {
                 plugins.apply("com.squareup.anvil")
                 extensions.configure(AnvilExtension::class.java) {
@@ -107,7 +117,7 @@ internal fun Project.configureDagger(mode: DaggerMode) {
     }
 }
 
-private fun Project.dependencySustitution() {
+private fun Project.anvilForkDependencySustitution() {
     configurations.configureEach { configuration ->
         configuration.resolutionStrategy.dependencySubstitution {
             it.substitute(it.module("com.squareup.anvil:annotations"))
