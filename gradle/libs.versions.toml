@@ -5,7 +5,7 @@ java-toolchain = "22"
 fgp = "0.15.0"
 
 kotlin = "2.0.20"
-coroutines = "1.8.1"
+coroutines = "1.9.0"
 android-gradle = "8.6.0"
 ksp="2.0.20-1.0.25"
 anvil = "2.5.0-beta11"
