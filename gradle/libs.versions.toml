@@ -48,6 +48,7 @@ gradle-toolchain = { module = "org.gradle.toolchains:foojay-resolver", version.r
 publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish"}
 
 clikt = { module = "com.github.ajalt.clikt:clikt-jvm", version.ref = "clikt" }
+clikt-core = { module = "com.github.ajalt.clikt:clikt-core-jvm", version.ref = "clikt" }
 ktlint-rule-engine = { module = "com.pinterest.ktlint:ktlint-rule-engine", version.ref = "ktlint" }
 ktlint-rule-engine-core = { module = "com.pinterest.ktlint:ktlint-rule-engine-core", version.ref = "ktlint" }
 ktlint-rules = { module = "com.pinterest.ktlint:ktlint-ruleset-standard", version.ref = "ktlint" }
