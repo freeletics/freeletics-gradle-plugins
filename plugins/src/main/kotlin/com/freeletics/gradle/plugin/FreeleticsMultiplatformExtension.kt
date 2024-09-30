@@ -125,6 +125,11 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
                 nodejs()
             }
 
+            @OptIn(ExperimentalWasmDsl::class)
+            wasmWasi {
+                nodejs()
+            }
+
             linuxX64()
             linuxArm64()
 
