@@ -1,6 +1,7 @@
 package com.freeletics.gradle.scripts
 
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.Context
 import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
@@ -16,9 +17,7 @@ import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.runBlocking
 
-public class KtLintCli : CliktCommand(
-    help = "CLI that runs ktlint.",
-) {
+public class KtLintCli : CliktCommand() {
     private val rootDirectory: Path by option(
         "--root",
         help = "The root directory of the project, used as starting point to search files and to find editorconfig. " +
@@ -76,5 +75,9 @@ public class KtLintCli : CliktCommand(
             // fail
             exitProcess(1)
         }
+    }
+
+    override fun help(context: Context): String {
+        return "CLI that runs ktlint."
     }
 }
