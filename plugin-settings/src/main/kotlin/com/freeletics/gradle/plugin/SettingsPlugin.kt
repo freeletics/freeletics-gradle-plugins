@@ -177,5 +177,21 @@ public abstract class SettingsPlugin : Plugin<Settings> {
 
             content.filter { it.includeGroup("com.yarnpkg") }
         }
+
+        exclusiveContent { content ->
+            content.forRepository {
+                ivy { ivy ->
+                    ivy.name = "Binaryen Distributions"
+                    ivy.setUrl("https://github.com/WebAssembly/binaryen/releases/download")
+                    ivy.patternLayout {
+                        it.artifact("version_[revision]/[module]-version_[revision]-[classifier].[ext]")
+                    }
+                    ivy.metadataSources { it.artifact() }
+                    ivy.content { it.includeModule("com.github.webassembly", "binaryen") }
+                }
+            }
+
+            content.filter { it.includeGroup("com.github.webassembly") }
+        }
     }
 }

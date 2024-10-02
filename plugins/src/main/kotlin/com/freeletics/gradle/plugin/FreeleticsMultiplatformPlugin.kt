@@ -43,5 +43,10 @@ public abstract class FreeleticsMultiplatformPlugin : Plugin<Project> {
                 it.downloadBaseUrl = null
             }
         }
+        plugins.withType(org.jetbrains.kotlin.gradle.targets.js.binaryen.BinaryenRootPlugin::class.java) {
+            extensions.configure(org.jetbrains.kotlin.gradle.targets.js.binaryen.BinaryenRootExtension::class.java) {
+                it.downloadBaseUrl = null
+            }
+        }
     }
 }
