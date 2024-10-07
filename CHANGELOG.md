@@ -1,6 +1,14 @@
 Change Log
 ==========
 
+## 0.16.0 *(2024-10-07)*
+
+- Update Kotlin to 2.0.20.
+- Enable `-Xconsistent-data-class-copy-visibility` by default.
+- Add WASM/WASI to the list of common multiplatform targets.
+- Bring back `fgp.kotlin.daggerKsp` option since Dagger KAPT can be faster than Dagger KSP.
+
+
 ## 0.15.0 *(2024-08-09)*
 
 - Update ktlint to 1.3.1.
