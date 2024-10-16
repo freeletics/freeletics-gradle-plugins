@@ -105,6 +105,8 @@ public abstract class RootPlugin : Plugin<Project> {
                             "javax.inject:javax.inject",
                             "com.squareup.anvil:annotations",
                             "com.squareup.anvil:annotations-optional",
+                            "dev.zacsweers.anvil:annotations",
+                            "dev.zacsweers.anvil:annotations-optional",
                             "com.freeletics.khonshu:codegen-runtime",
                             "com.freeletics.khonshu:codegen-scope",
                         )
@@ -118,6 +120,8 @@ public abstract class RootPlugin : Plugin<Project> {
                             "javax.inject:javax.inject",
                             "com.squareup.anvil:annotations",
                             "com.squareup.anvil:annotations-optional",
+                            "dev.zacsweers.anvil:annotations",
+                            "dev.zacsweers.anvil:annotations-optional",
                             "com.freeletics.khonshu:codegen-runtime",
                             "com.freeletics.khonshu:codegen-scope",
                             "com.google.dagger:dagger",
