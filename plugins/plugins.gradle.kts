@@ -58,6 +58,11 @@ gradlePlugin {
             implementationClass = "com.freeletics.gradle.plugin.FreeleticsPublishOssPlugin"
         }
 
+        create("rootPlugin") {
+            id = "com.freeletics.gradle.root"
+            implementationClass = "com.freeletics.gradle.plugin.RootPlugin"
+        }
+
         create("monoAppPlugin") {
             id = "com.freeletics.gradle.app"
             implementationClass = "com.freeletics.gradle.monorepo.plugin.AppPlugin"
