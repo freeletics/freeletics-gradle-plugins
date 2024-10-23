@@ -34,7 +34,6 @@ public abstract class SettingsExtension(private val settings: Settings) {
         settings.discoverProjects(extensions, directories.toList())
     }
 
-
     /**
      * @param androidXBuildId   buildId for androidx snapshot artifacts. Can be taken from here:
      *                          https://androidx.dev/snapshots/builds
