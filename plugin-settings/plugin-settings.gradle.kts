@@ -6,7 +6,6 @@ plugins {
 dependencies {
     implementation(libs.develocity)
     implementation(libs.gradle.toolchain)
-    implementation("nl.littlerobots.vcu:catalog:0.5.3")
 }
 
 gradlePlugin {

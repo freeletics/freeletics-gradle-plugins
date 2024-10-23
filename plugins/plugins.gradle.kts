@@ -4,17 +4,18 @@ plugins {
 }
 
 dependencies {
-    implementation(libs.android.gradle)
-    implementation(libs.kotlin.gradle)
-    implementation(libs.kotlin.gradle.annotations)
-    implementation(libs.kotlin.native.utils)
-    implementation(libs.ksp.gradle)
-    implementation(libs.anvil.gradle)
-    implementation(libs.paparazzi.gradle)
-    implementation(libs.dependency.analysis)
-    implementation(libs.publish)
-    implementation(libs.licensee)
-    implementation(libs.crashlytics)
+    compileOnly(libs.android.gradle)
+    compileOnly(libs.kotlin.gradle)
+    compileOnly(libs.kotlin.gradle.api)
+    compileOnly(libs.kotlin.gradle.annotations)
+    compileOnly(libs.kotlin.native.utils)
+    compileOnly(libs.ksp.gradle)
+    compileOnly(libs.anvil.gradle)
+    compileOnly(libs.paparazzi.gradle)
+    compileOnly(libs.dependency.analysis)
+    compileOnly(libs.publish)
+    compileOnly(libs.licensee)
+    compileOnly(libs.crashlytics)
 
     testImplementation(libs.junit)
     testImplementation(libs.truth)
@@ -55,11 +56,6 @@ gradlePlugin {
         create("commonPublishOssPlugin") {
             id = "com.freeletics.gradle.publish.oss"
             implementationClass = "com.freeletics.gradle.plugin.FreeleticsPublishOssPlugin"
-        }
-
-        create("rootPlugin") {
-            id = "com.freeletics.gradle.root"
-            implementationClass = "com.freeletics.gradle.plugin.RootPlugin"
         }
 
         create("monoAppPlugin") {
