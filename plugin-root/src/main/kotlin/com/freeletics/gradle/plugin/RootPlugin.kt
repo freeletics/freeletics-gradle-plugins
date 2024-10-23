@@ -1,32 +1,25 @@
 package com.freeletics.gradle.plugin
 
 import com.autonomousapps.DependencyAnalysisExtension
-import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
+import org.gradle.buildconfiguration.tasks.UpdateDaemonJvm
+import org.gradle.internal.jvm.inspection.JvmVendor
 
 public abstract class RootPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.plugins.apply("com.autonomousapps.dependency-analysis")
 
-        ensureJdkVersionAndVendor(target)
+        configureDaemonToolchainTask(target)
         createPlatform(target)
         configureDependencyAnalysis(target)
     }
 
-    private fun ensureJdkVersionAndVendor(target: Project) {
-        val libs = target.extensions.getByType(VersionCatalogsExtension::class.java).named("libs")
-        val expectedJavaVersion = libs.findVersion("java-gradle").orElseGet { null }?.requiredVersion
-        if (expectedJavaVersion != null) {
-            if (JavaVersion.current().toString() != expectedJavaVersion) {
-                target.logger.error("JDK $expectedJavaVersion is required to build this project")
-                throw RuntimeException("JDK $expectedJavaVersion is required to build this project")
-            }
-            if (System.getProperty("java.vendor") != "Azul Systems, Inc.") {
-                target.logger.error("The Azul Zulu JDK should be used to run Gradle")
-                throw RuntimeException("The Azul Zulu JDK should be used to run Gradle")
-            }
+    @Suppress("UnstableApiUsage")
+    private fun configureDaemonToolchainTask(target: Project) {
+        target.tasks.withType(UpdateDaemonJvm::class.java).configureEach {
+            it.jvmVendor.set(JvmVendor.KnownJvmVendor.AZUL.name)
         }
     }
 
