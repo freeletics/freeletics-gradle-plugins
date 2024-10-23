@@ -3,7 +3,6 @@ package com.freeletics.gradle.plugin
 import com.gradle.develocity.agent.gradle.DevelocityConfiguration
 import com.gradle.develocity.agent.gradle.DevelocityPlugin
 import org.gradle.api.Plugin
-import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.initialization.Settings
 import org.gradle.api.initialization.resolve.RepositoriesMode
 import org.gradle.caching.http.HttpBuildCache
@@ -16,7 +15,7 @@ public abstract class SettingsPlugin : Plugin<Settings> {
         target.plugins.apply(FoojayToolchainsPlugin::class.java)
         target.plugins.apply(DevelocityPlugin::class.java)
 
-        val extension = target.extensions.create("freeletics", SettingsExtension::class.java, target)
+        target.extensions.create("freeletics", SettingsExtension::class.java, target)
 
         target.extensions.configure(DevelocityConfiguration::class.java) {
             it.buildScan { scan ->
@@ -89,7 +88,7 @@ public abstract class SettingsPlugin : Plugin<Settings> {
 
         val autoDiscover = target.booleanProperty("fgp.discoverProjects.automatically", true)
         if (autoDiscover) {
-            extension.discoverProjects(listOf("gradle", "gradle.kts"))
+            target.discoverProjects(listOf("gradle", "gradle.kts"))
         }
     }
 }
