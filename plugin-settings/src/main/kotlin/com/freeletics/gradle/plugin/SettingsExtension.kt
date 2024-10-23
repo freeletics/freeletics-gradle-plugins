@@ -1,6 +1,5 @@
 package com.freeletics.gradle.plugin
 
-import java.io.File
 import org.gradle.api.initialization.Settings
 
 public fun Settings.freeletics(configure: SettingsExtension.() -> Unit) {
@@ -18,16 +17,7 @@ public abstract class SettingsExtension(private val settings: Settings) {
      */
     @JvmOverloads
     public fun discoverProjects(kts: Boolean = true) {
-        val extensions = if (kts) listOf("gradle.kts") else listOf("gradle")
-        discoverProjects(extensions)
-    }
-
-    internal fun discoverProjects(extensions: List<String>) {
-        val root = settings.rootDir
-        val rootPath = root.canonicalPath
-        root.listFiles()!!.forEach {
-            discoverProjectsIn(it, extensions, rootPath, depth = 1)
-        }
+        discoverProjectsIn(kts)
     }
 
     /**
@@ -41,42 +31,9 @@ public abstract class SettingsExtension(private val settings: Settings) {
     @JvmOverloads
     public fun discoverProjectsIn(kts: Boolean = true, vararg directories: String) {
         val extensions = if (kts) listOf("gradle.kts") else listOf("gradle")
-        val root = settings.rootDir
-        val rootPath = root.canonicalPath
-        directories.forEach {
-            discoverProjectsIn(root.resolve(it), extensions, rootPath, depth = 1)
-        }
+        settings.discoverProjects(extensions, directories.toList())
     }
 
-    private val ignoredDirectories = listOf("build", "gradle")
-
-    private fun discoverProjectsIn(directory: File, extensions: List<String>, rootPath: String, depth: Int) {
-        if (!directory.isDirectory || directory.isHidden || ignoredDirectories.contains(directory.name)) {
-            return
-        }
-
-        val relativePath = directory.path.substringAfter(rootPath)
-        if (relativePath.isNotEmpty()) {
-            val projectName = relativePath.replace(File.separator, ":")
-            extensions.forEach { extension ->
-                val expectedBuildFileName = "${projectName.drop(1).replace(":", "-")}.$extension"
-                if (directory.resolve(expectedBuildFileName).exists()) {
-                    settings.include(projectName)
-                    settings.project(projectName).buildFileName = expectedBuildFileName
-                    return
-                }
-            }
-        }
-
-        if (depth < 3) {
-            val files = directory.listFiles()!!.toList()
-            if (files.none { it.name.startsWith("settings.gradle") }) {
-                files.forEach {
-                    discoverProjectsIn(it, extensions, rootPath, depth + 1)
-                }
-            }
-        }
-    }
 
     /**
      * @param androidXBuildId   buildId for androidx snapshot artifacts. Can be taken from here:
