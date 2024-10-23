@@ -17,7 +17,7 @@ public abstract class SettingsPlugin : Plugin<Settings> {
         target.plugins.apply(FoojayToolchainsPlugin::class.java)
         target.plugins.apply(DevelocityPlugin::class.java)
 
-        val extension = target.extensions.create("freeletics", SettingsExtension::class.java, target)
+        target.extensions.create("freeletics", SettingsExtension::class.java, target)
 
         target.extensions.configure(DevelocityConfiguration::class.java) {
             it.buildScan { scan ->
@@ -136,7 +136,7 @@ public abstract class SettingsPlugin : Plugin<Settings> {
 
         val autoDiscover = target.booleanProperty("fgp.discoverProjects.automatically", true)
         if (autoDiscover) {
-            extension.discoverProjects(listOf("gradle", "gradle.kts"))
+            target.discoverProjects(listOf("gradle", "gradle.kts"))
         }
     }
 
