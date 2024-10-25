@@ -20,6 +20,10 @@ dependencies {
     testImplementation(libs.truth)
 }
 
+configurations.configureEach {
+    exclude("com.google.android", "annotations")
+}
+
 gradlePlugin {
     plugins {
         create("commonAndroidPlugin") {
