@@ -4,8 +4,10 @@ plugins {
 }
 
 dependencies {
-    implementation(libs.android.gradle)
-    implementation(libs.kotlin.gradle)
+    runtimeOnly(libs.android.gradle)
+    implementation(libs.android.gradle.api)
+    api(libs.kotlin.gradle)
+    implementation(libs.kotlin.gradle.api)
     implementation(libs.kotlin.gradle.annotations)
     implementation(libs.kotlin.native.utils)
     implementation(libs.ksp.gradle)

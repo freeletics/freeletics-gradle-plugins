@@ -28,10 +28,12 @@ truth = "1.4.4"
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-gradle-api = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin-api", version.ref = "kotlin" }
 kotlin-gradle-annotations = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin-annotations", version.ref = "kotlin" }
 kotlin-native-utils = { module = "org.jetbrains.kotlin:kotlin-native-utils", version.ref = "kotlin" }
 
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "android-gradle" }
+android-gradle-api = { module = "com.android.tools.build:gradle-api", version.ref = "android-gradle" }
 ksp-gradle = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin",  version.ref = "ksp" }
 anvil-gradle = { module = "com.squareup.anvil:gradle-plugin", version.ref = "anvil" }
 paparazzi-gradle = { module = "com.freeletics.fork.paparazzi:paparazzi-gradle-plugin", version.ref = "paparazzi" }

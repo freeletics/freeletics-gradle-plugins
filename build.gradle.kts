@@ -6,3 +6,13 @@ plugins {
 
     alias(libs.plugins.fgp.root)
 }
+
+dependencyAnalysis {
+    issues {
+        all {
+            onUnusedDependencies {
+                exclude(libs.paparazzi.gradle)
+            }
+        }
+    }
+}
