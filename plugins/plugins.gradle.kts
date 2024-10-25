@@ -12,9 +12,13 @@ dependencies {
     implementation(libs.kotlin.native.utils)
     implementation(libs.ksp.gradle)
     implementation(libs.anvil.gradle)
+    implementation(libs.poko.gradle)
+    implementation(libs.kopy.gradle)
+    implementation(libs.skie.gradle)
     implementation(libs.paparazzi.gradle)
     implementation(libs.dependency.analysis)
     implementation(libs.publish)
+    implementation(libs.dokka)
     implementation(libs.licensee)
     implementation(libs.crashlytics)
 

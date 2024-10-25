@@ -11,7 +11,12 @@ dependencyAnalysis {
     issues {
         all {
             onUnusedDependencies {
-                exclude(libs.paparazzi.gradle)
+                exclude(
+                    libs.poko.gradle,
+                    libs.kopy.gradle,
+                    libs.paparazzi.gradle,
+                    libs.dokka,
+                )
             }
         }
     }

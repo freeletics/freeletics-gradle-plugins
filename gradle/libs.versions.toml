@@ -36,6 +36,9 @@ android-gradle = { module = "com.android.tools.build:gradle", version.ref = "and
 android-gradle-api = { module = "com.android.tools.build:gradle-api", version.ref = "android-gradle" }
 ksp-gradle = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin",  version.ref = "ksp" }
 anvil-gradle = { module = "com.squareup.anvil:gradle-plugin", version.ref = "anvil" }
+poko-gradle = { module = "dev.drewhamilton.poko:poko-gradle-plugin", version = "0.17.2" }
+kopy-gradle = { module = "com.javiersc.kotlin:kopy-gradle-plugin", version = "0.12.0+2.0.21" }
+skie-gradle = { module = "co.touchlab.skie:gradle-plugin", version = "0.9.3" }
 paparazzi-gradle = { module = "com.freeletics.fork.paparazzi:paparazzi-gradle-plugin", version.ref = "paparazzi" }
 
 licensee = { module = "app.cash.licensee:licensee-gradle-plugin", version.ref = "licensee" }
@@ -43,10 +46,11 @@ crashlytics = { module = "com.google.firebase:firebase-crashlytics-gradle", vers
 
 dependency-analysis = { module = "com.autonomousapps:dependency-analysis-gradle-plugin", version.ref = "dependency-analysis" }
 
+publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish"}
+dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
+
 develocity = { module = "com.gradle:develocity-gradle-plugin", version.ref = "develocity" }
 gradle-toolchain = { module = "org.gradle.toolchains:foojay-resolver", version.ref = "gradle-toolchain" }
-
-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish"}
 
 versionCatalog = { module = "nl.littlerobots.vcu:catalog", version = "0.5.3" }
 
@@ -66,7 +70,6 @@ fgp-gradle = { id = "com.freeletics.gradle.gradle", version.ref = "fgp" }
 fgp-jvm = { id = "com.freeletics.gradle.jvm", version.ref = "fgp" }
 fgp-publish = { id = "com.freeletics.gradle.publish.oss", version.ref = "fgp" }
 
-android = { id = "com.android.application", version.ref = "android-gradle" }
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 
 dependency-analysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependency-analysis" }

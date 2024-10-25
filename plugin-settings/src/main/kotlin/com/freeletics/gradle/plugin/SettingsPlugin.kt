@@ -44,11 +44,15 @@ public abstract class SettingsPlugin : Plugin<Settings> {
                     "com.google.devtools.ksp:symbol-processing-gradle-plugin",
                     "com.android.tools.build:gradle",
                     "com.squareup.anvil:gradle-plugin",
+                    "dev.drewhamilton.poko:poko-gradle-plugin",
+                    "com.javiersc.kotlin:kopy-gradle-plugin",
+                    "co.touchlab.skie:gradle-plugin",
                     "com.freeletics.fork.paparazzi:paparazzi-gradle-plugin",
                     "app.cash.licensee:licensee-gradle-plugin",
                     "com.google.firebase:firebase-crashlytics-gradle",
                     "com.autonomousapps:dependency-analysis-gradle-plugin",
                     "com.vanniktech:gradle-maven-publish-plugin",
+                    "org.jetbrains.dokka:dokka-gradle-plugin",
                 ).forEach { dependency ->
                     val library = libraries.values.find { it.module == dependency }
                     if (library != null) {
