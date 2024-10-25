@@ -46,6 +46,15 @@ public abstract class FreeleticsBaseExtension(private val project: Project) : Ex
         project.configureDagger(DaggerMode.ANVIL_WITH_FULL_DAGGER)
     }
 
+    public fun usePoko() {
+        project.plugins.apply("dev.drewhamilton.poko")
+    }
+
+    public fun useKopy() {
+        project.plugins.apply("com.javiersc.kotlin.kopy")
+        project.plugins.apply("org.jetbrains.kotlin.plugin.atomicfu")
+    }
+
     internal enum class DaggerMode {
         ANVIL_ONLY,
         ANVIL_WITH_KHONSHU,
