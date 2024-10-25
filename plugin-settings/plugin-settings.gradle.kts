@@ -6,6 +6,7 @@ plugins {
 dependencies {
     implementation(libs.develocity)
     implementation(libs.gradle.toolchain)
+    implementation(libs.versionCatalog)
 }
 
 gradlePlugin {

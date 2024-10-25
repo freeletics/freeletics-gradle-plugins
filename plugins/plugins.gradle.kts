@@ -4,21 +4,26 @@ plugins {
 }
 
 dependencies {
-    compileOnly(libs.android.gradle)
-    compileOnly(libs.kotlin.gradle)
-    compileOnly(libs.kotlin.gradle.api)
-    compileOnly(libs.kotlin.gradle.annotations)
-    compileOnly(libs.kotlin.native.utils)
-    compileOnly(libs.ksp.gradle)
-    compileOnly(libs.anvil.gradle)
-    compileOnly(libs.paparazzi.gradle)
-    compileOnly(libs.dependency.analysis)
-    compileOnly(libs.publish)
-    compileOnly(libs.licensee)
-    compileOnly(libs.crashlytics)
+    runtimeOnly(libs.android.gradle)
+    implementation(libs.android.gradle.api)
+    api(libs.kotlin.gradle)
+    implementation(libs.kotlin.gradle.api)
+    implementation(libs.kotlin.gradle.annotations)
+    implementation(libs.kotlin.native.utils)
+    implementation(libs.ksp.gradle)
+    implementation(libs.anvil.gradle)
+    implementation(libs.paparazzi.gradle)
+    implementation(libs.dependency.analysis)
+    implementation(libs.publish)
+    implementation(libs.licensee)
+    implementation(libs.crashlytics)
 
     testImplementation(libs.junit)
     testImplementation(libs.truth)
+}
+
+configurations.configureEach {
+    exclude("com.google.android", "annotations")
 }
 
 gradlePlugin {

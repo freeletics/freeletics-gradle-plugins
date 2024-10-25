@@ -2,6 +2,7 @@ package com.freeletics.gradle.plugin
 
 import com.gradle.develocity.agent.gradle.DevelocityConfiguration
 import com.gradle.develocity.agent.gradle.DevelocityPlugin
+import nl.littlerobots.vcu.VersionCatalogParser
 import org.gradle.api.Plugin
 import org.gradle.api.initialization.Settings
 import org.gradle.api.initialization.resolve.DependencyResolutionManagement
@@ -20,6 +21,7 @@ public abstract class SettingsPlugin : Plugin<Settings> {
             target.enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
         }
 
+        target.forcePluginClasspath()
         target.configureDependencyResolution()
         target.configureBuildCache()
         target.configureToolchains()
@@ -27,6 +29,33 @@ public abstract class SettingsPlugin : Plugin<Settings> {
 
         if (target.booleanProperty("fgp.discoverProjects.automatically", true)) {
             target.discoverProjects(listOf("gradle", "gradle.kts"))
+        }
+    }
+
+    private fun Settings.forcePluginClasspath() {
+        val versionCatalogFile = rootDir.resolve("gradle/libs.versions.toml")
+        val versionCatalog = VersionCatalogParser().parse(versionCatalogFile.inputStream())
+        val libraries = versionCatalog.libraries
+
+        buildscript.configurations.named("classpath").configure { classpath ->
+            classpath.resolutionStrategy.apply {
+                listOf(
+                    "org.jetbrains.kotlin:kotlin-gradle-plugin",
+                    "com.google.devtools.ksp:symbol-processing-gradle-plugin",
+                    "com.android.tools.build:gradle",
+                    "com.squareup.anvil:gradle-plugin",
+                    "com.freeletics.fork.paparazzi:paparazzi-gradle-plugin",
+                    "app.cash.licensee:licensee-gradle-plugin",
+                    "com.google.firebase:firebase-crashlytics-gradle",
+                    "com.autonomousapps:dependency-analysis-gradle-plugin",
+                    "com.vanniktech:gradle-maven-publish-plugin",
+                ).forEach { dependency ->
+                    val library = libraries.values.find { it.module == dependency }
+                    if (library != null) {
+                        force("$dependency:${library.version.resolve(versionCatalog, settings)}")
+                    }
+                }
+            }
         }
     }
 
@@ -49,11 +78,10 @@ public abstract class SettingsPlugin : Plugin<Settings> {
     }
 
     private fun DependencyResolutionManagement.addVersionCatalogOverrides(settings: Settings) {
-        val prefix = "fgp.version.override."
         val libs = versionCatalogs.maybeCreate("libs")
         @Suppress("UnstableApiUsage")
-        settings.providers.gradlePropertiesPrefixedBy(prefix).get().forEach { (name, version) ->
-            libs.version(name.substringAfter(prefix), version)
+        settings.providers.gradlePropertiesPrefixedBy(VERSION_OVERRIDE_PREFIX).get().forEach { (name, version) ->
+            libs.version(name.substringAfter(VERSION_OVERRIDE_PREFIX), version)
         }
     }
 
