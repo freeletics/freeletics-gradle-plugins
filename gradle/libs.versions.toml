@@ -32,8 +32,7 @@ kotlin-gradle-api = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin-api", 
 kotlin-gradle-annotations = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin-annotations", version.ref = "kotlin" }
 kotlin-native-utils = { module = "org.jetbrains.kotlin:kotlin-native-utils", version.ref = "kotlin" }
 
-android-gradle = { module = "com.android.tools.build:gradle", version.ref = "android-gradle" }
-android-gradle-api = { module = "com.android.tools.build:gradle-api", version.ref = "android-gradle" }
+android-gradle = { module = "com.android.tools.build:gradle-api", version.ref = "android-gradle" }
 ksp-gradle = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin",  version.ref = "ksp" }
 anvil-gradle = { module = "com.squareup.anvil:gradle-plugin", version.ref = "anvil" }
 poko-gradle = { module = "dev.drewhamilton.poko:poko-gradle-plugin", version = "0.17.2" }
@@ -51,8 +50,6 @@ dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dok
 
 develocity = { module = "com.gradle:develocity-gradle-plugin", version.ref = "develocity" }
 gradle-toolchain = { module = "org.gradle.toolchains:foojay-resolver", version.ref = "gradle-toolchain" }
-
-versionCatalog = { module = "nl.littlerobots.vcu:catalog", version = "0.5.3" }
 
 clikt = { module = "com.github.ajalt.clikt:clikt-jvm", version.ref = "clikt" }
 clikt-core = { module = "com.github.ajalt.clikt:clikt-core-jvm", version.ref = "clikt" }

@@ -6,18 +6,3 @@ plugins {
 
     alias(libs.plugins.fgp.root)
 }
-
-dependencyAnalysis {
-    issues {
-        all {
-            onUnusedDependencies {
-                exclude(
-                    libs.poko.gradle,
-                    libs.kopy.gradle,
-                    libs.paparazzi.gradle,
-                    libs.dokka,
-                )
-            }
-        }
-    }
-}
