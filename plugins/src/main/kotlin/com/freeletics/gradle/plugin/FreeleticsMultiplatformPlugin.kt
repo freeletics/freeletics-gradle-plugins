@@ -29,25 +29,26 @@ public abstract class FreeleticsMultiplatformPlugin : Plugin<Project> {
 
         target.tasks.withType(Test::class.java).configureEach(Test::defaultTestSetup)
 
-        target.rootProject.disableDefaultJsRepositories()
+        target.disableDefaultJsRepositories(target.path)
+        target.rootProject.disableDefaultJsRepositories("root")
     }
 
     // TODO remove after https://youtrack.jetbrains.com/issue/KT-68533
-    private fun Project.disableDefaultJsRepositories() {
-        plugins.withType(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsPlugin::class.java) {
-            extensions.configure(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsEnvSpec::class.java) {
-                it.downloadBaseUrl.set(null)
+    @Suppress("DEPRECATION")
+    private fun Project.disableDefaultJsRepositories(name: String) {
+        plugins.withType(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin::class.java) {
+            extensions.configure(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension::class.java) {
+                it.downloadBaseUrl = null
             }
         }
         plugins.withType(org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin::class.java) {
-            extensions.configure(org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootEnvSpec::class.java) {
-                it.downloadBaseUrl.set(null)
+            extensions.configure(org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension::class.java) {
+                it.downloadBaseUrl = null
             }
         }
-        @OptIn(ExperimentalWasmDsl::class)
         plugins.withType(org.jetbrains.kotlin.gradle.targets.js.binaryen.BinaryenRootPlugin::class.java) {
-            extensions.configure(org.jetbrains.kotlin.gradle.targets.js.binaryen.BinaryenRootEnvSpec::class.java) {
-                it.downloadBaseUrl.set(null)
+            extensions.configure(org.jetbrains.kotlin.gradle.targets.js.binaryen.BinaryenRootExtension::class.java) {
+                it.downloadBaseUrl = null
             }
         }
     }
