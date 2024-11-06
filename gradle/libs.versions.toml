@@ -19,7 +19,7 @@ publish = "0.30.0"
 dokka = "1.9.20"
 
 clikt = "5.0.1"
-ktlint = "1.4.0"
+ktlint = "1.4.1"
 
 junit = "4.13.2"
 truth = "1.4.4"
