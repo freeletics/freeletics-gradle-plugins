@@ -183,9 +183,8 @@ public abstract class RootPlugin : Plugin<Project> {
                 }
 
                 structure.bundle("paparazzi") {
-                    it.primary("com.freeletics.fork.paparazzi:paparazzi")
+                    it.primary("app.cash.paparazzi")
                     it.includeGroup("app.cash.paparazzi")
-                    it.includeGroup("com.freeletics.fork.paparazzi")
                     it.includeGroup("com.android.tools.layoutlib")
                 }
             }
