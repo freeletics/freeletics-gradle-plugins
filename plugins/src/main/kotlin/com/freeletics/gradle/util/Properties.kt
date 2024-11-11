@@ -3,7 +3,6 @@ package com.freeletics.gradle.util
 import org.gradle.api.Project
 import org.gradle.api.provider.Provider
 
-@Suppress("UnstableApiUsage")
 internal fun Project.stringProperties(prefix: String): Provider<MutableMap<String, String>> {
     return providers.gradlePropertiesPrefixedBy(prefix)
 }
