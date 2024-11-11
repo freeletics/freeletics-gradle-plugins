@@ -51,7 +51,6 @@ public abstract class SettingsPlugin : Plugin<Settings> {
     private fun DependencyResolutionManagement.addVersionCatalogOverrides(settings: Settings) {
         val prefix = "fgp.version.override."
         val libs = versionCatalogs.maybeCreate("libs")
-        @Suppress("UnstableApiUsage")
         settings.providers.gradlePropertiesPrefixedBy(prefix).get().forEach { (name, version) ->
             libs.version(name.substringAfter(prefix), version)
         }
