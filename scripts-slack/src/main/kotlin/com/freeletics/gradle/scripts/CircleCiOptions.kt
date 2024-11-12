@@ -40,5 +40,4 @@ public class CircleCiOptions : OptionGroup("CircleCI options") {
         envvar = "CIRCLE_BRANCH",
         help = "The branch that was built",
     ).required()
-
 }

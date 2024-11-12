@@ -11,7 +11,6 @@ import com.slack.api.webhook.Payload
  * Simple base class with some common setup to send Slack messages using web hooks.
  */
 public abstract class SlackMessageCli(name: String? = null) : CliktCommand(name) {
-
     private val slack = Slack.getInstance()
 
     /**
@@ -46,4 +45,3 @@ public abstract class SlackMessageCli(name: String? = null) : CliktCommand(name)
         return "CLI to send Slack messages"
     }
 }
-
