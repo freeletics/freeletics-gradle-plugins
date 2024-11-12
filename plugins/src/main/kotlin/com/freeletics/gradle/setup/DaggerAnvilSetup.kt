@@ -7,113 +7,45 @@ import com.freeletics.gradle.util.booleanProperty
 import com.freeletics.gradle.util.getDependency
 import com.freeletics.gradle.util.getDependencyOrNull
 import com.freeletics.gradle.util.getVersion
-import com.squareup.anvil.plugin.AnvilExtension
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType.androidJvm
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType.jvm
 
 internal fun Project.configureDagger(mode: DaggerMode) {
+    configureProcessing(
+        useKsp = true,
+        basicArgument("generate-dagger-factories" to "${mode != DaggerMode.ANVIL_WITH_FULL_DAGGER}"),
+        basicArgument("disable-component-merging" to "${mode != DaggerMode.ANVIL_WITH_FULL_DAGGER}"),
+        basicArgument("will-have-dagger-factories" to "true"),
+        basicArgument("merging-backend" to if (mode == DaggerMode.ANVIL_WITH_FULL_DAGGER) "ksp" else "none"),
+    )
+
     addApiDependency(getDependency("inject"), SUPPORTED_PLATFORMS)
     addApiDependency(getDependency("anvil-annotations"), SUPPORTED_PLATFORMS)
     addApiDependency(getDependency("anvil-annotations-optional"), SUPPORTED_PLATFORMS)
     addApiDependency(getDependency("dagger"), SUPPORTED_PLATFORMS)
     addApiDependency(getDependencyOrNull("khonshu-codegen-runtime"), SUPPORTED_PLATFORMS)
+    addKspDependency(getDependency("anvil-compiler"), SUPPORTED_PLATFORMS)
 
-    when (mode) {
-        DaggerMode.ANVIL_ONLY -> {
-            if (booleanProperty("fgp.kotlin.anvilKsp", false).get()) {
-                configureProcessing(
-                    useKsp = true,
-                    basicArgument("generate-dagger-factories" to "true"),
-                    basicArgument("disable-component-merging" to "true"),
-                    basicArgument("will-have-dagger-factories" to "true"),
-                    basicArgument("merging-backend" to "none"),
-                )
+    if (mode == DaggerMode.ANVIL_WITH_KHONSHU) {
+        addKspDependency(getDependency("khonshu-codegen-compiler"), SUPPORTED_PLATFORMS)
+    }
 
-                addKspDependency(getDependency("anvil-compiler"), SUPPORTED_PLATFORMS)
-                anvilForkDependencySustitution()
-            } else {
-                plugins.apply("com.squareup.anvil")
-                extensions.configure(AnvilExtension::class.java) {
-                    it.generateDaggerFactories.set(true)
-                    it.disableComponentMerging.set(true)
-                    it.trackSourceFiles.set(true)
-                }
-            }
-        }
-        DaggerMode.ANVIL_WITH_KHONSHU -> {
-            if (booleanProperty("fgp.kotlin.anvilKsp", false).get()) {
-                configureProcessing(
-                    useKsp = true,
-                    basicArgument("generate-dagger-factories" to "true"),
-                    basicArgument("disable-component-merging" to "true"),
-                    basicArgument("will-have-dagger-factories" to "true"),
-                    basicArgument("merging-backend" to "none"),
-                ).also {
-                    // TODO workaround for Gradle not being able to resolve this in the ksp config
-                    configurations.named(it).configure {
-                        it.exclude(mapOf("group" to "org.jetbrains.skiko", "module" to "skiko"))
-                    }
-                }
+    if (mode == DaggerMode.ANVIL_WITH_FULL_DAGGER) {
+        val daggerProcessorConfiguration = configureProcessing(
+            useKsp = booleanProperty("fgp.kotlin.daggerKsp", false).get(),
+            basicArgument("dagger.experimentalDaggerErrorMessages" to "enabled"),
+            basicArgument("dagger.strictMultibindingValidation" to "enabled"),
+            basicArgument("dagger.warnIfInjectionFactoryNotGeneratedUpstream" to "enabled"),
+        )
+        dependencies.add(daggerProcessorConfiguration, getDependency("dagger-compiler"))
+    }
 
-                addKspDependency(getDependency("anvil-compiler"), SUPPORTED_PLATFORMS)
-                addKspDependency(getDependency("khonshu-codegen-compiler"), SUPPORTED_PLATFORMS)
-                anvilForkDependencySustitution()
-            } else {
-                plugins.apply("com.squareup.anvil")
-                extensions.configure(AnvilExtension::class.java) {
-                    it.generateDaggerFactories.set(true)
-                    it.disableComponentMerging.set(true)
-                    it.trackSourceFiles.set(true)
-                }
+    anvilForkDependencySustitution()
 
-                dependencies.add("anvil", getDependency("khonshu-codegen-compiler"))
-            }
-        }
-        DaggerMode.ANVIL_WITH_FULL_DAGGER -> {
-            if (booleanProperty("fgp.kotlin.anvilKspWithComponent", false).get()) {
-                val daggerKsp = booleanProperty("fgp.kotlin.daggerKsp", false).get()
-                configureProcessing(
-                    useKsp = true,
-                    basicArgument("generate-dagger-factories" to "false"),
-                    basicArgument("disable-component-merging" to "false"),
-                    basicArgument("will-have-dagger-factories" to "true"),
-                    basicArgument("merging-backend" to "ksp"),
-                    basicArgument("dagger.experimentalDaggerErrorMessages" to "enabled"),
-                    basicArgument("dagger.strictMultibindingValidation" to "enabled"),
-                    basicArgument("dagger.warnIfInjectionFactoryNotGeneratedUpstream" to "enabled"),
-                )
-
-                if (daggerKsp) {
-                    addKspDependency(getDependency("dagger-compiler"), SUPPORTED_PLATFORMS)
-                } else {
-                    val processorConfiguration = configureProcessing(
-                        useKsp = false,
-                        basicArgument("dagger.experimentalDaggerErrorMessages" to "enabled"),
-                        basicArgument("dagger.strictMultibindingValidation" to "enabled"),
-                        basicArgument("dagger.warnIfInjectionFactoryNotGeneratedUpstream" to "enabled"),
-                    )
-                    dependencies.add(processorConfiguration, getDependency("dagger-compiler"))
-                }
-                addKspDependency(getDependency("anvil-compiler"), SUPPORTED_PLATFORMS)
-                anvilForkDependencySustitution()
-            } else {
-                plugins.apply("com.squareup.anvil")
-                extensions.configure(AnvilExtension::class.java) {
-                    it.generateDaggerFactories.set(false)
-                    it.disableComponentMerging.set(false)
-                    it.trackSourceFiles.set(true)
-                }
-
-                val processorConfiguration = configureProcessing(
-                    useKsp = false,
-                    basicArgument("dagger.experimentalDaggerErrorMessages" to "enabled"),
-                    basicArgument("dagger.strictMultibindingValidation" to "enabled"),
-                    basicArgument("dagger.warnIfInjectionFactoryNotGeneratedUpstream" to "enabled"),
-                )
-                dependencies.add(processorConfiguration, getDependency("dagger-compiler"))
-            }
-        }
+    // TODO workaround for Gradle not being able to resolve this in the ksp config
+    configurations.named("ksp").configure {
+        it.exclude(mapOf("group" to "org.jetbrains.skiko", "module" to "skiko"))
     }
 }
 

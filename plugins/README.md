@@ -110,9 +110,9 @@ Add the following to the `libs` version catalog:
 # these will be automatically added as dependencies
 inject = { module = "javax.inject:javax.inject", version = "..." }
 dagger = { module = "com.google.dagger:dagger", version = "..." }
-anvil-annotations = { module = "com.squareup.anvil:annotations", version = "..." }
-anvil-annotations-optional = { module = "com.squareup.anvil:annotations-optional", version = "..." }
-anvil-compiler = { module = "com.squareup.anvil:compiler", version = "..." }
+anvil-annotations = { module = "dev.zacswers.anvil:annotations", version = "..." }
+anvil-annotations-optional = { module = "dev.zacswers.anvil:annotations-optional", version = "..." }
+anvil-compiler = { module = "dev.zacswers.anvil:compiler", version = "..." }
 # optional, if present it will be automatically added as a dependency
 khonshu-codegen-runtime = { module = "com.freeletics.khonshu:codegen-runtime", version = "..." }
 # only for `useDaggerWithComponent()`
