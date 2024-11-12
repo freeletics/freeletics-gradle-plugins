@@ -12,7 +12,7 @@ dependencies {
     compileOnly(libs.ksp.gradle)
     compileOnly(libs.poko.gradle)
     compileOnly(libs.kopy.gradle)
-    compileOnly(libs.anvil.gradle)
+    compileOnly(libs.skie.gradle)
     compileOnly(libs.paparazzi.gradle)
     compileOnly(libs.dependency.analysis)
     compileOnly(libs.publish)
