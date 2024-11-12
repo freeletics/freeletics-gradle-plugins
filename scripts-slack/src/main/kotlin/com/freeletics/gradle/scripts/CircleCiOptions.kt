@@ -5,17 +5,20 @@ import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
 
 public class CircleCiOptions : OptionGroup("CircleCI options") {
-    private val userName by option(
+    public val userName: String by option(
         "--project-username",
         envvar = "CIRCLE_PROJECT_USERNAME",
         help = "The username that this project belongs to",
     ).required()
 
-    private val repoName by option(
+    public val repoName: String by option(
         "--project-reponame",
         envvar = "CIRCLE_PROJECT_REPONAME",
         help = "The name of the repository for this project",
     ).required()
+
+    public val repoSlug: String
+        get() = "$userName/$repoName"
 
     public val jobUrl: String by option(
         "--job-url",
@@ -29,7 +32,7 @@ public class CircleCiOptions : OptionGroup("CircleCI options") {
         help = "The name of the job",
     ).required()
 
-    private val buildNumber by option(
+    public val buildNumber: String by option(
         "--build-number",
         envvar = "CIRCLE_BUILD_NUM",
         help = "The number of the job",
