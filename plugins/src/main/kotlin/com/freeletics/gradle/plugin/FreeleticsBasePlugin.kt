@@ -104,14 +104,6 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                     if (!isAndroid) {
                         freeCompilerArgs.add("-Xjdk-release=${project.javaTarget}")
                     }
-
-                    if (project.booleanProperty("fgp.kotlin.fastJarFs", false).get()) {
-                        freeCompilerArgs.add("-Xuse-fast-jar-file-system")
-                    }
-
-                    // TODO workaround for incremental issue when merging java resources
-                    //  https://issuetracker.google.com/issues/284003132
-                    moduleName.set(path.substring(1).replace(":", "_"))
                 }
             }
         }
