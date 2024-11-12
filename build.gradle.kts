@@ -6,3 +6,11 @@ plugins {
 
     alias(libs.plugins.fgp.root)
 }
+
+dependencyAnalysis {
+    structure {
+        bundle("slack") {
+            includeGroup("com.slack.api")
+        }
+    }
+}
