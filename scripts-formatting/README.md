@@ -11,9 +11,10 @@ given files. To use it create `ktlint.main.kts` and add the following content:
 ```kts
 #!/usr/bin/env kotlin
 
-@file:DependsOn("com.freeletics.gradle:scripts:<latest-version>")
+@file:DependsOn("com.freeletics.gradle:scripts-formatting:<latest-version>")
 
 import com.freeletics.gradle.scripts.KtLintCli
+import com.github.ajalt.clikt.core.main
 
 KtLintCli().main(args)
 ```
