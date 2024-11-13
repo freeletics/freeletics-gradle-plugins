@@ -43,4 +43,10 @@ public class CircleCiOptions : OptionGroup("CircleCI options") {
         envvar = "CIRCLE_BRANCH",
         help = "The branch that was built",
     ).required()
+
+    public val commitSha1: String by option(
+        "--commit-sha1",
+        envvar = "CIRCLE_SHA1",
+        help = "The sha1 of the commit that was built",
+    ).required()
 }

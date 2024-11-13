@@ -3,7 +3,6 @@
 Provides `SlackMessageCli` that makes it easy to write clikt scripts that send Slack messages.
 
 This also provides several `OptionGroup` helpers:
-- `CircleCiOptions`
 - `PlatformOptions`
 - `ReleaseTrainOptions`
 

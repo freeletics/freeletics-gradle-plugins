@@ -8,6 +8,14 @@ plugins {
 }
 
 dependencyAnalysis {
+    issues {
+        project(":scripts-circleci") {
+            onUnusedDependencies {
+                exclude(libs.clikt.asProvider())
+            }
+        }
+    }
+
     structure {
         bundle("slack") {
             includeGroup("com.slack.api")
