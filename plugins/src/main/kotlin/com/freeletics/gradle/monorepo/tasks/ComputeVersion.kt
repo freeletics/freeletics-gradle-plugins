@@ -1,7 +1,9 @@
 package com.freeletics.gradle.monorepo.tasks
 
 import com.freeletics.gradle.monorepo.util.Git
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.temporal.IsoFields
 
 /**
  * Get the app version name, which is computed using the branch name or `git describe`.
@@ -128,4 +130,25 @@ private fun versionNameFromTag(
  */
 public fun versionNameFromTag(tag: String, gitTagPrefix: String): String {
     return tag.substringAfter("$gitTagPrefix/v")
+}
+
+/**
+ * Computes a version based on the given date. The last 2 digits of the year are taken
+ * as major version, the week number as minor. The week based year is used to stay
+ * consistent
+ *
+ * For example:
+ * 2024-11-12 -> 24.46.0
+ * 2025-12-30 -> 25.1.0
+ * 2025-12-01 -> 25.1.0
+ */
+public fun versionBasedOnDate(date: LocalDate): String {
+    val year = date.get(IsoFields.WEEK_BASED_YEAR)
+    val week = date.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR)
+
+    // Version pattern is 'yy.ww.x'
+    val major = year - 2000 // so that major version is 'yy', i.e. 2022 - 2000 => '22.1.0'
+    val minor = week
+    val patch = 0
+    return "${major}.${minor}.${patch}"
 }
