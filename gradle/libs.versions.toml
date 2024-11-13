@@ -19,6 +19,7 @@ dokka = "1.9.20"
 
 clikt = "5.0.1"
 ktlint = "1.4.1"
+serialization = "1.7.3"
 
 junit = "4.13.2"
 truth = "1.4.4"
@@ -54,8 +55,10 @@ clikt-core = { module = "com.github.ajalt.clikt:clikt-core-jvm", version.ref = "
 ktlint-rule-engine = { module = "com.pinterest.ktlint:ktlint-rule-engine", version.ref = "ktlint" }
 ktlint-rule-engine-core = { module = "com.pinterest.ktlint:ktlint-rule-engine-core", version.ref = "ktlint" }
 ktlint-rules = { module = "com.pinterest.ktlint:ktlint-ruleset-standard", version.ref = "ktlint" }
-
 slack = { module = "com.slack.api:slack-api-client-kotlin-extension", version = "1.44.1"}
+okhttp = { module = "com.squareup.okhttp3:okhttp", version = "4.12.0" }
+kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "serialization" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json ", version.ref = "serialization" }
 
 junit = { module = "junit:junit", version.ref = "junit" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
@@ -68,6 +71,7 @@ fgp-jvm = { id = "com.freeletics.gradle.jvm", version.ref = "fgp" }
 fgp-publish = { id = "com.freeletics.gradle.publish.oss", version.ref = "fgp" }
 
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
 dependency-analysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependency-analysis" }
 publish = { id = "com.vanniktech.maven.publish", version.ref = "publish" }
