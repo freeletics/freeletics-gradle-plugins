@@ -1,6 +1,26 @@
 Change Log
 ==========
 
+## 0.17.0 *(2024-11-13)*
+
+- Added `useSkie`, `useKopy`, and `usePoko` to enable the respective plugins.
+- Added new `versionBasedOnDate` method and several overloads of `computeVersionName`
+  and `computeVersionCode` to make using them easier.
+- New `com.freeletics.gradle:scripts-circleci` artifact that contains helpers
+  for writing kts scripts that run in a CircleCI environment or interact
+  with CircleCI.
+- New `com.freeletics.gradle:scripts-slack` artifact that makes it easy
+  to write kts scripts that send Slack messages.
+- Updated ktlint to 1.4.1.
+- `usePaparazzi()` will now apply the official Paparazzi release instead of the Freeletics
+  Paparazzi fork.
+- The `com.freeletics.gradle.root` plugin is now shipped in the same artifact as the others.
+- Removed `fgp.kotlin.anvilKsp` and `fgp.kotlin.anvilKspWithComponent`. Anvil is now always run
+  through the [Anvil KSP fork](https://github.com/zacsweers/anvil).
+- Removed enforcing a Gradle Daemon JVM by setting `java-gradle` in the version catalog. Use
+  Daemon JVM toolchains instead (run `updateDaemonJvm` task).
+
+
 ## 0.16.0 *(2024-10-07)*
 
 - Update Kotlin to 2.0.20.
@@ -12,9 +32,9 @@ Change Log
 ## 0.15.0 *(2024-08-09)*
 
 - Update ktlint to 1.3.1.
-- Updated `fgp.kotlin.anvilKsp` and `fgp.kotlin.anvilKspWithComponent` to use the 
+- Updated `fgp.kotlin.anvilKsp` and `fgp.kotlin.anvilKspWithComponent` to use the
   [Anvil fork](https://github.com/zacsweers/anvil).
-- Removed `fgp.kotlin.daggerKsp`, whether Dagger is used through KSP is now controlled by 
+- Removed `fgp.kotlin.daggerKsp`, whether Dagger is used through KSP is now controlled by
   `fgp.kotlin.anvilKspWithComponent`.
 - Avoid warning about setting `buildFeatures.compose`.
 
@@ -42,7 +62,7 @@ Change Log
 
 - Add support for using Compose in Kotlin 2.0.0 through the new Compose compiler
   plugin that is shipped as part of Kotlin.
-- Only enable Kotlin's progressive mode if the language version matches or 
+- Only enable Kotlin's progressive mode if the language version matches or
   exceeds the current Kotlin version.
 - Separate activating Anvil KSP for app modules from library modules. This
   allows using Anvil KSP and K2 in most of the code base until Anvil KSP
