@@ -150,5 +150,5 @@ public fun versionBasedOnDate(date: LocalDate): String {
     val major = year - 2000 // so that major version is 'yy', i.e. 2022 - 2000 => '22.1.0'
     val minor = week
     val patch = 0
-    return "${major}.${minor}.${patch}"
+    return "$major.$minor.$patch"
 }
