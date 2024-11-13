@@ -65,7 +65,7 @@ internal fun RepositoryHandler.addAndroidXSnapshotRepositories(androidXBuildId: 
 internal fun RepositoryHandler.addInternalRepository(settings: Settings) {
     val internalUrl = settings.stringProperty("fgp.internalArtifacts.url") ?: return
 
-    newExclusiveContentRepository("Internal Artifacts", internalUrl) {
+    newExclusiveContentRepository("internalArtifacts", internalUrl) {
         includeGroupByRegex("^com\\.freeletics\\.internal.*")
     }.apply {
         credentials(PasswordCredentials::class.java)

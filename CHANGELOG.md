@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## 0.17.1 *(2024-11-13)*
+
+- Fix repository name for internal artifacts.
+
+
 ## 0.17.0 *(2024-11-13)*
 
 - Added `useSkie`, `useKopy`, and `usePoko` to enable the respective plugins.
