@@ -25,19 +25,10 @@ public fun computeVersionCode(git: Git, gitTagName: String, localDate: LocalDate
     if (version != null) {
         // if we are building a tagged commit use the version to compute the version code
         //
-        // New (since major v24):
-        //
         // 2_100_000_000 - maximum allowed value
         //    24_xxx_xxx - major version 24
         //    xx_x31_xxx - minor version 31
         //    xx_xxx_x00 - patch version 0
-        //
-        // Old (until major v24):
-        //
-        // 2_100_000_000 - maximum allowed value
-        //    22_xxx_xxx - major version 22
-        //    xx_31x_xxx - minor version 31
-        //    xx_xxx_000 - patch version 0
 
         val parts = version.split(".")
         check(parts.size == 3)
@@ -54,8 +45,6 @@ public fun computeVersionCode(git: Git, gitTagName: String, localDate: LocalDate
         // Untagged builds will use the major and minor version of the last version for
         // the computed build number.
         //
-        // New (since major v24):
-        //
         // We use the day of week in the 100 digit to get a higher build number than
         // anything the last release can reach. The last 2 digits are used for the time
         // of day to generally have the ability to produce multiple builds per day
@@ -67,18 +56,6 @@ public fun computeVersionCode(git: Git, gitTagName: String, localDate: LocalDate
         //    xx_x31_xxx - minor version 31
         //    xx_xxx_1xx - day of week
         //    xx_xxx_x99 - time of day in 15 minute intervals
-        //
-        // Old (until major v24):
-        //
-        // We use the day of week in the 100 digit to get a higher build number than
-        // anything the last release can reach. The last 3 digits are used for the
-        // number of commits since the last release.
-        //
-        // 2_100_000_000 - maximum allowed value
-        //    22_xxx_xxx - major version 22
-        //    xx_31x_xxx - minor version 31
-        //    xx_xx1_xxx - day of week
-        //    xx_xxx_099 - commit count 99
 
         val lastRelease = versionFromTag(git, gitTagName, initialRelease = true)
         checkNotNull(lastRelease) { "Did not find a previous release/tag" }
@@ -91,33 +68,18 @@ public fun computeVersionCode(git: Git, gitTagName: String, localDate: LocalDate
         patch = 0
         checkVersions(major, minor, patch)
 
-        extra = if (major >= 24) {
-            // Monday = 100, Sunday = 700
-            val dayOfWeek = localDate.dayOfWeek.value * 100
-            // Time of day in 15 minute intervals -> values from 0 to 96
-            val time = (localDate.hour * 60 + localDate.minute) / 15
-            dayOfWeek + time
-        } else {
-            // Monday = 1000, Sunday = 7000
-            val dayOfWeek = localDate.dayOfWeek.value * 1_000
-            // the returned version has 7.4.0-32-g5e2416d73f as format where the 32 is the commit count since the tag
-            val commitsSinceLastRelease = suffixParts[1].toInt()
-            check(commitsSinceLastRelease < 1_000) { "More than 999 commits found since the last release was created" }
-            dayOfWeek + commitsSinceLastRelease
-        }
+        // Monday = 100, Sunday = 700
+        val dayOfWeek = localDate.dayOfWeek.value * 100
+        // Time of day in 15 minute intervals -> values from 0 to 96
+        val time = (localDate.hour * 60 + localDate.minute) / 15
+        extra = dayOfWeek + time
     }
 
-    val versionCode = if (major >= 24) {
-        major * 1_000_000 +
-            minor * 1_000 +
-            patch +
-            extra
-    } else {
-        major * 1_000_000 +
-            minor * 10_000 +
-            patch +
-            extra
-    }
+    val versionCode = major * 1_000_000 +
+        minor * 1_000 +
+        patch +
+        extra
+
     check(versionCode < 1_000_000_000) { "Version code should always be lower than 1 billion, was $versionCode" }
 
     return versionCode
