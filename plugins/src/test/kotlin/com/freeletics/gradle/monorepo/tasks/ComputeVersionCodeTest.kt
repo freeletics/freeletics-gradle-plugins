@@ -14,16 +14,6 @@ internal class ComputeVersionCodeTest {
     fun `when there is a matching tag it returns version code computed from it`() {
         val git = FakeGit(
             branch = "main",
-            describe = "fl/v4.3.1",
-        )
-
-        assertThat(computeVersionCode(git, "fl", defaultDate)).isEqualTo(4030001)
-    }
-
-    @Test
-    fun `v24+, when there is a matching tag it returns version code computed from it`() {
-        val git = FakeGit(
-            branch = "main",
             describe = "fl/v24.3.1",
         )
 
@@ -86,19 +76,7 @@ internal class ComputeVersionCodeTest {
     }
 
     @Test
-    fun `when there is no tag it returns version computed from last tag, the commit count and day of week - friday`() {
-        val date = LocalDate.of(2022, 11, 11).atStartOfDay() // friday
-        val git = FakeGit(
-            branch = "main",
-            describe = "",
-            describeNonExact = "fl/v22.44.3-45-abcdefgh",
-        )
-
-        assertThat(computeVersionCode(git, "fl", date)).isEqualTo(22445045)
-    }
-
-    @Test
-    fun `v24+, when there is no tag it returns version computed from last tag and current day - friday`() {
+    fun `when there is no tag it returns version computed from last tag and current day - friday`() {
         val date = LocalDate.of(2022, 11, 11).atStartOfDay() // friday
         val git = FakeGit(
             branch = "main",
@@ -110,7 +88,7 @@ internal class ComputeVersionCodeTest {
     }
 
     @Test
-    fun `v24+, when there is no tag it returns version computed from last tag and current day - friday evening`() {
+    fun `when there is no tag it returns version computed from last tag and current day - friday evening`() {
         val date = LocalDate.of(2022, 11, 11).atTime(19, 35) // friday
         val git = FakeGit(
             branch = "main",
@@ -122,19 +100,7 @@ internal class ComputeVersionCodeTest {
     }
 
     @Test
-    fun `when there is no tag it returns version computed from last tag, the commit count and day of week - tuesday`() {
-        val date = LocalDate.of(2022, 11, 8).atStartOfDay() // tuesday
-        val git = FakeGit(
-            branch = "main",
-            describe = "",
-            describeNonExact = "fl/v22.44.3-45-abcdefgh",
-        )
-
-        assertThat(computeVersionCode(git, "fl", date)).isEqualTo(22442045)
-    }
-
-    @Test
-    fun `v24+, when there is no tag it returns version computed from last tag and current day - tuesday`() {
+    fun `when there is no tag it returns version computed from last tag and current day - tuesday`() {
         val date = LocalDate.of(2022, 11, 8).atStartOfDay() // tuesday
         val git = FakeGit(
             branch = "main",
@@ -146,7 +112,7 @@ internal class ComputeVersionCodeTest {
     }
 
     @Test
-    fun `v24+, when there is no tag it returns version computed from last tag and current day - tuesday at noon`() {
+    fun `when there is no tag it returns version computed from last tag and current day - tuesday at noon`() {
         val date = LocalDate.of(2022, 11, 8).atTime(12, 0) // tuesday
         val git = FakeGit(
             branch = "main",
@@ -163,10 +129,10 @@ internal class ComputeVersionCodeTest {
         val git = FakeGit(
             branch = "main",
             describe = "",
-            describeNonExact = "fl/v22.44.3-0-abcdefgh",
+            describeNonExact = "fl/v24.44.3-0-abcdefgh",
         )
 
-        assertThat(computeVersionCode(git, "fl", date)).isEqualTo(22445000)
+        assertThat(computeVersionCode(git, "fl", date)).isEqualTo(24044500)
     }
 
     @Test
@@ -195,23 +161,6 @@ internal class ComputeVersionCodeTest {
             computeVersionCode(git, "fl", defaultDate)
         }
         assertThat(exception).hasMessageThat().isEqualTo("Minor version is limited to 99, was 100")
-    }
-
-    @Test
-    fun `when there is no tag and there are too many extra commits it fails`() {
-        val date = LocalDate.of(2022, 11, 11).atStartOfDay() // friday
-        val git = FakeGit(
-            branch = "main",
-            describe = "",
-            describeNonExact = "fl/v22.44.3-1000-abcdefgh",
-        )
-
-        val exception = assertThrows(IllegalStateException::class.java) {
-            computeVersionCode(git, "fl", date)
-        }
-        assertThat(exception).hasMessageThat().isEqualTo(
-            "More than 999 commits found since the last release was created",
-        )
     }
 
     @Test
