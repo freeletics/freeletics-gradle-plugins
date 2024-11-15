@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+## 0.18.1 *(2024-11-15)*
+
+- New `com.freeletics.gradle:scripts-google` artifact that contains helpers
+  for interacting with the Google Play and Google Sheets APIs.
+
+
 ## 0.17.1 *(2024-11-13)*
 
 - Fix repository name for internal artifacts.
