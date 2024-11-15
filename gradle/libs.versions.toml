@@ -65,7 +65,7 @@ google-apiclient = { module = "com.google.api-client:google-api-client", version
 google-http = { module = "com.google.http-client:google-http-client", version = "1.45.0" }
 google-http-gson = { module = "com.google.http-client:google-http-client-gson", version = "1.23.0" }
 google-credentials = { module = "com.google.auth:google-auth-library-credentials", version = "1.23.0" }
-google-oauth = { module = "com.google.auth:google-auth-library-oauth2-http", version = "1.23.0" }
+google-oauth = { module = "com.google.auth:google-auth-library-oauth2-http", version = "1.30.0" }
 
 google-play = { module = "com.google.apis:google-api-services-androidpublisher", version = "v3-rev20241016-2.0.0" }
 google-sheets = { module = "com.google.apis:google-api-services-sheets", version = "v4-rev20241008-2.0.0" }
