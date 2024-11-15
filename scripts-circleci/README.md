@@ -1,4 +1,4 @@
-# Slack Scripts
+# CircleCI Scripts
 
 This provides a `OptionGroup` helper called `CircleCiOptions` which gives access
 to common CircleCI values like the repository name, job number or branch.
