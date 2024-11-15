@@ -15,6 +15,11 @@ dependencyAnalysis {
                 exclude(libs.clikt.asProvider())
             }
         }
+        project(":scripts-google") {
+            onUnusedDependencies {
+                exclude(libs.clikt.asProvider())
+            }
+        }
     }
 
     structure {
