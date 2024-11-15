@@ -21,7 +21,7 @@ public class GooglePlayPublisher(
         GoogleNetHttpTransport.newTrustedTransport(),
         GsonFactory.getDefaultInstance(),
         // long timeout because uploading an aab can take a while
-        TimeoutHttpCredentialsAdapter(credentials, timeout =  3.minutes),
+        TimeoutHttpCredentialsAdapter(credentials, timeout = 3.minutes),
     ).setApplicationName(application).build()
 
     public fun edit(block: GooglePlayEdit.() -> Boolean) {

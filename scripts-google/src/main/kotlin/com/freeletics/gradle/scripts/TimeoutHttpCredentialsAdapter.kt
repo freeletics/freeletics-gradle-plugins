@@ -12,7 +12,7 @@ import kotlin.time.Duration
  */
 internal class TimeoutHttpCredentialsAdapter(
     credentials: Credentials,
-    private val timeout: Duration? = null
+    private val timeout: Duration? = null,
 ) : HttpCredentialsAdapter(credentials) {
     override fun initialize(request: HttpRequest) {
         if (timeout != null) {

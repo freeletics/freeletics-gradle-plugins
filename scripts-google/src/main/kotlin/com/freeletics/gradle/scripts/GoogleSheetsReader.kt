@@ -10,7 +10,6 @@ import java.io.ByteArrayInputStream
 import java.util.Base64
 
 public class GoogleSheetsReader(applicationName: String, jsonKey: String) {
-
     private val credentials = GoogleCredentials.fromStream(ByteArrayInputStream(Base64.getDecoder().decode(jsonKey)))
         .createScoped(listOf(SPREADSHEETS_READONLY))
 
