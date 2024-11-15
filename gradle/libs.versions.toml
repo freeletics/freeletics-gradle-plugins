@@ -63,7 +63,7 @@ ktlint-rules = { module = "com.pinterest.ktlint:ktlint-ruleset-standard", versio
 slack = { module = "com.slack.api:slack-api-client-kotlin-extension", version = "1.44.1"}
 google-apiclient = { module = "com.google.api-client:google-api-client", version = "2.7.0" }
 google-http = { module = "com.google.http-client:google-http-client", version = "1.45.0" }
-google-http-gson = { module = "com.google.http-client:google-http-client-gson", version = "1.23.0" }
+google-http-gson = { module = "com.google.http-client:google-http-client-gson", version = "1.45.1" }
 google-credentials = { module = "com.google.auth:google-auth-library-credentials", version = "1.23.0" }
 google-oauth = { module = "com.google.auth:google-auth-library-oauth2-http", version = "1.23.0" }
 
