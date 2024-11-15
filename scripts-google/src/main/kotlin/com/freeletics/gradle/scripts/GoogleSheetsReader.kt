@@ -19,7 +19,7 @@ public class GoogleSheetsReader(applicationName: String, jsonKey: String) {
         HttpCredentialsAdapter(credentials),
     ).setApplicationName(applicationName).build()
 
-    public fun read(spreadsheetId: String, range: String): List<MutableList<Any>> {
+    public fun read(spreadsheetId: String, range: String): List<List<Any>> {
         return sheets.spreadsheets()
             .values()
             .get(spreadsheetId, range)
