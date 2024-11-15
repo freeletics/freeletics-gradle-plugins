@@ -1,4 +1,7 @@
 plugins {
+    alias(libs.plugins.fgp.jvm) apply (false)
+    alias(libs.plugins.fgp.gradle) apply (false)
+    alias(libs.plugins.fgp.publish) apply (false)
     alias(libs.plugins.kotlin) apply (false)
     alias(libs.plugins.kotlin.serialization) apply (false)
     alias(libs.plugins.dependency.analysis) apply (false)
