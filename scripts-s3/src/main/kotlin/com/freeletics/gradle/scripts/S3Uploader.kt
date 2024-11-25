@@ -26,7 +26,6 @@ private suspend fun upload(stream: ByteStream, options: S3Options): String {
             body = stream
         }
 
-
         val unsignedRequest = GetObjectRequest {
             bucket = options.bucket
             key = options.key
@@ -34,5 +33,4 @@ private suspend fun upload(stream: ByteStream, options: S3Options): String {
         val presignedRequest = s3.presignGetObject(unsignedRequest, options.validFor)
         return presignedRequest.url.toString()
     }
-
 }
