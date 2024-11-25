@@ -23,11 +23,23 @@ dependencyAnalysis {
                 exclude(libs.clikt.asProvider())
             }
         }
+        project(":scripts-s3") {
+            onUnusedDependencies {
+                exclude(libs.clikt.asProvider())
+            }
+        }
     }
 
     structure {
         bundle("slack") {
             includeGroup("com.slack.api")
+        }
+        bundle("aws") {
+            includeGroup("aws.smithy.kotlin")
+            includeGroup("aws.sdk.kotlin")
+        }
+        bundle("zxing") {
+            includeGroup("com.google.zxing")
         }
     }
 }
