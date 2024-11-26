@@ -8,15 +8,19 @@ import aws.smithy.kotlin.runtime.content.ByteStream
 import aws.smithy.kotlin.runtime.content.fromFile
 import java.io.File
 
-public suspend fun upload(byteArray: ByteArray, options: S3Options): String {
+public suspend fun upload(byteArray: ByteArray, options: BaseS3Options): String {
     return upload(ByteStream.fromBytes(byteArray), options)
 }
 
-public suspend fun upload(file: File, options: S3Options): String {
+public suspend fun upload(content: String, options: BaseS3Options): String {
+    return upload(ByteStream.fromString(content), options)
+}
+
+public suspend fun upload(file: File, options: BaseS3Options): String {
     return upload(ByteStream.fromFile(file), options)
 }
 
-private suspend fun upload(stream: ByteStream, options: S3Options): String {
+private suspend fun upload(stream: ByteStream, options: BaseS3Options): String {
     S3Client {
         this.region = options.region
     }.use { s3 ->
