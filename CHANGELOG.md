@@ -1,7 +1,14 @@
 Change Log
 ==========
 
-## 0.18.1 *(2024-11-15)*
+## 0.19.0 *(2024-11-26)*
+
+- New `com.freeletics.gradle:scripts-s3` artifact that contains helpers
+  for interacting with S3.
+- Fix `GoogleSheetsReader` expecting a base64 encoded json key.
+
+
+## 0.18.0 *(2024-11-15)*
 
 - New `com.freeletics.gradle:scripts-google` artifact that contains helpers
   for interacting with the Google Play and Google Sheets APIs.
