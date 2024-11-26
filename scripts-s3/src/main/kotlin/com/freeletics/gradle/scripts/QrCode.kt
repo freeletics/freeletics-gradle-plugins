@@ -5,7 +5,7 @@ import com.google.zxing.client.j2se.MatrixToImageWriter
 import com.google.zxing.qrcode.QRCodeWriter
 import java.io.ByteArrayOutputStream
 
-fun createQrCode(uri: String): ByteArray {
+public fun createQrCode(uri: String): ByteArray {
     val writer = QRCodeWriter()
     val bitMatrix = writer.encode(uri, BarcodeFormat.QR_CODE, IMAGE_SIZE, IMAGE_SIZE)
     return ByteArrayOutputStream().use {
