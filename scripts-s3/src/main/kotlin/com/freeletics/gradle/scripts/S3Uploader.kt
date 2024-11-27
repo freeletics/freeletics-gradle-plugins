@@ -28,6 +28,9 @@ private suspend fun upload(stream: ByteStream, options: BaseS3Options): String {
             bucket = options.bucket
             key = options.key
             body = stream
+            if (options.key.endsWith(".html")) {
+                metadata = mapOf("Content-Type" to "text/html")
+            }
         }
 
         val unsignedRequest = GetObjectRequest {
