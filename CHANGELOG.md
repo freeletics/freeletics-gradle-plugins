@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## 0.19.1 *(2024-11-27)*
+
+- When uploading html files to s3, set the `Content-Type` to `text/html`.
+
+
 ## 0.19.0 *(2024-11-26)*
 
 - New `com.freeletics.gradle:scripts-s3` artifact that contains helpers
