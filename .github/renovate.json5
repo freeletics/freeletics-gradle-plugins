@@ -62,6 +62,9 @@
       matchPackagePatterns: [
         "org.jetbrains.kotlin",
         "com.google.devtools.ksp",
+        "com.javiersc.kotlin",
+        "dev.drewhamilton.poko",
+        "co.touchlab.skie",
       ],
       excludePackagePatterns: [
         "org.jetbrains.kotlinx",
@@ -74,6 +77,11 @@
         "org.jetbrains.compose",
       ],
       groupName: "Compose"
-    }
+    },
+    // the AWS SDK is updated multiple times a week which causes a lot of noise
+    {
+      matchPackagePatterns: ["^aws.sdk.kotlin"],
+      schedule: ["after 9pm on sunday"]
+    },
   ]
 }
