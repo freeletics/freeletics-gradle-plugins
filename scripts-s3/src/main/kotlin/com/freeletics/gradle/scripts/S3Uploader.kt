@@ -29,7 +29,7 @@ private suspend fun upload(stream: ByteStream, options: BaseS3Options): String {
             key = options.key
             body = stream
             if (options.key.endsWith(".html")) {
-                metadata = mapOf("Content-Type" to "text/html")
+                contentType = "text/html"
             }
         }
 
