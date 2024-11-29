@@ -1,6 +1,21 @@
 Change Log
 ==========
 
+## 0.20.0 **UNRELEASED**
+
+- Updated to Kotlin 2.1.0
+- Enable new Kotlin language features
+  - [Guard conditions in when with a subject](https://kotlinlang.org/docs/whatsnew21.html#guard-conditions-in-when-with-a-subject) (`-Xwhen-guards`),
+  - [Non-local break and continue](https://kotlinlang.org/docs/whatsnew21.html#non-local-break-and-continue) (`-Xnon-local-break-continue`)
+  - [Multi-dollar string interpolation](https://kotlinlang.org/docs/whatsnew21.html#multi-dollar-string-interpolation) (`-Xmulti-dollar-interpolation`)
+- New Gradle properties to configure Kotlin compiler daemon:
+  - enable [`extraWarnings` option](https://kotlinlang.org/docs/whatsnew21.html#extra-compiler-checks) in the
+    compiler by default, can be disabled by setting `fgp.kotlin.extraWarnings=false`
+  - replaced the `fgp.kotlin.allowWarnings` property with `fgp.kotlin.warningsAsErrors` (defaults to true)
+  - allow easily suppressing deprecation warnings by setting `fgp.kotlin.suppressDeprecationWarnings=true`
+    (defaults to false)
+
+
 ## 0.19.2 *(2024-12-02)*
 
 - Disable progressive mode for kapt stub generation when not using K2.
