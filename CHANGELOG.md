@@ -1,6 +1,14 @@
 Change Log
 ==========
 
+## 0.19.2 *(2024-12-02)*
+
+- Disable progressive mode for kapt stub generation when not using K2.
+- Fix `Content-Type` not being set correctly when uploading html files to s3.
+- Don't report `com.freeletics.gradle:minify-common` and `com.freeletics.gradle:minify-crashlytics` as unused dependencies
+  since they're added by default.
+
+
 ## 0.19.1 *(2024-11-27)*
 
 - When uploading html files to s3, set the `Content-Type` to `text/html`.
