@@ -98,6 +98,10 @@ public abstract class RootPlugin : Plugin<Project> {
                             "org.jetbrains.kotlin:kotlin-stdlib",
                             // parcelize is enabled on all Android modules
                             "org.jetbrains.kotlin:kotlin-parcelize-runtime",
+                            // added automatically to all app modules
+                            "com.freeletics.gradle:minify-common",
+                            // added automatically to all app modules with crash reporting
+                            "com.freeletics.gradle:minify-crashlytics",
                             // added automatically when enabling Dagger but not all of them might be used
                             // the Dagger runtime is not listed here and it being marked as unused is the indicator
                             // to remove useDagger from the module
