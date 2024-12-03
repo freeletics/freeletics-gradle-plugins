@@ -12,7 +12,6 @@ import com.freeletics.gradle.plugin.FreeleticsJvmExtension
 import com.freeletics.gradle.plugin.FreeleticsMultiplatformExtension
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPluginExtension
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.HasConfigurableKotlinCompilerOptions
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinCommonCompilerOptions
@@ -42,7 +41,6 @@ internal fun Project.kotlin(action: KotlinProjectExtension.() -> Unit) {
     (project.extensions.getByName("kotlin") as KotlinProjectExtension).action()
 }
 
-@OptIn(ExperimentalKotlinGradlePluginApi::class)
 internal fun KotlinProjectExtension.compilerOptions(configure: KotlinCommonCompilerOptions.() -> Unit) {
     when (this) {
         is KotlinJvmProjectExtension -> compilerOptions(configure)

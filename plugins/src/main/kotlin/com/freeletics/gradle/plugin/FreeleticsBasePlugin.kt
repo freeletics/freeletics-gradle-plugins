@@ -74,7 +74,11 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                     ?.let(KotlinVersion::fromVersion) ?: KotlinVersion.DEFAULT
                 languageVersion.set(version)
 
-                allWarningsAsErrors.set(!booleanProperty("fgp.kotlin.allowWarnings", false).get())
+                extraWarnings.set(booleanProperty("fgp.kotlin.extraWarnings", true))
+                allWarningsAsErrors.set(booleanProperty("fgp.kotlin.warningsAsErrors", true))
+                if (booleanProperty("fgp.kotlin.suppressDeprecationWarnings", false).get()) {
+                    freeCompilerArgs.add("-Xsuppress-warning=DEPRECATION")
+                }
 
                 // In this mode, some deprecations and bug-fixes for unstable code take effect immediately.
                 progressiveMode.set(version >= KotlinVersion.DEFAULT)
@@ -82,6 +86,9 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                 // Support inferring type arguments based on only self upper bounds of the corresponding type parameters
                 // https://kotlinlang.org/docs/whatsnew1530.html#improvements-to-type-inference-for-recursive-generic-types
                 freeCompilerArgs.add("-Xself-upper-bound-inference")
+
+                // Kotlin 2.1 experimental language features
+                freeCompilerArgs.addAll("-Xwhen-guards", "-Xnon-local-break-continue", "-Xmulti-dollar-interpolation")
 
                 if (this is KotlinJvmCompilerOptions) {
                     jvmTarget.set(project.jvmTarget)
