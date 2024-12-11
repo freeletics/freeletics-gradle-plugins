@@ -78,6 +78,7 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                 allWarningsAsErrors.set(booleanProperty("fgp.kotlin.warningsAsErrors", true))
                 if (booleanProperty("fgp.kotlin.suppressDeprecationWarnings", false).get()) {
                     freeCompilerArgs.add("-Xsuppress-warning=DEPRECATION")
+                    freeCompilerArgs.add("-Xsuppress-warning=OVERRIDE_DEPRECATION")
                 }
 
                 // In this mode, some deprecations and bug-fixes for unstable code take effect immediately.
