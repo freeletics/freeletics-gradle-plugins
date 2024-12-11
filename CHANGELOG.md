@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-## 0.20.0 **UNRELEASED**
+## 0.20.0 *(2024-12-11)*
 
 - Updated to Kotlin 2.1.0
 - Enable new Kotlin language features
