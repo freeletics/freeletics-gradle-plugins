@@ -4,7 +4,6 @@ import java.nio.file.FileSystems
 import java.nio.file.FileVisitResult
 import java.nio.file.Path
 import java.nio.file.PathMatcher
-import kotlin.io.path.ExperimentalPathApi
 import kotlin.io.path.isHidden
 import kotlin.io.path.name
 import kotlin.io.path.visitFileTree
@@ -16,7 +15,6 @@ import kotlinx.coroutines.flow.filter
 
 internal val kotlinMatcher = FileSystems.getDefault().getPathMatcher("glob:**/*.{kt,kts}")
 
-@OptIn(ExperimentalPathApi::class)
 internal fun filesToFormat(
     files: List<Path>?,
     rootDirectory: Path,
