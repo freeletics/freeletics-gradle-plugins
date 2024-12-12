@@ -3,7 +3,7 @@ package com.freeletics.gradle.scripts
 import java.nio.file.FileSystems
 import java.nio.file.FileVisitResult
 import java.nio.file.Path
-import java.nio.file.PathMatcher 
+import java.nio.file.PathMatcher
 import kotlin.io.path.isHidden
 import kotlin.io.path.name
 import kotlin.io.path.visitFileTree
