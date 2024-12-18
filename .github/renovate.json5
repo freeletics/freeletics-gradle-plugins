@@ -78,7 +78,7 @@
       ],
       groupName: "Compose"
     },
-    // the AWS SDK is updated multiple times a week which causes a lot of noise
+    // the AWS SDK and Google APIs are updated multiple times a week which causes a lot of noise
     {
       matchPackagePatterns: [
         "^aws.sdk.kotlin",
