@@ -80,7 +80,12 @@
     },
     // the AWS SDK is updated multiple times a week which causes a lot of noise
     {
-      matchPackagePatterns: ["^aws.sdk.kotlin"],
+      matchPackagePatterns: [
+        "^aws.sdk.kotlin",
+        "^com.google.http-client",
+        "^com.google.auth",
+        "^com.google.apis",
+      ],
       schedule: ["after 9pm on sunday"]
     },
   ]
