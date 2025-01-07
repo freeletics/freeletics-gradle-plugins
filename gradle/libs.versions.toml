@@ -39,7 +39,7 @@ kotlin-gradle-serialization = { module = "org.jetbrains.kotlin:kotlin-serializat
 
 android-gradle = { module = "com.android.tools.build:gradle-api", version.ref = "android-gradle" }
 ksp-gradle = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin",  version.ref = "ksp" }
-poko-gradle = { module = "dev.drewhamilton.poko:poko-gradle-plugin", version = "0.18.1" }
+poko-gradle = { module = "dev.drewhamilton.poko:poko-gradle-plugin", version = "0.18.2" }
 kopy-gradle = { module = "com.javiersc.kotlin:kopy-gradle-plugin", version = "0.13.1+2.1.0" }
 skie-gradle = { module = "co.touchlab.skie:gradle-plugin", version = "0.10.0" }
 paparazzi-gradle = { module = "app.cash.paparazzi:paparazzi-gradle-plugin", version.ref = "paparazzi" }
