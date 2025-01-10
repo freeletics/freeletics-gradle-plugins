@@ -38,7 +38,8 @@ public abstract class AppExtension(private val project: Project) {
 
     public fun limitLanguagesTo(vararg configs: String) {
         project.androidApp {
-            defaultConfig.resourceConfigurations += configs
+            @Suppress("UnstableApiUsage")
+            androidResources.localeFilters += configs
         }
     }
 
