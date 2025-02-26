@@ -44,6 +44,7 @@ internal fun RepositoryHandler.addGoogleRepository() {
         includeVersionByRegex("^androidx\\..*", ".*", ".*(?<!-SNAPSHOT)\$")
         includeGroupByRegex("^com.google.android.*")
         includeGroup("com.google.firebase")
+        includeGroup("com.google.mediapipe")
         includeGroup("com.google.testing.platform")
         includeGroup("com.google.android.apps.common.testing.accessibility.framework")
     }
