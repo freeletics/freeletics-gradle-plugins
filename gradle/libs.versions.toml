@@ -14,7 +14,7 @@ crashlytics-gradle = "3.0.3"
 dependency-analysis = "2.10.1"
 develocity = "3.19.2"
 gradle-toolchain = "0.9.0"
-publish = "0.30.0"
+publish = "0.31.0"
 dokka = "2.0.0"
 
 clikt = "5.0.3"
