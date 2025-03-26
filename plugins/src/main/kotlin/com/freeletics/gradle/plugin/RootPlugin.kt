@@ -5,7 +5,6 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.buildconfiguration.tasks.UpdateDaemonJvm
-import org.gradle.internal.jvm.inspection.JvmVendor
 import org.gradle.jvm.toolchain.JvmVendorSpec
 
 public abstract class RootPlugin : Plugin<Project> {
