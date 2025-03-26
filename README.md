@@ -8,7 +8,7 @@ into 4 groups:
 - [base plugins](plugins/README.md) which share the same basic configuration of the monorepo plugins but don't require
   a specific module structure. These are used internally by the monoroepo plugins and we are using these for open source
   some projects (like this one) and some secondary projects.
-- [root-plugin](plugin-root/README.md) which is applied to the root `build.gradle` file (can be used in combination
+- [root-plugin](plugin-root/rootREADME.md) which is applied to the root `build.gradle` file (can be used in combination
   with both the monorepo and the common plugins)
 - [settings-plugin](plugin-settings/README.md) which is applied to `settings.gradle` file (can be used in combination
   with both the monorepo and the common plugins)
