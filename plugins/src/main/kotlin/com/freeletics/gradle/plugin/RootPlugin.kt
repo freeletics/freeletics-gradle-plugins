@@ -5,7 +5,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.buildconfiguration.tasks.UpdateDaemonJvm
-import org.gradle.internal.jvm.inspection.JvmVendor
+import org.gradle.jvm.toolchain.JvmVendorSpec
 
 public abstract class RootPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -19,7 +19,7 @@ public abstract class RootPlugin : Plugin<Project> {
     @Suppress("UnstableApiUsage")
     private fun configureDaemonToolchainTask(target: Project) {
         target.tasks.withType(UpdateDaemonJvm::class.java).configureEach {
-            it.jvmVendor.set(JvmVendor.KnownJvmVendor.AZUL.name)
+            it.vendor.set(JvmVendorSpec.AZUL)
         }
     }
 
@@ -147,6 +147,12 @@ public abstract class RootPlugin : Plugin<Project> {
                     project.onRedundantPlugins {
                         // needs to be set separately from onAny which does not apply here
                         it.severity("fail")
+                    }
+
+                    project.onDuplicateClassWarnings {
+                        // these originally are provided by the Jetbrais annotation library but are also
+                        // shipped in layoutlib and skie
+                        it.exclude("org/jetbrains/annotations/NotNull", "org/jetbrains/annotations/Nullable")
                     }
                 }
             }

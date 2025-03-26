@@ -1,6 +1,7 @@
 package com.freeletics.gradle.monorepo.setup
 
 import app.cash.licensee.LicenseeExtension
+import app.cash.licensee.SpdxId
 import com.freeletics.gradle.monorepo.tasks.UpdateLicensesTask.Companion.registerUpdateLicensesTask
 import org.gradle.api.Project
 
@@ -10,8 +11,9 @@ internal fun Project.configureLicensee() {
     registerUpdateLicensesTask()
 
     extensions.configure(LicenseeExtension::class.java) {
-        it.allow("Apache-2.0")
-        it.allow("MIT")
-        it.allow("MIT-0")
+        it.allow(SpdxId.Apache_20)
+        it.allow(SpdxId.BSD_3_Clause)
+        it.allow(SpdxId.MIT)
+        it.allow(SpdxId.MIT_0)
     }
 }
