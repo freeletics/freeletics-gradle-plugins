@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+## 0.21.0 *(2025-03-26)*
+
+- Updated for Gradle 8.13
+- Dependency updates
+
+
 ## 0.20.0 *(2024-12-11)*
 
 - Updated to Kotlin 2.1.0
