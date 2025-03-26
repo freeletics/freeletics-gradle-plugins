@@ -148,11 +148,6 @@ public abstract class RootPlugin : Plugin<Project> {
                         // needs to be set separately from onAny which does not apply here
                         it.severity("fail")
                     }
-
-                    project.onDuplicateClassWarnings {
-                        // layoutlib also contains these
-                        it.exclude("org/jetbrains/annotations/NotNull", "org/jetbrains/annotations/Nullable")
-                    }
                 }
             }
 
