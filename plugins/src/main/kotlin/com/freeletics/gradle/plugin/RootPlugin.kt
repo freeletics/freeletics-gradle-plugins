@@ -150,7 +150,8 @@ public abstract class RootPlugin : Plugin<Project> {
                     }
 
                     project.onDuplicateClassWarnings {
-                        // layoutlib also contains these
+                        // these originally are provided by the Jetbrais annotation library but are also
+                        // shipped in layoutlib and skie
                         it.exclude("org/jetbrains/annotations/NotNull", "org/jetbrains/annotations/Nullable")
                     }
                 }

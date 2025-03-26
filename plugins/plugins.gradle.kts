@@ -4,6 +4,7 @@ plugins {
 }
 
 dependencies {
+    implementation(libs.annotations)
     implementation(libs.android.gradle)
     api(libs.kotlin.gradle)
     implementation(libs.kotlin.gradle.api)
