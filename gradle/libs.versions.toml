@@ -2,7 +2,7 @@
 java-target = "17"
 java-toolchain = "22"
 
-fgp = "0.20.0"
+fgp = "0.21.0"
 
 kotlin = "2.1.10"
 coroutines = "1.10.1"
