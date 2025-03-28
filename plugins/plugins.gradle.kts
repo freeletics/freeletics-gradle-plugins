@@ -15,6 +15,7 @@ dependencies {
     implementation(libs.publish)
     implementation(libs.licensee)
     implementation(libs.crashlytics)
+    implementation(projects.codegen)
     runtimeOnly(libs.kotlin.gradle.compose)
     runtimeOnly(libs.kotlin.gradle.atomicfu)
     runtimeOnly(libs.kotlin.gradle.serialization)
@@ -111,6 +112,11 @@ gradlePlugin {
         create("monoLegacyAndroidPlugin") {
             id = "com.freeletics.gradle.legacy.android"
             implementationClass = "com.freeletics.gradle.monorepo.plugin.LegacyAndroidPlugin"
+        }
+
+        create("codegenPlugin") {
+            id = "com.freeletics.gradle.codegen"
+            implementationClass = "com.freeletics.gradle.codegen.CodegenPlugin"
         }
     }
 }
