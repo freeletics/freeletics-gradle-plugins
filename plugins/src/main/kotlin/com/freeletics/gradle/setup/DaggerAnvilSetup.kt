@@ -7,11 +7,53 @@ import com.freeletics.gradle.util.booleanProperty
 import com.freeletics.gradle.util.getDependency
 import com.freeletics.gradle.util.getDependencyOrNull
 import com.freeletics.gradle.util.getVersion
+import dev.zacsweers.metro.gradle.MetroPluginExtension
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType.androidJvm
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType.jvm
 
+internal fun Project.configureMetro() {
+    plugins.apply("dev.zacsweers.metro")
+}
+
+internal fun Project.configureKhonshu() {
+    configureProcessing(useKsp = true)
+
+    addApiDependency(getDependency("khonshu-codegen-runtime"), SUPPORTED_PLATFORMS)
+    addKspDependency(getDependency("khonshu-codegen-compiler"), SUPPORTED_PLATFORMS)
+
+    // TODO workaround for Gradle not being able to resolve this in the ksp config
+    configurations.named("ksp").configure {
+        it.exclude(mapOf("group" to "org.jetbrains.skiko", "module" to "skiko"))
+    }
+}
+
 internal fun Project.configureDagger(mode: DaggerMode) {
+    addApiDependency(getDependency("inject"), SUPPORTED_PLATFORMS)
+    addApiDependency(getDependency("anvil-annotations"), SUPPORTED_PLATFORMS)
+    addApiDependency(getDependency("anvil-annotations-optional"), SUPPORTED_PLATFORMS)
+    addApiDependency(getDependency("dagger"), SUPPORTED_PLATFORMS)
+    addApiDependency(getDependencyOrNull("khonshu-codegen-runtime"), SUPPORTED_PLATFORMS)
+
+    if (booleanProperty("fgp.metro.migrationEnabled", false).get()) {
+        configureMetro()
+
+        if (booleanProperty("fgp.metro.interop", false).get()) {
+            extensions.configure(MetroPluginExtension::class.java) {
+                it.interop {
+                    it.includeDagger()
+                    it.includeAnvil(includeDaggerAnvil = true, includeKotlinInjectAnvil = false)
+                }
+            }
+        }
+
+        if (mode == DaggerMode.ANVIL_WITH_KHONSHU) {
+            configureKhonshu()
+        }
+
+        return
+    }
+
     configureProcessing(
         useKsp = true,
         basicArgument("generate-dagger-factories" to "${mode != DaggerMode.ANVIL_WITH_FULL_DAGGER}"),
@@ -20,15 +62,10 @@ internal fun Project.configureDagger(mode: DaggerMode) {
         basicArgument("merging-backend" to if (mode == DaggerMode.ANVIL_WITH_FULL_DAGGER) "ksp" else "none"),
     )
 
-    addApiDependency(getDependency("inject"), SUPPORTED_PLATFORMS)
-    addApiDependency(getDependency("anvil-annotations"), SUPPORTED_PLATFORMS)
-    addApiDependency(getDependency("anvil-annotations-optional"), SUPPORTED_PLATFORMS)
-    addApiDependency(getDependency("dagger"), SUPPORTED_PLATFORMS)
-    addApiDependency(getDependencyOrNull("khonshu-codegen-runtime"), SUPPORTED_PLATFORMS)
     addKspDependency(getDependency("anvil-compiler"), SUPPORTED_PLATFORMS)
 
     if (mode == DaggerMode.ANVIL_WITH_KHONSHU) {
-        addKspDependency(getDependency("khonshu-codegen-compiler"), SUPPORTED_PLATFORMS)
+        configureKhonshu()
     }
 
     if (mode == DaggerMode.ANVIL_WITH_FULL_DAGGER) {
@@ -42,11 +79,6 @@ internal fun Project.configureDagger(mode: DaggerMode) {
     }
 
     anvilForkDependencySustitution()
-
-    // TODO workaround for Gradle not being able to resolve this in the ksp config
-    configurations.named("ksp").configure {
-        it.exclude(mapOf("group" to "org.jetbrains.skiko", "module" to "skiko"))
-    }
 }
 
 private fun Project.anvilForkDependencySustitution() {

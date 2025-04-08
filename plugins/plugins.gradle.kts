@@ -11,6 +11,7 @@ dependencies {
     implementation(libs.kotlin.gradle.annotations)
     implementation(libs.kotlin.native.utils)
     implementation(libs.ksp.gradle)
+    implementation(libs.metro.gradle)
     implementation(libs.dependency.analysis)
     implementation(libs.publish)
     implementation(libs.licensee)
