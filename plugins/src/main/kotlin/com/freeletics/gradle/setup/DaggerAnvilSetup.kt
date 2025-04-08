@@ -7,11 +7,38 @@ import com.freeletics.gradle.util.booleanProperty
 import com.freeletics.gradle.util.getDependency
 import com.freeletics.gradle.util.getDependencyOrNull
 import com.freeletics.gradle.util.getVersion
+import dev.zacsweers.metro.gradle.MetroPluginExtension
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType.androidJvm
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType.jvm
 
 internal fun Project.configureDagger(mode: DaggerMode) {
+    addApiDependency(getDependency("inject"), SUPPORTED_PLATFORMS)
+    addApiDependency(getDependency("anvil-annotations"), SUPPORTED_PLATFORMS)
+    addApiDependency(getDependency("anvil-annotations-optional"), SUPPORTED_PLATFORMS)
+    addApiDependency(getDependency("dagger"), SUPPORTED_PLATFORMS)
+    addApiDependency(getDependencyOrNull("khonshu-codegen-runtime"), SUPPORTED_PLATFORMS)
+
+    if (booleanProperty("fgp.metro.enabled", false).get()) {
+        plugins.apply("dev.zacsweers.metro")
+
+        if (booleanProperty("fgp.metro.interop", false).get()) {
+            extensions.configure(MetroPluginExtension::class.java) {
+                it.interop {
+                    it.includeDagger()
+                    it.includeAnvil(includeDaggerAnvil = true, includeKotlinInjectAnvil = false)
+                }
+            }
+        }
+
+        if (mode == DaggerMode.ANVIL_WITH_KHONSHU) {
+            configureProcessing(useKsp = true)
+            addKspDependency(getDependency("khonshu-codegen-compiler"), SUPPORTED_PLATFORMS)
+        }
+
+        return
+    }
+
     configureProcessing(
         useKsp = true,
         basicArgument("generate-dagger-factories" to "${mode != DaggerMode.ANVIL_WITH_FULL_DAGGER}"),
@@ -20,11 +47,6 @@ internal fun Project.configureDagger(mode: DaggerMode) {
         basicArgument("merging-backend" to if (mode == DaggerMode.ANVIL_WITH_FULL_DAGGER) "ksp" else "none"),
     )
 
-    addApiDependency(getDependency("inject"), SUPPORTED_PLATFORMS)
-    addApiDependency(getDependency("anvil-annotations"), SUPPORTED_PLATFORMS)
-    addApiDependency(getDependency("anvil-annotations-optional"), SUPPORTED_PLATFORMS)
-    addApiDependency(getDependency("dagger"), SUPPORTED_PLATFORMS)
-    addApiDependency(getDependencyOrNull("khonshu-codegen-runtime"), SUPPORTED_PLATFORMS)
     addKspDependency(getDependency("anvil-compiler"), SUPPORTED_PLATFORMS)
 
     if (mode == DaggerMode.ANVIL_WITH_KHONSHU) {

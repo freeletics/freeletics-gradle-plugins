@@ -15,6 +15,7 @@ dependencies {
     implementation(libs.publish)
     implementation(libs.licensee)
     implementation(libs.crashlytics)
+    implementation("dev.zacsweers.metro:gradle-plugin:0.1.1")
     runtimeOnly(libs.kotlin.gradle.compose)
     runtimeOnly(libs.kotlin.gradle.atomicfu)
     runtimeOnly(libs.kotlin.gradle.serialization)
