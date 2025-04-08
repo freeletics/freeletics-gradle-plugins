@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+## 0.22.0 *(2025-04-08)*
+
+- Updated for Kotlin 2.1.20
+- Add `-Xannotation-default-target=param-property` compiler option
+
+
 ## 0.21.0 *(2025-03-26)*
 
 - Updated for Gradle 8.13
