@@ -91,6 +91,9 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                 // Kotlin 2.1 experimental language features
                 freeCompilerArgs.addAll("-Xwhen-guards", "-Xnon-local-break-continue", "-Xmulti-dollar-interpolation")
 
+                // https://youtrack.jetbrains.com/issue/KT-73255
+                freeCompilerArgs.add("-Xannotation-default-target=param-property")
+
                 if (this is KotlinJvmCompilerOptions) {
                     jvmTarget.set(project.jvmTarget)
 
