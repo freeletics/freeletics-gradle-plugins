@@ -118,12 +118,5 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                 }
             }
         }
-
-        // TODO remove when updating to Kotlin 2.1.20 https://youtrack.jetbrains.com/issue/KT-64385
-        tasks.withType(org.jetbrains.kotlin.gradle.tasks.KaptGenerateStubs::class.java).configureEach {
-            it.compilerOptions {
-                progressiveMode.set(booleanProperty("kapt.use.k2", false))
-            }
-        }
     }
 }
