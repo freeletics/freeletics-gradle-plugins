@@ -29,7 +29,7 @@ public abstract class FreeleticsMultiplatformPlugin : Plugin<Project> {
 
         target.tasks.withType(Test::class.java).configureEach(Test::defaultTestSetup)
 
-        target.rootProject.disableDefaultJsRepositories()
+        target.project.disableDefaultJsRepositories()
     }
 
     // TODO remove after https://youtrack.jetbrains.com/issue/KT-68533
