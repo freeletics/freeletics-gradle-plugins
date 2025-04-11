@@ -37,6 +37,7 @@ kotlin-native-utils = { module = "org.jetbrains.kotlin:kotlin-native-utils", ver
 kotlin-gradle-compose = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 kotlin-gradle-atomicfu = { module = "org.jetbrains.kotlin:atomicfu", version.ref = "kotlin" }
 kotlin-gradle-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
+javax-inject = { module = "javax.inject:javax.inject", version = "1" }
 
 android-gradle = { module = "com.android.tools.build:gradle-api", version.ref = "android-gradle" }
 ksp-gradle = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin",  version.ref = "ksp" }
