@@ -8,7 +8,6 @@ import com.freeletics.gradle.util.kotlinMultiplatform
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.testing.Test
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 public abstract class FreeleticsMultiplatformPlugin : Plugin<Project> {
     override fun apply(target: Project) {
