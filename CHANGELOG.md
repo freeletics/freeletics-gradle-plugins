@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## 0.23.1 *(2025-04-14)*
+
+- Don't ship pre-release Kotlin compiler code.
+
+
 ## 0.23.0 *(2025-04-14)*
 
 - Add `com.freeletics.gradle.codegen` plugin that allows generating
