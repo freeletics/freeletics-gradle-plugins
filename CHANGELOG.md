@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+## 0.23.0 *(2025-04-14)*
+
+- Add `com.freeletics.gradle.codegen` plugin that allows generating
+  code through a provided `CodeGenerator`
+- Fix issue with adding repositories in projects using Kotlin/JS
+
+
 ## 0.22.0 *(2025-04-08)*
 
 - Updated for Kotlin 2.1.20
