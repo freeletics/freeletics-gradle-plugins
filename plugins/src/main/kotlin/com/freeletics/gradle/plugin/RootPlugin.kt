@@ -102,16 +102,6 @@ public abstract class RootPlugin : Plugin<Project> {
                             "com.freeletics.gradle:minify-common",
                             // added automatically to all app modules with crash reporting
                             "com.freeletics.gradle:minify-crashlytics",
-                            // added automatically when enabling Dagger but not all of them might be used
-                            // the Dagger runtime is not listed here and it being marked as unused is the indicator
-                            // to remove useDagger from the module
-                            "javax.inject:javax.inject",
-                            "com.squareup.anvil:annotations",
-                            "com.squareup.anvil:annotations-optional",
-                            "dev.zacsweers.anvil:annotations",
-                            "dev.zacsweers.anvil:annotations-optional",
-                            "com.freeletics.khonshu:codegen-runtime",
-                            "com.freeletics.khonshu:codegen-scope",
                         )
                     }
 
@@ -119,16 +109,6 @@ public abstract class RootPlugin : Plugin<Project> {
                         it.exclude(
                             // added by the Kotlin plugin
                             "org.jetbrains.kotlin:kotlin-stdlib",
-                            // Dagger is always added as "api", but some modules only use it in for example debugApi
-                            "javax.inject:javax.inject",
-                            "com.squareup.anvil:annotations",
-                            "com.squareup.anvil:annotations-optional",
-                            "dev.zacsweers.anvil:annotations",
-                            "dev.zacsweers.anvil:annotations-optional",
-                            "com.freeletics.khonshu:codegen-runtime",
-                            "com.freeletics.khonshu:codegen-scope",
-                            "com.google.dagger:dagger",
-                            "com.google.dagger:dagger-compiler",
                             // Room is always added as "api", but some modules only use it in for example debugApi
                             "androidx.room:room-runtime",
                             // Kotlinx.serialization is always added as "api", but some modules only use it in for example debugApi

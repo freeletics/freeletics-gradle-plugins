@@ -1,6 +1,8 @@
 package com.freeletics.gradle.plugin
 
 import com.freeletics.gradle.setup.configureDagger
+import com.freeletics.gradle.setup.configureKhonshu
+import com.freeletics.gradle.setup.configureMetro
 import com.freeletics.gradle.setup.setupCompose
 import com.freeletics.gradle.util.addApiDependency
 import com.freeletics.gradle.util.compilerOptions
@@ -32,6 +34,15 @@ public abstract class FreeleticsBaseExtension(private val project: Project) : Ex
         project.plugins.apply("org.jetbrains.kotlin.plugin.serialization")
 
         project.addApiDependency(project.getDependency("kotlinx-serialization"))
+    }
+
+    public fun useMetro() {
+        project.configureMetro()
+    }
+
+    public fun useKhonshu() {
+        project.configureMetro()
+        project.configureKhonshu()
     }
 
     public fun useDagger() {
