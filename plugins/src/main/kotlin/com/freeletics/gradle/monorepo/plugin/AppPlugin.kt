@@ -71,7 +71,6 @@ public abstract class AppPlugin : Plugin<Project> {
                 baseline = target.file("lint-baseline.xml")
             }
 
-            @Suppress("UnstableApiUsage")
             testOptions {
                 // include test resources in app module to be able to test the manifest
                 unitTests.isIncludeAndroidResources = true
