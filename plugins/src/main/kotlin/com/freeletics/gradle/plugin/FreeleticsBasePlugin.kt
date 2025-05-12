@@ -14,6 +14,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.jvm.tasks.Jar
 import org.gradle.jvm.toolchain.JvmVendorSpec
+import org.jetbrains.kotlin.gradle.dsl.JvmDefaultMode
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
@@ -77,29 +78,30 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                 extraWarnings.set(booleanProperty("fgp.kotlin.extraWarnings", true))
                 allWarningsAsErrors.set(booleanProperty("fgp.kotlin.warningsAsErrors", true))
                 if (booleanProperty("fgp.kotlin.suppressDeprecationWarnings", false).get()) {
-                    freeCompilerArgs.add("-Xsuppress-warning=DEPRECATION")
-                    freeCompilerArgs.add("-Xsuppress-warning=OVERRIDE_DEPRECATION")
+                    freeCompilerArgs.add("-Xwarning-level=DEPRECATION:disabled")
+                    freeCompilerArgs.add("-Xwarning-level=OVERRIDE_DEPRECATION:disabled")
                 }
 
                 // In this mode, some deprecations and bug-fixes for unstable code take effect immediately.
                 progressiveMode.set(version >= KotlinVersion.DEFAULT)
 
-                // Support inferring type arguments based on only self upper bounds of the corresponding type parameters
-                // https://kotlinlang.org/docs/whatsnew1530.html#improvements-to-type-inference-for-recursive-generic-types
-                freeCompilerArgs.add("-Xself-upper-bound-inference")
-
                 // Kotlin 2.1 experimental language features
                 freeCompilerArgs.addAll("-Xwhen-guards", "-Xnon-local-break-continue", "-Xmulti-dollar-interpolation")
+
+                // Enable context parameters
+                freeCompilerArgs.add("-Xcontext-parameters")
+
+                // https://kotlinlang.org/docs/whatsnew-eap.html#support-for-reading-and-writing-annotations-in-kotlin-metadata
+                freeCompilerArgs.add("-Xannotations-in-metadata")
 
                 // https://youtrack.jetbrains.com/issue/KT-73255
                 freeCompilerArgs.add("-Xannotation-default-target=param-property")
 
                 if (this is KotlinJvmCompilerOptions) {
                     jvmTarget.set(project.jvmTarget)
+                    jvmDefault.set(JvmDefaultMode.NO_COMPATIBILITY)
 
                     freeCompilerArgs.addAll(
-                        // https://blog.jetbrains.com/kotlin/2020/07/kotlin-1-4-m3-generating-default-methods-in-interfaces/
-                        "-Xjvm-default=all",
                         // https://youtrack.jetbrains.com/issue/KT-22292
                         "-Xassertions=jvm",
                         // Enabling default nullability annotations
