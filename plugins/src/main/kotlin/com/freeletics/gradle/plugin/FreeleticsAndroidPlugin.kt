@@ -119,7 +119,6 @@ public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
 
     private fun Project.configureUnitTests() {
         android {
-            @Suppress("UnstableApiUsage")
             testOptions {
                 unitTests.all(Test::defaultTestSetup)
             }

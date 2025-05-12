@@ -76,8 +76,8 @@ public abstract class AppExtension(private val project: Project) {
                 }
                 mainOutput.versionName.set(versionNameTask.mapOutput())
                 mainOutput.versionCode.set(versionCodeTask.mapOutput())
-                variant.buildConfigFields.put("GIT_SHA1", gitShaTask.mapOutput())
-                variant.buildConfigFields.put("BUILD_TIMESTAMP", gitTimestampTask.mapOutput())
+                variant.buildConfigFields!!.put("GIT_SHA1", gitShaTask.mapOutput())
+                variant.buildConfigFields!!.put("BUILD_TIMESTAMP", gitTimestampTask.mapOutput())
             }
         }
     }
