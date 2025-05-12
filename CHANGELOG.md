@@ -1,6 +1,15 @@
 Change Log
 ==========
 
+## 0.24.0 *(2025-05-12)*
+
+- Update AGP to 8.10.0
+- Add `useMetro()` that adds Metro
+- Add `useKhonshu()` that adds Metro + Khonshu
+- Add `fgp.metro.migrationEnabled` property that makes the existing `useDagger...()` methods use Metro instead
+- Add `fgp.metro.interop` that in the migration mode enables Metro's interop with Dagger/Anvil annotations
+
+
 ## 0.23.1 *(2025-04-14)*
 
 - Don't ship pre-release Kotlin compiler code.
