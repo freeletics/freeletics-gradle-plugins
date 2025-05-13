@@ -4,9 +4,10 @@ plugins {
 }
 
 dependencies {
+    api(libs.kotlin.gradle)
+    api(libs.javax.inject)
     implementation(libs.annotations)
     implementation(libs.android.gradle)
-    api(libs.kotlin.gradle)
     implementation(libs.kotlin.gradle.api)
     implementation(libs.kotlin.gradle.annotations)
     implementation(libs.kotlin.native.utils)
@@ -17,7 +18,6 @@ dependencies {
     implementation(libs.licensee)
     implementation(libs.crashlytics)
     implementation(projects.codegen)
-    implementation(libs.javax.inject)
     runtimeOnly(libs.kotlin.gradle.compose)
     runtimeOnly(libs.kotlin.gradle.atomicfu)
     runtimeOnly(libs.kotlin.gradle.serialization)
