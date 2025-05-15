@@ -71,9 +71,11 @@ internal fun Project.configureDagger(mode: DaggerMode) {
     if (mode == DaggerMode.ANVIL_WITH_FULL_DAGGER) {
         val daggerProcessorConfiguration = configureProcessing(
             useKsp = booleanProperty("fgp.kotlin.daggerKsp", false).get(),
-            basicArgument("dagger.experimentalDaggerErrorMessages" to "enabled"),
-            basicArgument("dagger.strictMultibindingValidation" to "enabled"),
-            basicArgument("dagger.warnIfInjectionFactoryNotGeneratedUpstream" to "enabled"),
+            basicArgument("dagger.experimentalDaggerErrorMessages" to "ENABLED"),
+            basicArgument("dagger.strictMultibindingValidation" to "ENABLED"),
+            basicArgument("dagger.warnIfInjectionFactoryNotGeneratedUpstream" to "ENABLED"),
+            basicArgument("dagger.useBindingGraphFix" to "ENABLED"),
+            basicArgument("dagger.ignoreProvisionKeyWildcards" to "ENABLED"),
         )
         dependencies.add(daggerProcessorConfiguration, getDependency("dagger-compiler"))
     }
