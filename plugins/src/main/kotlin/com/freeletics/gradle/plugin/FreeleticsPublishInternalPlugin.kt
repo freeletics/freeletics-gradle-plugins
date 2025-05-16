@@ -14,7 +14,6 @@ public abstract class FreeleticsPublishInternalPlugin : Plugin<Project> {
 
         target.addInternalRepo()
         target.addLocalRepo()
-        target.disablePublishingIosArtifacts()
         target.configurePom(includeLicense = false)
     }
 
@@ -43,14 +42,6 @@ public abstract class FreeleticsPublishInternalPlugin : Plugin<Project> {
                         it.setUrl(localPath)
                     }
                 }
-            }
-        }
-    }
-
-    private fun Project.disablePublishingIosArtifacts() {
-        tasks.withType(AbstractPublishToMaven::class.java).configureEach {
-            if (it.name.contains("ios", ignoreCase = true)) {
-                it.onlyIf { false }
             }
         }
     }
