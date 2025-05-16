@@ -6,7 +6,6 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.credentials.PasswordCredentials
 import org.gradle.api.publish.PublishingExtension
-import org.gradle.api.publish.maven.tasks.AbstractPublishToMaven
 
 public abstract class FreeleticsPublishInternalPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -14,7 +13,6 @@ public abstract class FreeleticsPublishInternalPlugin : Plugin<Project> {
 
         target.addInternalRepo()
         target.addLocalRepo()
-        target.disablePublishingIosArtifacts()
         target.configurePom(includeLicense = false)
     }
 
@@ -43,14 +41,6 @@ public abstract class FreeleticsPublishInternalPlugin : Plugin<Project> {
                         it.setUrl(localPath)
                     }
                 }
-            }
-        }
-    }
-
-    private fun Project.disablePublishingIosArtifacts() {
-        tasks.withType(AbstractPublishToMaven::class.java).configureEach {
-            if (it.name.contains("ios", ignoreCase = true)) {
-                it.onlyIf { false }
             }
         }
     }
