@@ -23,7 +23,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: zulu
-          java-version: 23
+          java-version: 24
 
       - name: Set version for main
         if: ${{ github.ref_name == 'main' || startsWith(github.ref, 'refs/tags/') }}
