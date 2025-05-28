@@ -1,6 +1,16 @@
 Change Log
 ==========
 
+## 0.25.0 *(2025-05-28)*
+
+- Add forward compatibility with Kotlin 2.2.0 compiler options
+- Enable context parameters by default in Kotlin 2.2.0
+- Added `verifyLicenses` task that runs as part of `check` to confirm the license acknowledgements are up to date
+- Stop disabling klib publishing
+- Enable `enable dagger.useBindingGraphFix` option
+- Updated ktlint to 1.6.0
+
+
 ## 0.24.0 *(2025-05-12)*
 
 - Update AGP to 8.10.0
