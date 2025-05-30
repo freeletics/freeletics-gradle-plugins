@@ -69,7 +69,7 @@ google-http = { module = "com.google.http-client:google-http-client", version.re
 google-http-gson = { module = "com.google.http-client:google-http-client-gson", version.ref = "google-http" }
 google-credentials = { module = "com.google.auth:google-auth-library-credentials", version.ref = "google-auth" }
 google-oauth = { module = "com.google.auth:google-auth-library-oauth2-http", version.ref = "google-auth" }
-google-play = { module = "com.google.apis:google-api-services-androidpublisher", version = "v3-rev20250318-2.0.0" }
+google-play = { module = "com.google.apis:google-api-services-androidpublisher", version = "v3-rev20250520-2.0.0" }
 google-sheets = { module = "com.google.apis:google-api-services-sheets", version = "v4-rev20250513-2.0.0" }
 zxing = { module = "com.google.zxing:javase", version = "3.5.3" }
 s3 = { module = "aws.sdk.kotlin:s3", version = "1.4.94" }
