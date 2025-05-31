@@ -8,6 +8,7 @@ import com.freeletics.gradle.util.kotlinMultiplatform
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.testing.Test
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 public abstract class FreeleticsMultiplatformPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -28,26 +29,36 @@ public abstract class FreeleticsMultiplatformPlugin : Plugin<Project> {
 
         target.tasks.withType(Test::class.java).configureEach(Test::defaultTestSetup)
 
-        target.disableDefaultJsRepositories(target.path)
-        target.rootProject.disableDefaultJsRepositories("root")
+        target.disableDefaultJsRepositories()
+        target.rootProject.disableDefaultJsRepositories()
     }
 
     // TODO remove after https://youtrack.jetbrains.com/issue/KT-68533
-    @Suppress("DEPRECATION")
-    private fun Project.disableDefaultJsRepositories(name: String) {
-        plugins.withType(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin::class.java) {
-            extensions.configure(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension::class.java) {
-                it.downloadBaseUrl = null
+    private fun Project.disableDefaultJsRepositories() {
+        plugins.withType(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsPlugin::class.java) {
+            extensions.configure(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsEnvSpec::class.java) {
+                it.downloadBaseUrl.set(null)
             }
         }
         plugins.withType(org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin::class.java) {
-            extensions.configure(org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension::class.java) {
-                it.downloadBaseUrl = null
+            extensions.configure(org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootEnvSpec::class.java) {
+                it.downloadBaseUrl.set(null)
             }
         }
-        plugins.withType(org.jetbrains.kotlin.gradle.targets.js.binaryen.BinaryenRootPlugin::class.java) {
-            extensions.configure(org.jetbrains.kotlin.gradle.targets.js.binaryen.BinaryenRootExtension::class.java) {
-                it.downloadBaseUrl = null
+        plugins.withType(org.jetbrains.kotlin.gradle.targets.wasm.nodejs.WasmNodeJsPlugin::class.java) {
+            extensions.configure(org.jetbrains.kotlin.gradle.targets.wasm.nodejs.WasmNodeJsEnvSpec::class.java) {
+                it.downloadBaseUrl.set(null)
+            }
+        }
+        plugins.withType(org.jetbrains.kotlin.gradle.targets.wasm.yarn.WasmYarnPlugin::class.java) {
+            extensions.configure(org.jetbrains.kotlin.gradle.targets.wasm.yarn.WasmYarnRootEnvSpec::class.java) {
+                it.downloadBaseUrl.set(null)
+            }
+        }
+        @OptIn(ExperimentalWasmDsl::class)
+        plugins.withType(org.jetbrains.kotlin.gradle.targets.wasm.binaryen.BinaryenPlugin::class.java) {
+            extensions.configure(org.jetbrains.kotlin.gradle.targets.wasm.binaryen.BinaryenEnvSpec::class.java) {
+                it.downloadBaseUrl.set(null)
             }
         }
     }
