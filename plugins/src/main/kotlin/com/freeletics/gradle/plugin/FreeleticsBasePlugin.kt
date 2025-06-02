@@ -143,8 +143,10 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                     )
 
                     if (version >= KotlinVersion.KOTLIN_2_2) {
-                        // https://kotlinlang.org/docs/whatsnew-eap.html#support-for-reading-and-writing-annotations-in-kotlin-metadata
-                        "-Xannotations-in-metadata"
+                        freeCompilerArgs.addAll(
+                            // https://kotlinlang.org/docs/whatsnew-eap.html#support-for-reading-and-writing-annotations-in-kotlin-metadata
+                            "-Xannotations-in-metadata",
+                        )
                     }
 
                     if (!isAndroid) {
