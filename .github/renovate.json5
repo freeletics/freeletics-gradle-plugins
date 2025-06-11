@@ -78,6 +78,16 @@
       ],
       groupName: "Compose"
     },
+    {
+      matchPackagePatterns: [
+        "^com.google.http-client",
+        "^com.google.auth",
+        "^com.google.apis",
+        "^com.google.api-client",
+        "^com.google.http-client",
+      ],
+      groupName: "Google APIs"
+    },
     // the AWS SDK and Google APIs are updated multiple times a week which causes a lot of noise
     {
       matchPackagePatterns: [
@@ -85,6 +95,8 @@
         "^com.google.http-client",
         "^com.google.auth",
         "^com.google.apis",
+        "^com.google.api-client",
+        "^com.google.http-client",
       ],
       schedule: ["after 9pm on sunday"]
     },
