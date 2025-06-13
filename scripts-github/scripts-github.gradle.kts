@@ -5,4 +5,5 @@ plugins {
 
 dependencies {
     api(libs.kotlin.stdlib)
+    api(libs.clikt.core)
 }
