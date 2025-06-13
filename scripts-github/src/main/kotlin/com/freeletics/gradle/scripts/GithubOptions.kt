@@ -14,7 +14,7 @@ public class GithubOptions : OptionGroup("Github options") {
     private val repoSlug: String by option(
         "--project-repository",
         envvar = "GITHUB_REPOSITORY",
-        help = "The repository "
+        help = "The repository ",
     ).required()
 
     public val repoName: String
@@ -22,9 +22,9 @@ public class GithubOptions : OptionGroup("Github options") {
 
     public val jobUrl: String
         get() = System.getenv("GITHUB_SERVER_URL") + "/" +
-                System.getenv("GITHUB_REPOSITORY") + "/" +
-                "actions/runs/" +
-                System.getenv("GITHUB_RUN_ID")
+            System.getenv("GITHUB_REPOSITORY") + "/" +
+            "actions/runs/" +
+            System.getenv("GITHUB_RUN_ID")
 
     public val jobName: String by option(
         "--job-name",
