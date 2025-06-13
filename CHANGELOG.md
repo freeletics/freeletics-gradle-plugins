@@ -1,6 +1,14 @@
 Change Log
 ==========
 
+## 0.26.0 *(2025-06-13)*
+
+- New `com.freeletics.gradle:scripts-github` artifact that contains helpers
+  for writing kts scripts that run in a Github Actions environment.
+- Support Parazzing configurations in `java-platform` to force layoutlib to newer versions more easily
+- Fix `-Xannotations-in-metadata` not being added in Kotlin 2.2
+
+
 ## 0.25.0 *(2025-05-28)*
 
 - Add forward compatibility with Kotlin 2.2.0 compiler options
