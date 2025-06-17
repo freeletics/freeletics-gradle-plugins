@@ -11,20 +11,29 @@ public class GithubOptions : OptionGroup("Github options") {
         help = "The username that this project belongs to",
     ).required()
 
-    private val repoSlug: String by option(
+    public val repoSlug: String by option(
         "--project-repository",
         envvar = "GITHUB_REPOSITORY",
-        help = "The repository ",
+        help = "The repository for this project",
     ).required()
 
     public val repoName: String
         get() = repoSlug.split("/")[1]
 
+    private val serverUrl: String by option(
+        "--server-url",
+        envvar = "GITHUB_SERVER_URL",
+        help = "The repository for this project",
+    ).required()
+
+    public val runId: String by option(
+        "--run-id",
+        envvar = "GITHUB_RUN_ID",
+        help = "The repository for this project",
+    ).required()
+
     public val jobUrl: String
-        get() = System.getenv("GITHUB_SERVER_URL") + "/" +
-            System.getenv("GITHUB_REPOSITORY") + "/" +
-            "actions/runs/" +
-            System.getenv("GITHUB_RUN_ID")
+        get() = "$serverUrl/$repoSlug/actions/runs/$runId"
 
     public val jobName: String by option(
         "--job-name",

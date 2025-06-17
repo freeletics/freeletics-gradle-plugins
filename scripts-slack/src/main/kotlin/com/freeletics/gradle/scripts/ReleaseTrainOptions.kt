@@ -25,7 +25,7 @@ public class ReleaseTrainOptions : OptionGroup("Release Train options") {
 
     public val branch: String by option(
         "--branch",
-        envvar = "CIRCLE_BRANCH",
+        envvar = "GITHUB_REF_NAME",
         help = "The branch of the release train",
     ).required()
 }
