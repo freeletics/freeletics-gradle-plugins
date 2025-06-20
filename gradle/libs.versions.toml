@@ -43,7 +43,7 @@ android-gradle = { module = "com.android.tools.build:gradle-api", version.ref = 
 ksp-gradle = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin",  version.ref = "ksp" }
 metro-gradle = { module = "dev.zacsweers.metro:gradle-plugin", version = "0.3.8" }
 poko-gradle = { module = "dev.drewhamilton.poko:poko-gradle-plugin", version = "0.18.7" }
-kopy-gradle = { module = "com.javiersc.kotlin:kopy-gradle-plugin", version = "0.15.0+2.1.20" }
+kopy-gradle = { module = "com.javiersc.kotlin:kopy-gradle-plugin", version = "0.16.3+2.1.21" }
 skie-gradle = { module = "co.touchlab.skie:gradle-plugin", version = "0.10.2" }
 paparazzi-gradle = { module = "app.cash.paparazzi:paparazzi-gradle-plugin", version.ref = "paparazzi" }
 
