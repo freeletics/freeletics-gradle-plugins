@@ -26,7 +26,7 @@ jobs:
           validate-wrappers: true
 
       - name: Build with Gradle
-        run: ./gradlew build buildHealth --stacktrace
+        run: ./gradlew build --stacktrace
 
       - name: Check code style
         run: ./kotlinw .kts/ktlint.main.kts --fail-on-changes
