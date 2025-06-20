@@ -108,7 +108,7 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                         // Enhance not null annotated type parameter's types to definitely not null types (@NotNull T => T & Any)
                         "-Xenhance-type-parameter-types-to-def-not-null",
                         // https://kotlinlang.org/docs/whatsnew-eap.html#support-for-reading-and-writing-annotations-in-kotlin-metadata
-                        "-Xannotations-in-metadata"
+                        "-Xannotations-in-metadata",
                     )
 
                     if (!isAndroid) {
