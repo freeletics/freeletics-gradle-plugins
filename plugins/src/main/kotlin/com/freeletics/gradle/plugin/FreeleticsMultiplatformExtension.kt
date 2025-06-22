@@ -112,7 +112,7 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
         }
     }
 
-    public fun addCommonTargets(androidNativeTargets: Boolean = true) {
+    public fun addCommonTargets() {
         project.kotlinMultiplatform {
             jvm()
 
@@ -152,12 +152,53 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
             watchosX64()
             watchosSimulatorArm64()
 
-            if (androidNativeTargets) {
-                androidNativeArm32()
-                androidNativeArm64()
-                androidNativeX86()
-                androidNativeX64()
+            androidNativeArm32()
+            androidNativeArm64()
+            androidNativeX86()
+            androidNativeX64()
+        }
+    }
+
+    public fun addComposeTargets() {
+        project.kotlinMultiplatform {
+            jvm()
+
+            js {
+                nodejs()
             }
+
+            @OptIn(ExperimentalWasmDsl::class)
+            wasmJs {
+                nodejs()
+            }
+
+            // TODO
+            // @OptIn(ExperimentalWasmDsl::class)
+            // wasmWasi {
+            //      nodejs()
+            // }
+
+            linuxX64()
+            linuxArm64()
+
+            iosArm64()
+            iosX64()
+            iosSimulatorArm64()
+
+            macosArm64()
+            macosX64()
+
+            mingwX64()
+
+            tvosArm64()
+            tvosX64()
+            tvosSimulatorArm64()
+
+            watchosArm32()
+            watchosArm64()
+            // TODO watchosDeviceArm64()
+            watchosX64()
+            watchosSimulatorArm64()
         }
     }
 

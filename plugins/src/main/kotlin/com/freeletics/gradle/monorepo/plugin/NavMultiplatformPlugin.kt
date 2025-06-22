@@ -1,21 +1,21 @@
 package com.freeletics.gradle.monorepo.plugin
 
 import com.freeletics.gradle.monorepo.setup.applyPlatformConstraints
-import com.freeletics.gradle.monorepo.setup.disableAndroidLibraryTasks
+import com.freeletics.gradle.monorepo.setup.disableMultiplatformLibraryTasks
 import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.registerCheckDependencyRulesTasks
 import com.freeletics.gradle.monorepo.util.ProjectType
-import com.freeletics.gradle.monorepo.util.appType
-import com.freeletics.gradle.plugin.FreeleticsAndroidPlugin
-import com.freeletics.gradle.util.freeleticsAndroidExtension
+import com.freeletics.gradle.plugin.FreeleticsMultiplatformPlugin
+import com.freeletics.gradle.util.freeleticsExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-public abstract class NavPlugin : Plugin<Project> {
+public abstract class NavMultiplatformPlugin : Plugin<Project> {
     override fun apply(target: Project) {
-        target.plugins.apply(FreeleticsAndroidPlugin::class.java)
+        target.plugins.apply(FreeleticsMultiplatformPlugin::class.java)
 
-        target.freeleticsAndroidExtension.minSdkVersion(target.appType()?.minSdkVersion(target))
-        target.freeleticsAndroidExtension.enableParcelize()
+        target.freeleticsExtension.useSerialization()
+        // TODO targets
+        // TODO: Android lint
 
         target.registerCheckDependencyRulesTasks(
             allowedProjectTypes = listOf(ProjectType.FEATURE_NAV),
@@ -27,7 +27,7 @@ public abstract class NavPlugin : Plugin<Project> {
             ),
         )
 
-        target.applyPlatformConstraints()
-        target.disableAndroidLibraryTasks()
+        target.applyPlatformConstraints(multiplatform = true)
+        target.disableMultiplatformLibraryTasks()
     }
 }

@@ -1,24 +1,32 @@
 package com.freeletics.gradle.monorepo.plugin
 
 import com.freeletics.gradle.monorepo.setup.applyPlatformConstraints
-import com.freeletics.gradle.monorepo.setup.disableAndroidApplicationTasks
 import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.registerCheckDependencyRulesTasks
 import com.freeletics.gradle.monorepo.util.ProjectType
 import com.freeletics.gradle.monorepo.util.appType
 import com.freeletics.gradle.plugin.FreeleticsAndroidAppPlugin
+import com.freeletics.gradle.plugin.FreeleticsMultiplatformPlugin
 import com.freeletics.gradle.util.androidApp
 import com.freeletics.gradle.util.androidComponents
 import com.freeletics.gradle.util.freeleticsAndroidExtension
 import com.freeletics.gradle.util.freeleticsExtension
+import com.freeletics.gradle.util.freeleticsMultiplatformExtension
 import com.freeletics.gradle.util.stringProperty
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-public abstract class AppPlugin : Plugin<Project> {
+public abstract class AppMultiplatformPlugin : Plugin<Project> {
     override fun apply(target: Project) {
+        target.plugins.apply(FreeleticsMultiplatformPlugin::class.java)
         target.plugins.apply(FreeleticsAndroidAppPlugin::class.java)
+        target.plugins.apply("org.jetbrains.compose")
 
-        target.freeleticsExtension.extensions.create("app", AppExtension::class.java)
+        target.freeleticsMultiplatformExtension.addAndroidTarget(variantsToPublish = emptyList())
+        target.freeleticsMultiplatformExtension.addJvmTarget()
+
+        // TODO multiplatform lint?
+
+        target.freeleticsExtension.extensions.create("androidApp", AppExtension::class.java)
 
         target.freeleticsAndroidExtension.minSdkVersion(target.appType()?.minSdkVersion(target))
         target.freeleticsAndroidExtension.enableBuildConfig()
@@ -128,7 +136,7 @@ public abstract class AppPlugin : Plugin<Project> {
             ),
         )
 
-        target.applyPlatformConstraints()
-        target.disableAndroidApplicationTasks()
+        target.applyPlatformConstraints(multiplatform = true)
+//  TODO      target.disableAndroidApplicationTasks()
     }
 }

@@ -19,6 +19,11 @@ internal fun Project.disableKotlinLibraryTasks() {
     disableTasks(lintTasksToDisableJvm)
 }
 
+internal fun Project.disableMultiplatformLibraryTasks() {
+    disableTasks(listOf("assemble"))
+    // TODO lint tasks
+}
+
 private fun Project.disableAndroidTasks(names: List<String>, variantToKeep: String = "") {
     extensions.configure<AndroidComponentsExtension<*, *, *>>("androidComponents") { components ->
         components.onVariants { variant ->

@@ -9,6 +9,7 @@ import com.freeletics.gradle.util.getDependencyOrNull
 import com.freeletics.gradle.util.getVersion
 import dev.zacsweers.metro.gradle.MetroPluginExtension
 import org.gradle.api.Project
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType.androidJvm
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType.jvm
 
@@ -19,8 +20,8 @@ internal fun Project.configureMetro() {
 internal fun Project.configureKhonshu() {
     configureProcessing(useKsp = true)
 
-    addApiDependency(getDependency("khonshu-codegen-runtime"), SUPPORTED_PLATFORMS)
-    addKspDependency(getDependency("khonshu-codegen-compiler"), SUPPORTED_PLATFORMS)
+    addApiDependency(getDependency("khonshu-codegen-runtime"))
+    addKspDependency(getDependency("khonshu-codegen-compiler"), KotlinPlatformType.entries.toSet() - KotlinPlatformType.common)
 
     // TODO workaround for Gradle not being able to resolve this in the ksp config
     configurations.named("ksp").configure {
