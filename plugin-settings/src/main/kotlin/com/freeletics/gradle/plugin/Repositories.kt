@@ -14,6 +14,10 @@ internal fun RepositoryHandler.addMavenCentral() {
 }
 
 internal fun RepositoryHandler.addSonatypeSnapshotRepositories() {
+    newRepository("Central Portal Snapshots", "https://central.sonatype.com/repository/maven-snapshots/") {
+        snapshotsOnly()
+    }
+
     newRepository("Sonatype Snapshots", "https://oss.sonatype.org/content/repositories/snapshots/") {
         snapshotsOnly()
     }
@@ -24,7 +28,10 @@ internal fun RepositoryHandler.addSonatypeSnapshotRepositories() {
 }
 
 internal fun RepositoryHandler.addKotlinSnapshotRepository() {
-    newExclusiveContentRepository("Kotlin Dev", "https://maven.pkg.jetbrains.space/kotlin/p/kotlin/bootstrap") {
+    newRepository("Kotlin Bootstrap", "https://redirector.kotlinlang.org/maven/bootstrap/") {
+        includeVersionByRegex("^org\\.jetbrains\\.kotlin\\..*", ".*", ".*-(dev|release)-.*")
+    }
+    newRepository("Kotlin Dev", "https://packages.jetbrains.team/maven/p/kt/dev") {
         includeVersionByRegex("^org\\.jetbrains\\.kotlin\\..*", ".*", ".*-(dev|release)-.*")
     }
 }
