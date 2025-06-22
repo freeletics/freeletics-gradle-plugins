@@ -1,5 +1,6 @@
 package com.freeletics.gradle.plugin
 
+import com.freeletics.gradle.setup.configureStandaloneLint
 import com.freeletics.gradle.util.kotlinMultiplatform
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
@@ -39,7 +40,7 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
     }
 
     @JvmOverloads
-    public fun addIosTargets(configure: KotlinNativeTarget.() -> Unit = { }) {
+    public fun addIosTargets(includeX64: Boolean = false, configure: KotlinNativeTarget.() -> Unit = { }) {
         project.kotlinMultiplatform {
             iosArm64 {
                 configure()
@@ -48,12 +49,19 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
             iosSimulatorArm64 {
                 configure()
             }
+
+            if (includeX64) {
+                iosX64 {
+                    configure()
+                }
+            }
         }
     }
 
     @JvmOverloads
     public fun addIosTargetsWithXcFramework(
         frameworkName: String,
+        includeX64: Boolean = false,
         configure: KotlinNativeTarget.(Framework) -> Unit = { },
     ) {
         val xcFramework = XCFrameworkConfig(project, frameworkName)
@@ -72,6 +80,16 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
                     baseName = frameworkName
                     xcFramework.add(this)
                     configure(this)
+                }
+            }
+
+            if (includeX64) {
+                iosX64 {
+                    binaries.framework {
+                        baseName = frameworkName
+                        xcFramework.add(this)
+                        configure(this)
+                    }
                 }
             }
         }
@@ -112,7 +130,7 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
         }
     }
 
-    public fun addCommonTargets(androidNativeTargets: Boolean = true) {
+    public fun addCommonTargets() {
         project.kotlinMultiplatform {
             jvm()
 
@@ -152,16 +170,63 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
             watchosX64()
             watchosSimulatorArm64()
 
-            if (androidNativeTargets) {
-                androidNativeArm32()
-                androidNativeArm64()
-                androidNativeX86()
-                androidNativeX64()
+            androidNativeArm32()
+            androidNativeArm64()
+            androidNativeX86()
+            androidNativeX64()
+        }
+    }
+
+    public fun addComposeTargets() {
+        project.kotlinMultiplatform {
+            jvm()
+
+            js {
+                nodejs()
             }
+
+            @OptIn(ExperimentalWasmDsl::class)
+            wasmJs {
+                nodejs()
+            }
+
+            // TODO
+            // @OptIn(ExperimentalWasmDsl::class)
+            // wasmWasi {
+            //      nodejs()
+            // }
+
+            linuxX64()
+            linuxArm64()
+
+            iosArm64()
+            iosX64()
+            iosSimulatorArm64()
+
+            macosArm64()
+            macosX64()
+
+            mingwX64()
+
+            tvosArm64()
+            tvosX64()
+            tvosSimulatorArm64()
+
+            watchosArm32()
+            watchosArm64()
+            // TODO watchosDeviceArm64()
+            watchosX64()
+            watchosSimulatorArm64()
         }
     }
 
     public fun useSkie() {
         project.plugins.apply("co.touchlab.skie")
+    }
+
+    public fun useAndroidLint() {
+        project.plugins.apply("com.android.lint")
+
+        project.configureStandaloneLint()
     }
 }

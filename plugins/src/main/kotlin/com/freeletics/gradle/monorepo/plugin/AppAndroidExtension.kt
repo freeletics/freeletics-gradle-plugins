@@ -17,13 +17,15 @@ import com.freeletics.gradle.monorepo.util.PRODUCTION
 import com.freeletics.gradle.monorepo.util.QA
 import com.freeletics.gradle.monorepo.util.defaultEnvironment
 import com.freeletics.gradle.monorepo.util.environmentBuildConfigFields
+import com.freeletics.gradle.util.addApiDependency
 import com.freeletics.gradle.util.androidApp
 import com.freeletics.gradle.util.androidComponentsApp
 import com.freeletics.gradle.util.getVersion
 import java.io.File
 import org.gradle.api.Project
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
-public abstract class AppExtension(private val project: Project) {
+public abstract class AppAndroidExtension(private val project: Project) {
     public fun applicationId(applicationId: String) {
         project.androidApp {
             defaultConfig.applicationId = applicationId
@@ -51,7 +53,10 @@ public abstract class AppExtension(private val project: Project) {
             }
         }
 
-        project.dependencies.add("api", "com.freeletics.gradle:minify-common:${project.getVersion("fgp")}")
+        project.addApiDependency(
+            "com.freeletics.gradle:minify-common:${project.getVersion("fgp")}",
+            setOf(KotlinPlatformType.androidJvm),
+        )
     }
 
     public fun checkLicenses() {

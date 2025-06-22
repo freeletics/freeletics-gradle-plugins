@@ -11,7 +11,7 @@ import com.freeletics.gradle.util.freeleticsExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-public abstract class FeaturePlugin : Plugin<Project> {
+public abstract class FeatureAndroidPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.plugins.apply(FreeleticsAndroidPlugin::class.java)
 

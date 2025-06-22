@@ -22,6 +22,19 @@ internal fun Project.addApiDependency(
     )
 }
 
+internal fun Project.addApiDependency(
+    dependency: String,
+    limitToTargets: Set<KotlinPlatformType>? = null,
+) {
+    addDependency(
+        dependency = dependency,
+        notMultiplatformConfiguration = "api",
+        commonConfiguration = "commonMainApi",
+        targetConfiguration = KotlinTarget::apiConfigName,
+        limitToTargets = limitToTargets,
+    )
+}
+
 internal fun Project.addKspDependency(
     dependency: Provider<MinimalExternalModuleDependency>?,
     limitToTargets: Set<KotlinPlatformType>? = null,
@@ -29,7 +42,7 @@ internal fun Project.addKspDependency(
     addDependency(
         dependency = dependency,
         notMultiplatformConfiguration = "ksp",
-        commonConfiguration = "ksp",
+        commonConfiguration = "kspCommonMainMetadata",
         targetConfiguration = KotlinTarget::kspConfigName,
         limitToTargets = limitToTargets,
     )
@@ -37,6 +50,33 @@ internal fun Project.addKspDependency(
 
 private fun Project.addDependency(
     dependency: Provider<MinimalExternalModuleDependency>?,
+    notMultiplatformConfiguration: String,
+    commonConfiguration: String,
+    targetConfiguration: KotlinTarget.() -> String,
+    limitToTargets: Set<KotlinPlatformType>?,
+) {
+    if (dependency == null) {
+        return
+    }
+
+    val extension = kotlinExtension
+    if (extension is KotlinMultiplatformExtension) {
+        if (limitToTargets == null) {
+            dependencies.add(commonConfiguration, dependency)
+        } else {
+            extension.targets.configureEach {
+                if (it.platformType in limitToTargets) {
+                    dependencies.add(it.targetConfiguration(), dependency)
+                }
+            }
+        }
+    } else {
+        dependencies.add(notMultiplatformConfiguration, dependency)
+    }
+}
+
+private fun Project.addDependency(
+    dependency: Any?,
     notMultiplatformConfiguration: String,
     commonConfiguration: String,
     targetConfiguration: KotlinTarget.() -> String,

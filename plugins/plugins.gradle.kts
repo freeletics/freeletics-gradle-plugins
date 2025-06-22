@@ -77,9 +77,14 @@ gradlePlugin {
             implementationClass = "com.freeletics.gradle.plugin.RootPlugin"
         }
 
-        create("monoAppPlugin") {
-            id = "com.freeletics.gradle.app"
-            implementationClass = "com.freeletics.gradle.monorepo.plugin.AppPlugin"
+        create("monoAppAndroidPlugin") {
+            id = "com.freeletics.gradle.app.android"
+            implementationClass = "com.freeletics.gradle.monorepo.plugin.AppAndroidPlugin"
+        }
+
+        create("monoAppMultiplatformPlugin") {
+            id = "com.freeletics.gradle.app.multiplatform"
+            implementationClass = "com.freeletics.gradle.monorepo.plugin.AppMultiplatformPlugin"
         }
 
         create("monoCoreAndroidPlugin") {
@@ -102,14 +107,24 @@ gradlePlugin {
             implementationClass = "com.freeletics.gradle.monorepo.plugin.DomainKotlinPlugin"
         }
 
-        create("monoFeaturePlugin") {
-            id = "com.freeletics.gradle.feature"
-            implementationClass = "com.freeletics.gradle.monorepo.plugin.FeaturePlugin"
+        create("monoFeatureAndroidPlugin") {
+            id = "com.freeletics.gradle.feature.android"
+            implementationClass = "com.freeletics.gradle.monorepo.plugin.FeatureAndroidPlugin"
         }
 
-        create("monoNavPlugin") {
-            id = "com.freeletics.gradle.nav"
-            implementationClass = "com.freeletics.gradle.monorepo.plugin.NavPlugin"
+        create("monoFeatureMultiplatformPlugin") {
+            id = "com.freeletics.gradle.feature.multiplatform"
+            implementationClass = "com.freeletics.gradle.monorepo.plugin.FeatureMultiplatformPlugin"
+        }
+
+        create("monoNavAndroidPlugin") {
+            id = "com.freeletics.gradle.nav.android"
+            implementationClass = "com.freeletics.gradle.monorepo.plugin.NavAndroidPlugin"
+        }
+
+        create("monoNavMultiplatformPlugin") {
+            id = "com.freeletics.gradle.nav.multiplatform"
+            implementationClass = "com.freeletics.gradle.monorepo.plugin.NavMultiplatformPlugin"
         }
 
         create("monoLegacyAndroidPlugin") {
