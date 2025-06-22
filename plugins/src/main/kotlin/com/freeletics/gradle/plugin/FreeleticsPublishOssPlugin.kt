@@ -21,7 +21,7 @@ public abstract class FreeleticsPublishOssPlugin : Plugin<Project> {
 
     private fun Project.configureMavenCentral() {
         extensions.configure(MavenPublishBaseExtension::class.java) {
-            it.publishToMavenCentral(SonatypeHost.DEFAULT, automaticRelease = true)
+            it.publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
             it.signAllPublications()
         }
     }
