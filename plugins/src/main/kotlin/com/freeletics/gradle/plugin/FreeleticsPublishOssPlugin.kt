@@ -4,7 +4,6 @@ import com.freeletics.gradle.setup.configurePom
 import com.freeletics.gradle.util.freeleticsExtension
 import com.freeletics.gradle.util.stringProperty
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
-import com.vanniktech.maven.publish.SonatypeHost
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -21,7 +20,7 @@ public abstract class FreeleticsPublishOssPlugin : Plugin<Project> {
 
     private fun Project.configureMavenCentral() {
         extensions.configure(MavenPublishBaseExtension::class.java) {
-            it.publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
+            it.publishToMavenCentral(automaticRelease = true)
             it.signAllPublications()
         }
     }
