@@ -3,6 +3,11 @@ plugins {
     id("com.freeletics.gradle.publish.oss")
 }
 
+kotlin {
+    abiValidation {
+    }
+}
+
 dependencies {
     api(libs.kotlin.gradle)
     api(libs.javax.inject)
