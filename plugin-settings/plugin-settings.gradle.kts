@@ -4,8 +4,8 @@ plugins {
 }
 
 dependencies {
-    implementation(libs.develocity)
-    implementation(libs.gradle.toolchain)
+    implementation(libs.develocity.gradle)
+    implementation(libs.toolchains.gradle)
 }
 
 gradlePlugin {

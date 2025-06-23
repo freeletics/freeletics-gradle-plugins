@@ -47,16 +47,16 @@ kopy-gradle = { module = "com.javiersc.kotlin:kopy-gradle-plugin", version = "0.
 skie-gradle = { module = "co.touchlab.skie:gradle-plugin", version = "0.10.4" }
 paparazzi-gradle = { module = "app.cash.paparazzi:paparazzi-gradle-plugin", version.ref = "paparazzi" }
 
-licensee = { module = "app.cash.licensee:licensee-gradle-plugin", version.ref = "licensee" }
-crashlytics = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "crashlytics-gradle" }
+licensee-gradle = { module = "app.cash.licensee:licensee-gradle-plugin", version.ref = "licensee" }
+crashlytics-gradle = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "crashlytics-gradle" }
 
-dependency-analysis = { module = "com.autonomousapps:dependency-analysis-gradle-plugin", version.ref = "dependency-analysis" }
+dependency-analysis-gradle = { module = "com.autonomousapps:dependency-analysis-gradle-plugin", version.ref = "dependency-analysis" }
 
-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish"}
-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
+publish-gradle = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish"}
+dokka-gradle = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 
-develocity = { module = "com.gradle:develocity-gradle-plugin", version.ref = "develocity" }
-gradle-toolchain = { module = "org.gradle.toolchains:foojay-resolver", version.ref = "gradle-toolchain" }
+develocity-gradle = { module = "com.gradle:develocity-gradle-plugin", version.ref = "develocity" }
+toolchains-gradle = { module = "org.gradle.toolchains:foojay-resolver", version.ref = "gradle-toolchain" }
 
 clikt = { module = "com.github.ajalt.clikt:clikt-jvm", version.ref = "clikt" }
 clikt-core = { module = "com.github.ajalt.clikt:clikt-core-jvm", version.ref = "clikt" }
