@@ -90,8 +90,11 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                     "-Xannotation-default-target=param-property",
                     // https://kotlinlang.org/docs/whatsnew2020.html#data-class-copy-function-to-have-the-same-visibility-as-constructor
                     "-Xconsistent-data-class-copy-visibility",
-                    // Enable context parameters (2.2.0 beta feature)
+                    // Enable 2.2.0 feature previews
                     "-Xcontext-parameters",
+                    "-Xcontext-sensitive-resolution",
+                    "-Xannotation-target-all",
+                    "-Xnested-type-aliases",
                 )
 
                 if (this is KotlinJvmCompilerOptions) {
