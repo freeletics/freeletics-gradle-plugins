@@ -1,6 +1,7 @@
 package com.freeletics.gradle.setup
 
 import com.freeletics.gradle.util.freeleticsExtension
+import com.freeletics.gradle.util.kotlin
 import com.freeletics.gradle.util.stringProperty
 import com.gradle.scan.agent.serialization.scan.serializer.kryo.it
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
@@ -11,6 +12,13 @@ import org.gradle.api.publish.maven.MavenPom
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.tasks.AbstractPublishToMaven
 import org.gradle.api.tasks.bundling.Zip
+import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.dsl.abi.AbiValidationExtension
+import org.jetbrains.kotlin.gradle.dsl.abi.AbiValidationLegacyDumpExtension
+import org.jetbrains.kotlin.gradle.dsl.abi.AbiValidationMultiplatformExtension
+import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
 import org.jetbrains.kotlin.konan.target.HostManager
 
 internal fun setupOssPublishing(target: Project) {
@@ -28,6 +36,8 @@ internal fun setupOssPublishing(target: Project) {
         @Suppress("UnstableApiUsage")
         it.configureBasedOnAppliedPlugins(sourcesJar = true, javadocJar = !isSnapshot)
     }
+
+    target.configureBinaryCompatibility()
 }
 
 internal fun setupInternalPublishing(target: Project) {
@@ -126,6 +136,33 @@ internal fun setupXcFrameworkPublishing(project: Project, frameworkName: String)
     project.tasks.withType(AbstractPublishToMaven::class.java).configureEach {
         if (it.name.contains(publicationName, ignoreCase = true)) {
             it.onlyIf { HostManager.hostIsMac }
+        }
+    }
+}
+
+@OptIn(ExperimentalAbiValidation::class)
+private fun Project.configureBinaryCompatibility() {
+    kotlin {
+        when (this) {
+            is KotlinJvmProjectExtension -> extensions.configure<AbiValidationExtension>("abiValidation") {
+                it.enabled.set(true)
+            }
+            is KotlinAndroidProjectExtension -> extensions.configure<AbiValidationExtension>("abiValidation") {
+                it.enabled.set(true)
+            }
+            is KotlinMultiplatformExtension -> extensions.configure<AbiValidationMultiplatformExtension>(
+                "abiValidation",
+            ) {
+                it.enabled.set(true)
+            }
+            else -> throw IllegalStateException("Unsupported kotlin extension ${this::class}")
+        }
+
+        // TODO remove manual task dependency https://youtrack.jetbrains.com/issue/KT-80614
+        extensions.configure(AbiValidationLegacyDumpExtension::class.java) {
+            tasks.named("check").configure { task ->
+                task.dependsOn(it.legacyDumpTaskProvider)
+            }
         }
     }
 }
