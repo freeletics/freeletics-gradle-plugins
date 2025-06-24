@@ -6,7 +6,7 @@ fgp = "0.26.1"
 
 kotlin = "2.1.21"
 coroutines = "1.10.2"
-android-gradle = "8.10.1"
+android-gradle = "8.11.0"
 ksp="2.1.21-2.0.2"
 paparazzi = "1.3.5"
 licensee = "1.13.0"
