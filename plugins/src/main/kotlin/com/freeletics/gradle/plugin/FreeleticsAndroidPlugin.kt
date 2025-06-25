@@ -8,8 +8,8 @@ import com.freeletics.gradle.setup.defaultTestSetup
 import com.freeletics.gradle.util.addMaybe
 import com.freeletics.gradle.util.android
 import com.freeletics.gradle.util.androidComponents
-import com.freeletics.gradle.util.enable
 import com.freeletics.gradle.util.dataBinding
+import com.freeletics.gradle.util.enable
 import com.freeletics.gradle.util.freeleticsExtension
 import com.freeletics.gradle.util.getBundleOrNull
 import com.freeletics.gradle.util.getDependencyOrNull
