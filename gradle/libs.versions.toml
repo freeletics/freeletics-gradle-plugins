@@ -44,7 +44,7 @@ ksp-gradle = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin
 metro-gradle = { module = "dev.zacsweers.metro:gradle-plugin", version = "0.4.0" }
 poko-gradle = { module = "dev.drewhamilton.poko:poko-gradle-plugin", version = "0.18.7" }
 kopy-gradle = { module = "com.javiersc.kotlin:kopy-gradle-plugin", version = "0.16.3+2.1.21" }
-skie-gradle = { module = "co.touchlab.skie:gradle-plugin", version = "0.10.2" }
+skie-gradle = { module = "co.touchlab.skie:gradle-plugin", version = "0.10.4" }
 paparazzi-gradle = { module = "app.cash.paparazzi:paparazzi-gradle-plugin", version.ref = "paparazzi" }
 
 licensee = { module = "app.cash.licensee:licensee-gradle-plugin", version.ref = "licensee" }
