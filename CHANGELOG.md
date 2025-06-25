@@ -1,6 +1,14 @@
 Change Log
 ==========
 
+## 0.27.0 *(2025-06-25)*
+
+- Kotlin 2.2.0
+- Android Gradle Plugin 8.11.0
+- `com.freeletics.gradle:scripts-circleci` was removed
+- fix some issues for `com.freeletics.gradle:scripts-github`
+
+
 ## 0.26.0 *(2025-06-13)*
 
 - New `com.freeletics.gradle:scripts-github` artifact that contains helpers
