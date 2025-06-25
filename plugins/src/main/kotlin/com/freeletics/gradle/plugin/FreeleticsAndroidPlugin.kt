@@ -8,7 +8,7 @@ import com.freeletics.gradle.setup.defaultTestSetup
 import com.freeletics.gradle.util.addMaybe
 import com.freeletics.gradle.util.android
 import com.freeletics.gradle.util.androidComponents
-import com.freeletics.gradle.util.androidResources
+import com.freeletics.gradle.util.enable
 import com.freeletics.gradle.util.dataBinding
 import com.freeletics.gradle.util.freeleticsExtension
 import com.freeletics.gradle.util.getBundleOrNull
@@ -57,8 +57,8 @@ public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
             }
 
             // default all features to false, they will be enabled through FreeleticsAndroidExtension
+            androidResources.enable = false
             buildFeatures {
-                androidResources = false
                 viewBinding = false
                 resValues = false
                 buildConfig = false
