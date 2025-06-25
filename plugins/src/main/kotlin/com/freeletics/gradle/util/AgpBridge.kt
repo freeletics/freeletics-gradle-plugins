@@ -1,7 +1,10 @@
 package com.freeletics.gradle.util
 
+import com.android.build.api.dsl.AndroidResources
+import com.android.build.api.dsl.ApplicationAndroidResources
 import com.android.build.api.dsl.ApplicationBuildFeatures
 import com.android.build.api.dsl.BuildFeatures
+import com.android.build.api.dsl.LibraryAndroidResources
 import com.android.build.api.dsl.LibraryBuildFeatures
 
 internal var BuildFeatures.dataBinding: Boolean?
@@ -16,14 +19,14 @@ internal var BuildFeatures.dataBinding: Boolean?
         else -> throw UnsupportedOperationException("")
     }
 
-internal var BuildFeatures.androidResources: Boolean?
+internal var AndroidResources.enable: Boolean
     get() = when (this) {
-        is LibraryBuildFeatures -> androidResources
-        is ApplicationBuildFeatures -> true
+        is LibraryAndroidResources -> enable
+        is ApplicationAndroidResources -> true
         else -> throw UnsupportedOperationException("")
     }
     set(value) = when (this) {
-        is LibraryBuildFeatures -> androidResources = value
-        is ApplicationBuildFeatures -> {}
+        is LibraryAndroidResources -> enable = value
+        is ApplicationAndroidResources -> {}
         else -> throw UnsupportedOperationException("")
     }
