@@ -6,7 +6,7 @@ import com.freeletics.gradle.setup.basicArgument
 import com.freeletics.gradle.setup.configurePaparazzi
 import com.freeletics.gradle.setup.configureProcessing
 import com.freeletics.gradle.util.android
-import com.freeletics.gradle.util.androidResources
+import com.freeletics.gradle.util.enable
 import com.freeletics.gradle.util.getDependency
 import java.io.File
 import org.gradle.api.Project
@@ -62,7 +62,7 @@ public abstract class FreeleticsAndroidExtension(private val project: Project) {
 
     public fun enableAndroidResources() {
         project.android {
-            buildFeatures.androidResources = true
+            androidResources.enable = true
         }
     }
 
