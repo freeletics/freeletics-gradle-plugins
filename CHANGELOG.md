@@ -1,12 +1,22 @@
 Change Log
 ==========
 
+## 0.27.1 *(2025-06-25)*
+
+- remove `-Xnested-type-aliases` because it triggers prerelease flags
+
+
 ## 0.27.0 *(2025-06-25)*
 
 - Kotlin 2.2.0
 - Android Gradle Plugin 8.11.0
 - `com.freeletics.gradle:scripts-circleci` was removed
 - fix some issues for `com.freeletics.gradle:scripts-github`
+
+
+## 0.26.1 *(2025-06-22)*
+
+- Publish through Central Portal instead of Sonatype OSSRH
 
 
 ## 0.26.0 *(2025-06-13)*

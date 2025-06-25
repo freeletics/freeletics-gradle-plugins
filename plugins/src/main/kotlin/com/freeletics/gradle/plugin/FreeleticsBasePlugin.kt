@@ -94,7 +94,6 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                     "-Xcontext-parameters",
                     "-Xcontext-sensitive-resolution",
                     "-Xannotation-target-all",
-                    "-Xnested-type-aliases",
                 )
 
                 if (this is KotlinJvmCompilerOptions) {
