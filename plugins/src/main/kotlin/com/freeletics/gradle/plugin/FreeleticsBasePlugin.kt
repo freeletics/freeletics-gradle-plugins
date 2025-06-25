@@ -93,7 +93,7 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                     // Enable 2.2.0 feature previews
                     "-Xcontext-parameters",
                     "-Xcontext-sensitive-resolution",
-                    "-Xannotation-target-all",
+//                    "-Xannotation-target-all",
                     "-Xnested-type-aliases",
                 )
 
