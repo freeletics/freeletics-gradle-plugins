@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## 0.27.1 *(2025-06-25)*
+
+- remove `-Xnested-type-aliases` because it triggers prerelease flags
+
+
 ## 0.27.0 *(2025-06-25)*
 
 - Kotlin 2.2.0
