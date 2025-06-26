@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## 0.27.3 *(2025-06-26)*
+
+- fix kotlin.io.path.ExperimentalPathApi for multiplatform projects
+
+
 ## 0.27.2 *(2025-06-26)*
 
 - opt in to the following stdlib APIs by default
