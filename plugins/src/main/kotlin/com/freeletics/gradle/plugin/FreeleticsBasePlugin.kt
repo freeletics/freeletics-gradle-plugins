@@ -94,6 +94,11 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                     "-Xcontext-parameters",
                     "-Xcontext-sensitive-resolution",
                     "-Xannotation-target-all",
+                    // opt in to experimental stdlib apis
+                    "-opt-in=kotlin.ExperimentalStdlibApi",
+                    "-opt-in=kotlin.time.ExperimentalTime",
+                    "-opt-in=kotlin.uuid.ExperimentalUuidApi",
+                    "-opt-in=kotlin.io.path.ExperimentalPathApi",
                 )
 
                 if (this is KotlinJvmCompilerOptions) {
