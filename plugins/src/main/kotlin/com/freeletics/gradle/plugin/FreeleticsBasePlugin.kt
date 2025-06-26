@@ -98,7 +98,6 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                     "-opt-in=kotlin.ExperimentalStdlibApi",
                     "-opt-in=kotlin.time.ExperimentalTime",
                     "-opt-in=kotlin.uuid.ExperimentalUuidApi",
-                    "-opt-in=kotlin.io.path.ExperimentalPathApi",
                 )
 
                 if (this is KotlinJvmCompilerOptions) {
@@ -116,6 +115,8 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                         "-Xenhance-type-parameter-types-to-def-not-null",
                         // https://kotlinlang.org/docs/whatsnew-eap.html#support-for-reading-and-writing-annotations-in-kotlin-metadata
                         "-Xannotations-in-metadata",
+                        // opt in to experimental stdlib apis
+                        "-opt-in=kotlin.io.path.ExperimentalPathApi",
                     )
 
                     if (!isAndroid) {
