@@ -29,6 +29,8 @@ internal fun Lint.configure(project: Project) {
     textReport = true
     textOutput = project.reportsFile("lint-result.txt").get().asFile
 
+    disable += "NewerVersionAvailable"
+
     project.dependencies.addMaybe("lintChecks", project.getBundleOrNull("default-lint"))
 }
 
