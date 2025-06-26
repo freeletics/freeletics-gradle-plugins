@@ -1,6 +1,16 @@
 Change Log
 ==========
 
+## 0.27.2 *(2025-06-26)*
+
+- opt in to the following stdlib APIs by default
+    - kotlin.ExperimentalStdlibApi
+    - kotlin.time.ExperimentalTime
+    - kotlin.uuid.ExperimentalUuidApi
+    - kotlin.io.path.ExperimentalPathApi
+- disable `NewerVersionsAvailable` lint check
+
+
 ## 0.27.1 *(2025-06-25)*
 
 - remove `-Xnested-type-aliases` because it triggers prerelease flags
