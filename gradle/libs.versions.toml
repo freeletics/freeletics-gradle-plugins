@@ -19,7 +19,7 @@ dokka = "2.0.0"
 
 clikt = "5.0.3"
 ktlint = "1.6.0"
-serialization = "1.8.1"
+serialization = "1.9.0"
 google-http = "1.47.0"
 google-auth = "1.37.1"
 
