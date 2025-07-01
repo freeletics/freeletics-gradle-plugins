@@ -18,23 +18,16 @@ import org.gradle.process.CommandLineArgumentProvider
 public abstract class FreeleticsAndroidExtension(private val project: Project) {
     public fun useRoom(schemaLocation: String? = null) {
         val processingArguments = buildList {
-            add(basicArgument("room.generateKotlin" to "true"))
+            add(basicArgument("room.generateKotlin", "true"))
             schemaLocation?.let {
-                add(
-                    argumentProvider(
-                        RoomSchemaArgProvider(schemaDir = File(project.projectDir, schemaLocation)),
-                    ),
-                )
+                add(RoomSchemaArgProvider(schemaDir = File(project.projectDir, schemaLocation)))
             }
         }
-        val processorConfiguration = project.configureProcessing(
-            useKsp = true,
-            *processingArguments.toTypedArray(),
-        )
 
+        project.configureProcessing(processingArguments)
         project.dependencies.apply {
             add("api", project.getDependency("androidx-room-runtime"))
-            add(processorConfiguration, project.getDependency("androidx-room-compiler"))
+            add("ksp", project.getDependency("androidx-room-compiler"))
         }
     }
 
