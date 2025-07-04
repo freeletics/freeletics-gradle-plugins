@@ -1,6 +1,5 @@
 package com.freeletics.gradle.plugin
 
-import com.freeletics.gradle.setup.configureDagger
 import com.freeletics.gradle.setup.configureKhonshu
 import com.freeletics.gradle.setup.configureMetro
 import com.freeletics.gradle.setup.setupCompose
@@ -45,18 +44,6 @@ public abstract class FreeleticsBaseExtension(private val project: Project) : Ex
         project.configureKhonshu()
     }
 
-    public fun useDagger() {
-        project.configureDagger(DaggerMode.ANVIL_ONLY)
-    }
-
-    public fun useDaggerWithKhonshu() {
-        project.configureDagger(DaggerMode.ANVIL_WITH_KHONSHU)
-    }
-
-    public fun useDaggerWithComponent() {
-        project.configureDagger(DaggerMode.ANVIL_WITH_FULL_DAGGER)
-    }
-
     public fun usePoko() {
         project.plugins.apply("dev.drewhamilton.poko")
     }
@@ -64,11 +51,5 @@ public abstract class FreeleticsBaseExtension(private val project: Project) : Ex
     public fun useKopy() {
         project.plugins.apply("com.javiersc.kotlin.kopy")
         project.plugins.apply("org.jetbrains.kotlin.plugin.atomicfu")
-    }
-
-    internal enum class DaggerMode {
-        ANVIL_ONLY,
-        ANVIL_WITH_KHONSHU,
-        ANVIL_WITH_FULL_DAGGER,
     }
 }
