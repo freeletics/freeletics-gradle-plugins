@@ -67,9 +67,9 @@ public abstract class AppPlugin : Plugin<Project> {
                 }
             }
 
-            // avoid "Unable to strip the following libraries, packaging them as they are" messages
-            packagingOptions {
-                jniLibs.keepDebugSymbols.addAll(
+            packaging {
+                // avoid "Unable to strip the following libraries, packaging them as they are" messages
+                jniLibs.keepDebugSymbols += setOf(
                     "**/libandroidx.graphics.path.so",
                     "**/libdatastore_shared_counter.so",
                 )
