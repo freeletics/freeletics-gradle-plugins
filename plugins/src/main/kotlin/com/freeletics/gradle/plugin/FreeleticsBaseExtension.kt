@@ -1,9 +1,9 @@
 package com.freeletics.gradle.plugin
 
-import com.freeletics.gradle.setup.configureKhonshu
-import com.freeletics.gradle.setup.configureMetro
+import com.freeletics.gradle.setup.configureProcessing
 import com.freeletics.gradle.setup.setupCompose
 import com.freeletics.gradle.util.addApiDependency
+import com.freeletics.gradle.util.addKspDependency
 import com.freeletics.gradle.util.compilerOptions
 import com.freeletics.gradle.util.getDependency
 import com.freeletics.gradle.util.kotlin
@@ -36,12 +36,18 @@ public abstract class FreeleticsBaseExtension(private val project: Project) : Ex
     }
 
     public fun useMetro() {
-        project.configureMetro()
+        project.plugins.apply("dev.zacsweers.metro")
     }
 
     public fun useKhonshu() {
-        project.configureMetro()
-        project.configureKhonshu()
+        useMetro()
+        project.configureProcessing()
+        project.addApiDependency(project.getDependency("khonshu-codegen-runtime"))
+        project.addKspDependency(project.getDependency("khonshu-codegen-compiler"))
+        // TODO workaround for Gradle not being able to resolve this in the ksp config
+        project.configurations.named("ksp").configure {
+            it.exclude(mapOf("group" to "org.jetbrains.skiko", "module" to "skiko"))
+        }
     }
 
     public fun usePoko() {
