@@ -4,11 +4,13 @@ import com.freeletics.gradle.setup.configureDagger
 import com.freeletics.gradle.setup.configureKhonshu
 import com.freeletics.gradle.setup.configureMetro
 import com.freeletics.gradle.setup.setupCompose
+import com.freeletics.gradle.setup.setupSqlDelight
 import com.freeletics.gradle.util.addApiDependency
 import com.freeletics.gradle.util.compilerOptions
 import com.freeletics.gradle.util.getDependency
 import com.freeletics.gradle.util.kotlin
 import org.gradle.api.Project
+import org.gradle.api.internal.catalog.DelegatingProjectDependency
 import org.gradle.api.plugins.ExtensionAware
 
 public abstract class FreeleticsBaseExtension(private val project: Project) : ExtensionAware {
@@ -64,6 +66,13 @@ public abstract class FreeleticsBaseExtension(private val project: Project) : Ex
     public fun useKopy() {
         project.plugins.apply("com.javiersc.kotlin.kopy")
         project.plugins.apply("org.jetbrains.kotlin.plugin.atomicfu")
+    }
+
+    public fun useSqlDelight(
+        name: String = "Database",
+        dependency: DelegatingProjectDependency? = null,
+    ) {
+        project.setupSqlDelight(name, dependency)
     }
 
     internal enum class DaggerMode {

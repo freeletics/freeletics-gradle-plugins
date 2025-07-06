@@ -13,6 +13,7 @@ dependencies {
     implementation(libs.kotlin.native.utils)
     implementation(libs.ksp.gradle)
     implementation(libs.metro.gradle)
+    implementation(libs.sqldelight.gradle)
     implementation(libs.dependency.analysis.gradle)
     implementation(libs.publish.gradle)
     implementation(libs.licensee.gradle)
