@@ -84,7 +84,7 @@ public class GooglePlayEdit(
     }
 
     private fun List<TrackRelease>.toVersions() = flatMap { release ->
-        release.versionCodes.map { GooglePlayReleaseVersion(release.name, it) }
+        release.versionCodes.map { GooglePlayReleaseVersion.WithRollout(release.name, it, release.userFraction) }
     }
 
     public companion object {
