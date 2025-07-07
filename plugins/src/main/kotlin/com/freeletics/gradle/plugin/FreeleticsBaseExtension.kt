@@ -1,10 +1,11 @@
 package com.freeletics.gradle.plugin
 
-import com.freeletics.gradle.setup.configureProcessing
+import com.freeletics.gradle.setup.configureDagger
+import com.freeletics.gradle.setup.configureKhonshu
+import com.freeletics.gradle.setup.configureMetro
 import com.freeletics.gradle.setup.setupCompose
 import com.freeletics.gradle.setup.setupSqlDelight
 import com.freeletics.gradle.util.addApiDependency
-import com.freeletics.gradle.util.addKspDependency
 import com.freeletics.gradle.util.compilerOptions
 import com.freeletics.gradle.util.getDependency
 import com.freeletics.gradle.util.kotlin
@@ -38,18 +39,24 @@ public abstract class FreeleticsBaseExtension(private val project: Project) : Ex
     }
 
     public fun useMetro() {
-        project.plugins.apply("dev.zacsweers.metro")
+        project.configureMetro()
     }
 
     public fun useKhonshu() {
-        useMetro()
-        project.configureProcessing()
-        project.addApiDependency(project.getDependency("khonshu-codegen-runtime"))
-        project.addKspDependency(project.getDependency("khonshu-codegen-compiler"))
-        // TODO workaround for Gradle not being able to resolve this in the ksp config
-        project.configurations.named("ksp").configure {
-            it.exclude(mapOf("group" to "org.jetbrains.skiko", "module" to "skiko"))
-        }
+        project.configureMetro()
+        project.configureKhonshu()
+    }
+
+    public fun useDagger() {
+        project.configureDagger(DaggerMode.ANVIL_ONLY)
+    }
+
+    public fun useDaggerWithKhonshu() {
+        project.configureDagger(DaggerMode.ANVIL_WITH_KHONSHU)
+    }
+
+    public fun useDaggerWithComponent() {
+        project.configureDagger(DaggerMode.ANVIL_WITH_FULL_DAGGER)
     }
 
     public fun usePoko() {
@@ -66,5 +73,11 @@ public abstract class FreeleticsBaseExtension(private val project: Project) : Ex
         dependency: DelegatingProjectDependency? = null,
     ) {
         project.setupSqlDelight(name, dependency)
+    }
+
+    internal enum class DaggerMode {
+        ANVIL_ONLY,
+        ANVIL_WITH_KHONSHU,
+        ANVIL_WITH_FULL_DAGGER,
     }
 }

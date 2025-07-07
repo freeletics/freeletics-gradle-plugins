@@ -1,6 +1,7 @@
 package com.freeletics.gradle.plugin
 
 import com.android.build.api.dsl.LibraryExtension
+import com.freeletics.gradle.setup.argumentProvider
 import com.freeletics.gradle.setup.basicArgument
 import com.freeletics.gradle.setup.configurePaparazzi
 import com.freeletics.gradle.setup.configureProcessing
@@ -17,16 +18,23 @@ import org.gradle.process.CommandLineArgumentProvider
 public abstract class FreeleticsAndroidExtension(private val project: Project) {
     public fun useRoom(schemaLocation: String? = null) {
         val processingArguments = buildList {
-            add(basicArgument("room.generateKotlin", "true"))
+            add(basicArgument("room.generateKotlin" to "true"))
             schemaLocation?.let {
-                add(RoomSchemaArgProvider(schemaDir = File(project.projectDir, schemaLocation)))
+                add(
+                    argumentProvider(
+                        RoomSchemaArgProvider(schemaDir = File(project.projectDir, schemaLocation)),
+                    ),
+                )
             }
         }
+        val processorConfiguration = project.configureProcessing(
+            useKsp = true,
+            *processingArguments.toTypedArray(),
+        )
 
-        project.configureProcessing(processingArguments)
         project.dependencies.apply {
             add("api", project.getDependency("androidx-room-runtime"))
-            add("ksp", project.getDependency("androidx-room-compiler"))
+            add(processorConfiguration, project.getDependency("androidx-room-compiler"))
         }
     }
 
