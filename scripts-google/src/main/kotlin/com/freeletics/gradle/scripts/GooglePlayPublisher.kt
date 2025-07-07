@@ -7,6 +7,7 @@ import com.google.api.services.androidpublisher.AndroidPublisherScopes.ANDROIDPU
 import com.google.api.services.androidpublisher.model.AppEdit
 import com.google.auth.oauth2.GoogleCredentials
 import java.io.ByteArrayInputStream
+import java.io.File
 import kotlin.time.Duration.Companion.minutes
 
 public class GooglePlayPublisher(
@@ -39,6 +40,15 @@ public class GooglePlayPublisher(
         } catch (t: Throwable) {
             androidPublisher.edits().delete(appId, edit.id).execute()
             throw t
+        }
+    }
+
+    public fun downloadApkTo(file: File, versionCode: Int) {
+        val result = androidPublisher.generatedapks().list(appId, versionCode).execute()
+        val universalApk = result.generatedApks.single().generatedUniversalApk
+        val request = androidPublisher.generatedapks().download(appId, versionCode, universalApk.downloadId)
+        file.outputStream().use {
+            request.executeMediaAndDownloadTo(it)
         }
     }
 }
