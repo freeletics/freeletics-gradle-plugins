@@ -1,7 +1,6 @@
 package com.freeletics.gradle.scripts
 
 public sealed class GooglePlayReleaseVersion() {
-
     public abstract val name: String
     public abstract val code: Long
 
@@ -24,12 +23,12 @@ public sealed class GooglePlayReleaseVersion() {
     public data class WithRollout(
         override val name: String,
         override val code: Long,
-        val rolloutPercentage: Double
+        val rolloutPercentage: Double,
     ) : GooglePlayReleaseVersion() {
         public fun asSimple(): GooglePlayReleaseVersion = Simple(name, code)
 
         override fun toString(): String {
-            return "$name ($code) @ ${rolloutPercentage}"
+            return "$name ($code) @ $rolloutPercentage"
         }
-   }
+    }
 }
