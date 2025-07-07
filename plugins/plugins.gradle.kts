@@ -22,6 +22,7 @@ dependencies {
     runtimeOnly(libs.kotlin.gradle.compose)
     runtimeOnly(libs.kotlin.gradle.atomicfu)
     runtimeOnly(libs.kotlin.gradle.serialization)
+    runtimeOnly(libs.metro.gradle)
     runtimeOnly(libs.dokka.gradle)
     runtimeOnly(libs.poko.gradle)
     runtimeOnly(libs.kopy.gradle)
