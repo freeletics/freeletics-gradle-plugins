@@ -78,7 +78,7 @@ public class GooglePlayEdit(
         userFraction = rollout.takeIf { rollout < 1 }
     }
 
-    public fun versionsInTrack(track: String): List<GooglePlayReleaseVersion> {
+    public fun versionsInTrack(track: String): List<GooglePlayReleaseVersion.WithRollout> {
         val content = edits.tracks().get(appId, editId, track).execute()
         return content.releases.toVersions()
     }

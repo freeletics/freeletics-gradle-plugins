@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+## 0.28.0 *(2025-07-07)*
+
+- Add `useSqlDelight` to `freeletics` extension
+- Expose `downloadApkTo` from `GooglePlayPublisher` to download the universal apk of a given version.
+- Add `rolloutPercentage` to result returned by `versionsInTrack`
+
+
 ## 0.27.3 *(2025-06-26)*
 
 - fix kotlin.io.path.ExperimentalPathApi for multiplatform projects
