@@ -112,7 +112,7 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
         }
     }
 
-    public fun addCommonTargets(androidNativeTargets: Boolean = true) {
+    public fun addCommonTargets(limitToComposeTargets: Boolean = false) {
         project.kotlinMultiplatform {
             jvm()
 
@@ -125,9 +125,11 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
                 nodejs()
             }
 
-            @OptIn(ExperimentalWasmDsl::class)
-            wasmWasi {
-                nodejs()
+            if (!limitToComposeTargets) {
+                @OptIn(ExperimentalWasmDsl::class)
+                wasmWasi {
+                    nodejs()
+                }
             }
 
             linuxX64()
@@ -148,11 +150,14 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
 
             watchosArm32()
             watchosArm64()
-            watchosDeviceArm64()
+            // TODO remove check when Compose 1.9.0 is stable
+            if (!limitToComposeTargets) {
+                watchosDeviceArm64()
+            }
             watchosX64()
             watchosSimulatorArm64()
 
-            if (androidNativeTargets) {
+            if (!limitToComposeTargets) {
                 androidNativeArm32()
                 androidNativeArm64()
                 androidNativeX86()
