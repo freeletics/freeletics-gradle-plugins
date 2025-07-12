@@ -4,6 +4,8 @@ import com.android.build.api.dsl.LibraryExtension
 import com.freeletics.gradle.setup.basicArgument
 import com.freeletics.gradle.setup.configurePaparazzi
 import com.freeletics.gradle.setup.configureProcessing
+import com.freeletics.gradle.util.addApiDependency
+import com.freeletics.gradle.util.addKspDependency
 import com.freeletics.gradle.util.android
 import com.freeletics.gradle.util.enable
 import com.freeletics.gradle.util.getDependency
@@ -24,10 +26,8 @@ public abstract class FreeleticsAndroidExtension(private val project: Project) {
         }
 
         project.configureProcessing(processingArguments)
-        project.dependencies.apply {
-            add("api", project.getDependency("androidx-room-runtime"))
-            add("ksp", project.getDependency("androidx-room-compiler"))
-        }
+        project.addApiDependency(project.getDependency("androidx-room-runtime"))
+        project.addKspDependency(project.getDependency("androidx-room-compiler"))
     }
 
     public fun usePaparazzi() {

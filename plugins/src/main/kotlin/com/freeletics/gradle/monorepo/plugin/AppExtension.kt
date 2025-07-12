@@ -51,7 +51,7 @@ public abstract class AppExtension(private val project: Project) {
             }
         }
 
-        project.dependencies.add("api", "com.freeletics.gradle:minify-common:${project.getVersion("fgp")}")
+        project.dependencies.add("releaseApi", "com.freeletics.gradle:minify-common:${project.getVersion("fgp")}")
     }
 
     public fun checkLicenses() {
