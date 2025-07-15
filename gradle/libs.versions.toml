@@ -19,7 +19,7 @@ publish = "0.34.0"
 dokka = "2.0.0"
 
 clikt = "5.0.3"
-ktlint = "1.6.0"
+ktlint = "1.7.0"
 serialization = "1.9.0"
 google-http = "1.47.1"
 google-auth = "1.37.1"
