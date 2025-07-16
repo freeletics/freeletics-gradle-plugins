@@ -1,5 +1,6 @@
 package com.freeletics.gradle.plugin
 
+import com.freeletics.gradle.setup.configureStandaloneLint
 import com.freeletics.gradle.util.kotlinMultiplatform
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
@@ -185,5 +186,11 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
 
     public fun useSkie() {
         project.plugins.apply("co.touchlab.skie")
+    }
+
+    public fun useAndroidLint() {
+        project.plugins.apply("com.android.lint")
+
+        project.configureStandaloneLint()
     }
 }
