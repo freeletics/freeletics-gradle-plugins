@@ -17,7 +17,15 @@ internal fun Project.addApiDependency(
     addApiDependency(dependency as Any?, limitToTargets)
 }
 
+@JvmName("addApiDependencyBundle")
 internal fun Project.addApiDependency(
+    dependency: Provider<ExternalModuleDependencyBundle>?,
+    limitToTargets: Set<KotlinPlatformType>? = null,
+) {
+    addApiDependency(dependency as Any?, limitToTargets)
+}
+
+private fun Project.addApiDependency(
     dependency: Any?,
     limitToTargets: Set<KotlinPlatformType>? = null,
 ) {
@@ -37,15 +45,9 @@ internal fun Project.addImplementationDependency(
     addImplementationDependency(dependency as Any?, limitToTargets)
 }
 
+@JvmName("addImplementationDependencyBundle")
 internal fun Project.addImplementationDependency(
     dependency: Provider<ExternalModuleDependencyBundle>?,
-    limitToTargets: Set<KotlinPlatformType>? = null,
-) {
-    addImplementationDependency(dependency as Any?, limitToTargets)
-}
-
-internal fun Project.addImplementationDependency(
-    dependency: String,
     limitToTargets: Set<KotlinPlatformType>? = null,
 ) {
     addImplementationDependency(dependency as Any?, limitToTargets)
@@ -64,6 +66,14 @@ private fun Project.addImplementationDependency(
     )
 }
 
+internal fun Project.addCompileOnlyDependency(
+    dependency: Provider<MinimalExternalModuleDependency>?,
+    limitToTargets: Set<KotlinPlatformType>? = null,
+) {
+    addCompileOnlyDependency(dependency as Any?, limitToTargets)
+}
+
+@JvmName("addCompileOnlyDependencyBundle")
 internal fun Project.addCompileOnlyDependency(
     dependency: Provider<ExternalModuleDependencyBundle>?,
     limitToTargets: Set<KotlinPlatformType>? = null,
@@ -85,14 +95,15 @@ private fun Project.addCompileOnlyDependency(
 }
 
 internal fun Project.addTestImplementationDependency(
-    dependency: Provider<ExternalModuleDependencyBundle>?,
+    dependency: Provider<MinimalExternalModuleDependency>?,
     limitToTargets: Set<KotlinPlatformType>? = null,
 ) {
     addTestImplementationDependency(dependency as Any?, limitToTargets)
 }
 
+@JvmName("addTestImplementationDependencyBundle")
 internal fun Project.addTestImplementationDependency(
-    dependency: String,
+    dependency: Provider<ExternalModuleDependencyBundle>?,
     limitToTargets: Set<KotlinPlatformType>? = null,
 ) {
     addTestImplementationDependency(dependency as Any?, limitToTargets)
@@ -111,6 +122,14 @@ private fun Project.addTestImplementationDependency(
     )
 }
 
+internal fun Project.addTestCompileOnlyDependency(
+    dependency: Provider<MinimalExternalModuleDependency>?,
+    limitToTargets: Set<KotlinPlatformType>? = null,
+) {
+    addTestCompileOnlyDependency(dependency as Any?, limitToTargets)
+}
+
+@JvmName("addTestCompileOnlyDependencyBundle")
 internal fun Project.addTestCompileOnlyDependency(
     dependency: Provider<ExternalModuleDependencyBundle>?,
     limitToTargets: Set<KotlinPlatformType>? = null,
@@ -131,6 +150,14 @@ private fun Project.addTestCompileOnlyDependency(
     )
 }
 
+internal fun Project.addTestRuntimeOnlyDependency(
+    dependency: Provider<MinimalExternalModuleDependency>?,
+    limitToTargets: Set<KotlinPlatformType>? = null,
+) {
+    addTestRuntimeOnlyDependency(dependency as Any?, limitToTargets)
+}
+
+@JvmName("addTestRuntimeOnlyDependencyBundle")
 internal fun Project.addTestRuntimeOnlyDependency(
     dependency: Provider<ExternalModuleDependencyBundle>?,
     limitToTargets: Set<KotlinPlatformType>? = null,
