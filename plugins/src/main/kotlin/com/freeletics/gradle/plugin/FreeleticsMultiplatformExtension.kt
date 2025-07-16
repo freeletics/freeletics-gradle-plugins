@@ -1,6 +1,5 @@
 package com.freeletics.gradle.plugin
 
-import com.freeletics.gradle.setup.configureStandaloneLint
 import com.freeletics.gradle.util.kotlinMultiplatform
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
