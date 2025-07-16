@@ -48,7 +48,7 @@ public abstract class FreeleticsBaseExtension(private val project: Project) : Ex
         project.addApiDependency(project.getDependency("khonshu-codegen-runtime"))
         project.addKspDependency(
             project.getDependency("khonshu-codegen-compiler"),
-            KotlinPlatformType.entries.toSet() - KotlinPlatformType.common,
+            limitToTargets = KotlinPlatformType.entries.toSet() - KotlinPlatformType.common,
         )
         // TODO workaround for Gradle not being able to resolve this in the ksp config
         project.configurations.named("ksp").configure {

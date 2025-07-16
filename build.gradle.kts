@@ -13,6 +13,12 @@ plugins {
 
 dependencyAnalysis {
     issues {
+        project(":plugins") {
+            // false positive around capabilities
+            onUsedTransitiveDependencies {
+                exclude("org.jetbrains.kotlin:kotlin-gradle-plugin-api")
+            }
+        }
         project(":scripts-circleci") {
             onUnusedDependencies {
                 exclude(libs.clikt.asProvider())
