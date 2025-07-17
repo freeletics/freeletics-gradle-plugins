@@ -6,6 +6,8 @@ import com.android.build.api.variant.HasUnitTestBuilder
 import com.freeletics.gradle.setup.configure
 import com.freeletics.gradle.setup.defaultPackageName
 import com.freeletics.gradle.setup.defaultTestSetup
+import com.freeletics.gradle.util.addCompileOnlyDependency
+import com.freeletics.gradle.util.addImplementationDependency
 import com.freeletics.gradle.util.addMaybe
 import com.freeletics.gradle.util.android
 import com.freeletics.gradle.util.androidComponents
@@ -81,11 +83,11 @@ public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
     private fun Project.addDefaultAndroidDependencies() {
         val bundle = getBundleOrNull("default-android")
         if (bundle != null) {
-            dependencies.add("implementation", bundle)
+            addImplementationDependency(bundle)
         }
         val compileBundle = getBundleOrNull("default-android-compile")
         if (compileBundle != null) {
-            dependencies.add("testCompileOnly", compileBundle)
+            addCompileOnlyDependency(compileBundle)
         }
     }
 

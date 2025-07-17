@@ -5,10 +5,10 @@ plugins {
 
 dependencies {
     api(libs.kotlin.gradle)
+    api(libs.kotlin.gradle.api)
     api(libs.javax.inject)
     implementation(libs.annotations)
     implementation(libs.android.gradle)
-    implementation(libs.kotlin.gradle.api)
     implementation(libs.kotlin.gradle.annotations)
     implementation(libs.kotlin.native.utils)
     implementation(libs.ksp.gradle)
