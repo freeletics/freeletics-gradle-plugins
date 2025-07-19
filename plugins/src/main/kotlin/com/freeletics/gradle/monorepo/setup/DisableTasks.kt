@@ -8,6 +8,10 @@ internal fun Project.disableAndroidApplicationTasks() {
     disableAndroidTasks(androidAppLintTasksToDisableExceptOneVariant, "debug")
 }
 
+internal fun Project.disableMultiplatformApplicationTasks() {
+    // TODO lint tasks
+}
+
 internal fun Project.disableAndroidLibraryTasks() {
     disableAndroidTasks(androidLibraryTasksToDisable)
     disableAndroidTasks(androidLibraryLintTasksToDisable)
@@ -17,6 +21,11 @@ internal fun Project.disableAndroidLibraryTasks() {
 internal fun Project.disableKotlinLibraryTasks() {
     disableTasks(listOf("assemble"))
     disableTasks(lintTasksToDisableJvm)
+}
+
+internal fun Project.disableMultiplatformLibraryTasks() {
+    disableTasks(listOf("assemble"))
+    // TODO lint tasks
 }
 
 private fun Project.disableAndroidTasks(names: List<String>, variantToKeep: String = "") {
