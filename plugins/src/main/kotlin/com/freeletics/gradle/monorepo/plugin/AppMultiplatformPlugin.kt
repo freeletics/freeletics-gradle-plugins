@@ -22,7 +22,6 @@ public abstract class AppMultiplatformPlugin : Plugin<Project> {
             target.freeleticsMultiplatformExtension.addIosTargetsWithXcFramework(target.name, includeX64 = true)
         }
 
-        target.freeleticsMultiplatformExtension.useAndroidLint()
         target.freeleticsAndroidExtension.minSdkVersion(target.appType()?.minSdkVersion(target))
 
         target.registerCheckDependencyRulesTasks(

@@ -23,7 +23,6 @@ public abstract class DomainMultiplatformPlugin : Plugin<Project> {
             target.freeleticsMultiplatformExtension.addIosTargets(includeX64 = true)
         }
 
-        target.freeleticsMultiplatformExtension.useAndroidLint()
         target.freeleticsAndroidExtension.minSdkVersion(target.appType()?.minSdkVersion(target))
 
         target.registerCheckDependencyRulesTasks(

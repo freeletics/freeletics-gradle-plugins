@@ -26,7 +26,6 @@ public abstract class NavMultiplatformPlugin : Plugin<Project> {
         }
 
         target.freeleticsAndroidExtension.minSdkVersion(target.appType()?.minSdkVersion(target))
-        target.freeleticsMultiplatformExtension.useAndroidLint()
 
         target.registerCheckDependencyRulesTasks(
             allowedProjectTypes = listOf(ProjectType.FEATURE_NAV),

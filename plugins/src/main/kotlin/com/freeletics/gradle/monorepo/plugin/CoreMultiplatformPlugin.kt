@@ -20,8 +20,6 @@ public abstract class CoreMultiplatformPlugin : Plugin<Project> {
             target.freeleticsMultiplatformExtension.addIosTargets(includeX64 = true)
         }
 
-        target.freeleticsMultiplatformExtension.useAndroidLint()
-
         target.registerCheckDependencyRulesTasks(
             allowedProjectTypes = listOf(
                 ProjectType.CORE_API,

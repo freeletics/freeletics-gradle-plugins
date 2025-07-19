@@ -84,6 +84,11 @@ gradlePlugin {
             implementationClass = "com.freeletics.gradle.monorepo.plugin.AppAndroidPlugin"
         }
 
+        create("monoAppDesktopPlugin") {
+            id = "com.freeletics.gradle.app.desktop"
+            implementationClass = "com.freeletics.gradle.monorepo.plugin.AppDesktopPlugin"
+        }
+
         create("monoAppMultiplatformPlugin") {
             id = "com.freeletics.gradle.app.multiplatform"
             implementationClass = "com.freeletics.gradle.monorepo.plugin.AppMultiplatformPlugin"
