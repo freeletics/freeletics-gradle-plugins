@@ -1,6 +1,18 @@
 Change Log
 ==========
 
+## 0.29.0 *(2025-07-21)*
+
+- Add multiplatform variants of all monorepo plugins (core, domain, feature, nav, app).
+- `addCommonTargets` now has a `limitToComposeTargets` parameter to only add targets supported by Compose
+- Add option to include `iosX64` in iOS targets (off by default)
+- Improve automatically created platform to consider iOS KMP artifacts
+- Removed `useDagger`, `useDaggerWithKhonshu` and `useDaggerWithComponent` methods
+- Removed `fgp.metro.migrationEnabled` and `fgp.metro.interop` properties
+- Fix NPE for `rolloutPercentage` in `versionsInTrack`
+- Disable `GradleDependency` lint check to avoid random failures
+
+
 ## 0.28.0 *(2025-07-07)*
 
 - Add `useSqlDelight` to `freeletics` extension
