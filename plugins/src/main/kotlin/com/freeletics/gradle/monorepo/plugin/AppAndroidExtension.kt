@@ -23,7 +23,7 @@ import com.freeletics.gradle.util.getVersion
 import java.io.File
 import org.gradle.api.Project
 
-public abstract class AppExtension(private val project: Project) {
+public abstract class AppAndroidExtension(private val project: Project) {
     public fun applicationId(applicationId: String) {
         project.androidApp {
             defaultConfig.applicationId = applicationId
