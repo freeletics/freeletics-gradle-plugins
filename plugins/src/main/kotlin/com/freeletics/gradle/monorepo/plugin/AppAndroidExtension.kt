@@ -17,13 +17,11 @@ import com.freeletics.gradle.monorepo.util.PRODUCTION
 import com.freeletics.gradle.monorepo.util.QA
 import com.freeletics.gradle.monorepo.util.defaultEnvironment
 import com.freeletics.gradle.monorepo.util.environmentBuildConfigFields
-import com.freeletics.gradle.util.addApiDependency
 import com.freeletics.gradle.util.androidApp
 import com.freeletics.gradle.util.androidComponentsApp
 import com.freeletics.gradle.util.getVersion
 import java.io.File
 import org.gradle.api.Project
-import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
 public abstract class AppAndroidExtension(private val project: Project) {
     public fun applicationId(applicationId: String) {
