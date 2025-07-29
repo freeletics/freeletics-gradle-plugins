@@ -42,7 +42,7 @@ javax-inject = { module = "javax.inject:javax.inject", version = "1" }
 
 android-gradle = { module = "com.android.tools.build:gradle-api", version.ref = "android-gradle" }
 ksp-gradle = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin",  version.ref = "ksp" }
-metro-gradle = { module = "dev.zacsweers.metro:gradle-plugin", version = "0.5.2" }
+metro-gradle = { module = "dev.zacsweers.metro:gradle-plugin", version = "0.5.3" }
 poko-gradle = { module = "dev.drewhamilton.poko:poko-gradle-plugin", version = "0.19.3" }
 kopy-gradle = { module = "com.javiersc.kotlin:kopy-gradle-plugin", version = "0.16.3+2.1.21" }
 skie-gradle = { module = "co.touchlab.skie:gradle-plugin", version = "0.10.4" }
