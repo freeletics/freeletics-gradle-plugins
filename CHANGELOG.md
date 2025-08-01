@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## 0.30.1 *(2025-08-01)*
+
+- Add missing `com.freeletics.gradle.core.multiplatform` and `com.freeletics.gradle.core.multiplatform` plugin ids.
+
+
 ## 0.30.0 *(2025-08-01)*
 
 - Update the default package name logic to be less verbose, handles dashes and camel case better and supports different prefixes for different products.

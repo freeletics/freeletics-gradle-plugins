@@ -104,6 +104,11 @@ gradlePlugin {
             implementationClass = "com.freeletics.gradle.monorepo.plugin.CoreKotlinPlugin"
         }
 
+        create("monoCoreMultiplatformPlugin") {
+            id = "com.freeletics.gradle.core.multiplatform"
+            implementationClass = "com.freeletics.gradle.monorepo.plugin.CoreMultiplatformPlugin"
+        }
+
         create("monoDomainAndroidPlugin") {
             id = "com.freeletics.gradle.domain.android"
             implementationClass = "com.freeletics.gradle.monorepo.plugin.DomainAndroidPlugin"
@@ -112,6 +117,11 @@ gradlePlugin {
         create("monoDomainKotlinPlugin") {
             id = "com.freeletics.gradle.domain.kotlin"
             implementationClass = "com.freeletics.gradle.monorepo.plugin.DomainKotlinPlugin"
+        }
+
+        create("monoDomainMultiplatformPlugin") {
+            id = "com.freeletics.gradle.domain.multiplatform"
+            implementationClass = "com.freeletics.gradle.monorepo.plugin.DomainMultiplatformPlugin"
         }
 
         create("monoFeatureAndroidPlugin") {
