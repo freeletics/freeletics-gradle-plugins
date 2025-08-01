@@ -1,6 +1,17 @@
 Change Log
 ==========
 
+## 0.30.0 *(2025-08-01)*
+
+- Update the default package name logic to be less verbose, handles dashes and camel case better and supports different prefixes for different products.
+    - The default prefix is defined with `fgp.defaultPackageName`.
+    - Different prefixes can be defined with `fgp.defaultPackageName.{product}`.
+    - Use `fgp.useLegacyPackageNaming=false` to keep the old behavior.
+- Ignore `AndroidGradlePluginVersion` lint check to avoid random failures.
+- Update to AWS Kotlin SDK with resolved okhttp 5.0.0 conflict.
+- Updated ktlint to 1.7.1.
+
+
 ## 0.29.0 *(2025-07-21)*
 
 - Add multiplatform variants of all monorepo plugins (core, domain, feature, nav, app).
