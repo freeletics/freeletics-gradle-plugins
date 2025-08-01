@@ -4,7 +4,6 @@ import com.android.build.api.dsl.ApplicationDefaultConfig
 import com.android.build.api.variant.HasAndroidTestBuilder
 import com.android.build.api.variant.HasUnitTestBuilder
 import com.freeletics.gradle.setup.configure
-import com.freeletics.gradle.setup.defaultPackageName
 import com.freeletics.gradle.setup.defaultTestSetup
 import com.freeletics.gradle.util.addCompileOnlyDependency
 import com.freeletics.gradle.util.addImplementationDependency
@@ -12,6 +11,7 @@ import com.freeletics.gradle.util.addMaybe
 import com.freeletics.gradle.util.android
 import com.freeletics.gradle.util.androidComponents
 import com.freeletics.gradle.util.dataBinding
+import com.freeletics.gradle.util.defaultPackageName
 import com.freeletics.gradle.util.enable
 import com.freeletics.gradle.util.freeleticsExtension
 import com.freeletics.gradle.util.getBundleOrNull
