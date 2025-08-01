@@ -5,7 +5,7 @@ import com.freeletics.gradle.monorepo.setup.disableMultiplatformApplicationTasks
 import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.registerCheckDependencyRulesTasks
 import com.freeletics.gradle.monorepo.util.ProjectType
 import com.freeletics.gradle.plugin.FreeleticsMultiplatformPlugin
-import com.freeletics.gradle.setup.defaultPackageName
+import com.freeletics.gradle.util.defaultPackageName
 import com.freeletics.gradle.util.freeleticsMultiplatformExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project

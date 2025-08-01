@@ -3,20 +3,22 @@ package com.freeletics.gradle.monorepo.util
 import org.gradle.api.Project
 
 internal enum class ProjectType(
-    internal val fullName: String,
+    val fullName: String,
+    val prefix: String,
+    val suffix: String,
 ) {
-    APP(":app:*"),
-    CORE_API(":core:*:api"),
-    CORE_IMPLEMENTATION(":core:*:implementation"),
-    CORE_TESTING(":core:*:testing"),
-    DOMAIN_API(":domain:*:api"),
-    DOMAIN_IMPLEMENTATION(":domain:*:implementation"),
-    DOMAIN_TESTING(":domain:*:testing"),
-    FEATURE_NAV(":feature:*:nav"),
-    FEATURE_IMPLEMENTATION(":feature:*:implementation"),
+    APP(":app:*", "app", ""),
+    CORE_API(":core:*:api", "core", "api"),
+    CORE_IMPLEMENTATION(":core:*:implementation", "core", "implementation"),
+    CORE_TESTING(":core:*:testing", "core", "testing"),
+    DOMAIN_API(":domain:*:api", "domain", "api"),
+    DOMAIN_IMPLEMENTATION(":domain:*:implementation", "domain", "implementation"),
+    DOMAIN_TESTING(":domain:*:testing", "domain", "testing"),
+    FEATURE_NAV(":feature:*:nav", "domain", "nav"),
+    FEATURE_IMPLEMENTATION(":feature:*:implementation", "domain", "implementation"),
 
     // TODO phase out
-    LEGACY(":legacy-freeletics:*"),
+    LEGACY(":legacy-freeletics:*", "legacy", ""),
 }
 
 internal fun Project.projectType(): ProjectType {
