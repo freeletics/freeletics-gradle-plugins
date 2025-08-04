@@ -261,4 +261,28 @@ class PackageNameTest {
         assertThat(defaultPackageName(":app:productName-android", "com.product"))
             .isEqualTo("com.product.android")
     }
+
+    @Test
+    fun `defaultPackageName for non monorepo project`() {
+        assertThat(defaultPackageName(":navigation", "com.project"))
+            .isEqualTo("com.project.navigation")
+    }
+
+    @Test
+    fun `defaultPackageName for nested non monorepo project`() {
+        assertThat(defaultPackageName(":navigation:testing", "com.project"))
+            .isEqualTo("com.project.navigation.testing")
+    }
+
+    @Test
+    fun `defaultPackageName for non monorepo project with dash`() {
+        assertThat(defaultPackageName(":navigation-testing", "com.project"))
+            .isEqualTo("com.project.navigation.testing")
+    }
+
+    @Test
+    fun `defaultPackageName for non monorepo project with camel case`() {
+        assertThat(defaultPackageName(":navigationTesting", "com.project"))
+            .isEqualTo("com.project.navigationtesting")
+    }
 }

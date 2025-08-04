@@ -26,6 +26,10 @@ internal fun Project.projectType(): ProjectType {
 }
 
 internal fun String.toProjectType(): ProjectType {
+    return toProjectTypeOrNull() ?: throw IllegalStateException("Unknown project type $this")
+}
+
+internal fun String.toProjectTypeOrNull(): ProjectType? {
     return when {
         startsWith(":app:") -> ProjectType.APP
         startsWith(":core:") && endsWith(":api") -> ProjectType.CORE_API
@@ -37,6 +41,6 @@ internal fun String.toProjectType(): ProjectType {
         startsWith(":feature") && endsWith(":implementation") -> ProjectType.FEATURE_IMPLEMENTATION
         startsWith(":feature") && endsWith(":nav") -> ProjectType.FEATURE_NAV
         startsWith(":legacy-freeletics:") -> ProjectType.LEGACY
-        else -> throw IllegalStateException("Unknown project type $this")
+        else -> null
     }
 }
