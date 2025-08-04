@@ -1,6 +1,5 @@
 package com.freeletics.gradle.plugin
 
-import com.android.build.api.dsl.ApplicationDefaultConfig
 import com.android.build.api.variant.HasAndroidTestBuilder
 import com.android.build.api.variant.HasUnitTestBuilder
 import com.freeletics.gradle.setup.configure
@@ -27,16 +26,13 @@ public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
         if (!target.plugins.hasPlugin("com.android.application")) {
             target.plugins.apply("com.android.library")
         }
-        if (!target.plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")) {
-            target.plugins.apply("org.jetbrains.kotlin.android")
-        }
+        target.plugins.apply("org.jetbrains.kotlin.android")
         target.plugins.apply(FreeleticsBasePlugin::class.java)
 
         target.freeleticsExtension.extensions.create("android", FreeleticsAndroidExtension::class.java)
 
         target.androidSetup()
         target.addDefaultAndroidDependencies()
-        target.configureLint()
         target.disableReleaseUnitTests()
         target.disableAndroidTests()
     }
@@ -53,9 +49,6 @@ public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
 
             compileSdk = getVersion("android.compile").toInt()
             defaultConfig.minSdk = getVersion("android.min").toInt()
-            (defaultConfig as? ApplicationDefaultConfig)?.let {
-                it.targetSdk = getVersion("android.target").toInt()
-            }
 
             // default all features to false, they will be enabled through FreeleticsAndroidExtension
             androidResources.enable = false
@@ -74,6 +67,8 @@ public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
                 sourceCompatibility = javaTargetVersion
                 targetCompatibility = javaTargetVersion
             }
+
+            lint.configure(project)
         }
 
         dependencies.addMaybe("coreLibraryDesugaring", desugarLibrary)
@@ -87,12 +82,6 @@ public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
         val compileBundle = getBundleOrNull("default-android-compile")
         if (compileBundle != null) {
             addCompileOnlyDependency(compileBundle, setOf(KotlinPlatformType.androidJvm))
-        }
-    }
-
-    private fun Project.configureLint() {
-        android {
-            lint.configure(project)
         }
     }
 

@@ -1,6 +1,8 @@
 package com.freeletics.gradle.plugin
 
+import com.android.build.api.dsl.androidLibrary
 import com.freeletics.gradle.setup.configureStandaloneLint
+import com.freeletics.gradle.setup.setupAndroidTarget
 import com.freeletics.gradle.util.addImplementationDependency
 import com.freeletics.gradle.util.booleanProperty
 import com.freeletics.gradle.util.defaultPackageName
@@ -16,10 +18,8 @@ import org.jetbrains.compose.ComposePlugin
 import org.jetbrains.compose.resources.ResourcesExtension
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.plugin.mpp.Framework
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFrameworkConfig
-import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 import org.jetbrains.kotlin.konan.target.HostManager
 
 public abstract class FreeleticsMultiplatformExtension(private val project: Project) {
@@ -42,44 +42,37 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
         }
     }
 
-    @JvmOverloads
-    public fun addJvmTarget(configure: KotlinJvmTarget.() -> Unit = { }) {
+    public fun addJvmTarget() {
         project.kotlinMultiplatform {
-            jvm(configure = configure)
+            jvm()
         }
     }
 
     @JvmOverloads
     public fun addAndroidTarget(
         variantsToPublish: List<String>? = listOf("release"),
-        configure: KotlinAndroidTarget.() -> Unit = { },
+        configure: FreeleticsMultiplatformAndroidExtension.() -> Unit = { },
     ) {
-        project.plugins.apply(FreeleticsAndroidPlugin::class.java)
-
+        project.plugins.apply("com.android.kotlin.multiplatform.library")
         project.kotlinMultiplatform {
-            androidTarget {
-                publishLibraryVariants = variantsToPublish
-
-                configure()
+            @Suppress("UnstableApiUsage")
+            androidLibrary {
+                setupAndroidTarget(project, configure)
             }
         }
     }
 
     @JvmOverloads
-    public fun addIosTargets(includeX64: Boolean = false, configure: KotlinNativeTarget.() -> Unit = { }) {
+    public fun addIosTargets(includeX64: Boolean = false) {
+        addIosTargets(includeX64) {}
+    }
+
+    private fun addIosTargets(includeX64: Boolean, configure: KotlinNativeTarget.() -> Unit) {
         project.kotlinMultiplatform {
-            iosArm64 {
-                configure()
-            }
-
-            iosSimulatorArm64 {
-                configure()
-            }
-
+            iosArm64(configure)
+            iosSimulatorArm64(configure)
             if (includeX64) {
-                iosX64 {
-                    configure()
-                }
+                iosX64(configure)
             }
         }
     }
@@ -92,31 +85,11 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
     ) {
         val xcFramework = XCFrameworkConfig(project, frameworkName)
 
-        project.kotlinMultiplatform {
-            iosArm64 {
-                binaries.framework {
-                    baseName = frameworkName
-                    xcFramework.add(this)
-                    configure(this)
-                }
-            }
-
-            iosSimulatorArm64 {
-                binaries.framework {
-                    baseName = frameworkName
-                    xcFramework.add(this)
-                    configure(this)
-                }
-            }
-
-            if (includeX64) {
-                iosX64 {
-                    binaries.framework {
-                        baseName = frameworkName
-                        xcFramework.add(this)
-                        configure(this)
-                    }
-                }
+        addIosTargets(includeX64 = includeX64) {
+            binaries.framework {
+                baseName = frameworkName
+                xcFramework.add(this)
+                configure(this)
             }
         }
 
@@ -228,6 +201,10 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
     }
 
     public fun useAndroidLint() {
+        if (project.plugins.hasPlugin("com.android.kotlin.multiplatform.library")) {
+            return
+        }
+
         project.plugins.apply("com.android.lint")
 
         project.configureStandaloneLint()

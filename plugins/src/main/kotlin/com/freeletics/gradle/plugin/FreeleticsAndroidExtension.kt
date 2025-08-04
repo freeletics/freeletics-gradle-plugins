@@ -95,7 +95,7 @@ public abstract class FreeleticsAndroidExtension(private val project: Project) {
     }
 }
 
-private class RoomSchemaArgProvider(
+internal class RoomSchemaArgProvider(
     @get:InputDirectory
     @get:PathSensitive(PathSensitivity.RELATIVE)
     val schemaDir: File,
