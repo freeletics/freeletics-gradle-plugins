@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## 0.30.2 *(2025-08-04)*
+
+- Fix default package name logic for the non monorepo plugins.
+
+
 ## 0.30.1 *(2025-08-01)*
 
 - Add missing `com.freeletics.gradle.core.multiplatform` and `com.freeletics.gradle.core.multiplatform` plugin ids.

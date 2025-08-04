@@ -2,16 +2,13 @@ package com.freeletics.gradle.util
 
 import com.freeletics.gradle.monorepo.util.ProjectType
 import com.freeletics.gradle.monorepo.util.appType
-import com.freeletics.gradle.monorepo.util.toProjectType
+import com.freeletics.gradle.monorepo.util.toProjectTypeOrNull
 import org.gradle.api.Project
 
 internal fun Project.defaultPackageName(): String {
     val appType = project.appType()
-    val prefix = if (appType != null) {
-        stringProperty("fgp.defaultPackageName.${appType.name}").get()
-    } else {
-        stringProperty("fgp.defaultPackageName").get()
-    }
+    val appPrefix = stringProperty("fgp.defaultPackageName.${appType?.name}").orNull
+    val prefix = appPrefix ?: stringProperty("fgp.defaultPackageName").get()
     if (booleanProperty("fgp.useLegacyPackageNaming", false).get()) {
         return legacyPackageName(path, prefix)
     }
@@ -19,7 +16,7 @@ internal fun Project.defaultPackageName(): String {
 }
 
 internal fun defaultPackageName(path: String, prefix: String): String {
-    val projectType = path.toProjectType()
+    val projectType = path.toProjectTypeOrNull()
     val pathElements = path.split(":").drop(1)
     val projectPackageElements = when (projectType) {
         // skip first part of the app name because it's generally already part of the prefix
@@ -33,6 +30,7 @@ internal fun defaultPackageName(path: String, prefix: String): String {
         ProjectType.FEATURE_NAV -> pathElements[1].transformPathPart() + projectType.suffix
         ProjectType.FEATURE_IMPLEMENTATION -> pathElements[1].transformPathPart()
         ProjectType.LEGACY -> pathElements[1].transformPathPart()
+        null -> pathElements.flatMap { it.transformPathPart() }
     }
     val packageElements = prefix.split(".") + projectPackageElements
     return packageElements.joinToString(separator = ".") { it.lowercase() }
