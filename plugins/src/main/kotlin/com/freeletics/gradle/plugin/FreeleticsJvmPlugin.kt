@@ -1,5 +1,6 @@
 package com.freeletics.gradle.plugin
 
+import com.freeletics.gradle.setup.configureStandaloneLint
 import com.freeletics.gradle.setup.defaultTestSetup
 import com.freeletics.gradle.util.freeleticsExtension
 import com.freeletics.gradle.util.java
@@ -14,8 +15,6 @@ public abstract class FreeleticsJvmPlugin : Plugin<Project> {
         target.plugins.apply("org.jetbrains.kotlin.jvm")
         target.plugins.apply(FreeleticsBasePlugin::class.java)
 
-        target.freeleticsExtension.extensions.create("jvm", FreeleticsJvmExtension::class.java)
-
         target.java {
             sourceCompatibility = target.javaTargetVersion
             targetCompatibility = target.javaTargetVersion
@@ -24,6 +23,8 @@ public abstract class FreeleticsJvmPlugin : Plugin<Project> {
         target.tasks.withType(JavaCompile::class.java).configureEach {
             it.options.release.set(target.javaTargetVersion.majorVersion.toInt())
         }
+
+        target.configureStandaloneLint()
 
         target.tasks.withType(Test::class.java).configureEach(Test::defaultTestSetup)
     }
