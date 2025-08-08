@@ -25,7 +25,9 @@ import org.gradle.api.tasks.testing.Test
 
 public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
     override fun apply(target: Project) {
-        if (!target.plugins.hasPlugin("com.android.application")) {
+        if (!target.plugins.hasPlugin("com.android.application") &&
+            !target.plugins.hasPlugin("com.android.kotlin.multiplatform.library")
+        ) {
             target.plugins.apply("com.android.library")
         }
         if (!target.plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")) {
