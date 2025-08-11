@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+## 0.31.0 *(2025-08-11)*
+
+- Add `useComposeResources()` to multiplatform DSL.
+- Explicitly set Kotlin language version and api version for Gradle plugins.
+- Fix default package name logic for app modules with a platform suffix.
+
+
 ## 0.30.2 *(2025-08-04)*
 
 - Fix default package name logic for the non monorepo plugins.
