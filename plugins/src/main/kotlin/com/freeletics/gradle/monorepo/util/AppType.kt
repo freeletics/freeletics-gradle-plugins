@@ -17,7 +17,7 @@ internal fun Project.appType(): AppType? {
 
 internal fun String.toAppType(): AppType? {
     if (startsWith(":app:")) {
-        return AppType(substringAfter(":app:"))
+        return AppType(substringAfter(":app:").substringBefore("-"))
     }
     val firstPathElement = split(":")[1]
     if (firstPathElement.contains("-")) {
