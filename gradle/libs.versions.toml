@@ -67,12 +67,12 @@ ktlint-rule-engine = { module = "com.pinterest.ktlint:ktlint-rule-engine", versi
 ktlint-rule-engine-core = { module = "com.pinterest.ktlint:ktlint-rule-engine-core", version.ref = "ktlint" }
 ktlint-rules = { module = "com.pinterest.ktlint:ktlint-ruleset-standard", version.ref = "ktlint" }
 slack = { module = "com.slack.api:slack-api-client-kotlin-extension", version = "1.45.3"}
-google-apiclient = { module = "com.google.api-client:google-api-client", version = "2.8.0" }
+google-apiclient = { module = "com.google.api-client:google-api-client", version = "2.8.1" }
 google-http = { module = "com.google.http-client:google-http-client", version.ref = "google-http" }
 google-http-gson = { module = "com.google.http-client:google-http-client-gson", version.ref = "google-http" }
 google-credentials = { module = "com.google.auth:google-auth-library-credentials", version.ref = "google-auth" }
 google-oauth = { module = "com.google.auth:google-auth-library-oauth2-http", version.ref = "google-auth" }
-google-play = { module = "com.google.apis:google-api-services-androidpublisher", version = "v3-rev20250724-2.0.0" }
+google-play = { module = "com.google.apis:google-api-services-androidpublisher", version = "v3-rev20250807-2.0.0" }
 google-sheets = { module = "com.google.apis:google-api-services-sheets", version = "v4-rev20250616-2.0.0" }
 zxing = { module = "com.google.zxing:javase", version = "3.5.3" }
 s3 = { module = "aws.sdk.kotlin:s3", version = "1.5.9" }
