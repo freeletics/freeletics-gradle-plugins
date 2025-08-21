@@ -60,6 +60,8 @@ public abstract class RootPlugin : Plugin<Project> {
 
     private fun configureDependencyAnalysis(target: Project) {
         target.extensions.configure(DependencyAnalysisExtension::class.java) { analysis ->
+            analysis.useTypesafeProjectAccessors(true)
+
             analysis.issues { issues ->
                 issues.all { project ->
                     project.onAny {
