@@ -9,7 +9,7 @@ dependencies {
     api(libs.javax.inject)
     implementation(libs.annotations)
     implementation(libs.android.gradle)
-    implementation(libs.kotlin.gradle.annotations)
+    compileOnly(libs.kotlin.gradle.annotations)
     implementation(libs.kotlin.native.utils)
     implementation(libs.ksp.gradle)
     implementation(libs.sqldelight.gradle)
