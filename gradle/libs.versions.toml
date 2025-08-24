@@ -22,7 +22,7 @@ clikt = "5.0.3"
 ktlint = "1.7.1"
 serialization = "1.9.0"
 google-http = "2.0.0"
-google-auth = "1.37.1"
+google-auth = "1.38.0"
 
 junit = "4.13.2"
 truth = "1.4.4"
@@ -72,7 +72,7 @@ google-http = { module = "com.google.http-client:google-http-client", version.re
 google-http-gson = { module = "com.google.http-client:google-http-client-gson", version.ref = "google-http" }
 google-credentials = { module = "com.google.auth:google-auth-library-credentials", version.ref = "google-auth" }
 google-oauth = { module = "com.google.auth:google-auth-library-oauth2-http", version.ref = "google-auth" }
-google-play = { module = "com.google.apis:google-api-services-androidpublisher", version = "v3-rev20250807-2.0.0" }
+google-play = { module = "com.google.apis:google-api-services-androidpublisher", version = "v3-rev20250820-2.0.0" }
 google-sheets = { module = "com.google.apis:google-api-services-sheets", version = "v4-rev20250616-2.0.0" }
 zxing = { module = "com.google.zxing:javase", version = "3.5.3" }
 s3 = { module = "aws.sdk.kotlin:s3", version = "1.5.19" }
