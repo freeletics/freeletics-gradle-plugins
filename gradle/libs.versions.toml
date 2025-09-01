@@ -28,7 +28,7 @@ junit = "4.13.2"
 truth = "1.4.4"
 
 [libraries]
-annotations = { module = "org.jetbrains:annotations", version = "26.0.2" }
+annotations = { module = "org.jetbrains:annotations", version = "26.0.2-1" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
