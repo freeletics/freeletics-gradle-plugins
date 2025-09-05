@@ -20,7 +20,7 @@ import kotlinx.coroutines.runBlocking
 public class KtLintCli : CliktCommand() {
     private val rootDirectory: Path by option(
         "--root",
-        help = "The root directory of the project, used as starting point to search files and to find editorconfig. " +
+        help = "The root directory of the project, used as starting point to search files. " +
             "Uses current directory if not specified",
     ).path().default(Paths.get(".").absolute())
 
@@ -46,7 +46,7 @@ public class KtLintCli : CliktCommand() {
             return@runBlocking
         }
 
-        val formatter = KtLintFormatter(rootDirectory.resolve(".editorconfig"))
+        val formatter = KtLintFormatter()
 
         var count = 0
         var hadChanges = false
