@@ -1,6 +1,5 @@
 package com.freeletics.gradle.plugin
 
-import com.android.build.api.dsl.ApplicationDefaultConfig
 import com.android.build.api.variant.HasAndroidTestBuilder
 import com.android.build.api.variant.HasUnitTestBuilder
 import com.freeletics.gradle.setup.configure
@@ -10,7 +9,6 @@ import com.freeletics.gradle.util.addImplementationDependency
 import com.freeletics.gradle.util.addMaybe
 import com.freeletics.gradle.util.android
 import com.freeletics.gradle.util.androidComponents
-import com.freeletics.gradle.util.dataBinding
 import com.freeletics.gradle.util.defaultPackageName
 import com.freeletics.gradle.util.enable
 import com.freeletics.gradle.util.freeleticsExtension
@@ -28,9 +26,6 @@ public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         if (!target.plugins.hasPlugin("com.android.application")) {
             target.plugins.apply("com.android.library")
-        }
-        if (!target.plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")) {
-            target.plugins.apply("org.jetbrains.kotlin.android")
         }
         target.plugins.apply(FreeleticsBasePlugin::class.java)
 
@@ -55,21 +50,9 @@ public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
 
             compileSdk = getVersion("android.compile").toInt()
             defaultConfig.minSdk = getVersion("android.min").toInt()
-            (defaultConfig as? ApplicationDefaultConfig)?.let {
-                it.targetSdk = getVersion("android.target").toInt()
-            }
 
             // default all features to false, they will be enabled through FreeleticsAndroidExtension
             androidResources.enable = false
-            buildFeatures {
-                viewBinding = false
-                resValues = false
-                buildConfig = false
-                dataBinding = false
-                aidl = false
-                renderScript = false
-                shaders = false
-            }
 
             compileOptions {
                 isCoreLibraryDesugaringEnabled = desugarLibrary != null
@@ -115,9 +98,7 @@ public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
     private fun Project.disableAndroidTests() {
         androidComponents {
             beforeVariants {
-                if (it is HasAndroidTestBuilder) {
-                    it.androidTest.enable = false
-                }
+                (it as? HasAndroidTestBuilder)?.androidTest?.enable = false
             }
         }
     }
