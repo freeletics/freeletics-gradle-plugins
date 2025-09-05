@@ -22,7 +22,6 @@ import org.gradle.api.Project
 public abstract class FreeleticsAndroidAppPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.plugins.apply("com.android.application")
-        target.plugins.apply("org.jetbrains.kotlin.android")
         target.plugins.apply(FreeleticsBasePlugin::class.java)
 
         target.freeleticsExtension.extensions.create("android", FreeleticsAndroidAppExtension::class.java)
@@ -55,7 +54,6 @@ public abstract class FreeleticsAndroidAppPlugin : Plugin<Project> {
                 viewBinding = false
                 dataBinding = false
                 aidl = false
-                renderScript = false
                 shaders = false
             }
 
