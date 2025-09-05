@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 
 internal val kotlinMatcher = FileSystems.getDefault().getPathMatcher("glob:**/*.{kt,kts}")
+internal val gradleMatcher = FileSystems.getDefault().getPathMatcher("glob:**/*.{gradle,gradle.kts}")
 
 internal fun filesToFormat(
     files: List<Path>?,
