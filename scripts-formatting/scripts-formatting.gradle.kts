@@ -18,4 +18,5 @@ dependencies {
     "jvmMainImplementation"(libs.ktlint.rule.engine.core)
     "jvmMainImplementation"(libs.ktlint.rules)
     "jvmMainImplementation"(libs.ktfmt)
+    "jvmMainImplementation"(libs.gradle.sorter)
 }
