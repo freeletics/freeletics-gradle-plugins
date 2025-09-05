@@ -4,6 +4,7 @@ import java.nio.file.FileSystems
 import java.nio.file.FileVisitResult
 import java.nio.file.Path
 import java.nio.file.PathMatcher
+import kotlin.io.path.absolute
 import kotlin.io.path.isHidden
 import kotlin.io.path.name
 import kotlin.io.path.visitFileTree
@@ -12,6 +13,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
 
 internal val kotlinMatcher = FileSystems.getDefault().getPathMatcher("glob:**/*.{kt,kts}")
 
@@ -21,7 +23,10 @@ internal fun filesToFormat(
     matcher: PathMatcher,
 ): Flow<Path> {
     if (files != null) {
-        return files.asFlow().filter { matcher.matches(it) }
+        return files.asFlow()
+            .filter { matcher.matches(it) }
+            // needed for editorconfig to be found
+            .map { it.absolute() }
     }
 
     return channelFlow {
