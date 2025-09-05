@@ -1,5 +1,6 @@
 package com.freeletics.gradle.monorepo.plugin
 
+import com.android.build.api.dsl.Lint
 import com.freeletics.gradle.monorepo.setup.applyPlatformConstraints
 import com.freeletics.gradle.monorepo.setup.disableMultiplatformApplicationTasks
 import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.registerCheckDependencyRulesTasks
@@ -34,6 +35,10 @@ public abstract class AppDesktopPlugin : Plugin<Project> {
                     }
                 }
             }
+        }
+
+        target.extensions.configure(Lint::class.java) {
+            it.baseline = target.file("lint-baseline.xml")
         }
 
         target.registerCheckDependencyRulesTasks(
