@@ -7,18 +7,6 @@ import com.android.build.api.dsl.BuildFeatures
 import com.android.build.api.dsl.LibraryAndroidResources
 import com.android.build.api.dsl.LibraryBuildFeatures
 
-internal var BuildFeatures.dataBinding: Boolean?
-    get() = when (this) {
-        is ApplicationBuildFeatures -> dataBinding
-        is LibraryBuildFeatures -> dataBinding
-        else -> throw UnsupportedOperationException("")
-    }
-    set(value) = when (this) {
-        is ApplicationBuildFeatures -> dataBinding = value
-        is LibraryBuildFeatures -> dataBinding = value
-        else -> throw UnsupportedOperationException("")
-    }
-
 internal var AndroidResources.enable: Boolean
     get() = when (this) {
         is LibraryAndroidResources -> enable
