@@ -16,12 +16,19 @@ internal fun Project.appType(): AppType? {
 }
 
 internal fun String.toAppType(): AppType? {
-    if (startsWith(":app:")) {
-        return AppType(substringAfter(":app:").substringBefore("-"))
-    }
-    val firstPathElement = split(":")[1]
-    if (firstPathElement.contains("-")) {
-        return AppType(firstPathElement.substringAfter("-"))
+    val parts = split(":")
+    if (parts[1] == "app") {
+        val suffix = parts[2].substringAfterLast("-")
+        // for app modules that are platform specific variants (-android, -desktop) we shouldn't consider the suffix
+        return if (platformSuffixes.contains(suffix)) {
+            AppType(parts[2].substringBeforeLast("-"))
+        } else {
+            AppType(parts[2])
+        }
+    } else if (parts[1].contains("-")) {
+        return AppType(parts[1].substringAfter("-"))
     }
     return null
 }
+
+private val platformSuffixes = listOf("android", "desktop")
