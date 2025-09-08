@@ -19,6 +19,7 @@ dependencies {
     implementation(libs.licensee.gradle)
     implementation(libs.crashlytics.gradle)
     implementation(projects.codegen)
+    compileOnly(libs.develocity.gradle)
     runtimeOnly(libs.kotlin.gradle.compose)
     runtimeOnly(libs.kotlin.gradle.atomicfu)
     runtimeOnly(libs.kotlin.gradle.serialization)
@@ -152,6 +153,11 @@ gradlePlugin {
         create("codegenPlugin") {
             id = "com.freeletics.gradle.codegen"
             implementationClass = "com.freeletics.gradle.codegen.CodegenPlugin"
+        }
+
+        create("appiumPlugin") {
+            id = "com.freeletics.gradle.appium"
+            implementationClass = "com.freeletics.gradle.plugin.AppiumPlugin"
         }
     }
 }
