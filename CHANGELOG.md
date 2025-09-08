@@ -1,6 +1,22 @@
 Change Log
 ==========
 
+## 0.32.0 *(2025-09-08)*
+
+- Add keep rule for native methods.
+- Remove obsolete `-dontusemixedcaseclassnames` from default proguard rules.
+- Improve how the app type is computed for dependency rule checks.
+- Add `KtFmtCli` to `scripts-formatting` to allow using ktfmt as alternative to ktlint.
+- Enable certain ktlint options by default:
+    - `ktlint_ignore_back_ticked_identifier = true`
+    - `ktlint_function_naming_ignore_when_annotated_with = Composable`
+    - `ktlint_standard_no-unused-imports = enabled`
+    - `ktlint_standard_annotation = disabled`
+- Enable lint baseline for KMP desktop apps.
+- Fix Android default dependencies being incorrectly applied to KMP projects.
+- Add `com.freeletics.gradle.appium` plugin.
+
+
 ## 0.31.0 *(2025-08-11)*
 
 - Add `useComposeResources()` to multiplatform DSL.
