@@ -67,6 +67,14 @@ public abstract class AppAndroidPlugin : Plugin<Project> {
                 }
             }
 
+            packaging {
+                // avoid "Unable to strip the following libraries, packaging them as they are" messages
+                jniLibs.keepDebugSymbols += setOf(
+                    "**/libandroidx.graphics.path.so",
+                    "**/libdatastore_shared_counter.so",
+                )
+            }
+
             lint {
                 baseline = target.file("lint-baseline.xml")
             }
