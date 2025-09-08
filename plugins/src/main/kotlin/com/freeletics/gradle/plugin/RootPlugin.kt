@@ -169,7 +169,7 @@ public abstract class RootPlugin : Plugin<Project> {
                 }
 
                 structure.bundle("paparazzi") {
-                    it.primary("app.cash.paparazzi")
+                    it.primary("app.cash.paparazzi:paparazzi")
                     it.includeGroup("app.cash.paparazzi")
                     it.includeGroup("com.android.tools.layoutlib")
                 }
