@@ -41,17 +41,11 @@ public abstract class RootPlugin : Plugin<Project> {
 
                     constraints.add("api", library)
 
-                    // if this is a ktx library also add the non ktx artifact to the platform
-                    if (module.name.endsWith("-ktx")) {
-                        constraints.add("api", "${module.group}:${module.name.replace("-ktx", "")}:$version")
-                    }
-                    // for KMP modules where the platform artifact is specified also add the common artifact
-                    if (module.name.endsWith("-jvm")) {
-                        constraints.add("api", "${module.group}:${module.name.replace("-jvm", "")}:$version")
-                    }
-                    // for KMP modules where the platform artifact is specified also add the common artifact
-                    if (module.name.endsWith("-android")) {
-                        constraints.add("api", "${module.group}:${module.name.replace("-android", "")}:$version")
+                    // if this is a ktx or kmp library also add the artifact to the platform without a suffix
+                    listOf("-ktx", "-jvm", "-android", "-iosarm64", "-iossimulatorarm64").forEach {
+                        if (module.name.endsWith(it)) {
+                            constraints.add("api", "${module.group}:${module.name.replace(it, "")}:$version")
+                        }
                     }
                     // add all Kotlin stdlib variations
                     if (module.group == "org.jetbrains.kotlin" && module.name == "kotlin-stdlib") {
@@ -66,6 +60,8 @@ public abstract class RootPlugin : Plugin<Project> {
 
     private fun configureDependencyAnalysis(target: Project) {
         target.extensions.configure(DependencyAnalysisExtension::class.java) { analysis ->
+            analysis.useTypesafeProjectAccessors(true)
+
             analysis.issues { issues ->
                 issues.all { project ->
                     project.onAny {
@@ -173,7 +169,7 @@ public abstract class RootPlugin : Plugin<Project> {
                 }
 
                 structure.bundle("paparazzi") {
-                    it.primary("app.cash.paparazzi")
+                    it.primary("app.cash.paparazzi:paparazzi")
                     it.includeGroup("app.cash.paparazzi")
                     it.includeGroup("com.android.tools.layoutlib")
                 }

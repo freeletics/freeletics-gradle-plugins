@@ -13,6 +13,12 @@ plugins {
 
 dependencyAnalysis {
     issues {
+        project(":plugins") {
+            // false positive around capabilities
+            onUsedTransitiveDependencies {
+                exclude("org.jetbrains.kotlin:kotlin-gradle-plugin-api")
+            }
+        }
         project(":scripts-circleci") {
             onUnusedDependencies {
                 exclude(libs.clikt.asProvider())
@@ -45,6 +51,10 @@ dependencyAnalysis {
         }
         bundle("zxing") {
             includeGroup("com.google.zxing")
+        }
+        bundle("ktlint") {
+            includeGroup("com.pinterest.ktlint")
+            includeGroup("org.ec4j.core")
         }
     }
 }

@@ -11,4 +11,5 @@ dependencies {
     implementation(libs.ktlint.rule.engine)
     implementation(libs.ktlint.rule.engine.core)
     implementation(libs.ktlint.rules)
+    implementation(libs.ktfmt)
 }

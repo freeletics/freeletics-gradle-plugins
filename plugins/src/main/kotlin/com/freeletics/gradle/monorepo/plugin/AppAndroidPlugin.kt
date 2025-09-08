@@ -14,11 +14,11 @@ import com.freeletics.gradle.util.stringProperty
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-public abstract class AppPlugin : Plugin<Project> {
+public abstract class AppAndroidPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.plugins.apply(FreeleticsAndroidAppPlugin::class.java)
 
-        target.freeleticsExtension.extensions.create("app", AppExtension::class.java)
+        target.freeleticsExtension.extensions.create("app", AppAndroidExtension::class.java)
 
         target.freeleticsAndroidExtension.minSdkVersion(target.appType()?.minSdkVersion(target))
         target.freeleticsAndroidExtension.enableBuildConfig()
@@ -133,6 +133,7 @@ public abstract class AppPlugin : Plugin<Project> {
                 ProjectType.FEATURE_IMPLEMENTATION,
                 ProjectType.FEATURE_NAV,
                 ProjectType.LEGACY,
+                ProjectType.APP,
             ),
         )
 

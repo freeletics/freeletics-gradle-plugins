@@ -1,6 +1,10 @@
 package com.freeletics.gradle.plugin
 
-import com.freeletics.gradle.util.addMaybe
+import com.freeletics.gradle.util.addCompileOnlyDependency
+import com.freeletics.gradle.util.addImplementationDependency
+import com.freeletics.gradle.util.addTestCompileOnlyDependency
+import com.freeletics.gradle.util.addTestImplementationDependency
+import com.freeletics.gradle.util.addTestRuntimeOnlyDependency
 import com.freeletics.gradle.util.booleanProperty
 import com.freeletics.gradle.util.compilerOptions
 import com.freeletics.gradle.util.getBundleOrNull
@@ -42,14 +46,14 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
     }
 
     private fun Project.addDefaultDependencies() {
-        dependencies.addMaybe("implementation", getBundleOrNull("default-all"))
-        dependencies.addMaybe("compileOnly", getBundleOrNull("default-all-compile"))
+        addImplementationDependency(getBundleOrNull("default-all"))
+        addCompileOnlyDependency(getBundleOrNull("default-all-compile"))
     }
 
     private fun Project.addDefaultTestDependencies() {
-        dependencies.addMaybe("testImplementation", getBundleOrNull("default-testing"))
-        dependencies.addMaybe("testCompileOnly", getBundleOrNull("default-testing-compile"))
-        dependencies.addMaybe("testRuntimeOnly", getBundleOrNull("default-testing-runtime"))
+        addTestImplementationDependency(getBundleOrNull("default-testing"))
+        addTestCompileOnlyDependency(getBundleOrNull("default-testing-compile"))
+        addTestRuntimeOnlyDependency(getBundleOrNull("default-testing-runtime"))
     }
 
     private fun Project.configureJava() {

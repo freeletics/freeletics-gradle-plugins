@@ -1,6 +1,69 @@
 Change Log
 ==========
 
+## 0.32.0 *(2025-09-08)*
+
+- Add keep rule for native methods.
+- Remove obsolete `-dontusemixedcaseclassnames` from default proguard rules.
+- Improve how the app type is computed for dependency rule checks.
+- Add `KtFmtCli` to `scripts-formatting` to allow using ktfmt as alternative to ktlint.
+- Enable certain ktlint options by default:
+    - `ktlint_ignore_back_ticked_identifier = true`
+    - `ktlint_function_naming_ignore_when_annotated_with = Composable`
+    - `ktlint_standard_no-unused-imports = enabled`
+    - `ktlint_standard_annotation = disabled`
+- Enable lint baseline for KMP desktop apps.
+- Fix Android default dependencies being incorrectly applied to KMP projects.
+- Add `com.freeletics.gradle.appium` plugin.
+
+
+## 0.31.0 *(2025-08-11)*
+
+- Add `useComposeResources()` to multiplatform DSL.
+- Explicitly set Kotlin language version and api version for Gradle plugins.
+- Fix default package name logic for app modules with a platform suffix.
+
+
+## 0.30.2 *(2025-08-04)*
+
+- Fix default package name logic for the non monorepo plugins.
+
+
+## 0.30.1 *(2025-08-01)*
+
+- Add missing `com.freeletics.gradle.core.multiplatform` and `com.freeletics.gradle.core.multiplatform` plugin ids.
+
+
+## 0.30.0 *(2025-08-01)*
+
+- Update the default package name logic to be less verbose, handles dashes and camel case better and supports different prefixes for different products.
+    - The default prefix is defined with `fgp.defaultPackageName`.
+    - Different prefixes can be defined with `fgp.defaultPackageName.{product}`.
+    - Use `fgp.useLegacyPackageNaming=false` to keep the old behavior.
+- Ignore `AndroidGradlePluginVersion` lint check to avoid random failures.
+- Update to AWS Kotlin SDK with resolved okhttp 5.0.0 conflict.
+- Updated ktlint to 1.7.1.
+
+
+## 0.29.0 *(2025-07-21)*
+
+- Add multiplatform variants of all monorepo plugins (core, domain, feature, nav, app).
+- `addCommonTargets` now has a `limitToComposeTargets` parameter to only add targets supported by Compose
+- Add option to include `iosX64` in iOS targets (off by default)
+- Improve automatically created platform to consider iOS KMP artifacts
+- Removed `useDagger`, `useDaggerWithKhonshu` and `useDaggerWithComponent` methods
+- Removed `fgp.metro.migrationEnabled` and `fgp.metro.interop` properties
+- Fix NPE for `rolloutPercentage` in `versionsInTrack`
+- Disable `GradleDependency` lint check to avoid random failures
+
+
+## 0.28.0 *(2025-07-07)*
+
+- Add `useSqlDelight` to `freeletics` extension
+- Expose `downloadApkTo` from `GooglePlayPublisher` to download the universal apk of a given version.
+- Add `rolloutPercentage` to result returned by `versionsInTrack`
+
+
 ## 0.27.3 *(2025-06-26)*
 
 - fix kotlin.io.path.ExperimentalPathApi for multiplatform projects

@@ -30,6 +30,8 @@ internal fun Lint.configure(project: Project) {
     textOutput = project.reportsFile("lint-result.txt").get().asFile
 
     disable += "NewerVersionAvailable"
+    disable += "GradleDependency"
+    disable += "AndroidGradlePluginVersion"
 
     project.dependencies.addMaybe("lintChecks", project.getBundleOrNull("default-lint"))
 }

@@ -1,11 +1,18 @@
 package com.freeletics.gradle.plugin
 
+import com.freeletics.gradle.setup.configureStandaloneLint
+import com.freeletics.gradle.util.addImplementationDependency
+import com.freeletics.gradle.util.defaultPackageName
 import com.freeletics.gradle.util.kotlinMultiplatform
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.tasks.AbstractPublishToMaven
 import org.gradle.api.tasks.bundling.Zip
+import org.jetbrains.compose.ComposeExtension
+import org.jetbrains.compose.ComposePlugin
+import org.jetbrains.compose.compose
+import org.jetbrains.compose.resources.ResourcesExtension
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.plugin.mpp.Framework
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget
@@ -39,7 +46,7 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
     }
 
     @JvmOverloads
-    public fun addIosTargets(configure: KotlinNativeTarget.() -> Unit = { }) {
+    public fun addIosTargets(includeX64: Boolean = false, configure: KotlinNativeTarget.() -> Unit = { }) {
         project.kotlinMultiplatform {
             iosArm64 {
                 configure()
@@ -48,12 +55,19 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
             iosSimulatorArm64 {
                 configure()
             }
+
+            if (includeX64) {
+                iosX64 {
+                    configure()
+                }
+            }
         }
     }
 
     @JvmOverloads
     public fun addIosTargetsWithXcFramework(
         frameworkName: String,
+        includeX64: Boolean = false,
         configure: KotlinNativeTarget.(Framework) -> Unit = { },
     ) {
         val xcFramework = XCFrameworkConfig(project, frameworkName)
@@ -72,6 +86,16 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
                     baseName = frameworkName
                     xcFramework.add(this)
                     configure(this)
+                }
+            }
+
+            if (includeX64) {
+                iosX64 {
+                    binaries.framework {
+                        baseName = frameworkName
+                        xcFramework.add(this)
+                        configure(this)
+                    }
                 }
             }
         }
@@ -112,7 +136,7 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
         }
     }
 
-    public fun addCommonTargets(androidNativeTargets: Boolean = true) {
+    public fun addCommonTargets(limitToComposeTargets: Boolean = false) {
         project.kotlinMultiplatform {
             jvm()
 
@@ -125,9 +149,11 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
                 nodejs()
             }
 
-            @OptIn(ExperimentalWasmDsl::class)
-            wasmWasi {
-                nodejs()
+            if (!limitToComposeTargets) {
+                @OptIn(ExperimentalWasmDsl::class)
+                wasmWasi {
+                    nodejs()
+                }
             }
 
             linuxX64()
@@ -148,11 +174,14 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
 
             watchosArm32()
             watchosArm64()
-            watchosDeviceArm64()
+            // TODO remove check when Compose 1.9.0 is stable
+            if (!limitToComposeTargets) {
+                watchosDeviceArm64()
+            }
             watchosX64()
             watchosSimulatorArm64()
 
-            if (androidNativeTargets) {
+            if (!limitToComposeTargets) {
                 androidNativeArm32()
                 androidNativeArm64()
                 androidNativeX86()
@@ -161,7 +190,26 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
         }
     }
 
+    public fun useComposeResources() {
+        project.plugins.apply("org.jetbrains.compose")
+
+        project.extensions.configure(ComposeExtension::class.java) { compose ->
+            compose.extensions.configure(ResourcesExtension::class.java) {
+                it.generateResClass = ResourcesExtension.ResourceClassGeneration.Always
+                it.packageOfResClass = project.defaultPackageName()
+            }
+        }
+
+        project.addImplementationDependency(ComposePlugin.CommonComponentsDependencies.resources)
+    }
+
     public fun useSkie() {
         project.plugins.apply("co.touchlab.skie")
+    }
+
+    public fun useAndroidLint() {
+        project.plugins.apply("com.android.lint")
+
+        project.configureStandaloneLint()
     }
 }
