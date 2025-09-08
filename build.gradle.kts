@@ -52,5 +52,9 @@ dependencyAnalysis {
         bundle("zxing") {
             includeGroup("com.google.zxing")
         }
+        bundle("ktlint") {
+            includeGroup("com.pinterest.ktlint")
+            includeGroup("org.ec4j.core")
+        }
     }
 }

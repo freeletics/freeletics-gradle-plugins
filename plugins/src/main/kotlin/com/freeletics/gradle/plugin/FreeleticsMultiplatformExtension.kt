@@ -3,12 +3,18 @@ package com.freeletics.gradle.plugin
 import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
 import com.android.build.api.dsl.androidLibrary
 import com.freeletics.gradle.setup.configureStandaloneLint
+import com.freeletics.gradle.util.addImplementationDependency
+import com.freeletics.gradle.util.defaultPackageName
 import com.freeletics.gradle.util.kotlinMultiplatform
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.tasks.AbstractPublishToMaven
 import org.gradle.api.tasks.bundling.Zip
+import org.jetbrains.compose.ComposeExtension
+import org.jetbrains.compose.ComposePlugin
+import org.jetbrains.compose.compose
+import org.jetbrains.compose.resources.ResourcesExtension
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.plugin.mpp.Framework
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget
@@ -154,6 +160,19 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
                 androidNativeX64()
             }
         }
+    }
+
+    public fun useComposeResources() {
+        project.plugins.apply("org.jetbrains.compose")
+
+        project.extensions.configure(ComposeExtension::class.java) { compose ->
+            compose.extensions.configure(ResourcesExtension::class.java) {
+                it.generateResClass = ResourcesExtension.ResourceClassGeneration.Always
+                it.packageOfResClass = project.defaultPackageName()
+            }
+        }
+
+        project.addImplementationDependency(ComposePlugin.CommonComponentsDependencies.resources)
     }
 
     public fun useSkie() {

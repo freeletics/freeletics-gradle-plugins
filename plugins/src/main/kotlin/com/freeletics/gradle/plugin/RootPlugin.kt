@@ -60,6 +60,8 @@ public abstract class RootPlugin : Plugin<Project> {
 
     private fun configureDependencyAnalysis(target: Project) {
         target.extensions.configure(DependencyAnalysisExtension::class.java) { analysis ->
+            analysis.useTypesafeProjectAccessors(true)
+
             analysis.issues { issues ->
                 issues.all { project ->
                     project.onAny {
@@ -167,7 +169,7 @@ public abstract class RootPlugin : Plugin<Project> {
                 }
 
                 structure.bundle("paparazzi") {
-                    it.primary("app.cash.paparazzi")
+                    it.primary("app.cash.paparazzi:paparazzi")
                     it.includeGroup("app.cash.paparazzi")
                     it.includeGroup("com.android.tools.layoutlib")
                 }

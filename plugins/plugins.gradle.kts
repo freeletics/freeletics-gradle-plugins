@@ -9,7 +9,7 @@ dependencies {
     api(libs.javax.inject)
     api(libs.android.gradle.api)
     implementation(libs.annotations)
-    implementation(libs.kotlin.gradle.annotations)
+    compileOnly(libs.kotlin.gradle.annotations)
     implementation(libs.kotlin.native.utils)
     implementation(libs.ksp.gradle)
     implementation(libs.sqldelight.gradle)
@@ -19,6 +19,7 @@ dependencies {
     implementation(libs.licensee.gradle)
     implementation(libs.crashlytics.gradle)
     implementation(projects.codegen)
+    compileOnly(libs.develocity.gradle)
     runtimeOnly(libs.android.gradle)
     runtimeOnly(libs.kotlin.gradle.compose)
     runtimeOnly(libs.kotlin.gradle.atomicfu)
@@ -153,6 +154,11 @@ gradlePlugin {
         create("codegenPlugin") {
             id = "com.freeletics.gradle.codegen"
             implementationClass = "com.freeletics.gradle.codegen.CodegenPlugin"
+        }
+
+        create("appiumPlugin") {
+            id = "com.freeletics.gradle.appium"
+            implementationClass = "com.freeletics.gradle.plugin.AppiumPlugin"
         }
     }
 }

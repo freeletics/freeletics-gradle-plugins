@@ -3,10 +3,10 @@ package com.freeletics.gradle.scripts
 import com.github.ajalt.clikt.core.Context
 import java.nio.file.PathMatcher
 
-public class KtLintCli : FormattingCli() {
+public class KtFmtCli : FormattingCli() {
     override fun createPathMatcher(): PathMatcher = kotlinMatcher
 
-    override fun createFormatter(): Formatter = KtLintFormatter()
+    override fun createFormatter(): Formatter = KtFmtFormatter()
 
-    override fun help(context: Context): String = "CLI that runs ktlint."
+    override fun help(context: Context): String = "CLI that runs ktfmt."
 }

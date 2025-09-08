@@ -53,6 +53,14 @@ internal fun Project.addImplementationDependency(
     addImplementationDependency(dependency as Any?, limitToTargets)
 }
 
+@JvmName("addImplementationDependencyString")
+internal fun Project.addImplementationDependency(
+    dependency: String,
+    limitToTargets: Set<KotlinPlatformType>? = null,
+) {
+    addImplementationDependency(dependency as Any?, limitToTargets)
+}
+
 private fun Project.addImplementationDependency(
     dependency: Any?,
     limitToTargets: Set<KotlinPlatformType>? = null,
