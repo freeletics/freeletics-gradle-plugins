@@ -1,5 +1,6 @@
 package com.freeletics.gradle.plugin
 
+import com.freeletics.gradle.setup.configureStandaloneLint
 import com.freeletics.gradle.setup.defaultTestSetup
 import com.freeletics.gradle.util.compilerOptions
 import com.freeletics.gradle.util.freeleticsExtension
@@ -26,6 +27,8 @@ public abstract class FreeleticsMultiplatformPlugin : Plugin<Project> {
                 freeCompilerArgs.add("-Xexpect-actual-classes")
             }
         }
+
+        target.configureStandaloneLint()
 
         target.tasks.withType(Test::class.java).configureEach(Test::defaultTestSetup)
 
