@@ -22,7 +22,7 @@ clikt = "5.0.3"
 ktlint = "1.7.1"
 serialization = "1.9.0"
 google-http = "2.0.2"
-google-auth = "1.39.1"
+google-auth = "1.40.0"
 
 junit = "4.13.2"
 truth = "1.4.5"
