@@ -61,7 +61,6 @@
     {
       matchPackagePatterns: [
         "org.jetbrains.kotlin",
-        "com.google.devtools.ksp",
         "com.javiersc.kotlin",
         "dev.drewhamilton.poko",
         "co.touchlab.skie",
@@ -69,7 +68,7 @@
       excludePackagePatterns: [
         "org.jetbrains.kotlinx",
       ],
-      groupName: "Kotlin and KSP"
+      groupName: "Kotlin and compiler plugins"
     },
     {
       matchPackagePatterns: [
