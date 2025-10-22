@@ -1,5 +1,7 @@
 package com.freeletics.gradle.plugin
 
+import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
+import com.android.build.api.dsl.androidLibrary
 import com.freeletics.gradle.setup.configureStandaloneLint
 import com.freeletics.gradle.util.addImplementationDependency
 import com.freeletics.gradle.util.defaultPackageName
@@ -25,41 +27,31 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
     @JvmOverloads
     public fun addJvmTarget(configure: KotlinJvmTarget.() -> Unit = { }) {
         project.kotlinMultiplatform {
-            jvm(configure = configure)
+            jvm(configure)
         }
     }
 
     @JvmOverloads
     public fun addAndroidTarget(
         variantsToPublish: List<String>? = listOf("release"),
-        configure: KotlinAndroidTarget.() -> Unit = { },
+        configure: KotlinMultiplatformAndroidLibraryTarget.() -> Unit = { },
     ) {
+        project.plugins.apply("com.android.kotlin.multiplatform.library")
         project.plugins.apply(FreeleticsAndroidPlugin::class.java)
 
         project.kotlinMultiplatform {
-            androidTarget {
-                publishLibraryVariants = variantsToPublish
-
-                configure()
-            }
+            @Suppress("UnstableApiUsage")
+            androidLibrary(configure)
         }
     }
 
     @JvmOverloads
     public fun addIosTargets(includeX64: Boolean = false, configure: KotlinNativeTarget.() -> Unit = { }) {
         project.kotlinMultiplatform {
-            iosArm64 {
-                configure()
-            }
-
-            iosSimulatorArm64 {
-                configure()
-            }
-
+            iosArm64(configure)
+            iosSimulatorArm64(configure)
             if (includeX64) {
-                iosX64 {
-                    configure()
-                }
+                iosX64(configure)
             }
         }
     }
@@ -72,31 +64,11 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
     ) {
         val xcFramework = XCFrameworkConfig(project, frameworkName)
 
-        project.kotlinMultiplatform {
-            iosArm64 {
-                binaries.framework {
-                    baseName = frameworkName
-                    xcFramework.add(this)
-                    configure(this)
-                }
-            }
-
-            iosSimulatorArm64 {
-                binaries.framework {
-                    baseName = frameworkName
-                    xcFramework.add(this)
-                    configure(this)
-                }
-            }
-
-            if (includeX64) {
-                iosX64 {
-                    binaries.framework {
-                        baseName = frameworkName
-                        xcFramework.add(this)
-                        configure(this)
-                    }
-                }
+        addIosTargets(includeX64 = includeX64) {
+            binaries.framework {
+                baseName = frameworkName
+                xcFramework.add(this)
+                configure(this)
             }
         }
 
