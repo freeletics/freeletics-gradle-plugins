@@ -16,7 +16,6 @@ public abstract class RootPlugin : Plugin<Project> {
         configureDependencyAnalysis(target)
     }
 
-    @Suppress("UnstableApiUsage")
     private fun configureDaemonToolchainTask(target: Project) {
         target.tasks.withType(UpdateDaemonJvm::class.java).configureEach {
             it.vendor.set(JvmVendorSpec.AZUL)
