@@ -77,7 +77,7 @@ google-oauth = { module = "com.google.auth:google-auth-library-oauth2-http", ver
 google-play = { module = "com.google.apis:google-api-services-androidpublisher", version = "v3-rev20250904-2.0.0" }
 google-sheets = { module = "com.google.apis:google-api-services-sheets", version = "v4-rev20250616-2.0.0" }
 zxing = { module = "com.google.zxing:javase", version = "3.5.3" }
-s3 = { module = "aws.sdk.kotlin:s3", version = "1.5.68" }
+s3 = { module = "aws.sdk.kotlin:s3", version = "1.5.73" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version = "5.3.0" }
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "serialization" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json ", version.ref = "serialization" }
