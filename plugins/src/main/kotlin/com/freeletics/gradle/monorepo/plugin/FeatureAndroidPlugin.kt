@@ -4,7 +4,6 @@ import com.freeletics.gradle.monorepo.setup.applyPlatformConstraints
 import com.freeletics.gradle.monorepo.setup.disableAndroidLibraryTasks
 import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.registerCheckDependencyRulesTasks
 import com.freeletics.gradle.monorepo.util.ProjectType
-import com.freeletics.gradle.monorepo.util.appType
 import com.freeletics.gradle.plugin.FreeleticsAndroidPlugin
 import com.freeletics.gradle.util.freeleticsAndroidExtension
 import com.freeletics.gradle.util.freeleticsExtension
@@ -18,7 +17,6 @@ public abstract class FeatureAndroidPlugin : Plugin<Project> {
         val extension = target.freeleticsExtension.extensions.create("legacy", LegacyExtension::class.java)
 
         target.freeleticsExtension.useCompose()
-        target.freeleticsAndroidExtension.minSdkVersion(target.appType()?.minSdkVersion(target))
         target.freeleticsAndroidExtension.enableAndroidResources()
         target.freeleticsAndroidExtension.enableParcelize()
 
