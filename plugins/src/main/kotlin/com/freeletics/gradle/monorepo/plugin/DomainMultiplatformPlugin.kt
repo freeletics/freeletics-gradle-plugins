@@ -23,8 +23,6 @@ public abstract class DomainMultiplatformPlugin : Plugin<Project> {
             target.freeleticsMultiplatformExtension.addIosTargets(includeX64 = true)
         }
 
-        target.freeleticsAndroidExtension.minSdkVersion(target.appType()?.minSdkVersion(target))
-
         target.registerCheckDependencyRulesTasks(
             allowedProjectTypes = listOf(
                 ProjectType.DOMAIN_API,

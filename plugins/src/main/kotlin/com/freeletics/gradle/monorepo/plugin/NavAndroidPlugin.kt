@@ -14,7 +14,6 @@ public abstract class NavAndroidPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.plugins.apply(FreeleticsAndroidPlugin::class.java)
 
-        target.freeleticsAndroidExtension.minSdkVersion(target.appType()?.minSdkVersion(target))
         target.freeleticsAndroidExtension.enableParcelize()
 
         target.registerCheckDependencyRulesTasks(

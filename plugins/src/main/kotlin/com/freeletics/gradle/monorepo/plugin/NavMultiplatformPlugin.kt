@@ -25,8 +25,6 @@ public abstract class NavMultiplatformPlugin : Plugin<Project> {
             target.freeleticsMultiplatformExtension.addIosTargets(includeX64 = true)
         }
 
-        target.freeleticsAndroidExtension.minSdkVersion(target.appType()?.minSdkVersion(target))
-
         target.registerCheckDependencyRulesTasks(
             allowedProjectTypes = listOf(ProjectType.FEATURE_NAV),
             allowedDependencyProjectTypes = listOf(

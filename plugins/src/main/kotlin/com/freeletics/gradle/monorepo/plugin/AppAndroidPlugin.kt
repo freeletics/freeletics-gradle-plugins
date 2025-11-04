@@ -20,7 +20,6 @@ public abstract class AppAndroidPlugin : Plugin<Project> {
 
         target.freeleticsExtension.extensions.create("app", AppAndroidExtension::class.java)
 
-        target.freeleticsAndroidExtension.minSdkVersion(target.appType()?.minSdkVersion(target))
         target.freeleticsAndroidExtension.enableBuildConfig()
         target.freeleticsAndroidExtension.enableAndroidResources()
         target.freeleticsAndroidExtension.enableResValues()

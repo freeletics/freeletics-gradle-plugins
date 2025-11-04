@@ -34,14 +34,6 @@ public abstract class FreeleticsAndroidExtension(private val project: Project) {
         project.configurePaparazzi()
     }
 
-    public fun minSdkVersion(minSdkVersion: Int?) {
-        if (minSdkVersion != null) {
-            project.android {
-                defaultConfig.minSdk = minSdkVersion
-            }
-        }
-    }
-
     public fun enableParcelize() {
         project.plugins.apply("org.jetbrains.kotlin.plugin.parcelize")
     }
