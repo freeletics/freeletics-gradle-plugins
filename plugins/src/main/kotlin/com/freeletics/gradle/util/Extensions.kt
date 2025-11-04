@@ -1,13 +1,8 @@
 package com.freeletics.gradle.util
 
 import com.android.build.api.dsl.ApplicationExtension
-import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryExtension
-import com.android.build.api.dsl.LibraryExtension
-import com.android.build.api.variant.AndroidComponentsExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
-import com.android.build.api.variant.LibraryAndroidComponentsExtension
-import com.freeletics.gradle.plugin.FreeleticsAndroidExtension
 import com.freeletics.gradle.plugin.FreeleticsBaseExtension
 import com.freeletics.gradle.plugin.FreeleticsMultiplatformExtension
 import org.gradle.api.Project
@@ -23,9 +18,6 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
 internal val Project.freeleticsExtension: FreeleticsBaseExtension
     get() = extensions.getByType(FreeleticsBaseExtension::class.java)
-
-internal val Project.freeleticsAndroidExtension: FreeleticsAndroidExtension
-    get() = freeleticsExtension.extensions.getByType(FreeleticsAndroidExtension::class.java)
 
 internal val Project.freeleticsMultiplatformExtension: FreeleticsMultiplatformExtension
     get() = freeleticsExtension.extensions.getByType(FreeleticsMultiplatformExtension::class.java)
@@ -70,40 +62,16 @@ internal fun Project.kotlinMultiplatform(action: KotlinMultiplatformExtension.()
     }
 }
 
-internal fun Project.android(action: CommonExtension<*, *, *, *, *, *>.() -> Unit) {
-    extensions.configure(CommonExtension::class.java) {
-        it.action()
-    }
-}
-
-internal fun Project.androidLibrary(action: LibraryExtension.() -> Unit) {
-    extensions.configure(LibraryExtension::class.java) {
-        it.action()
-    }
-}
-
 internal fun Project.androidMultiplatform(action: KotlinMultiplatformAndroidLibraryExtension.() -> Unit) {
-    extensions.getByType(
-        KotlinMultiplatformExtension::class.java,
-    ).extensions.configure(KotlinMultiplatformAndroidLibraryExtension::class.java) {
-        it.action()
+    kotlinMultiplatform {
+        extensions.configure(KotlinMultiplatformAndroidLibraryExtension::class.java) {
+            it.action()
+        }
     }
 }
 
 internal fun Project.androidApp(action: ApplicationExtension.() -> Unit) {
     extensions.configure(ApplicationExtension::class.java) {
-        it.action()
-    }
-}
-
-internal fun Project.androidComponents(action: AndroidComponentsExtension<*, *, *>.() -> Unit) {
-    extensions.configure(AndroidComponentsExtension::class.java) {
-        it.action()
-    }
-}
-
-internal fun Project.androidComponentsLibrary(action: LibraryAndroidComponentsExtension.() -> Unit) {
-    extensions.configure(LibraryAndroidComponentsExtension::class.java) {
         it.action()
     }
 }

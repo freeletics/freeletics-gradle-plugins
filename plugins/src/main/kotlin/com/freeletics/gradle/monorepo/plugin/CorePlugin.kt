@@ -10,7 +10,7 @@ import com.freeletics.gradle.util.freeleticsMultiplatformExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-public abstract class CoreMultiplatformPlugin : Plugin<Project> {
+public abstract class CorePlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.plugins.apply(FreeleticsMultiplatformPlugin::class.java)
         target.freeleticsMultiplatformExtension.addDefaultTargets()

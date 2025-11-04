@@ -11,7 +11,6 @@ import org.gradle.api.publish.maven.MavenPom
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.tasks.AbstractPublishToMaven
 import org.gradle.api.tasks.bundling.Zip
-import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.abi.AbiValidationExtension
@@ -143,15 +142,6 @@ private fun Project.configureBinaryCompatibility() {
     kotlin {
         when (this) {
             is KotlinJvmProjectExtension -> extensions.configure<AbiValidationExtension>(
-                "abiValidation",
-            ) { validation ->
-                validation.enabled.set(true)
-                // TODO remove manual task dependency https://youtrack.jetbrains.com/issue/KT-80614
-                tasks.named("check").configure { task ->
-                    task.dependsOn(validation.legacyDump.legacyCheckTaskProvider)
-                }
-            }
-            is KotlinAndroidProjectExtension -> extensions.configure<AbiValidationExtension>(
                 "abiValidation",
             ) { validation ->
                 validation.enabled.set(true)

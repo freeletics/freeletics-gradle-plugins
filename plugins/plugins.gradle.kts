@@ -50,11 +50,6 @@ configurations.configureEach {
 
 gradlePlugin {
     plugins {
-        create("commonAndroidPlugin") {
-            id = "com.freeletics.gradle.android"
-            implementationClass = "com.freeletics.gradle.plugin.FreeleticsAndroidPlugin"
-        }
-
         create("commonAndroidAppPlugin") {
             id = "com.freeletics.gradle.android.app"
             implementationClass = "com.freeletics.gradle.plugin.FreeleticsAndroidAppPlugin"
@@ -85,54 +80,29 @@ gradlePlugin {
             implementationClass = "com.freeletics.gradle.monorepo.plugin.AppDesktopPlugin"
         }
 
-        create("monoAppMultiplatformPlugin") {
-            id = "com.freeletics.gradle.app.multiplatform"
-            implementationClass = "com.freeletics.gradle.monorepo.plugin.AppMultiplatformPlugin"
+        create("monoAppPlugin") {
+            id = "com.freeletics.gradle.app"
+            implementationClass = "com.freeletics.gradle.monorepo.plugin.AppPlugin"
         }
 
-        create("monoCoreAndroidPlugin") {
+        create("monoCorePlugin") {
             id = "com.freeletics.gradle.core"
-            implementationClass = "com.freeletics.gradle.monorepo.plugin.CoreAndroidPlugin"
+            implementationClass = "com.freeletics.gradle.monorepo.plugin.CorePlugin"
         }
 
-        create("monoCoreMultiplatformPlugin") {
-            id = "com.freeletics.gradle.core.multiplatform"
-            implementationClass = "com.freeletics.gradle.monorepo.plugin.CoreMultiplatformPlugin"
-        }
-
-        create("monoDomainAndroidPlugin") {
+        create("monoDomainPlugin") {
             id = "com.freeletics.gradle.domain"
-            implementationClass = "com.freeletics.gradle.monorepo.plugin.DomainAndroidPlugin"
+            implementationClass = "com.freeletics.gradle.monorepo.plugin.DomainPlugin"
         }
 
-        create("monoDomainMultiplatformPlugin") {
-            id = "com.freeletics.gradle.domain.multiplatform"
-            implementationClass = "com.freeletics.gradle.monorepo.plugin.DomainMultiplatformPlugin"
-        }
-
-        create("monoFeatureAndroidPlugin") {
+        create("monoFeaturePlugin") {
             id = "com.freeletics.gradle.feature"
-            implementationClass = "com.freeletics.gradle.monorepo.plugin.FeatureAndroidPlugin"
+            implementationClass = "com.freeletics.gradle.monorepo.plugin.FeaturePlugin"
         }
 
-        create("monoFeatureMultiplatformPlugin") {
-            id = "com.freeletics.gradle.feature.multiplatform"
-            implementationClass = "com.freeletics.gradle.monorepo.plugin.FeatureMultiplatformPlugin"
-        }
-
-        create("monoNavAndroidPlugin") {
+        create("monoNavPlugin") {
             id = "com.freeletics.gradle.nav"
-            implementationClass = "com.freeletics.gradle.monorepo.plugin.NavAndroidPlugin"
-        }
-
-        create("monoNavMultiplatformPlugin") {
-            id = "com.freeletics.gradle.nav.multiplatform"
-            implementationClass = "com.freeletics.gradle.monorepo.plugin.NavMultiplatformPlugin"
-        }
-
-        create("monoLegacyAndroidPlugin") {
-            id = "com.freeletics.gradle.legacy"
-            implementationClass = "com.freeletics.gradle.monorepo.plugin.LegacyAndroidPlugin"
+            implementationClass = "com.freeletics.gradle.monorepo.plugin.NavPlugin"
         }
 
         create("codegenPlugin") {

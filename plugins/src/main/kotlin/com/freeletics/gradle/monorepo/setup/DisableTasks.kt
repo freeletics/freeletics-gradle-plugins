@@ -12,17 +12,6 @@ internal fun Project.disableMultiplatformApplicationTasks() {
     // TODO lint tasks
 }
 
-internal fun Project.disableAndroidLibraryTasks() {
-    disableAndroidTasks(androidLibraryTasksToDisable)
-    disableAndroidTasks(androidLibraryLintTasksToDisable)
-    disableAndroidTasks(androidLibraryLintTasksToDisableExceptOneVariant, "debug")
-}
-
-internal fun Project.disableKotlinLibraryTasks() {
-    disableTasks(listOf("assemble"))
-    disableTasks(lintTasksToDisableJvm)
-}
-
 internal fun Project.disableMultiplatformLibraryTasks() {
     disableTasks(listOf("assemble"))
     // TODO lint tasks
@@ -56,37 +45,6 @@ private fun Project.disableTasks(names: List<String>) {
     }
 }
 
-// disable these tasks since we never want to build an aar out of
-// library modules and AGP consumes the individual elements directly
-private val androidLibraryTasksToDisable = listOf(
-    "assemble",
-    "assemble{VARIANT}",
-    "bundle{VARIANT}Aar",
-)
-
-// for libraries remove all reporting tasks so that they only
-// have the analyze task since we have an aggregated report at
-// the app level
-private val androidLibraryLintTasksToDisable get() = listOf(
-    // report
-    "lint",
-    "lint{VARIANT}",
-    "lintReport{VARIANT}",
-    "copy{VARIANT}LintReports",
-    // fix
-    "lintFix",
-    "lintFix{VARIANT}",
-    // baseline
-    "updateLintBaseline",
-    "updateLintBaseline{VARIANT}",
-)
-
-// disable debug variant of these tasks, we're only running on release
-private val androidLibraryLintTasksToDisableExceptOneVariant = listOf(
-    // analyze
-    "lintAnalyze{VARIANT}",
-)
-
 // disable debug variant of these tasks, we're only running on release
 private val androidAppLintTasksToDisableExceptOneVariant get() = listOf(
     // analyze
@@ -100,21 +58,3 @@ private val androidAppLintTasksToDisableExceptOneVariant get() = listOf(
     // baseline
     "updateLintBaseline{VARIANT}",
 )
-
-// same as the Android library tasks, only keep analyze and the report
-// is created in the app module
-private val lintTasksToDisableJvm
-    get() = listOf(
-        "lint",
-        "lintJvm",
-        "lintReportJvm",
-        "copyJvmLintReports",
-        "lintFix",
-        "lintFixJvm",
-        "updateLintBaseline",
-        "updateLintBaselineJvm",
-        "lintVital",
-        "lintVitalJvm",
-        "lintVitalAnalyzeJvmMain",
-        "lintVitalReportJvm",
-    )
