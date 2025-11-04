@@ -1,6 +1,5 @@
 package com.freeletics.gradle.monorepo.util
 
-import com.freeletics.gradle.util.getVersionOrNull
 import org.gradle.api.Project
 
 internal data class AppType(

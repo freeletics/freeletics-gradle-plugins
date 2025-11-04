@@ -4,7 +4,6 @@ import com.freeletics.gradle.monorepo.setup.applyPlatformConstraints
 import com.freeletics.gradle.monorepo.setup.disableAndroidApplicationTasks
 import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.registerCheckDependencyRulesTasks
 import com.freeletics.gradle.monorepo.util.ProjectType
-import com.freeletics.gradle.monorepo.util.appType
 import com.freeletics.gradle.plugin.FreeleticsAndroidAppPlugin
 import com.freeletics.gradle.util.androidApp
 import com.freeletics.gradle.util.androidComponents

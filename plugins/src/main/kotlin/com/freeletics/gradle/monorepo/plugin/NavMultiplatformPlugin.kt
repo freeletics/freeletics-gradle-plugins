@@ -4,10 +4,8 @@ import com.freeletics.gradle.monorepo.setup.applyPlatformConstraints
 import com.freeletics.gradle.monorepo.setup.disableMultiplatformLibraryTasks
 import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.registerCheckDependencyRulesTasks
 import com.freeletics.gradle.monorepo.util.ProjectType
-import com.freeletics.gradle.monorepo.util.appType
 import com.freeletics.gradle.plugin.FreeleticsMultiplatformPlugin
 import com.freeletics.gradle.util.booleanProperty
-import com.freeletics.gradle.util.freeleticsAndroidExtension
 import com.freeletics.gradle.util.freeleticsExtension
 import com.freeletics.gradle.util.freeleticsMultiplatformExtension
 import org.gradle.api.Plugin
