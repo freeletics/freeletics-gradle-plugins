@@ -2,7 +2,9 @@ package com.freeletics.gradle.plugin
 
 import com.freeletics.gradle.setup.configureStandaloneLint
 import com.freeletics.gradle.util.addImplementationDependency
+import com.freeletics.gradle.util.booleanProperty
 import com.freeletics.gradle.util.defaultPackageName
+import com.freeletics.gradle.util.freeleticsMultiplatformExtension
 import com.freeletics.gradle.util.kotlinMultiplatform
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
@@ -11,7 +13,6 @@ import org.gradle.api.publish.maven.tasks.AbstractPublishToMaven
 import org.gradle.api.tasks.bundling.Zip
 import org.jetbrains.compose.ComposeExtension
 import org.jetbrains.compose.ComposePlugin
-import org.jetbrains.compose.compose
 import org.jetbrains.compose.resources.ResourcesExtension
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.plugin.mpp.Framework
@@ -22,6 +23,25 @@ import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 import org.jetbrains.kotlin.konan.target.HostManager
 
 public abstract class FreeleticsMultiplatformExtension(private val project: Project) {
+    internal fun addDefaultTargets(xcFramework: Boolean = false) {
+        if (project.booleanProperty("fgp.kotlin.targets.android", false).get()) {
+            project.freeleticsMultiplatformExtension.addAndroidTarget(variantsToPublish = null)
+        }
+        if (project.booleanProperty("fgp.kotlin.targets.jvm", false).get()) {
+            project.freeleticsMultiplatformExtension.addJvmTarget()
+        }
+        if (project.booleanProperty("fgp.kotlin.targets.ios", false).get()) {
+            if (xcFramework) {
+                project.freeleticsMultiplatformExtension.addIosTargetsWithXcFramework(
+                    frameworkName = project.name,
+                    includeX64 = true,
+                )
+            } else {
+                project.freeleticsMultiplatformExtension.addIosTargets(includeX64 = true)
+            }
+        }
+    }
+
     @JvmOverloads
     public fun addJvmTarget(configure: KotlinJvmTarget.() -> Unit = { }) {
         project.kotlinMultiplatform {
