@@ -4,7 +4,6 @@ import com.android.build.api.dsl.ApplicationDefaultConfig
 import com.android.build.api.variant.HasAndroidTestBuilder
 import com.android.build.api.variant.HasUnitTestBuilder
 import com.freeletics.gradle.setup.configure
-import com.freeletics.gradle.setup.defaultTestSetup
 import com.freeletics.gradle.util.addCompileOnlyDependency
 import com.freeletics.gradle.util.addImplementationDependency
 import com.freeletics.gradle.util.addMaybe
@@ -21,7 +20,6 @@ import com.freeletics.gradle.util.getVersionOrNull
 import com.freeletics.gradle.util.javaTargetVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.tasks.testing.Test
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
 public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
@@ -39,7 +37,7 @@ public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
         target.androidSetup()
         target.addDefaultAndroidDependencies()
         target.configureLint()
-        target.configureUnitTests()
+        target.disableReleaseUnitTests()
         target.disableAndroidTests()
     }
 
@@ -98,13 +96,7 @@ public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
         }
     }
 
-    private fun Project.configureUnitTests() {
-        android {
-            testOptions {
-                unitTests.all(Test::defaultTestSetup)
-            }
-        }
-
+    private fun Project.disableReleaseUnitTests() {
         androidComponents {
             beforeVariants(selector().withBuildType("release")) {
                 (it as? HasUnitTestBuilder)?.enableUnitTest = false

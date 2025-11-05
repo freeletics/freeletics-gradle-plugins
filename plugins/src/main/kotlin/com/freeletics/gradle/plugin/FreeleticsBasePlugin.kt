@@ -16,6 +16,7 @@ import com.freeletics.gradle.util.jvmTarget
 import com.freeletics.gradle.util.kotlin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.tasks.testing.Test
 import org.gradle.jvm.tasks.Jar
 import org.gradle.jvm.toolchain.JvmVendorSpec
 import org.jetbrains.kotlin.gradle.dsl.JvmDefaultMode
@@ -34,6 +35,7 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
         target.addDefaultTestDependencies()
         target.configureJava()
         target.configureKotlin()
+        target.configureTests()
     }
 
     private fun Project.makeJarsReproducible() {
@@ -128,6 +130,18 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                     }
                 }
             }
+        }
+    }
+
+    private fun Project.configureTests() {
+        project.tasks.withType(Test::class.java).configureEach {
+            val directory = rootProject.layout.buildDirectory
+            val projectName = path
+                .replace("projects", "")
+                .replaceFirst(":", "")
+                .replace(":", "/")
+            it.reports.html.outputLocation.set(directory.dir("reports/tests/$projectName"))
+            it.reports.junitXml.outputLocation.set(directory.dir("reports/tests/$projectName"))
         }
     }
 }
