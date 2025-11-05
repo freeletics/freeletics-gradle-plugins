@@ -1,7 +1,7 @@
 package com.freeletics.gradle.plugin
 
 import com.freeletics.gradle.setup.configureStandaloneLint
-import com.freeletics.gradle.util.compilerOptions
+import com.freeletics.gradle.util.compilerOptionsJvm
 import com.freeletics.gradle.util.java
 import com.freeletics.gradle.util.javaTargetVersion
 import com.freeletics.gradle.util.kotlin
@@ -26,7 +26,7 @@ public abstract class FreeleticsGradlePluginPlugin : Plugin<Project> {
         }
 
         target.kotlin {
-            compilerOptions {
+            compilerOptionsJvm {
                 // https://docs.gradle.org/current/userguide/compatibility.html#kotlin
                 apiVersion.set(KotlinVersion.KOTLIN_2_2)
                 languageVersion.set(KotlinVersion.KOTLIN_2_2)

@@ -7,7 +7,7 @@ import com.freeletics.gradle.setup.setupOssPublishing
 import com.freeletics.gradle.setup.setupSqlDelight
 import com.freeletics.gradle.util.addApiDependency
 import com.freeletics.gradle.util.addKspDependency
-import com.freeletics.gradle.util.compilerOptions
+import com.freeletics.gradle.util.compilerOptionsCommon
 import com.freeletics.gradle.util.getDependency
 import com.freeletics.gradle.util.kotlin
 import org.gradle.api.Project
@@ -23,7 +23,7 @@ public abstract class FreeleticsBaseExtension(private val project: Project) : Ex
 
     public fun optIn(vararg classes: String) {
         project.kotlin {
-            compilerOptions {
+            compilerOptionsCommon {
                 optIn.addAll(*classes)
             }
         }
