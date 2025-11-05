@@ -1,6 +1,23 @@
 Change Log
 ==========
 
+## 0.33.0 *(2025-11-05)*
+
+- Updated all multiplatform plugins to use the new `com.android.kotlin.multiplatform.library` plugin for Android
+  targets.
+- Monorepo multiplatform plugins now don't add any targets by default, use the following Gradle properties to
+  add certain targets:
+    - `fgp.kotlin.targets.android`
+    - `fgp.kotlin.targets.jvm`
+    - `fgp.kotlin.targets.ios`
+- The `con.freeletics.gradle.gradle` plugin now has Android Lint enabled by default.
+- Avoid "Unable to strip the following libraries, packaging them as they are" warnings for AndroidX graphics
+  and datastore.
+- Removed `android.min.<app>` support for min sdk versions.
+- Removed `com.freeletics.gradle.jvm`, `com.freeletics.gradle.core.jvm` and `com.freeletics.gradle.domain.jvm` plugins.
+- Removed `.android` suffix from plugin ids for core, domain, feature, nav and legacy plugins.
+
+
 ## 0.32.0 *(2025-09-08)*
 
 - Add keep rule for native methods.
