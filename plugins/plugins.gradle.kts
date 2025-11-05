@@ -4,13 +4,16 @@ plugins {
 }
 
 dependencies {
-    api(libs.kotlin.gradle)
     api(libs.kotlin.gradle.api)
     api(libs.javax.inject)
+    implementation(libs.android.gradle.api)
     implementation(libs.annotations)
-    implementation(libs.android.gradle)
-    compileOnly(libs.kotlin.gradle.annotations)
     implementation(libs.kotlin.native.utils)
+    implementation(projects.codegen)
+    compileOnly(libs.kotlin.gradle.annotations)
+
+    // plugins needed at both compile time for configuration and at runtime as default version
+    api(libs.kotlin.gradle)
     implementation(libs.ksp.gradle)
     implementation(libs.sqldelight.gradle)
     implementation(libs.compose.gradle)
@@ -18,8 +21,12 @@ dependencies {
     implementation(libs.publish.gradle)
     implementation(libs.licensee.gradle)
     implementation(libs.crashlytics.gradle)
-    implementation(projects.codegen)
+
+    // already brought in by settings plugin
     compileOnly(libs.develocity.gradle)
+
+    // add to runtime so that consumers can get a default version
+    runtimeOnly(libs.android.gradle)
     runtimeOnly(libs.kotlin.gradle.compose)
     runtimeOnly(libs.kotlin.gradle.atomicfu)
     runtimeOnly(libs.kotlin.gradle.serialization)
