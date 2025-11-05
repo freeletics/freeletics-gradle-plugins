@@ -50,11 +50,6 @@ gradlePlugin {
             implementationClass = "com.freeletics.gradle.plugin.FreeleticsAndroidAppPlugin"
         }
 
-        create("commonJvmPlugin") {
-            id = "com.freeletics.gradle.jvm"
-            implementationClass = "com.freeletics.gradle.plugin.FreeleticsJvmPlugin"
-        }
-
         create("commonMultiplatformPlugin") {
             id = "com.freeletics.gradle.multiplatform"
             implementationClass = "com.freeletics.gradle.plugin.FreeleticsMultiplatformPlugin"
@@ -96,13 +91,8 @@ gradlePlugin {
         }
 
         create("monoCoreAndroidPlugin") {
-            id = "com.freeletics.gradle.core.android"
+            id = "com.freeletics.gradle.core"
             implementationClass = "com.freeletics.gradle.monorepo.plugin.CoreAndroidPlugin"
-        }
-
-        create("monoCoreKotlinPlugin") {
-            id = "com.freeletics.gradle.core.kotlin"
-            implementationClass = "com.freeletics.gradle.monorepo.plugin.CoreKotlinPlugin"
         }
 
         create("monoCoreMultiplatformPlugin") {
@@ -111,13 +101,8 @@ gradlePlugin {
         }
 
         create("monoDomainAndroidPlugin") {
-            id = "com.freeletics.gradle.domain.android"
+            id = "com.freeletics.gradle.domain"
             implementationClass = "com.freeletics.gradle.monorepo.plugin.DomainAndroidPlugin"
-        }
-
-        create("monoDomainKotlinPlugin") {
-            id = "com.freeletics.gradle.domain.kotlin"
-            implementationClass = "com.freeletics.gradle.monorepo.plugin.DomainKotlinPlugin"
         }
 
         create("monoDomainMultiplatformPlugin") {
@@ -126,7 +111,7 @@ gradlePlugin {
         }
 
         create("monoFeatureAndroidPlugin") {
-            id = "com.freeletics.gradle.feature.android"
+            id = "com.freeletics.gradle.feature"
             implementationClass = "com.freeletics.gradle.monorepo.plugin.FeatureAndroidPlugin"
         }
 
@@ -136,7 +121,7 @@ gradlePlugin {
         }
 
         create("monoNavAndroidPlugin") {
-            id = "com.freeletics.gradle.nav.android"
+            id = "com.freeletics.gradle.nav"
             implementationClass = "com.freeletics.gradle.monorepo.plugin.NavAndroidPlugin"
         }
 
@@ -146,7 +131,7 @@ gradlePlugin {
         }
 
         create("monoLegacyAndroidPlugin") {
-            id = "com.freeletics.gradle.legacy.android"
+            id = "com.freeletics.gradle.legacy"
             implementationClass = "com.freeletics.gradle.monorepo.plugin.LegacyAndroidPlugin"
         }
 

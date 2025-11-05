@@ -1,13 +1,11 @@
 package com.freeletics.gradle.plugin
 
-import com.freeletics.gradle.setup.defaultTestSetup
 import com.freeletics.gradle.util.compilerOptions
 import com.freeletics.gradle.util.freeleticsExtension
 import com.freeletics.gradle.util.kotlin
 import com.freeletics.gradle.util.kotlinMultiplatform
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.tasks.testing.Test
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 public abstract class FreeleticsMultiplatformPlugin : Plugin<Project> {
@@ -26,8 +24,6 @@ public abstract class FreeleticsMultiplatformPlugin : Plugin<Project> {
                 freeCompilerArgs.add("-Xexpect-actual-classes")
             }
         }
-
-        target.tasks.withType(Test::class.java).configureEach(Test::defaultTestSetup)
 
         target.disableDefaultJsRepositories()
         target.rootProject.disableDefaultJsRepositories()
