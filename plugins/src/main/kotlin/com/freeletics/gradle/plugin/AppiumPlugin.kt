@@ -17,9 +17,6 @@ import org.gradle.testing.base.TestingExtension
 
 public abstract class AppiumPlugin : Plugin<Project> {
     override fun apply(project: Project) {
-        check(project.plugins.hasPlugin("com.freeletics.gradle.jvm")) {
-            "The Freeletics Appium plugin requires com.freeletics.gradle.jvm to be applied to the project"
-        }
         project.plugins.apply("jvm-test-suite")
 
         val localTestCases = project.rootProject.name == "shared-infrastructure"
