@@ -2,6 +2,8 @@ package com.freeletics.gradle.plugin
 
 import com.freeletics.gradle.setup.configureProcessing
 import com.freeletics.gradle.setup.setupCompose
+import com.freeletics.gradle.setup.setupInternalPublishing
+import com.freeletics.gradle.setup.setupOssPublishing
 import com.freeletics.gradle.setup.setupSqlDelight
 import com.freeletics.gradle.util.addApiDependency
 import com.freeletics.gradle.util.addKspDependency
@@ -70,5 +72,13 @@ public abstract class FreeleticsBaseExtension(private val project: Project) : Ex
         dependency: DelegatingProjectDependency? = null,
     ) {
         project.setupSqlDelight(name, dependency)
+    }
+
+    public fun enableOssPublishing() {
+        setupOssPublishing(project)
+    }
+
+    public fun enableInternalPublishing() {
+        setupInternalPublishing(project)
     }
 }
