@@ -4,6 +4,7 @@ import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.freeletics.gradle.plugin.FreeleticsBaseExtension
+import com.freeletics.gradle.plugin.FreeleticsMultiplatformAndroidExtension
 import com.freeletics.gradle.plugin.FreeleticsMultiplatformExtension
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPluginExtension
@@ -21,6 +22,9 @@ internal val Project.freeleticsExtension: FreeleticsBaseExtension
 
 internal val Project.freeleticsMultiplatformExtension: FreeleticsMultiplatformExtension
     get() = freeleticsExtension.extensions.getByType(FreeleticsMultiplatformExtension::class.java)
+
+internal val Project.freeleticsAndroidMultiplatformExtension: FreeleticsMultiplatformAndroidExtension
+    get() = freeleticsExtension.extensions.getByType(FreeleticsMultiplatformAndroidExtension::class.java)
 
 internal fun Project.java(action: JavaPluginExtension.() -> Unit) {
     extensions.configure(JavaPluginExtension::class.java) {

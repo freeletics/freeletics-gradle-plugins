@@ -105,6 +105,11 @@ gradlePlugin {
             implementationClass = "com.freeletics.gradle.monorepo.plugin.NavPlugin"
         }
 
+        create("monoLegacyPlugin") {
+            id = "com.freeletics.gradle.legacy"
+            implementationClass = "com.freeletics.gradle.monorepo.plugin.LegacyPlugin"
+        }
+
         create("codegenPlugin") {
             id = "com.freeletics.gradle.codegen"
             implementationClass = "com.freeletics.gradle.codegen.CodegenPlugin"

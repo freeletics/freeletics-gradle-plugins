@@ -1,0 +1,35 @@
+package com.freeletics.gradle.monorepo.plugin
+
+import com.freeletics.gradle.monorepo.setup.applyPlatformConstraints
+import com.freeletics.gradle.monorepo.setup.disableMultiplatformLibraryTasks
+import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.registerCheckDependencyRulesTasks
+import com.freeletics.gradle.monorepo.util.ProjectType
+import com.freeletics.gradle.plugin.FreeleticsMultiplatformPlugin
+import com.freeletics.gradle.util.freeleticsAndroidMultiplatformExtension
+import com.freeletics.gradle.util.freeleticsMultiplatformExtension
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+
+public abstract class LegacyPlugin : Plugin<Project> {
+    override fun apply(target: Project) {
+        target.plugins.apply(FreeleticsMultiplatformPlugin::class.java)
+        target.freeleticsMultiplatformExtension.addDefaultTargets()
+
+        target.freeleticsAndroidMultiplatformExtension.enableAndroidResources()
+
+        target.registerCheckDependencyRulesTasks(
+            allowedProjectTypes = listOf(ProjectType.LEGACY),
+            allowedDependencyProjectTypes = listOfNotNull(
+                ProjectType.CORE_API,
+                ProjectType.CORE_TESTING,
+                ProjectType.DOMAIN_API,
+                ProjectType.DOMAIN_TESTING,
+                ProjectType.FEATURE_NAV,
+                ProjectType.LEGACY,
+            ),
+        )
+
+        target.applyPlatformConstraints(multiplatform = true)
+        target.disableMultiplatformLibraryTasks()
+    }
+}

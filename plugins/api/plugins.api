@@ -80,6 +80,18 @@ public abstract class com/freeletics/gradle/monorepo/plugin/FeaturePlugin : org/
 	public fun apply (Lorg/gradle/api/Project;)V
 }
 
+public abstract class com/freeletics/gradle/monorepo/plugin/LegacyExtension {
+	public fun <init> ()V
+	public final fun getAllowLegacyDependencies ()Z
+	public final fun setAllowLegacyDependencies (Z)V
+}
+
+public abstract class com/freeletics/gradle/monorepo/plugin/LegacyPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
 public abstract class com/freeletics/gradle/monorepo/plugin/NavPlugin : org/gradle/api/Plugin {
 	public fun <init> ()V
 	public synthetic fun apply (Ljava/lang/Object;)V
