@@ -13,6 +13,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 public abstract class FreeleticsGradlePluginPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.plugins.apply("java-gradle-plugin")
+        target.plugins.apply("org.jetbrains.kotlin.jvm")
         target.plugins.apply(FreeleticsBasePlugin::class.java)
 
         target.java {
