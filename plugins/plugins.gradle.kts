@@ -67,16 +67,6 @@ gradlePlugin {
             implementationClass = "com.freeletics.gradle.plugin.FreeleticsGradlePluginPlugin"
         }
 
-        create("commonPublishInternalPlugin") {
-            id = "com.freeletics.gradle.publish.internal"
-            implementationClass = "com.freeletics.gradle.plugin.FreeleticsPublishInternalPlugin"
-        }
-
-        create("commonPublishOssPlugin") {
-            id = "com.freeletics.gradle.publish.oss"
-            implementationClass = "com.freeletics.gradle.plugin.FreeleticsPublishOssPlugin"
-        }
-
         create("rootPlugin") {
             id = "com.freeletics.gradle.root"
             implementationClass = "com.freeletics.gradle.plugin.RootPlugin"

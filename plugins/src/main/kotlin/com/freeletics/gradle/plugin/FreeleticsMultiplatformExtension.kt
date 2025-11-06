@@ -3,16 +3,14 @@ package com.freeletics.gradle.plugin
 import com.android.build.api.dsl.androidLibrary
 import com.freeletics.gradle.setup.configureStandaloneLint
 import com.freeletics.gradle.setup.setupAndroidTarget
+import com.freeletics.gradle.setup.setupXcFrameworkPublishing
 import com.freeletics.gradle.util.addImplementationDependency
 import com.freeletics.gradle.util.booleanProperty
 import com.freeletics.gradle.util.defaultPackageName
 import com.freeletics.gradle.util.freeleticsMultiplatformExtension
 import com.freeletics.gradle.util.kotlinMultiplatform
+import kotlin.jvm.java
 import org.gradle.api.Project
-import org.gradle.api.publish.PublishingExtension
-import org.gradle.api.publish.maven.MavenPublication
-import org.gradle.api.publish.maven.tasks.AbstractPublishToMaven
-import org.gradle.api.tasks.bundling.Zip
 import org.jetbrains.compose.ComposeExtension
 import org.jetbrains.compose.ComposePlugin
 import org.jetbrains.compose.resources.ResourcesExtension
@@ -20,7 +18,6 @@ import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.plugin.mpp.Framework
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFrameworkConfig
-import org.jetbrains.kotlin.konan.target.HostManager
 
 public abstract class FreeleticsMultiplatformExtension(private val project: Project) {
     internal fun addDefaultTargets(xcFramework: Boolean = false) {
@@ -93,39 +90,8 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
             }
         }
 
-        project.plugins.withType(FreeleticsPublishInternalPlugin::class.java) {
-            val framework = "$frameworkName.xcframework"
-            val frameworkRoot = project.layout.buildDirectory.dir("XCFrameworks/release")
-            val assembleTask = "assemble${frameworkName}ReleaseXCFramework"
-
-            val frameworkZip = project.tasks.register("${assembleTask}Zip", Zip::class.java) {
-                it.dependsOn(assembleTask)
-                it.onlyIf { HostManager.hostIsMac }
-
-                it.from(frameworkRoot.map { root -> root.dir(framework) })
-                it.into(framework)
-                it.archiveBaseName.set(framework)
-                it.destinationDirectory.set(frameworkRoot)
-                it.isPreserveFileTimestamps = false
-                it.isReproducibleFileOrder = true
-            }
-
-            val publicationName = "${frameworkName}XcFramework"
-            project.extensions.configure(PublishingExtension::class.java) { publishing ->
-                publishing.publications.create(publicationName, MavenPublication::class.java) {
-                    // the project.name will be replaced with the real artifact id by the publishing plugin
-                    it.artifactId = "${project.name}-xcframework"
-                    it.artifact(frameworkZip) { artifact ->
-                        artifact.extension = "zip"
-                    }
-                }
-            }
-
-            project.tasks.withType(AbstractPublishToMaven::class.java).configureEach {
-                if (it.name.contains(publicationName, ignoreCase = true)) {
-                    it.onlyIf { HostManager.hostIsMac }
-                }
-            }
+        project.plugins.withId("com.vanniktech.maven.publish") {
+            setupXcFrameworkPublishing(project, frameworkName)
         }
     }
 
