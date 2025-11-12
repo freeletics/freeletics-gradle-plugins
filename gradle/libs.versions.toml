@@ -46,7 +46,7 @@ ksp-gradle = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin
 metro-gradle = { module = "dev.zacsweers.metro:gradle-plugin", version = "0.7.5" }
 poko-gradle = { module = "dev.drewhamilton.poko:poko-gradle-plugin", version = "0.20.1" }
 kopy-gradle = { module = "com.javiersc.kotlin:kopy-gradle-plugin", version = "0.20.2+2.2.21" }
-skie-gradle = { module = "co.touchlab.skie:gradle-plugin", version = "0.10.6" }
+skie-gradle = { module = "co.touchlab.skie:gradle-plugin", version = "0.10.7" }
 compose-gradle = { module = "org.jetbrains.compose:compose-gradle-plugin", version = "1.9.3"}
 sqldelight-gradle = { module = "app.cash.sqldelight:gradle-plugin", version.ref = "sqldelight" }
 paparazzi-gradle = { module = "app.cash.paparazzi:paparazzi-gradle-plugin", version.ref = "paparazzi" }
