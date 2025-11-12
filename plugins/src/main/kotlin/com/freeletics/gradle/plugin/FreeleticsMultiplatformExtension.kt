@@ -1,7 +1,6 @@
 package com.freeletics.gradle.plugin
 
 import com.android.build.api.dsl.androidLibrary
-import com.freeletics.gradle.setup.configureStandaloneLint
 import com.freeletics.gradle.setup.setupAndroidTarget
 import com.freeletics.gradle.setup.setupXcFrameworkPublishing
 import com.freeletics.gradle.util.addImplementationDependency
@@ -164,15 +163,5 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
 
     public fun useSkie() {
         project.plugins.apply("co.touchlab.skie")
-    }
-
-    public fun useAndroidLint() {
-        if (project.plugins.hasPlugin("com.android.kotlin.multiplatform.library")) {
-            return
-        }
-
-        project.plugins.apply("com.android.lint")
-
-        project.configureStandaloneLint()
     }
 }

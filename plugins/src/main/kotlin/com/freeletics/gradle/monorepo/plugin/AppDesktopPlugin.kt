@@ -21,8 +21,6 @@ public abstract class AppDesktopPlugin : Plugin<Project> {
 
         target.freeleticsMultiplatformExtension.addJvmTarget()
 
-        target.freeleticsMultiplatformExtension.useAndroidLint()
-
         target.extensions.configure(ComposeExtension::class.java) { compose ->
             compose.extensions.configure(DesktopExtension::class.java) { desktop ->
                 desktop.application { app ->

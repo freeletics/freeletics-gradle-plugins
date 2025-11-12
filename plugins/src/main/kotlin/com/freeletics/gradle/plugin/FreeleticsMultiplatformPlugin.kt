@@ -1,5 +1,6 @@
 package com.freeletics.gradle.plugin
 
+import com.freeletics.gradle.setup.configureStandaloneLint
 import com.freeletics.gradle.util.compilerOptions
 import com.freeletics.gradle.util.freeleticsExtension
 import com.freeletics.gradle.util.kotlin
@@ -25,6 +26,7 @@ public abstract class FreeleticsMultiplatformPlugin : Plugin<Project> {
             }
         }
 
+        target.configureStandaloneLint()
         target.disableDefaultJsRepositories()
         target.rootProject.disableDefaultJsRepositories()
     }
