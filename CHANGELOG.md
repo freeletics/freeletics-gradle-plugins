@@ -1,6 +1,16 @@
 Change Log
 ==========
 
+## 0.34.0 *(2024-11-12)*
+
+- Replace publishing plugins with extension methods.
+    - `com.freeletics.gradle.publish.oss` -> `enableOssPublishing()`
+    - `com.freeletics.gradle.publish.internal` -> `enableInternalPublishing()`
+- Enable Android Lint by default for all project types.
+- Enable kotlinx.serialization by default for nav modules.
+- Fix Android default dependencies not being applied to KMP projects.
+
+
 ## 0.33.0 *(2025-11-05)*
 
 - Updated all multiplatform plugins to use the new `com.android.kotlin.multiplatform.library` plugin for Android
