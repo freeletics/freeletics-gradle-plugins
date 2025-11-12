@@ -7,12 +7,12 @@ import org.gradle.api.artifacts.MinimalExternalModuleDependency
 import org.gradle.api.provider.Provider
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.kotlinExtension
-import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.plugin.KotlinTarget
 
 internal fun Project.addApiDependency(
     dependency: Provider<MinimalExternalModuleDependency>?,
-    limitToTargets: Set<KotlinPlatformType>? = null,
+    limitToTargets: Set<String>? = null,
+    excludeTargets: Set<String>? = null,
 ) {
     addApiDependency(dependency as Any?, limitToTargets)
 }
@@ -20,14 +20,16 @@ internal fun Project.addApiDependency(
 @JvmName("addApiDependencyBundle")
 internal fun Project.addApiDependency(
     dependency: Provider<ExternalModuleDependencyBundle>?,
-    limitToTargets: Set<KotlinPlatformType>? = null,
+    limitToTargets: Set<String>? = null,
+    excludeTargets: Set<String>? = null,
 ) {
     addApiDependency(dependency as Any?, limitToTargets)
 }
 
 private fun Project.addApiDependency(
     dependency: Any?,
-    limitToTargets: Set<KotlinPlatformType>? = null,
+    limitToTargets: Set<String>? = null,
+    excludeTargets: Set<String>? = null,
 ) {
     addDependency(
         dependency = dependency,
@@ -35,12 +37,14 @@ private fun Project.addApiDependency(
         commonConfiguration = "commonMainApi",
         targetConfiguration = KotlinTarget::apiConfigName,
         limitToTargets = limitToTargets,
+        excludeTargets = excludeTargets,
     )
 }
 
 internal fun Project.addImplementationDependency(
     dependency: Provider<MinimalExternalModuleDependency>?,
-    limitToTargets: Set<KotlinPlatformType>? = null,
+    limitToTargets: Set<String>? = null,
+    excludeTargets: Set<String>? = null,
 ) {
     addImplementationDependency(dependency as Any?, limitToTargets)
 }
@@ -48,7 +52,8 @@ internal fun Project.addImplementationDependency(
 @JvmName("addImplementationDependencyBundle")
 internal fun Project.addImplementationDependency(
     dependency: Provider<ExternalModuleDependencyBundle>?,
-    limitToTargets: Set<KotlinPlatformType>? = null,
+    limitToTargets: Set<String>? = null,
+    excludeTargets: Set<String>? = null,
 ) {
     addImplementationDependency(dependency as Any?, limitToTargets)
 }
@@ -56,14 +61,16 @@ internal fun Project.addImplementationDependency(
 @JvmName("addImplementationDependencyString")
 internal fun Project.addImplementationDependency(
     dependency: String,
-    limitToTargets: Set<KotlinPlatformType>? = null,
+    limitToTargets: Set<String>? = null,
+    excludeTargets: Set<String>? = null,
 ) {
     addImplementationDependency(dependency as Any?, limitToTargets)
 }
 
 private fun Project.addImplementationDependency(
     dependency: Any?,
-    limitToTargets: Set<KotlinPlatformType>? = null,
+    limitToTargets: Set<String>? = null,
+    excludeTargets: Set<String>? = null,
 ) {
     addDependency(
         dependency = dependency,
@@ -71,12 +78,14 @@ private fun Project.addImplementationDependency(
         commonConfiguration = "commonMainImplementation",
         targetConfiguration = KotlinTarget::implementationConfigName,
         limitToTargets = limitToTargets,
+        excludeTargets = excludeTargets,
     )
 }
 
 internal fun Project.addCompileOnlyDependency(
     dependency: Provider<MinimalExternalModuleDependency>?,
-    limitToTargets: Set<KotlinPlatformType>? = null,
+    limitToTargets: Set<String>? = null,
+    excludeTargets: Set<String>? = null,
 ) {
     addCompileOnlyDependency(dependency as Any?, limitToTargets)
 }
@@ -84,14 +93,16 @@ internal fun Project.addCompileOnlyDependency(
 @JvmName("addCompileOnlyDependencyBundle")
 internal fun Project.addCompileOnlyDependency(
     dependency: Provider<ExternalModuleDependencyBundle>?,
-    limitToTargets: Set<KotlinPlatformType>? = null,
+    limitToTargets: Set<String>? = null,
+    excludeTargets: Set<String>? = null,
 ) {
     addCompileOnlyDependency(dependency as Any?, limitToTargets)
 }
 
 private fun Project.addCompileOnlyDependency(
     dependency: Any?,
-    limitToTargets: Set<KotlinPlatformType>? = null,
+    limitToTargets: Set<String>? = null,
+    excludeTargets: Set<String>? = null,
 ) {
     addDependency(
         dependency = dependency,
@@ -99,12 +110,14 @@ private fun Project.addCompileOnlyDependency(
         commonConfiguration = "commonMainCompileOnly",
         targetConfiguration = KotlinTarget::compileOnlyConfigName,
         limitToTargets = limitToTargets,
+        excludeTargets = excludeTargets,
     )
 }
 
 internal fun Project.addTestImplementationDependency(
     dependency: Provider<MinimalExternalModuleDependency>?,
-    limitToTargets: Set<KotlinPlatformType>? = null,
+    limitToTargets: Set<String>? = null,
+    excludeTargets: Set<String>? = null,
 ) {
     addTestImplementationDependency(dependency as Any?, limitToTargets)
 }
@@ -112,14 +125,16 @@ internal fun Project.addTestImplementationDependency(
 @JvmName("addTestImplementationDependencyBundle")
 internal fun Project.addTestImplementationDependency(
     dependency: Provider<ExternalModuleDependencyBundle>?,
-    limitToTargets: Set<KotlinPlatformType>? = null,
+    limitToTargets: Set<String>? = null,
+    excludeTargets: Set<String>? = null,
 ) {
     addTestImplementationDependency(dependency as Any?, limitToTargets)
 }
 
 private fun Project.addTestImplementationDependency(
     dependency: Any?,
-    limitToTargets: Set<KotlinPlatformType>? = null,
+    limitToTargets: Set<String>? = null,
+    excludeTargets: Set<String>? = null,
 ) {
     addDependency(
         dependency = dependency,
@@ -127,12 +142,14 @@ private fun Project.addTestImplementationDependency(
         commonConfiguration = "commonTestImplementation",
         targetConfiguration = KotlinTarget::testImplementationConfigName,
         limitToTargets = limitToTargets,
+        excludeTargets = excludeTargets,
     )
 }
 
 internal fun Project.addTestCompileOnlyDependency(
     dependency: Provider<MinimalExternalModuleDependency>?,
-    limitToTargets: Set<KotlinPlatformType>? = null,
+    limitToTargets: Set<String>? = null,
+    excludeTargets: Set<String>? = null,
 ) {
     addTestCompileOnlyDependency(dependency as Any?, limitToTargets)
 }
@@ -140,14 +157,16 @@ internal fun Project.addTestCompileOnlyDependency(
 @JvmName("addTestCompileOnlyDependencyBundle")
 internal fun Project.addTestCompileOnlyDependency(
     dependency: Provider<ExternalModuleDependencyBundle>?,
-    limitToTargets: Set<KotlinPlatformType>? = null,
+    limitToTargets: Set<String>? = null,
+    excludeTargets: Set<String>? = null,
 ) {
     addTestCompileOnlyDependency(dependency as Any?, limitToTargets)
 }
 
 private fun Project.addTestCompileOnlyDependency(
     dependency: Any?,
-    limitToTargets: Set<KotlinPlatformType>? = null,
+    limitToTargets: Set<String>? = null,
+    excludeTargets: Set<String>? = null,
 ) {
     addDependency(
         dependency = dependency,
@@ -155,12 +174,14 @@ private fun Project.addTestCompileOnlyDependency(
         commonConfiguration = "commonTestCompileOnly",
         targetConfiguration = KotlinTarget::testCompileOnlyConfigName,
         limitToTargets = limitToTargets,
+        excludeTargets = excludeTargets,
     )
 }
 
 internal fun Project.addTestRuntimeOnlyDependency(
     dependency: Provider<MinimalExternalModuleDependency>?,
-    limitToTargets: Set<KotlinPlatformType>? = null,
+    limitToTargets: Set<String>? = null,
+    excludeTargets: Set<String>? = null,
 ) {
     addTestRuntimeOnlyDependency(dependency as Any?, limitToTargets)
 }
@@ -168,14 +189,16 @@ internal fun Project.addTestRuntimeOnlyDependency(
 @JvmName("addTestRuntimeOnlyDependencyBundle")
 internal fun Project.addTestRuntimeOnlyDependency(
     dependency: Provider<ExternalModuleDependencyBundle>?,
-    limitToTargets: Set<KotlinPlatformType>? = null,
+    limitToTargets: Set<String>? = null,
+    excludeTargets: Set<String>? = null,
 ) {
     addTestRuntimeOnlyDependency(dependency as Any?, limitToTargets)
 }
 
 private fun Project.addTestRuntimeOnlyDependency(
     dependency: Any?,
-    limitToTargets: Set<KotlinPlatformType>? = null,
+    limitToTargets: Set<String>? = null,
+    excludeTargets: Set<String>? = null,
 ) {
     addDependency(
         dependency = dependency,
@@ -183,12 +206,14 @@ private fun Project.addTestRuntimeOnlyDependency(
         commonConfiguration = "commonTestRuntimeOnly",
         targetConfiguration = KotlinTarget::testRuntimeOnlyConfigName,
         limitToTargets = limitToTargets,
+        excludeTargets = excludeTargets,
     )
 }
 
 internal fun Project.addKspDependency(
     dependency: Provider<MinimalExternalModuleDependency>?,
-    limitToTargets: Set<KotlinPlatformType>? = null,
+    limitToTargets: Set<String>? = null,
+    excludeTargets: Set<String>? = null,
 ) {
     addDependency(
         dependency = dependency,
@@ -196,6 +221,7 @@ internal fun Project.addKspDependency(
         commonConfiguration = "kspCommonMainMetadata",
         targetConfiguration = KotlinTarget::kspConfigName,
         limitToTargets = limitToTargets,
+        excludeTargets = excludeTargets,
     )
 }
 
@@ -204,7 +230,8 @@ private fun Project.addDependency(
     notMultiplatformConfiguration: String,
     commonConfiguration: String,
     targetConfiguration: KotlinTarget.() -> String,
-    limitToTargets: Set<KotlinPlatformType>?,
+    limitToTargets: Set<String>?,
+    excludeTargets: Set<String>?,
 ) {
     if (dependency == null) {
         return
@@ -212,12 +239,18 @@ private fun Project.addDependency(
 
     val extension = kotlinExtension
     if (extension is KotlinMultiplatformExtension) {
-        if (limitToTargets == null) {
+        if (limitToTargets == null && excludeTargets == null) {
             dependencies.add(commonConfiguration, dependency)
         } else {
             extension.targets.configureEach {
-                if (it.platformType in limitToTargets) {
-                    dependencies.add(it.targetConfiguration(), dependency)
+                if (limitToTargets != null) {
+                    if (limitToTargets.contains(it.targetName)) {
+                        dependencies.add(it.targetConfiguration(), dependency)
+                    }
+                } else if (excludeTargets != null) {
+                    if (!excludeTargets.contains(it.targetName)) {
+                        dependencies.add(it.targetConfiguration(), dependency)
+                    }
                 }
             }
         }

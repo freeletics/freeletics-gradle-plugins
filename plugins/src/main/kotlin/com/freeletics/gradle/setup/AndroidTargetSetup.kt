@@ -13,7 +13,6 @@ import com.freeletics.gradle.util.getVersion
 import com.freeletics.gradle.util.getVersionOrNull
 import kotlin.text.toInt
 import org.gradle.api.Project
-import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
 internal fun KotlinMultiplatformAndroidLibraryTarget.setupAndroidTarget(
     target: Project,
@@ -44,11 +43,11 @@ internal fun KotlinMultiplatformAndroidLibraryTarget.setupAndroidTarget(
     // add default dependencies
     val bundle = target.getBundleOrNull("default-android")
     if (bundle != null) {
-        target.addImplementationDependency(bundle, setOf(KotlinPlatformType.androidJvm))
+        target.addImplementationDependency(bundle, setOf("android"))
     }
     val compileBundle = target.getBundleOrNull("default-android-compile")
     if (compileBundle != null) {
-        target.addCompileOnlyDependency(compileBundle, setOf(KotlinPlatformType.androidJvm))
+        target.addCompileOnlyDependency(compileBundle, setOf("android"))
     }
 
     project.freeleticsExtension.extensions

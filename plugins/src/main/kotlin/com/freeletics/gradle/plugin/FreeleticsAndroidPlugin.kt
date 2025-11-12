@@ -19,7 +19,6 @@ import com.freeletics.gradle.util.getVersionOrNull
 import com.freeletics.gradle.util.javaTargetVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
 public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -77,11 +76,11 @@ public abstract class FreeleticsAndroidPlugin : Plugin<Project> {
     private fun Project.addDefaultAndroidDependencies() {
         val bundle = getBundleOrNull("default-android")
         if (bundle != null) {
-            addImplementationDependency(bundle, setOf(KotlinPlatformType.androidJvm))
+            addImplementationDependency(bundle)
         }
         val compileBundle = getBundleOrNull("default-android-compile")
         if (compileBundle != null) {
-            addCompileOnlyDependency(compileBundle, setOf(KotlinPlatformType.androidJvm))
+            addCompileOnlyDependency(compileBundle)
         }
     }
 
