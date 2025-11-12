@@ -1,12 +1,18 @@
 plugins {
-    alias(libs.plugins.fgp.jvm)
-    alias(libs.plugins.fgp.publish)
+    id("com.freeletics.gradle.multiplatform")
+    id("com.freeletics.gradle.publish.oss")
+}
+
+freeletics {
+    multiplatform {
+        addJvmTarget()
+    }
 }
 
 dependencies {
-    api(libs.kotlin.stdlib)
-    api(libs.clikt)
-    api(libs.clikt.core)
-    implementation(libs.s3)
-    implementation(libs.zxing)
+    "jvmMainApi"(libs.kotlin.stdlib)
+    "jvmMainApi"(libs.clikt)
+    "jvmMainApi"(libs.clikt.core)
+    "jvmMainImplementation"(libs.s3)
+    "jvmMainImplementation"(libs.zxing)
 }
