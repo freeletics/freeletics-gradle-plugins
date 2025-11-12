@@ -13,7 +13,6 @@ import com.freeletics.gradle.util.kotlin
 import org.gradle.api.Project
 import org.gradle.api.internal.catalog.DelegatingProjectDependency
 import org.gradle.api.plugins.ExtensionAware
-import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
 public abstract class FreeleticsBaseExtension(private val project: Project) : ExtensionAware {
     public fun explicitApi() {
@@ -50,7 +49,7 @@ public abstract class FreeleticsBaseExtension(private val project: Project) : Ex
         project.addApiDependency(project.getDependency("khonshu-codegen-runtime"))
         project.addKspDependency(
             project.getDependency("khonshu-codegen-compiler"),
-            limitToTargets = KotlinPlatformType.entries.toSet() - KotlinPlatformType.common,
+            excludeTargets = setOf("metadata"),
         )
         // TODO workaround for Gradle not being able to resolve this in the ksp config
         project.configurations.named("ksp").configure {
