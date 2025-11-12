@@ -1,10 +1,16 @@
 plugins {
-    id("com.freeletics.gradle.jvm")
+    id("com.freeletics.gradle.multiplatform")
     id("com.freeletics.gradle.publish.oss")
 }
 
+freeletics {
+    multiplatform {
+        addJvmTarget()
+    }
+}
+
 dependencies {
-    api(libs.kotlin.stdlib)
-    api(libs.clikt)
-    api(libs.clikt.core)
+    "jvmMainApi"(libs.kotlin.stdlib)
+    "jvmMainApi"(libs.clikt)
+    "jvmMainApi"(libs.clikt.core)
 }

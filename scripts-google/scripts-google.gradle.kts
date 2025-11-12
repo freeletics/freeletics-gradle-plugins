@@ -1,17 +1,23 @@
 plugins {
-    alias(libs.plugins.fgp.jvm)
-    alias(libs.plugins.fgp.publish)
+    id("com.freeletics.gradle.multiplatform")
+    id("com.freeletics.gradle.publish.oss")
+}
+
+freeletics {
+    multiplatform {
+        addJvmTarget()
+    }
 }
 
 dependencies {
-    api(libs.kotlin.stdlib)
-    api(libs.clikt)
-    api(libs.clikt.core)
-    api(libs.google.play)
-    implementation(libs.google.sheets)
-    implementation(libs.google.apiclient)
-    implementation(libs.google.http)
-    implementation(libs.google.http.gson)
-    implementation(libs.google.credentials)
-    implementation(libs.google.oauth)
+    "jvmMainApi"(libs.kotlin.stdlib)
+    "jvmMainApi"(libs.clikt)
+    "jvmMainApi"(libs.clikt.core)
+    "jvmMainApi"(libs.google.play)
+    "jvmMainImplementation"(libs.google.sheets)
+    "jvmMainImplementation"(libs.google.apiclient)
+    "jvmMainImplementation"(libs.google.http)
+    "jvmMainImplementation"(libs.google.http.gson)
+    "jvmMainImplementation"(libs.google.credentials)
+    "jvmMainImplementation"(libs.google.oauth)
 }
