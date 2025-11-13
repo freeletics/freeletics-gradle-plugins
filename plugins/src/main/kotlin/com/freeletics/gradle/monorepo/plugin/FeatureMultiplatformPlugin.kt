@@ -18,12 +18,17 @@ public abstract class FeatureMultiplatformPlugin : Plugin<Project> {
         target.freeleticsExtension.useCompose()
 
         target.registerCheckDependencyRulesTasks(
-            allowedProjectTypes = listOf(ProjectType.FEATURE_IMPLEMENTATION),
+            allowedProjectTypes = listOf(
+                ProjectType.FEATURE_IMPLEMENTATION,
+                ProjectType.FEATURE_DEBUG,
+            ),
             allowedDependencyProjectTypes = listOfNotNull(
                 ProjectType.CORE_API,
                 ProjectType.CORE_TESTING,
+                ProjectType.CORE_DEBUG,
                 ProjectType.DOMAIN_API,
                 ProjectType.DOMAIN_TESTING,
+                ProjectType.DOMAIN_DEBUG,
                 ProjectType.FEATURE_NAV,
             ),
         )

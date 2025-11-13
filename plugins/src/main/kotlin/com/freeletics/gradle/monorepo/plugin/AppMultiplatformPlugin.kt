@@ -20,11 +20,14 @@ public abstract class AppMultiplatformPlugin : Plugin<Project> {
                 ProjectType.CORE_API,
                 ProjectType.CORE_IMPLEMENTATION,
                 ProjectType.CORE_TESTING,
+                ProjectType.CORE_DEBUG,
                 ProjectType.DOMAIN_API,
                 ProjectType.DOMAIN_IMPLEMENTATION,
                 ProjectType.DOMAIN_TESTING,
+                ProjectType.DOMAIN_DEBUG,
                 ProjectType.FEATURE_IMPLEMENTATION,
                 ProjectType.FEATURE_NAV,
+                ProjectType.FEATURE_DEBUG,
             ),
         )
 

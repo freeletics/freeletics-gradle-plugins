@@ -24,11 +24,14 @@ internal fun defaultPackageName(path: String, prefix: String): String {
         ProjectType.CORE_API -> pathElements[1].transformPathPart()
         ProjectType.CORE_IMPLEMENTATION -> pathElements[1].transformPathPart() + projectType.suffix
         ProjectType.CORE_TESTING -> pathElements[1].transformPathPart() + projectType.suffix
+        ProjectType.CORE_DEBUG -> pathElements[1].transformPathPart() + projectType.suffix
         ProjectType.DOMAIN_API -> pathElements[1].transformPathPart()
         ProjectType.DOMAIN_IMPLEMENTATION -> pathElements[1].transformPathPart() + projectType.suffix
         ProjectType.DOMAIN_TESTING -> pathElements[1].transformPathPart() + projectType.suffix
+        ProjectType.DOMAIN_DEBUG -> pathElements[1].transformPathPart() + projectType.suffix
         ProjectType.FEATURE_NAV -> pathElements[1].transformPathPart() + projectType.suffix
         ProjectType.FEATURE_IMPLEMENTATION -> pathElements[1].transformPathPart()
+        ProjectType.FEATURE_DEBUG -> pathElements[1].transformPathPart()
         ProjectType.LEGACY -> pathElements[1].transformPathPart()
         null -> pathElements.flatMap { it.transformPathPart() }
     }

@@ -19,10 +19,12 @@ public abstract class CoreMultiplatformPlugin : Plugin<Project> {
                 ProjectType.CORE_API,
                 ProjectType.CORE_IMPLEMENTATION,
                 ProjectType.CORE_TESTING,
+                ProjectType.CORE_DEBUG,
             ),
-            allowedDependencyProjectTypes = listOf(
+            allowedDependencyProjectTypes = listOfNotNull(
                 ProjectType.CORE_API,
                 ProjectType.CORE_TESTING,
+                ProjectType.CORE_DEBUG,
             ),
         )
 

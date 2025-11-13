@@ -20,8 +20,10 @@ public abstract class NavAndroidPlugin : Plugin<Project> {
             allowedDependencyProjectTypes = listOf(
                 ProjectType.CORE_API,
                 ProjectType.CORE_TESTING,
+                ProjectType.CORE_DEBUG,
                 ProjectType.DOMAIN_API,
                 ProjectType.DOMAIN_TESTING,
+                ProjectType.DOMAIN_DEBUG,
             ),
         )
 

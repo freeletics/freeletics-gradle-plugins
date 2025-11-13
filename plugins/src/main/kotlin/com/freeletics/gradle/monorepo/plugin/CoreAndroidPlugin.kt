@@ -20,10 +20,12 @@ public abstract class CoreAndroidPlugin : Plugin<Project> {
                 ProjectType.CORE_API,
                 ProjectType.CORE_IMPLEMENTATION,
                 ProjectType.CORE_TESTING,
+                ProjectType.CORE_DEBUG,
             ),
             allowedDependencyProjectTypes = listOf(
                 ProjectType.CORE_API,
                 ProjectType.CORE_TESTING,
+                ProjectType.CORE_DEBUG,
             ),
         )
 

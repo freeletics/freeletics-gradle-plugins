@@ -21,8 +21,10 @@ public abstract class LegacyAndroidPlugin : Plugin<Project> {
             allowedDependencyProjectTypes = listOfNotNull(
                 ProjectType.CORE_API,
                 ProjectType.CORE_TESTING,
+                ProjectType.CORE_DEBUG,
                 ProjectType.DOMAIN_API,
                 ProjectType.DOMAIN_TESTING,
+                ProjectType.DOMAIN_DEBUG,
                 ProjectType.FEATURE_NAV,
                 ProjectType.LEGACY,
             ),

@@ -6,6 +6,7 @@ import com.freeletics.gradle.monorepo.util.toProjectType
 
 internal fun checkDependencyRules(
     projectPath: String,
+    configurationName: String,
     dependencyPath: String,
     allowedProjectTypes: List<ProjectType>,
     allowedDependencyProjectTypes: List<ProjectType>,
@@ -29,6 +30,21 @@ internal fun checkDependencyRules(
 
     if (dependencyAppType != null && dependencyAppType != projectAppType) {
         errors += "$projectPath is not allowed to depend on ${dependencyAppType.name} module $dependencyPath"
+    }
+
+    if (dependencyProjectType.suffix == "testing" && projectType.suffix != "testing") {
+        if (!configurationName.contains("test", ignoreCase = true)) {
+            errors += "$projectPath is not allowed to depend on testing module $dependencyPath " +
+                "in configuration $configurationName"
+        }
+    }
+    if (dependencyProjectType.suffix == "debug" && projectType.suffix != "debug" && projectType.suffix != "testing") {
+        if (!configurationName.contains("debug", ignoreCase = true) &&
+            !configurationName.contains("test", ignoreCase = true)
+        ) {
+            errors += "$projectPath is not allowed to depend on debug module $dependencyPath " +
+                "in configuration $configurationName"
+        }
     }
 
     return errors
