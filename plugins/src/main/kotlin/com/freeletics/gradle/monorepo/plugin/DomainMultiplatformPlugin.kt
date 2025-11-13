@@ -20,13 +20,16 @@ public abstract class DomainMultiplatformPlugin : Plugin<Project> {
                 ProjectType.DOMAIN_API,
                 ProjectType.DOMAIN_IMPLEMENTATION,
                 ProjectType.DOMAIN_TESTING,
+                ProjectType.DOMAIN_DEBUG,
             ),
             allowedDependencyProjectTypes = listOfNotNull(
                 ProjectType.CORE_API,
                 ProjectType.CORE_TESTING,
+                ProjectType.CORE_DEBUG,
                 ProjectType.DOMAIN_API,
                 ProjectType.DOMAIN_TESTING,
-                if (target.projectType() == ProjectType.DOMAIN_IMPLEMENTATION) ProjectType.FEATURE_NAV else null,
+                ProjectType.DOMAIN_DEBUG,
+                ProjectType.FEATURE_NAV.takeIf { target.projectType() == ProjectType.DOMAIN_IMPLEMENTATION },
             ),
         )
 

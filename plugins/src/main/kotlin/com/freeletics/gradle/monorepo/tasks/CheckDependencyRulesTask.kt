@@ -25,6 +25,9 @@ public abstract class CheckDependencyRulesTask : DefaultTask() {
     public abstract val projectPath: Property<String>
 
     @get:Input
+    public abstract val configurationName: Property<String>
+
+    @get:Input
     public abstract val allowedProjectTypes: ListProperty<String>
 
     @get:Input
@@ -59,6 +62,7 @@ public abstract class CheckDependencyRulesTask : DefaultTask() {
             .flatMap {
                 checkDependencyRules(
                     projectPath = projectPath,
+                    configurationName = configurationName.get(),
                     dependencyPath = it.projectPath,
                     allowedProjectTypes = allowedProjectTypes.get().map(ProjectType::valueOf),
                     allowedDependencyProjectTypes = allowedDependencyProjectTypes.get().map(ProjectType::valueOf),
@@ -113,6 +117,7 @@ public abstract class CheckDependencyRulesTask : DefaultTask() {
         ): TaskProvider<CheckDependencyRulesTask> {
             return tasks.register("${configuration.name}CheckDependencyRules", CheckDependencyRulesTask::class.java) {
                 it.projectPath.set(path)
+                it.configurationName.set(configuration.name)
                 it.allowedProjectTypes.addAll(allowedProjectTypes.map(ProjectType::name))
                 it.allowedDependencyProjectTypes.addAll(allowedDependencyProjectTypes.map(ProjectType::name))
                 it.artifactIds.set(configuration.incoming.resolutionResult.rootComponent)
