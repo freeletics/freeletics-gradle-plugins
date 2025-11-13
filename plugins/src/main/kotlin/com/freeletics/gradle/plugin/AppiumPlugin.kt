@@ -42,7 +42,7 @@ public abstract class AppiumPlugin : Plugin<Project> {
         val testClassesDir = layout.buildDirectory.dir("testClasses")
         return tasks.register("unzipTests", Copy::class.java) {
             if (localTestCases) {
-                it.dependsOn(tasks.getByPath(":testing:appium-tests:jar"))
+                it.dependsOn(tasks.getByPath(":testing:appium-tests:jvmJar"))
             }
             it.from(zipTree(testCases.singleFile))
             it.into(testClassesDir)
