@@ -1,13 +1,16 @@
 Change Log
 ==========
 
-## 0.34.0 *(2024-11-12)*
+## 0.34.0 *(2024-11-14)*
 
 - Replace publishing plugins with extension methods.
     - `com.freeletics.gradle.publish.oss` -> `enableOssPublishing()`
     - `com.freeletics.gradle.publish.internal` -> `enableInternalPublishing()`
+- New `debug` project type for debug functionality. This allows replacing Android's `debug` build type
+  which is only supported by Android and not by Android KMP.q
 - Enable Android Lint by default for all project types.
 - Enable kotlinx.serialization by default for nav modules.
+- Enable abiValidation by default for all projects calling `enableOssPublishing`.
 - Fix Android default dependencies not being applied to KMP projects.
 
 
