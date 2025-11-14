@@ -28,7 +28,7 @@ internal fun setupOssPublishing(target: Project) {
     target.extensions.configure(MavenPublishBaseExtension::class.java) {
         it.publishToMavenCentral(automaticRelease = true)
         it.signAllPublications()
-        it.pom { pom -> pom.configurePom(target, includeLicense = false) }
+        it.pom { pom -> pom.configurePom(target, includeLicense = true) }
 
         val isSnapshot = target.stringProperty("VERSION_NAME").orNull?.endsWith("-SNAPSHOT") == true
         @Suppress("UnstableApiUsage")

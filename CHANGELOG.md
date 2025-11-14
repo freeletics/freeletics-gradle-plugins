@@ -4,6 +4,7 @@ Change Log
 ## 0.34.1 *(2024-11-15)*
 
 - Allow feature modules to depend on feature debug modules.
+- Fix OSS publishing not having license information.
 
 
 ## 0.34.1 *(2024-11-14)*
