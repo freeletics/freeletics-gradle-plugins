@@ -16,7 +16,6 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.abi.AbiValidationExtension
-import org.jetbrains.kotlin.gradle.dsl.abi.AbiValidationLegacyDumpExtension
 import org.jetbrains.kotlin.gradle.dsl.abi.AbiValidationMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
 import org.jetbrains.kotlin.konan.target.HostManager
@@ -144,25 +143,34 @@ internal fun setupXcFrameworkPublishing(project: Project, frameworkName: String)
 private fun Project.configureBinaryCompatibility() {
     kotlin {
         when (this) {
-            is KotlinJvmProjectExtension -> extensions.configure<AbiValidationExtension>("abiValidation") {
-                it.enabled.set(true)
+            is KotlinJvmProjectExtension -> extensions.configure<AbiValidationExtension>(
+                "abiValidation",
+            ) { validation ->
+                validation.enabled.set(true)
+                // TODO remove manual task dependency https://youtrack.jetbrains.com/issue/KT-80614
+                tasks.named("check").configure { task ->
+                    task.dependsOn(validation.legacyDump.legacyCheckTaskProvider)
+                }
             }
-            is KotlinAndroidProjectExtension -> extensions.configure<AbiValidationExtension>("abiValidation") {
-                it.enabled.set(true)
+            is KotlinAndroidProjectExtension -> extensions.configure<AbiValidationExtension>(
+                "abiValidation",
+            ) { validation ->
+                validation.enabled.set(true)
+                // TODO remove manual task dependency https://youtrack.jetbrains.com/issue/KT-80614
+                tasks.named("check").configure { task ->
+                    task.dependsOn(validation.legacyDump.legacyCheckTaskProvider)
+                }
             }
             is KotlinMultiplatformExtension -> extensions.configure<AbiValidationMultiplatformExtension>(
                 "abiValidation",
-            ) {
-                it.enabled.set(true)
+            ) { validation ->
+                validation.enabled.set(true)
+                // TODO remove manual task dependency https://youtrack.jetbrains.com/issue/KT-80614
+                tasks.named("check").configure { task ->
+                    task.dependsOn(validation.legacyDump.legacyCheckTaskProvider)
+                }
             }
             else -> throw IllegalStateException("Unsupported kotlin extension ${this::class}")
-        }
-
-        // TODO remove manual task dependency https://youtrack.jetbrains.com/issue/KT-80614
-        extensions.configure(AbiValidationLegacyDumpExtension::class.java) {
-            tasks.named("check").configure { task ->
-                task.dependsOn(it.legacyDumpTaskProvider)
-            }
         }
     }
 }

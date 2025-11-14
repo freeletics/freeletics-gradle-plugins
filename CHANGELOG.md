@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## 0.34.1 *(2024-11-14)*
+
+- Fix dependency on abi dumb check task.
+
+
 ## 0.34.0 *(2024-11-14)*
 
 - Replace publishing plugins with extension methods.
