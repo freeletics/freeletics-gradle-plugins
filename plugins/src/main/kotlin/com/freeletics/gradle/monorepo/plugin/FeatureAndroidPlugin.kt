@@ -36,6 +36,7 @@ public abstract class FeatureAndroidPlugin : Plugin<Project> {
                     ProjectType.DOMAIN_DEBUG,
                     ProjectType.FEATURE_NAV,
                     ProjectType.FEATURE_IMPLEMENTATION.takeIf { target.projectType() == ProjectType.FEATURE_DEBUG },
+                    ProjectType.FEATURE_DEBUG,
                     // TODO remove when nav modules don't depend on legacy modules anymore
                     ProjectType.LEGACY.takeIf { extension.allowLegacyDependencies },
                 ),

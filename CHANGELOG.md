@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## 0.34.1 *(2024-11-15)*
+
+- Allow feature modules to depend on feature debug modules.
+
+
 ## 0.34.1 *(2024-11-14)*
 
 - Fix dependency on abi dumb check task.
