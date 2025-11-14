@@ -2,7 +2,7 @@
 java-target = "17"
 java-toolchain = "24"
 
-fgp = "0.33.1"
+fgp = "0.34.1"
 
 kotlin = "2.2.21"
 coroutines = "1.10.2"
@@ -91,7 +91,6 @@ fgp-root = { id = "com.freeletics.gradle.root", version.ref = "fgp" }
 fgp-settings = { id = "com.freeletics.gradle.settings", version.ref = "fgp" }
 fgp-gradle = { id = "com.freeletics.gradle.gradle", version.ref = "fgp" }
 fgp-multiplatform = { id = "com.freeletics.gradle.multiplatform", version.ref = "fgp" }
-fgp-publish = { id = "com.freeletics.gradle.publish.oss", version.ref = "fgp" }
 
 kotlin = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
