@@ -1,0 +1,69 @@
+public final class com/freeletics/gradle/scripts/GoogleApiOptions : com/github/ajalt/clikt/parameters/groups/OptionGroup {
+	public fun <init> ()V
+	public final fun getJsonKeyData ()Ljava/lang/String;
+}
+
+public final class com/freeletics/gradle/scripts/GooglePlayEdit {
+	public static final field Companion Lcom/freeletics/gradle/scripts/GooglePlayEdit$Companion;
+	public static final field STATUS_COMPLETED Ljava/lang/String;
+	public static final field STATUS_IN_PROGRESS Ljava/lang/String;
+	public static final field TRACK_BETA Ljava/lang/String;
+	public static final field TRACK_INTERNAL Ljava/lang/String;
+	public static final field TRACK_PRODUCTION Ljava/lang/String;
+	public fun <init> (Lcom/google/api/services/androidpublisher/AndroidPublisher$Edits;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun publishToTrack (Ljava/lang/String;DLcom/freeletics/gradle/scripts/GooglePlayReleaseVersion;Ljava/util/Map;)V
+	public final fun updateRolloutInTrack (Ljava/lang/String;DLcom/freeletics/gradle/scripts/GooglePlayReleaseVersion;)V
+	public final fun upload (Ljava/io/File;Lcom/freeletics/gradle/scripts/GooglePlayReleaseVersion;)V
+	public final fun versionsInTrack (Ljava/lang/String;)Ljava/util/List;
+}
+
+public final class com/freeletics/gradle/scripts/GooglePlayEdit$Companion {
+}
+
+public final class com/freeletics/gradle/scripts/GooglePlayPublisher {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun downloadApkTo (Ljava/io/File;I)V
+	public final fun edit (Lkotlin/jvm/functions/Function1;)V
+}
+
+public abstract class com/freeletics/gradle/scripts/GooglePlayReleaseVersion {
+	public abstract fun getCode ()J
+	public final fun getCodePrefix ()J
+	public abstract fun getName ()Ljava/lang/String;
+	public final fun getNamePrefix ()Ljava/lang/String;
+}
+
+public final class com/freeletics/gradle/scripts/GooglePlayReleaseVersion$Simple : com/freeletics/gradle/scripts/GooglePlayReleaseVersion {
+	public fun <init> (Ljava/lang/String;J)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()J
+	public final fun copy (Ljava/lang/String;J)Lcom/freeletics/gradle/scripts/GooglePlayReleaseVersion$Simple;
+	public static synthetic fun copy$default (Lcom/freeletics/gradle/scripts/GooglePlayReleaseVersion$Simple;Ljava/lang/String;JILjava/lang/Object;)Lcom/freeletics/gradle/scripts/GooglePlayReleaseVersion$Simple;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode ()J
+	public fun getName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/freeletics/gradle/scripts/GooglePlayReleaseVersion$WithRollout : com/freeletics/gradle/scripts/GooglePlayReleaseVersion {
+	public fun <init> (Ljava/lang/String;JD)V
+	public final fun asSimple ()Lcom/freeletics/gradle/scripts/GooglePlayReleaseVersion;
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()J
+	public final fun component3 ()D
+	public final fun copy (Ljava/lang/String;JD)Lcom/freeletics/gradle/scripts/GooglePlayReleaseVersion$WithRollout;
+	public static synthetic fun copy$default (Lcom/freeletics/gradle/scripts/GooglePlayReleaseVersion$WithRollout;Ljava/lang/String;JDILjava/lang/Object;)Lcom/freeletics/gradle/scripts/GooglePlayReleaseVersion$WithRollout;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getCode ()J
+	public fun getName ()Ljava/lang/String;
+	public final fun getRolloutPercentage ()D
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/freeletics/gradle/scripts/GoogleSheetsReader {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun read (Ljava/lang/String;Ljava/lang/String;)Ljava/util/List;
+}
+

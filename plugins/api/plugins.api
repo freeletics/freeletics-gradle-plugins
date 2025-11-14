@@ -1,0 +1,315 @@
+public abstract interface class com/freeletics/gradle/codegen/CodegenExtension {
+	public abstract fun getArguments ()Lorg/gradle/api/provider/ListProperty;
+	public abstract fun getSourceDirectory ()Lorg/gradle/api/file/DirectoryProperty;
+}
+
+public abstract class com/freeletics/gradle/codegen/CodegenPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public abstract class com/freeletics/gradle/codegen/CodegenTask : org/gradle/api/DefaultTask {
+	public fun <init> ()V
+	public abstract fun getArguments ()Lorg/gradle/api/provider/ListProperty;
+	public abstract fun getOutputDirectory ()Lorg/gradle/api/file/DirectoryProperty;
+	public abstract fun getSourceDirectory ()Lorg/gradle/api/file/DirectoryProperty;
+	public abstract fun getWorkerExecutor ()Lorg/gradle/workers/WorkerExecutor;
+	public final fun run ()V
+}
+
+public abstract class com/freeletics/gradle/codegen/CodegenTask$GenerateCode : org/gradle/workers/WorkAction {
+	public fun <init> ()V
+	public fun execute ()V
+}
+
+public abstract interface class com/freeletics/gradle/codegen/CodegenTask$GenerateCode$Parameters : org/gradle/workers/WorkParameters {
+	public abstract fun getArguments ()Lorg/gradle/api/provider/ListProperty;
+	public abstract fun getOutputDirectory ()Lorg/gradle/api/file/DirectoryProperty;
+	public abstract fun getSourceDirectory ()Lorg/gradle/api/file/DirectoryProperty;
+}
+
+public abstract class com/freeletics/gradle/monorepo/plugin/AppAndroidExtension {
+	public fun <init> (Lorg/gradle/api/Project;)V
+	public final fun applicationId (Ljava/lang/String;)V
+	public final fun applicationIdSuffix (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun checkLicenses ()V
+	public final fun crashReporting ()V
+	public final fun crashReporting (Z)V
+	public static synthetic fun crashReporting$default (Lcom/freeletics/gradle/monorepo/plugin/AppAndroidExtension;ZILjava/lang/Object;)V
+	public final fun environmentBuildConfig (Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun freeleticsBackend ()V
+	public final fun limitLanguagesTo ([Ljava/lang/String;)V
+	public final fun minify ([Ljava/io/File;)V
+	public final fun versionFromGit (Ljava/lang/String;)V
+}
+
+public abstract class com/freeletics/gradle/monorepo/plugin/AppAndroidPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public abstract class com/freeletics/gradle/monorepo/plugin/AppDesktopPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public abstract class com/freeletics/gradle/monorepo/plugin/AppMultiplatformPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public abstract class com/freeletics/gradle/monorepo/plugin/CoreAndroidPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public abstract class com/freeletics/gradle/monorepo/plugin/CoreMultiplatformPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public abstract class com/freeletics/gradle/monorepo/plugin/DomainAndroidPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public abstract class com/freeletics/gradle/monorepo/plugin/DomainMultiplatformPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public abstract class com/freeletics/gradle/monorepo/plugin/FeatureAndroidPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public abstract class com/freeletics/gradle/monorepo/plugin/FeatureMultiplatformPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public abstract class com/freeletics/gradle/monorepo/plugin/LegacyAndroidPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public abstract class com/freeletics/gradle/monorepo/plugin/LegacyExtension {
+	public fun <init> ()V
+	public final fun getAllowLegacyDependencies ()Z
+	public final fun setAllowLegacyDependencies (Z)V
+}
+
+public abstract class com/freeletics/gradle/monorepo/plugin/NavAndroidPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public abstract class com/freeletics/gradle/monorepo/plugin/NavMultiplatformPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public abstract class com/freeletics/gradle/monorepo/tasks/CheckDependencyRulesTask : org/gradle/api/DefaultTask {
+	public fun <init> ()V
+	public final fun check ()V
+	public abstract fun getAllowedDependencyProjectTypes ()Lorg/gradle/api/provider/ListProperty;
+	public abstract fun getAllowedProjectTypes ()Lorg/gradle/api/provider/ListProperty;
+	public abstract fun getArtifactIds ()Lorg/gradle/api/provider/Property;
+	public abstract fun getConfigurationName ()Lorg/gradle/api/provider/Property;
+	public abstract fun getOutputFile ()Lorg/gradle/api/file/RegularFileProperty;
+	public abstract fun getProjectPath ()Lorg/gradle/api/provider/Property;
+}
+
+public abstract class com/freeletics/gradle/monorepo/tasks/ComputeGitShaTask : org/gradle/api/DefaultTask {
+	public fun <init> ()V
+	public final fun action ()V
+	public abstract fun getComputeFromGit ()Lorg/gradle/api/provider/Property;
+	public abstract fun getGitRootDirectory ()Lorg/gradle/api/provider/Property;
+	public abstract fun getOutputFile ()Lorg/gradle/api/file/RegularFileProperty;
+}
+
+public abstract class com/freeletics/gradle/monorepo/tasks/ComputeGitTimestampTask : org/gradle/api/DefaultTask {
+	public fun <init> ()V
+	public final fun action ()V
+	public abstract fun getComputeFromGit ()Lorg/gradle/api/provider/Property;
+	public abstract fun getGitRootDirectory ()Lorg/gradle/api/provider/Property;
+	public abstract fun getOutputFile ()Lorg/gradle/api/file/RegularFileProperty;
+}
+
+public abstract class com/freeletics/gradle/monorepo/tasks/ComputeVersionCodeTask : org/gradle/api/DefaultTask {
+	public fun <init> ()V
+	public final fun action ()V
+	public abstract fun getComputeFromGit ()Lorg/gradle/api/provider/Property;
+	public abstract fun getGitRootDirectory ()Lorg/gradle/api/provider/Property;
+	public abstract fun getGitTagName ()Lorg/gradle/api/provider/Property;
+	public abstract fun getOutputFile ()Lorg/gradle/api/file/RegularFileProperty;
+}
+
+public final class com/freeletics/gradle/monorepo/tasks/ComputeVersionKt {
+	public static final fun computeVersionCode (Lcom/freeletics/gradle/monorepo/util/Git;Ljava/lang/String;Ljava/time/LocalDateTime;)I
+	public static final fun computeVersionCodeFromTag (Ljava/lang/String;)I
+	public static final fun computeVersionName (Lcom/freeletics/gradle/monorepo/util/Git;Ljava/lang/String;)Ljava/lang/String;
+	public static final fun versionBasedOnDate (Ljava/time/LocalDate;)Ljava/lang/String;
+	public static final fun versionNameFromTag (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+}
+
+public abstract class com/freeletics/gradle/monorepo/tasks/ComputeVersionNameTask : org/gradle/api/DefaultTask {
+	public fun <init> ()V
+	public final fun action ()V
+	public abstract fun getComputeFromGit ()Lorg/gradle/api/provider/Property;
+	public abstract fun getGitRootDirectory ()Lorg/gradle/api/provider/Property;
+	public abstract fun getGitTagName ()Lorg/gradle/api/provider/Property;
+	public abstract fun getOutputFile ()Lorg/gradle/api/file/RegularFileProperty;
+}
+
+public abstract class com/freeletics/gradle/monorepo/tasks/UpdateLicensesTask : org/gradle/api/tasks/Copy {
+	public fun <init> ()V
+}
+
+public abstract class com/freeletics/gradle/monorepo/tasks/VerifyLicensesTask : org/gradle/api/DefaultTask {
+	public fun <init> ()V
+	public abstract fun getExistingJson ()Lorg/gradle/api/file/RegularFileProperty;
+	public abstract fun getGeneratedJson ()Lorg/gradle/api/file/RegularFileProperty;
+	public final fun verify ()V
+}
+
+public abstract interface class com/freeletics/gradle/monorepo/util/Git {
+	public abstract fun branch ()Ljava/lang/String;
+	public abstract fun commitSha ()Ljava/lang/String;
+	public abstract fun commitTimestamp ()Ljava/lang/String;
+	public abstract fun describe (Ljava/lang/String;Z)Ljava/lang/String;
+}
+
+public final class com/freeletics/gradle/monorepo/util/RealGit : com/freeletics/gradle/monorepo/util/Git {
+	public fun <init> (Ljava/io/File;)V
+	public fun branch ()Ljava/lang/String;
+	public fun commitSha ()Ljava/lang/String;
+	public fun commitTimestamp ()Ljava/lang/String;
+	public fun describe (Ljava/lang/String;Z)Ljava/lang/String;
+}
+
+public abstract class com/freeletics/gradle/plugin/AppiumPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public abstract class com/freeletics/gradle/plugin/FreeleticsAndroidAppPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public abstract class com/freeletics/gradle/plugin/FreeleticsAndroidExtension {
+	public fun <init> (Lorg/gradle/api/Project;)V
+	public final fun buildConfigField (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun buildConfigField (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun consumerProguardFiles ([Ljava/lang/String;)V
+	public final fun enableAndroidResources ()V
+	public final fun enableBuildConfig ()V
+	public final fun enableParcelize ()V
+	public final fun enableResValues ()V
+	public final fun enableViewBinding ()V
+	public final fun resValue (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun resValue (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun usePaparazzi ()V
+	public final fun useRoom (Ljava/lang/String;)V
+	public static synthetic fun useRoom$default (Lcom/freeletics/gradle/plugin/FreeleticsAndroidExtension;Ljava/lang/String;ILjava/lang/Object;)V
+}
+
+public abstract class com/freeletics/gradle/plugin/FreeleticsAndroidPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public abstract class com/freeletics/gradle/plugin/FreeleticsBaseExtension : org/gradle/api/plugins/ExtensionAware {
+	public fun <init> (Lorg/gradle/api/Project;)V
+	public final fun enableInternalPublishing ()V
+	public final fun enableOssPublishing ()V
+	public final fun explicitApi ()V
+	public final fun optIn ([Ljava/lang/String;)V
+	public final fun useCompose ()V
+	public final fun useKhonshu ()V
+	public final fun useKopy ()V
+	public final fun useMetro ()V
+	public final fun usePoko ()V
+	public final fun useSerialization ()V
+	public final fun useSqlDelight (Ljava/lang/String;Lorg/gradle/api/internal/catalog/DelegatingProjectDependency;)V
+	public static synthetic fun useSqlDelight$default (Lcom/freeletics/gradle/plugin/FreeleticsBaseExtension;Ljava/lang/String;Lorg/gradle/api/internal/catalog/DelegatingProjectDependency;ILjava/lang/Object;)V
+}
+
+public abstract class com/freeletics/gradle/plugin/FreeleticsBasePlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public abstract class com/freeletics/gradle/plugin/FreeleticsGradlePluginPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public abstract class com/freeletics/gradle/plugin/FreeleticsMultiplatformAndroidExtension {
+	public fun <init> (Lorg/gradle/api/Project;)V
+	public final fun consumerProguardFiles ([Ljava/lang/String;)V
+	public final fun enableAndroidResources ()V
+	public final fun enableParcelize ()V
+	public final fun usePaparazzi ()V
+	public final fun useRoom (Ljava/lang/String;)V
+	public static synthetic fun useRoom$default (Lcom/freeletics/gradle/plugin/FreeleticsMultiplatformAndroidExtension;Ljava/lang/String;ILjava/lang/Object;)V
+}
+
+public abstract class com/freeletics/gradle/plugin/FreeleticsMultiplatformExtension {
+	public fun <init> (Lorg/gradle/api/Project;)V
+	public final fun addAndroidTarget ()V
+	public final fun addAndroidTarget (Ljava/util/List;)V
+	public final fun addAndroidTarget (Ljava/util/List;Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun addAndroidTarget$default (Lcom/freeletics/gradle/plugin/FreeleticsMultiplatformExtension;Ljava/util/List;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+	public final fun addCommonTargets (Z)V
+	public static synthetic fun addCommonTargets$default (Lcom/freeletics/gradle/plugin/FreeleticsMultiplatformExtension;ZILjava/lang/Object;)V
+	public final fun addIosTargets ()V
+	public final fun addIosTargets (Z)V
+	public static synthetic fun addIosTargets$default (Lcom/freeletics/gradle/plugin/FreeleticsMultiplatformExtension;ZILjava/lang/Object;)V
+	public final fun addIosTargetsWithXcFramework (Ljava/lang/String;)V
+	public final fun addIosTargetsWithXcFramework (Ljava/lang/String;Z)V
+	public final fun addIosTargetsWithXcFramework (Ljava/lang/String;ZLkotlin/jvm/functions/Function2;)V
+	public static synthetic fun addIosTargetsWithXcFramework$default (Lcom/freeletics/gradle/plugin/FreeleticsMultiplatformExtension;Ljava/lang/String;ZLkotlin/jvm/functions/Function2;ILjava/lang/Object;)V
+	public final fun addJvmTarget ()V
+	public final fun useComposeResources ()V
+	public final fun useSkie ()V
+}
+
+public abstract class com/freeletics/gradle/plugin/FreeleticsMultiplatformPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public abstract class com/freeletics/gradle/plugin/RootPlugin : org/gradle/api/Plugin {
+	public fun <init> ()V
+	public synthetic fun apply (Ljava/lang/Object;)V
+	public fun apply (Lorg/gradle/api/Project;)V
+}
+
+public abstract class com/google/gms/googleservices/GoogleServicesTask : org/gradle/api/DefaultTask {
+	public fun <init> ()V
+	public final fun extractAppId ()V
+	public abstract fun getGmpAppId ()Lorg/gradle/api/file/RegularFileProperty;
+	public abstract fun getGoogleServicesConfigFile ()Lorg/gradle/api/file/RegularFileProperty;
+}
+

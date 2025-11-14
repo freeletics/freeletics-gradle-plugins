@@ -1,0 +1,13 @@
+public final class com/freeletics/gradle/scripts/GithubOptions : com/github/ajalt/clikt/parameters/groups/OptionGroup {
+	public fun <init> ()V
+	public final fun getBranch ()Ljava/lang/String;
+	public final fun getBuildNumber ()Ljava/lang/String;
+	public final fun getCommitSha1 ()Ljava/lang/String;
+	public final fun getJobName ()Ljava/lang/String;
+	public final fun getJobUrl ()Ljava/lang/String;
+	public final fun getRepoName ()Ljava/lang/String;
+	public final fun getRepoSlug ()Ljava/lang/String;
+	public final fun getRunId ()Ljava/lang/String;
+	public final fun getUserName ()Ljava/lang/String;
+}
+
