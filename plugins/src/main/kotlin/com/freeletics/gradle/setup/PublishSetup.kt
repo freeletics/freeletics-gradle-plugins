@@ -3,6 +3,7 @@ package com.freeletics.gradle.setup
 import com.freeletics.gradle.util.freeleticsExtension
 import com.freeletics.gradle.util.kotlin
 import com.freeletics.gradle.util.stringProperty
+import com.gradle.scan.agent.serialization.scan.serializer.kryo.it
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import org.gradle.api.Project
 import org.gradle.api.credentials.PasswordCredentials
