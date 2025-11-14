@@ -4,6 +4,7 @@ import com.freeletics.gradle.monorepo.setup.applyPlatformConstraints
 import com.freeletics.gradle.monorepo.setup.disableMultiplatformLibraryTasks
 import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.registerCheckDependencyRulesTasks
 import com.freeletics.gradle.monorepo.util.ProjectType
+import com.freeletics.gradle.monorepo.util.projectType
 import com.freeletics.gradle.plugin.FreeleticsMultiplatformPlugin
 import com.freeletics.gradle.util.freeleticsMultiplatformExtension
 import org.gradle.api.Plugin
@@ -25,6 +26,7 @@ public abstract class CoreMultiplatformPlugin : Plugin<Project> {
                 ProjectType.CORE_API,
                 ProjectType.CORE_TESTING,
                 ProjectType.CORE_DEBUG,
+                ProjectType.CORE_IMPLEMENTATION.takeIf { target.projectType() == ProjectType.CORE_DEBUG },
             ),
         )
 

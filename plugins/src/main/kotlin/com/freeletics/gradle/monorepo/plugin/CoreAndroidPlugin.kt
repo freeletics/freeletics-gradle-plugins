@@ -4,6 +4,7 @@ import com.freeletics.gradle.monorepo.setup.applyPlatformConstraints
 import com.freeletics.gradle.monorepo.setup.disableAndroidLibraryTasks
 import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.registerCheckDependencyRulesTasks
 import com.freeletics.gradle.monorepo.util.ProjectType
+import com.freeletics.gradle.monorepo.util.projectType
 import com.freeletics.gradle.plugin.FreeleticsAndroidPlugin
 import com.freeletics.gradle.util.freeleticsAndroidExtension
 import org.gradle.api.Plugin
@@ -22,10 +23,11 @@ public abstract class CoreAndroidPlugin : Plugin<Project> {
                 ProjectType.CORE_TESTING,
                 ProjectType.CORE_DEBUG,
             ),
-            allowedDependencyProjectTypes = listOf(
+            allowedDependencyProjectTypes = listOfNotNull(
                 ProjectType.CORE_API,
                 ProjectType.CORE_TESTING,
                 ProjectType.CORE_DEBUG,
+                ProjectType.CORE_IMPLEMENTATION.takeIf { target.projectType() == ProjectType.CORE_DEBUG },
             ),
         )
 

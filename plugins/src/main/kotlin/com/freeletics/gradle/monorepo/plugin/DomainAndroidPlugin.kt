@@ -30,7 +30,8 @@ public abstract class DomainAndroidPlugin : Plugin<Project> {
                 ProjectType.DOMAIN_API,
                 ProjectType.DOMAIN_TESTING,
                 ProjectType.DOMAIN_DEBUG,
-                if (target.projectType() == ProjectType.DOMAIN_IMPLEMENTATION) ProjectType.FEATURE_NAV else null,
+                ProjectType.DOMAIN_IMPLEMENTATION.takeIf { target.projectType() == ProjectType.DOMAIN_DEBUG },
+                ProjectType.FEATURE_NAV.takeIf { target.projectType() == ProjectType.DOMAIN_IMPLEMENTATION },
             ),
         )
 

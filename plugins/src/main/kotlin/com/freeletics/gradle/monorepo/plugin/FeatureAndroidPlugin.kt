@@ -4,6 +4,7 @@ import com.freeletics.gradle.monorepo.setup.applyPlatformConstraints
 import com.freeletics.gradle.monorepo.setup.disableAndroidLibraryTasks
 import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.registerCheckDependencyRulesTasks
 import com.freeletics.gradle.monorepo.util.ProjectType
+import com.freeletics.gradle.monorepo.util.projectType
 import com.freeletics.gradle.plugin.FreeleticsAndroidPlugin
 import com.freeletics.gradle.util.freeleticsAndroidExtension
 import com.freeletics.gradle.util.freeleticsExtension
@@ -34,12 +35,9 @@ public abstract class FeatureAndroidPlugin : Plugin<Project> {
                     ProjectType.DOMAIN_TESTING,
                     ProjectType.DOMAIN_DEBUG,
                     ProjectType.FEATURE_NAV,
+                    ProjectType.FEATURE_IMPLEMENTATION.takeIf { target.projectType() == ProjectType.FEATURE_DEBUG },
                     // TODO remove when nav modules don't depend on legacy modules anymore
-                    if (extension.allowLegacyDependencies) {
-                        ProjectType.LEGACY
-                    } else {
-                        null
-                    },
+                    ProjectType.LEGACY.takeIf { extension.allowLegacyDependencies },
                 ),
             )
         }

@@ -29,6 +29,7 @@ public abstract class DomainMultiplatformPlugin : Plugin<Project> {
                 ProjectType.DOMAIN_API,
                 ProjectType.DOMAIN_TESTING,
                 ProjectType.DOMAIN_DEBUG,
+                ProjectType.DOMAIN_IMPLEMENTATION.takeIf { target.projectType() == ProjectType.DOMAIN_DEBUG },
                 ProjectType.FEATURE_NAV.takeIf { target.projectType() == ProjectType.DOMAIN_IMPLEMENTATION },
             ),
         )
