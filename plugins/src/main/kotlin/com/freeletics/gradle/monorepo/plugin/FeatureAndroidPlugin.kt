@@ -6,7 +6,6 @@ import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.r
 import com.freeletics.gradle.monorepo.util.ProjectType
 import com.freeletics.gradle.monorepo.util.projectType
 import com.freeletics.gradle.plugin.FreeleticsAndroidPlugin
-import com.freeletics.gradle.util.freeleticsAndroidExtension
 import com.freeletics.gradle.util.freeleticsExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -18,8 +17,6 @@ public abstract class FeatureAndroidPlugin : Plugin<Project> {
         val extension = target.freeleticsExtension.extensions.create("legacy", LegacyExtension::class.java)
 
         target.freeleticsExtension.useCompose()
-        target.freeleticsAndroidExtension.enableAndroidResources()
-        target.freeleticsAndroidExtension.enableParcelize()
 
         target.afterEvaluate {
             target.registerCheckDependencyRulesTasks(

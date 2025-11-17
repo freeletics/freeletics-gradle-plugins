@@ -6,15 +6,12 @@ import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.r
 import com.freeletics.gradle.monorepo.util.ProjectType
 import com.freeletics.gradle.monorepo.util.projectType
 import com.freeletics.gradle.plugin.FreeleticsAndroidPlugin
-import com.freeletics.gradle.util.freeleticsAndroidExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
 public abstract class DomainAndroidPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.plugins.apply(FreeleticsAndroidPlugin::class.java)
-
-        target.freeleticsAndroidExtension.enableParcelize()
 
         target.registerCheckDependencyRulesTasks(
             allowedProjectTypes = listOf(
