@@ -38,12 +38,6 @@ public abstract class FreeleticsAndroidExtension(private val project: Project) {
         project.plugins.apply("org.jetbrains.kotlin.plugin.parcelize")
     }
 
-    public fun enableViewBinding() {
-        project.android {
-            buildFeatures.viewBinding = true
-        }
-    }
-
     public fun enableAndroidResources() {
         project.android {
             androidResources.enable = true
