@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+## 0.35.0 *(2024-11-18)*
+
+- Use fork of Paparazzi and make it compatible with Android KMP targets.
+- Stop enabling `Parcelize` by default.
+- Remove `enableViewBinding` option.
+
+
 ## 0.34.1 *(2024-11-15)*
 
 - Allow feature modules to depend on feature debug modules.

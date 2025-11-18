@@ -38,7 +38,7 @@ internal fun KotlinMultiplatformAndroidLibraryTarget.setupAndroidTarget(
     lint.configure(target)
 
     // enable tests
-    withHostTestBuilder {}.configure {}
+    withHostTest {}
 
     // add default dependencies
     val bundle = target.getBundleOrNull("default-android")
