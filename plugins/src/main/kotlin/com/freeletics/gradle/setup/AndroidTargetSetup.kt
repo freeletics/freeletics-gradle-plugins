@@ -38,7 +38,7 @@ internal fun KotlinMultiplatformAndroidLibraryTarget.setupAndroidTarget(
     lint.configure(target)
 
     // enable tests
-    withHostTest {
+    withHostTestBuilder {}.configure {
         isIncludeAndroidResources = true
     }
 
