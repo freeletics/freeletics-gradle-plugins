@@ -1,7 +1,7 @@
 package com.freeletics.gradle.setup
 
 import com.freeletics.gradle.util.booleanProperty
-import com.freeletics.gradle.util.compilerOptions
+import com.freeletics.gradle.util.compilerOptionsCommon
 import com.freeletics.gradle.util.kotlin
 import org.gradle.api.Project
 
@@ -16,7 +16,7 @@ internal fun Project.setupCompose() {
             .get()
 
         kotlin {
-            compilerOptions {
+            compilerOptionsCommon {
                 freeCompilerArgs.addAll(
                     "-P",
                     "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=$metricsFolderAbsolutePath",
@@ -33,7 +33,7 @@ internal fun Project.setupCompose() {
             .get()
 
         kotlin {
-            compilerOptions {
+            compilerOptionsCommon {
                 freeCompilerArgs.addAll(
                     "-P",
                     "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=$reportsFolderAbsolutePath",

@@ -1,7 +1,7 @@
 package com.freeletics.gradle.plugin
 
 import com.freeletics.gradle.setup.configureStandaloneLint
-import com.freeletics.gradle.util.compilerOptions
+import com.freeletics.gradle.util.compilerOptionsCommon
 import com.freeletics.gradle.util.freeleticsExtension
 import com.freeletics.gradle.util.kotlin
 import com.freeletics.gradle.util.kotlinMultiplatform
@@ -21,7 +21,7 @@ public abstract class FreeleticsMultiplatformPlugin : Plugin<Project> {
         }
 
         target.kotlin {
-            compilerOptions {
+            compilerOptionsCommon {
                 freeCompilerArgs.add("-Xexpect-actual-classes")
             }
         }

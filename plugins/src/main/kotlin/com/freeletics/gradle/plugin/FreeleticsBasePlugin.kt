@@ -6,7 +6,8 @@ import com.freeletics.gradle.util.addTestCompileOnlyDependency
 import com.freeletics.gradle.util.addTestImplementationDependency
 import com.freeletics.gradle.util.addTestRuntimeOnlyDependency
 import com.freeletics.gradle.util.booleanProperty
-import com.freeletics.gradle.util.compilerOptions
+import com.freeletics.gradle.util.compilerOptionsCommon
+import com.freeletics.gradle.util.compilerOptionsJvm
 import com.freeletics.gradle.util.getBundleOrNull
 import com.freeletics.gradle.util.getVersionOrNull
 import com.freeletics.gradle.util.java
@@ -20,8 +21,6 @@ import org.gradle.api.tasks.testing.Test
 import org.gradle.jvm.tasks.Jar
 import org.gradle.jvm.toolchain.JvmVendorSpec
 import org.jetbrains.kotlin.gradle.dsl.JvmDefaultMode
-import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
-import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 public abstract class FreeleticsBasePlugin : Plugin<Project> {
@@ -74,12 +73,13 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                 toolchain.vendor.set(JvmVendorSpec.AZUL)
             }
 
-            val isAndroid = this is KotlinAndroidProjectExtension
-
-            compilerOptions {
+            compilerOptionsCommon {
                 val version = getVersionOrNull("kotlin-language")
                     ?.let(KotlinVersion::fromVersion) ?: KotlinVersion.DEFAULT
                 languageVersion.set(version)
+
+                // In this mode, some deprecations and bug-fixes for unstable code take effect immediately.
+                progressiveMode.set(version >= KotlinVersion.DEFAULT)
 
                 extraWarnings.set(booleanProperty("fgp.kotlin.extraWarnings", true))
                 allWarningsAsErrors.set(booleanProperty("fgp.kotlin.warningsAsErrors", true))
@@ -87,9 +87,6 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                     freeCompilerArgs.add("-Xwarning-level=DEPRECATION:disabled")
                     freeCompilerArgs.add("-Xwarning-level=OVERRIDE_DEPRECATION:disabled")
                 }
-
-                // In this mode, some deprecations and bug-fixes for unstable code take effect immediately.
-                progressiveMode.set(version >= KotlinVersion.DEFAULT)
 
                 freeCompilerArgs.addAll(
                     // https://youtrack.jetbrains.com/issue/KT-73255
@@ -105,30 +102,30 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                     "-opt-in=kotlin.time.ExperimentalTime",
                     "-opt-in=kotlin.uuid.ExperimentalUuidApi",
                 )
+            }
 
-                if (this is KotlinJvmCompilerOptions) {
-                    jvmTarget.set(project.jvmTarget)
-                    jvmDefault.set(JvmDefaultMode.NO_COMPATIBILITY)
+            compilerOptionsJvm { isAndroid ->
+                jvmTarget.set(project.jvmTarget)
+                jvmDefault.set(JvmDefaultMode.NO_COMPATIBILITY)
 
-                    freeCompilerArgs.addAll(
-                        // https://youtrack.jetbrains.com/issue/KT-22292
-                        "-Xassertions=jvm",
-                        // Enabling default nullability annotations
-                        "-Xjsr305=strict",
-                        // https://kotlinlang.org/docs/whatsnew1520.html#support-for-jspecify-nullness-annotations
-                        "-Xjspecify-annotations=strict",
-                        // Enhance not null annotated type parameter's types to definitely not null types (@NotNull T => T & Any)
-                        "-Xenhance-type-parameter-types-to-def-not-null",
-                        // https://kotlinlang.org/docs/whatsnew-eap.html#support-for-reading-and-writing-annotations-in-kotlin-metadata
-                        "-Xannotations-in-metadata",
-                        // opt in to experimental stdlib apis
-                        "-opt-in=kotlin.io.path.ExperimentalPathApi",
-                    )
-
-                    if (!isAndroid) {
-                        freeCompilerArgs.add("-Xjdk-release=${project.javaTarget}")
-                    }
+                if (!isAndroid) {
+                    freeCompilerArgs.add("-Xjdk-release=${project.javaTarget}")
                 }
+
+                freeCompilerArgs.addAll(
+                    // https://youtrack.jetbrains.com/issue/KT-22292
+                    "-Xassertions=jvm",
+                    // Enabling default nullability annotations
+                    "-Xjsr305=strict",
+                    // https://kotlinlang.org/docs/whatsnew1520.html#support-for-jspecify-nullness-annotations
+                    "-Xjspecify-annotations=strict",
+                    // Enhance not null annotated type parameter's types to definitely not null types (@NotNull T => T & Any)
+                    "-Xenhance-type-parameter-types-to-def-not-null",
+                    // https://kotlinlang.org/docs/whatsnew-eap.html#support-for-reading-and-writing-annotations-in-kotlin-metadata
+                    "-Xannotations-in-metadata",
+                    // opt in to experimental stdlib apis
+                    "-opt-in=kotlin.io.path.ExperimentalPathApi",
+                )
             }
         }
     }

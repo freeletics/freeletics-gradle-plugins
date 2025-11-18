@@ -10,15 +10,16 @@ import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import com.freeletics.gradle.plugin.FreeleticsAndroidExtension
 import com.freeletics.gradle.plugin.FreeleticsBaseExtension
 import com.freeletics.gradle.plugin.FreeleticsMultiplatformExtension
-import com.gradle.scan.agent.serialization.scan.serializer.kryo.it
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPluginExtension
 import org.jetbrains.kotlin.gradle.dsl.HasConfigurableKotlinCompilerOptions
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinCommonCompilerOptions
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
 internal val Project.freeleticsExtension: FreeleticsBaseExtension
     get() = extensions.getByType(FreeleticsBaseExtension::class.java)
@@ -39,14 +40,24 @@ internal fun Project.kotlin(action: KotlinProjectExtension.() -> Unit) {
     (project.extensions.getByName("kotlin") as KotlinProjectExtension).action()
 }
 
-internal fun KotlinProjectExtension.compilerOptions(configure: KotlinCommonCompilerOptions.() -> Unit) {
+internal fun KotlinProjectExtension.compilerOptionsCommon(configure: KotlinCommonCompilerOptions.() -> Unit) {
     when (this) {
         is KotlinJvmProjectExtension -> compilerOptions(configure)
         is KotlinAndroidProjectExtension -> compilerOptions(configure)
-        is KotlinMultiplatformExtension -> {
-            compilerOptions(configure)
-            targets.configureEach {
-                (it as? HasConfigurableKotlinCompilerOptions<*>)?.compilerOptions(configure)
+        is KotlinMultiplatformExtension -> compilerOptions(configure)
+        else -> throw IllegalStateException("Unsupported kotlin extension ${this::class}")
+    }
+}
+
+internal fun KotlinProjectExtension.compilerOptionsJvm(configure: KotlinJvmCompilerOptions.(Boolean) -> Unit) {
+    when (this) {
+        is KotlinJvmProjectExtension -> compilerOptions { configure(false) }
+        is KotlinAndroidProjectExtension -> compilerOptions { configure(true) }
+        is KotlinMultiplatformExtension -> targets.configureEach {
+            (it as? HasConfigurableKotlinCompilerOptions<*>)?.compilerOptions {
+                if (this is KotlinJvmCompilerOptions) {
+                    configure(it.platformType == KotlinPlatformType.androidJvm)
+                }
             }
         }
         else -> throw IllegalStateException("Unsupported kotlin extension ${this::class}")
