@@ -1,5 +1,8 @@
 package com.freeletics.gradle.setup
 
+import com.android.build.api.dsl.KotlinMultiplatformAndroidHostTestCompilation
+import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
+import com.freeletics.gradle.util.kotlinMultiplatform
 import org.gradle.api.Project
 import org.gradle.api.attributes.java.TargetJvmEnvironment
 import org.gradle.api.tasks.Copy
@@ -7,7 +10,7 @@ import org.gradle.api.tasks.testing.Test
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType.Companion.attribute
 
 internal fun Project.configurePaparazzi() {
-    plugins.apply("app.cash.paparazzi")
+    plugins.apply("com.freeletics.fork.paparazzi")
 
     val copyFailures = tasks.register("copyPaparazziFailures", Copy::class.java) {
         it.from(layout.buildDirectory.dir("paparazzi/failures"))
@@ -27,8 +30,24 @@ internal fun Project.configurePaparazzi() {
         it.dependsOn(verify)
     }
 
+    plugins.withId("com.android.library") {
+        addConstraint("testImplementation")
+    }
+    plugins.withId("com.android.kotlin.multiplatform.library") {
+        addConstraint("androidHostTestImplementation")
+        kotlinMultiplatform {
+            extensions.configure(KotlinMultiplatformAndroidLibraryTarget::class.java) {
+                it.compilations.withType(KotlinMultiplatformAndroidHostTestCompilation::class.java) { test ->
+                    test.isIncludeAndroidResources = true
+                }
+            }
+        }
+    }
+}
+
+private fun Project.addConstraint(configuration: String) {
     dependencies.constraints { constraints ->
-        constraints.add("testImplementation", "com.google.guava:guava") { constraint ->
+        constraints.add(configuration, "com.google.guava:guava") { constraint ->
             constraint.attributes {
                 it.attribute(
                     TargetJvmEnvironment.TARGET_JVM_ENVIRONMENT_ATTRIBUTE,
