@@ -4,11 +4,12 @@ import app.cash.sqldelight.gradle.SqlDelightExtension
 import com.freeletics.gradle.util.defaultPackageName
 import com.freeletics.gradle.util.getDependencyOrNull
 import org.gradle.api.Project
+import org.gradle.api.artifacts.ProjectDependency
 import org.gradle.api.internal.catalog.DelegatingProjectDependency
 
 internal fun Project.setupSqlDelight(
     name: String,
-    dependency: DelegatingProjectDependency?,
+    dependency: ProjectDependency?,
 ) {
     plugins.apply("app.cash.sqldelight")
 
