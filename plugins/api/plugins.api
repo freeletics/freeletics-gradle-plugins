@@ -222,7 +222,6 @@ public abstract class com/freeletics/gradle/plugin/FreeleticsAndroidExtension {
 	public final fun enableBuildConfig ()V
 	public final fun enableParcelize ()V
 	public final fun enableResValues ()V
-	public final fun enableViewBinding ()V
 	public final fun resValue (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
 	public final fun resValue (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
 	public final fun usePaparazzi ()V
