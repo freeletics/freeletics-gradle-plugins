@@ -8,13 +8,23 @@ internal fun Project.disableAndroidApplicationTasks() {
     disableAndroidTasks(androidAppLintTasksToDisableExceptOneVariant, "debug")
 }
 
-internal fun Project.disableMultiplatformApplicationTasks() {
-    // TODO lint tasks
-}
+internal fun Project.disableMultiplatformApplicationTasks() {}
 
 internal fun Project.disableMultiplatformLibraryTasks() {
-    disableTasks(listOf("assemble"))
-    // TODO lint tasks
+    disableTasks(
+        listOf(
+            "assemble",
+            "lint",
+            "lintAndroidMain",
+            "lintJvm",
+            "lintReportAndroidMain",
+            "lintReportJvm",
+            "copyAndroidMainLintReports",
+            "copyJvmLintReports",
+            "lintFix",
+            "updateLintBaseline",
+        ),
+    )
 }
 
 private fun Project.disableAndroidTasks(names: List<String>, variantToKeep: String = "") {
