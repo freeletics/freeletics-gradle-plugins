@@ -8,7 +8,9 @@ import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.VerificationException
+import org.gradle.work.DisableCachingByDefault
 
+@DisableCachingByDefault(because = "Verification task without output")
 public abstract class VerifyLicensesTask : DefaultTask() {
     @get:InputFile
     @get:PathSensitive(PathSensitivity.NONE)
