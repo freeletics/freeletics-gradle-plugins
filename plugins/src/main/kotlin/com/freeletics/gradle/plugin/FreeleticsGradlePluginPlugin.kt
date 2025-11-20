@@ -2,12 +2,14 @@ package com.freeletics.gradle.plugin
 
 import com.freeletics.gradle.setup.configureStandaloneLint
 import com.freeletics.gradle.util.compilerOptionsJvm
+import com.freeletics.gradle.util.getDependency
 import com.freeletics.gradle.util.java
 import com.freeletics.gradle.util.javaTargetVersion
 import com.freeletics.gradle.util.kotlin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.compile.JavaCompile
+import org.gradle.plugin.devel.tasks.ValidatePlugins
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 public abstract class FreeleticsGradlePluginPlugin : Plugin<Project> {
@@ -36,7 +38,11 @@ public abstract class FreeleticsGradlePluginPlugin : Plugin<Project> {
             }
         }
 
-        target.plugins.apply("com.android.lint")
+        target.tasks.withType(ValidatePlugins::class.java).configureEach {
+            it.enableStricterValidation.set(true)
+        }
+
         target.configureStandaloneLint()
+        target.dependencies.add("lintChecks", target.getDependency("androidx-lint-gradle"))
     }
 }
