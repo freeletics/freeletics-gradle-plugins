@@ -5,7 +5,6 @@ import com.freeletics.gradle.util.addMaybe
 import com.freeletics.gradle.util.getBundleOrNull
 import org.gradle.api.Project
 import org.gradle.api.file.RegularFile
-import org.gradle.api.provider.Provider
 
 internal fun Project.configureStandaloneLint() {
     plugins.apply("com.android.lint")

@@ -35,7 +35,7 @@ public abstract class AppAndroidPlugin : Plugin<Project> {
                 if (keyStoreFile.isPresent) {
                     register("release") {
                         @Suppress("UnstableApiUsage")
-                        it.storeFile =  target.layout.settingsDirectory.file(keyStoreFile.get()).asFile
+                        it.storeFile = target.layout.settingsDirectory.file(keyStoreFile.get()).asFile
                         it.storePassword = target.stringProperty("fgpReleaseStorePassword").get()
                         it.keyAlias = target.stringProperty("fgpReleaseKeyAlias").get()
                         it.keyPassword = target.stringProperty("fgpReleaseKeyPassword").get()
