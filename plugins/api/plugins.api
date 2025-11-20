@@ -56,49 +56,25 @@ public abstract class com/freeletics/gradle/monorepo/plugin/AppDesktopPlugin : o
 	public fun apply (Lorg/gradle/api/Project;)V
 }
 
-public abstract class com/freeletics/gradle/monorepo/plugin/AppMultiplatformPlugin : org/gradle/api/Plugin {
+public abstract class com/freeletics/gradle/monorepo/plugin/AppPlugin : org/gradle/api/Plugin {
 	public fun <init> ()V
 	public synthetic fun apply (Ljava/lang/Object;)V
 	public fun apply (Lorg/gradle/api/Project;)V
 }
 
-public abstract class com/freeletics/gradle/monorepo/plugin/CoreAndroidPlugin : org/gradle/api/Plugin {
+public abstract class com/freeletics/gradle/monorepo/plugin/CorePlugin : org/gradle/api/Plugin {
 	public fun <init> ()V
 	public synthetic fun apply (Ljava/lang/Object;)V
 	public fun apply (Lorg/gradle/api/Project;)V
 }
 
-public abstract class com/freeletics/gradle/monorepo/plugin/CoreMultiplatformPlugin : org/gradle/api/Plugin {
+public abstract class com/freeletics/gradle/monorepo/plugin/DomainPlugin : org/gradle/api/Plugin {
 	public fun <init> ()V
 	public synthetic fun apply (Ljava/lang/Object;)V
 	public fun apply (Lorg/gradle/api/Project;)V
 }
 
-public abstract class com/freeletics/gradle/monorepo/plugin/DomainAndroidPlugin : org/gradle/api/Plugin {
-	public fun <init> ()V
-	public synthetic fun apply (Ljava/lang/Object;)V
-	public fun apply (Lorg/gradle/api/Project;)V
-}
-
-public abstract class com/freeletics/gradle/monorepo/plugin/DomainMultiplatformPlugin : org/gradle/api/Plugin {
-	public fun <init> ()V
-	public synthetic fun apply (Ljava/lang/Object;)V
-	public fun apply (Lorg/gradle/api/Project;)V
-}
-
-public abstract class com/freeletics/gradle/monorepo/plugin/FeatureAndroidPlugin : org/gradle/api/Plugin {
-	public fun <init> ()V
-	public synthetic fun apply (Ljava/lang/Object;)V
-	public fun apply (Lorg/gradle/api/Project;)V
-}
-
-public abstract class com/freeletics/gradle/monorepo/plugin/FeatureMultiplatformPlugin : org/gradle/api/Plugin {
-	public fun <init> ()V
-	public synthetic fun apply (Ljava/lang/Object;)V
-	public fun apply (Lorg/gradle/api/Project;)V
-}
-
-public abstract class com/freeletics/gradle/monorepo/plugin/LegacyAndroidPlugin : org/gradle/api/Plugin {
+public abstract class com/freeletics/gradle/monorepo/plugin/FeaturePlugin : org/gradle/api/Plugin {
 	public fun <init> ()V
 	public synthetic fun apply (Ljava/lang/Object;)V
 	public fun apply (Lorg/gradle/api/Project;)V
@@ -110,13 +86,13 @@ public abstract class com/freeletics/gradle/monorepo/plugin/LegacyExtension {
 	public final fun setAllowLegacyDependencies (Z)V
 }
 
-public abstract class com/freeletics/gradle/monorepo/plugin/NavAndroidPlugin : org/gradle/api/Plugin {
+public abstract class com/freeletics/gradle/monorepo/plugin/LegacyPlugin : org/gradle/api/Plugin {
 	public fun <init> ()V
 	public synthetic fun apply (Ljava/lang/Object;)V
 	public fun apply (Lorg/gradle/api/Project;)V
 }
 
-public abstract class com/freeletics/gradle/monorepo/plugin/NavMultiplatformPlugin : org/gradle/api/Plugin {
+public abstract class com/freeletics/gradle/monorepo/plugin/NavPlugin : org/gradle/api/Plugin {
 	public fun <init> ()V
 	public synthetic fun apply (Ljava/lang/Object;)V
 	public fun apply (Lorg/gradle/api/Project;)V
@@ -207,29 +183,15 @@ public abstract class com/freeletics/gradle/plugin/AppiumPlugin : org/gradle/api
 	public fun apply (Lorg/gradle/api/Project;)V
 }
 
-public abstract class com/freeletics/gradle/plugin/FreeleticsAndroidAppPlugin : org/gradle/api/Plugin {
-	public fun <init> ()V
-	public synthetic fun apply (Ljava/lang/Object;)V
-	public fun apply (Lorg/gradle/api/Project;)V
-}
-
-public abstract class com/freeletics/gradle/plugin/FreeleticsAndroidExtension {
+public abstract class com/freeletics/gradle/plugin/FreeleticsAndroidAppExtension {
 	public fun <init> (Lorg/gradle/api/Project;)V
 	public final fun buildConfigField (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
 	public final fun buildConfigField (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
-	public final fun consumerProguardFiles ([Ljava/lang/String;)V
-	public final fun enableAndroidResources ()V
-	public final fun enableBuildConfig ()V
-	public final fun enableParcelize ()V
-	public final fun enableResValues ()V
 	public final fun resValue (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
 	public final fun resValue (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
-	public final fun usePaparazzi ()V
-	public final fun useRoom (Ljava/lang/String;)V
-	public static synthetic fun useRoom$default (Lcom/freeletics/gradle/plugin/FreeleticsAndroidExtension;Ljava/lang/String;ILjava/lang/Object;)V
 }
 
-public abstract class com/freeletics/gradle/plugin/FreeleticsAndroidPlugin : org/gradle/api/Plugin {
+public abstract class com/freeletics/gradle/plugin/FreeleticsAndroidAppPlugin : org/gradle/api/Plugin {
 	public fun <init> ()V
 	public synthetic fun apply (Ljava/lang/Object;)V
 	public fun apply (Lorg/gradle/api/Project;)V
@@ -246,6 +208,8 @@ public abstract class com/freeletics/gradle/plugin/FreeleticsBaseExtension : org
 	public final fun useKopy ()V
 	public final fun useMetro ()V
 	public final fun usePoko ()V
+	public final fun useRoom (Ljava/lang/String;)V
+	public static synthetic fun useRoom$default (Lcom/freeletics/gradle/plugin/FreeleticsBaseExtension;Ljava/lang/String;ILjava/lang/Object;)V
 	public final fun useSerialization ()V
 	public final fun useSqlDelight (Ljava/lang/String;Lorg/gradle/api/internal/catalog/DelegatingProjectDependency;)V
 	public static synthetic fun useSqlDelight$default (Lcom/freeletics/gradle/plugin/FreeleticsBaseExtension;Ljava/lang/String;Lorg/gradle/api/internal/catalog/DelegatingProjectDependency;ILjava/lang/Object;)V
@@ -269,8 +233,6 @@ public abstract class com/freeletics/gradle/plugin/FreeleticsMultiplatformAndroi
 	public final fun enableAndroidResources ()V
 	public final fun enableParcelize ()V
 	public final fun usePaparazzi ()V
-	public final fun useRoom (Ljava/lang/String;)V
-	public static synthetic fun useRoom$default (Lcom/freeletics/gradle/plugin/FreeleticsMultiplatformAndroidExtension;Ljava/lang/String;ILjava/lang/Object;)V
 }
 
 public abstract class com/freeletics/gradle/plugin/FreeleticsMultiplatformExtension {

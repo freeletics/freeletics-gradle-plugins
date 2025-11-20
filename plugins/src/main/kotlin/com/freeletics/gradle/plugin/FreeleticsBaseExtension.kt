@@ -1,5 +1,6 @@
 package com.freeletics.gradle.plugin
 
+import com.freeletics.gradle.setup.basicArgument
 import com.freeletics.gradle.setup.configureProcessing
 import com.freeletics.gradle.setup.setupCompose
 import com.freeletics.gradle.setup.setupInternalPublishing
@@ -10,9 +11,14 @@ import com.freeletics.gradle.util.addKspDependency
 import com.freeletics.gradle.util.compilerOptionsCommon
 import com.freeletics.gradle.util.getDependency
 import com.freeletics.gradle.util.kotlin
+import java.io.File
 import org.gradle.api.Project
 import org.gradle.api.internal.catalog.DelegatingProjectDependency
 import org.gradle.api.plugins.ExtensionAware
+import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.PathSensitive
+import org.gradle.api.tasks.PathSensitivity
+import org.gradle.process.CommandLineArgumentProvider
 
 public abstract class FreeleticsBaseExtension(private val project: Project) : ExtensionAware {
     public fun explicitApi() {
@@ -73,11 +79,34 @@ public abstract class FreeleticsBaseExtension(private val project: Project) : Ex
         project.setupSqlDelight(name, dependency)
     }
 
+    public fun useRoom(schemaLocation: String? = null) {
+        val processingArguments = buildList {
+            add(basicArgument("room.generateKotlin", "true"))
+            schemaLocation?.let {
+                add(RoomSchemaArgProvider(schemaDir = File(project.projectDir, schemaLocation)))
+            }
+        }
+
+        project.configureProcessing(processingArguments)
+        project.addApiDependency(project.getDependency("androidx-room-runtime"))
+        project.addKspDependency(project.getDependency("androidx-room-compiler"))
+    }
+
     public fun enableOssPublishing() {
         setupOssPublishing(project)
     }
 
     public fun enableInternalPublishing() {
         setupInternalPublishing(project)
+    }
+
+    private class RoomSchemaArgProvider(
+        @get:InputDirectory
+        @get:PathSensitive(PathSensitivity.RELATIVE)
+        val schemaDir: File,
+    ) : CommandLineArgumentProvider {
+        override fun asArguments(): Iterable<String> {
+            return listOf("room.schemaLocation=${schemaDir.path}")
+        }
     }
 }

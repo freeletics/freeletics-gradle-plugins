@@ -7,11 +7,7 @@ import org.gradle.api.Project
 import org.gradle.api.file.RegularFile
 import org.gradle.api.provider.Provider
 
-internal fun Project.configureStandaloneLint() = afterEvaluate {
-    if (project.plugins.hasPlugin("com.android.kotlin.multiplatform.library")) {
-        return@afterEvaluate
-    }
-
+internal fun Project.configureStandaloneLint() {
     plugins.apply("com.android.lint")
 
     extensions.configure(Lint::class.java) {

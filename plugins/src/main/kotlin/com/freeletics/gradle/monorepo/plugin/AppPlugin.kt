@@ -9,7 +9,7 @@ import com.freeletics.gradle.util.freeleticsMultiplatformExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-public abstract class AppMultiplatformPlugin : Plugin<Project> {
+public abstract class AppPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.plugins.apply(FreeleticsMultiplatformPlugin::class.java)
         target.freeleticsMultiplatformExtension.addDefaultTargets(xcFramework = true)

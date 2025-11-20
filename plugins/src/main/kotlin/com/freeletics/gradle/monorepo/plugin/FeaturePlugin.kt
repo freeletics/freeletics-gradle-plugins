@@ -1,22 +1,26 @@
 package com.freeletics.gradle.monorepo.plugin
 
 import com.freeletics.gradle.monorepo.setup.applyPlatformConstraints
-import com.freeletics.gradle.monorepo.setup.disableAndroidLibraryTasks
+import com.freeletics.gradle.monorepo.setup.disableMultiplatformLibraryTasks
 import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.registerCheckDependencyRulesTasks
 import com.freeletics.gradle.monorepo.util.ProjectType
 import com.freeletics.gradle.monorepo.util.projectType
-import com.freeletics.gradle.plugin.FreeleticsAndroidPlugin
+import com.freeletics.gradle.plugin.FreeleticsMultiplatformPlugin
+import com.freeletics.gradle.util.freeleticsAndroidMultiplatformExtension
 import com.freeletics.gradle.util.freeleticsExtension
+import com.freeletics.gradle.util.freeleticsMultiplatformExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-public abstract class FeatureAndroidPlugin : Plugin<Project> {
+public abstract class FeaturePlugin : Plugin<Project> {
     override fun apply(target: Project) {
-        target.plugins.apply(FreeleticsAndroidPlugin::class.java)
-
-        val extension = target.freeleticsExtension.extensions.create("legacy", LegacyExtension::class.java)
+        target.plugins.apply(FreeleticsMultiplatformPlugin::class.java)
+        target.freeleticsMultiplatformExtension.addDefaultTargets()
 
         target.freeleticsExtension.useCompose()
+        target.freeleticsAndroidMultiplatformExtension.enableAndroidResources()
+
+        val legacy = target.freeleticsExtension.extensions.create("legacy", LegacyExtension::class.java)
 
         target.afterEvaluate {
             target.registerCheckDependencyRulesTasks(
@@ -34,13 +38,12 @@ public abstract class FeatureAndroidPlugin : Plugin<Project> {
                     ProjectType.FEATURE_NAV,
                     ProjectType.FEATURE_IMPLEMENTATION.takeIf { target.projectType() == ProjectType.FEATURE_DEBUG },
                     ProjectType.FEATURE_DEBUG,
-                    // TODO remove when nav modules don't depend on legacy modules anymore
-                    ProjectType.LEGACY.takeIf { extension.allowLegacyDependencies },
+                    ProjectType.LEGACY.takeIf { legacy.allowLegacyDependencies },
                 ),
             )
         }
 
-        target.applyPlatformConstraints()
-        target.disableAndroidLibraryTasks()
+        target.applyPlatformConstraints(multiplatform = true)
+        target.disableMultiplatformLibraryTasks()
     }
 }

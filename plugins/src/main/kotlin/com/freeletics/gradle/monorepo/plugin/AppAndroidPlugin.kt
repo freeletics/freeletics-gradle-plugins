@@ -6,8 +6,7 @@ import com.freeletics.gradle.monorepo.tasks.CheckDependencyRulesTask.Companion.r
 import com.freeletics.gradle.monorepo.util.ProjectType
 import com.freeletics.gradle.plugin.FreeleticsAndroidAppPlugin
 import com.freeletics.gradle.util.androidApp
-import com.freeletics.gradle.util.androidComponents
-import com.freeletics.gradle.util.freeleticsAndroidExtension
+import com.freeletics.gradle.util.androidComponentsApp
 import com.freeletics.gradle.util.freeleticsExtension
 import com.freeletics.gradle.util.stringProperty
 import org.gradle.api.Plugin
@@ -18,10 +17,6 @@ public abstract class AppAndroidPlugin : Plugin<Project> {
         target.plugins.apply(FreeleticsAndroidAppPlugin::class.java)
 
         target.freeleticsExtension.extensions.create("app", AppAndroidExtension::class.java)
-
-        target.freeleticsAndroidExtension.enableBuildConfig()
-        target.freeleticsAndroidExtension.enableAndroidResources()
-        target.freeleticsAndroidExtension.enableResValues()
 
         target.androidApp {
             signingConfigs {
@@ -83,7 +78,7 @@ public abstract class AppAndroidPlugin : Plugin<Project> {
             }
         }
 
-        target.androidComponents {
+        target.androidComponentsApp {
             onVariants(selector().withBuildType("release")) {
                 it.packaging.resources.excludes.addAll(
                     // produced by Kotlin for each module/library that uses it, they are not needed inside an app
