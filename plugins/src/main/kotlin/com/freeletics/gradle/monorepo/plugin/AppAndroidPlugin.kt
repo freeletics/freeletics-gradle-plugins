@@ -21,7 +21,8 @@ public abstract class AppAndroidPlugin : Plugin<Project> {
         target.androidApp {
             signingConfigs {
                 named("debug") {
-                    val debugKeystore = target.rootProject.file("gradle/debug.keystore")
+                    @Suppress("UnstableApiUsage")
+                    val debugKeystore = target.layout.settingsDirectory.file("gradle/debug.keystore").asFile
                     if (debugKeystore.exists()) {
                         it.storeFile = debugKeystore
                     }
@@ -33,7 +34,8 @@ public abstract class AppAndroidPlugin : Plugin<Project> {
                 val keyStoreFile = target.stringProperty("fgpReleaseStoreFile")
                 if (keyStoreFile.isPresent) {
                     register("release") {
-                        it.storeFile = target.rootProject.file(keyStoreFile.get())
+                        @Suppress("UnstableApiUsage")
+                        it.storeFile = target.layout.settingsDirectory.file(keyStoreFile.get()).asFile
                         it.storePassword = target.stringProperty("fgpReleaseStorePassword").get()
                         it.keyAlias = target.stringProperty("fgpReleaseKeyAlias").get()
                         it.keyPassword = target.stringProperty("fgpReleaseKeyPassword").get()

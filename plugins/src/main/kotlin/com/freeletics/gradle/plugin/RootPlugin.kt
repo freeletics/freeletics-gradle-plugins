@@ -1,6 +1,7 @@
 package com.freeletics.gradle.plugin
 
 import com.autonomousapps.DependencyAnalysisExtension
+import com.freeletics.gradle.setup.disableDefaultJsRepositories
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
@@ -14,6 +15,7 @@ public abstract class RootPlugin : Plugin<Project> {
         configureDaemonToolchainTask(target)
         createPlatform(target)
         configureDependencyAnalysis(target)
+        target.disableDefaultJsRepositories()
     }
 
     private fun configureDaemonToolchainTask(target: Project) {

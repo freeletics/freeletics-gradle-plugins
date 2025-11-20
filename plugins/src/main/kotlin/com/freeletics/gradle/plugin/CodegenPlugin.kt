@@ -15,10 +15,10 @@ public abstract class CodegenPlugin : Plugin<Project> {
         val extension = project.extensions.create("codegen", CodegenExtension::class.java)
 
         // The code generator will be added to this as a dependency
-        val configuration = project.configurations.create("codegen").apply {
-            isTransitive = true
+        val configuration = project.configurations.register("codegen") { configuration ->
+            configuration.isTransitive = true
 
-            attributes {
+            configuration.attributes { it ->
                 it.attribute(
                     TARGET_JVM_ENVIRONMENT_ATTRIBUTE,
                     project.objects.named(TargetJvmEnvironment::class.java, STANDARD_JVM),

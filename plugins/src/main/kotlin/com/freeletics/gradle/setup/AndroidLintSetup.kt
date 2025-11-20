@@ -5,7 +5,6 @@ import com.freeletics.gradle.util.addMaybe
 import com.freeletics.gradle.util.getBundleOrNull
 import org.gradle.api.Project
 import org.gradle.api.file.RegularFile
-import org.gradle.api.provider.Provider
 
 internal fun Project.configureStandaloneLint() {
     plugins.apply("com.android.lint")
@@ -16,7 +15,8 @@ internal fun Project.configureStandaloneLint() {
 }
 
 internal fun Lint.configure(project: Project) {
-    lintConfig = project.rootProject.file("gradle/lint.xml")
+    @Suppress("UnstableApiUsage")
+    lintConfig = project.layout.settingsDirectory.file("gradle/lint.xml").asFile
 
     checkReleaseBuilds = false
     checkGeneratedSources = false
@@ -27,9 +27,9 @@ internal fun Lint.configure(project: Project) {
     warningsAsErrors = true
 
     htmlReport = true
-    htmlOutput = project.reportsFile("lint-result.html").get().asFile
+    htmlOutput = project.reportsFile("lint-result.html").asFile
     textReport = true
-    textOutput = project.reportsFile("lint-result.txt").get().asFile
+    textOutput = project.reportsFile("lint-result.txt").asFile
 
     disable += "NewerVersionAvailable"
     disable += "GradleDependency"
@@ -38,11 +38,12 @@ internal fun Lint.configure(project: Project) {
     project.dependencies.addMaybe("lintChecks", project.getBundleOrNull("default-lint"))
 }
 
-private fun Project.reportsFile(name: String): Provider<RegularFile> {
+private fun Project.reportsFile(name: String): RegularFile {
     val projectName = project.path
         .replace("projects", "")
         .replaceFirst(":", "")
         .replace(":", "/")
 
-    return rootProject.layout.buildDirectory.file("reports/lint/$projectName/$name")
+    @Suppress("UnstableApiUsage")
+    return project.layout.settingsDirectory.file("reports/lint/$projectName/$name")
 }
