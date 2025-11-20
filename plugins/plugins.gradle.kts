@@ -38,6 +38,7 @@ dependencies {
     runtimeOnly(libs.poko.gradle)
     runtimeOnly(libs.kopy.gradle)
     runtimeOnly(libs.skie.gradle)
+    runtimeOnly(libs.burst.gradle)
     runtimeOnly(libs.paparazzi.gradle)
 
     testImplementation(libs.junit)

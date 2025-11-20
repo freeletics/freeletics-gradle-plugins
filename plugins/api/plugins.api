@@ -203,6 +203,7 @@ public abstract class com/freeletics/gradle/plugin/FreeleticsBaseExtension : org
 	public final fun enableOssPublishing ()V
 	public final fun explicitApi ()V
 	public final fun optIn ([Ljava/lang/String;)V
+	public final fun useBurst ()V
 	public final fun useCompose ()V
 	public final fun useKhonshu ()V
 	public final fun useKopy ()V

@@ -92,6 +92,10 @@ public abstract class FreeleticsBaseExtension(private val project: Project) : Ex
         project.addKspDependency(project.getDependency("androidx-room-compiler"))
     }
 
+    public fun useBurst() {
+        project.plugins.apply("app.cash.burst")
+    }
+
     public fun enableOssPublishing() {
         setupOssPublishing(project)
     }
