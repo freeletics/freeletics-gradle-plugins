@@ -15,6 +15,7 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.gradle.testing.base.TestingExtension
 
+@Suppress("EagerGradleConfiguration", "GradleProjectIsolation")
 public abstract class AppiumPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         project.plugins.apply("jvm-test-suite")
@@ -28,8 +29,9 @@ public abstract class AppiumPlugin : Plugin<Project> {
     }
 
     private fun Project.setupTestDependency(localTestCases: Boolean): TaskProvider<Copy> {
-        val testCases = configurations.create("testCases")
-        testCases.isTransitive = false
+        val testCases = configurations.register("testCases") {
+            it.isTransitive = false
+        }
 
         dependencies.apply {
             if (localTestCases) {
@@ -44,7 +46,7 @@ public abstract class AppiumPlugin : Plugin<Project> {
             if (localTestCases) {
                 it.dependsOn(tasks.getByPath(":testing:appium-tests:jvmJar"))
             }
-            it.from(zipTree(testCases.singleFile))
+            it.from(zipTree(testCases.get().singleFile))
             it.into(testClassesDir)
         }
     }

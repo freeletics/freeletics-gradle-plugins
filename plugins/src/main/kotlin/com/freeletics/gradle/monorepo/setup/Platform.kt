@@ -3,7 +3,7 @@ package com.freeletics.gradle.monorepo.setup
 import org.gradle.api.Project
 
 internal fun Project.applyPlatformConstraints(multiplatform: Boolean = false) {
-    val platformDependency = dependencies.enforcedPlatform(rootProject)
+    val platformDependency = dependencies.enforcedPlatform(project(":"))
     configurations.configureEach { config ->
         if (isPlatformConfigurationName(config.name, multiplatform)) {
             config.dependencies.add(platformDependency)

@@ -13,7 +13,7 @@ import com.freeletics.gradle.util.getDependency
 import com.freeletics.gradle.util.kotlin
 import java.io.File
 import org.gradle.api.Project
-import org.gradle.api.internal.catalog.DelegatingProjectDependency
+import org.gradle.api.artifacts.ProjectDependency
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.PathSensitive
@@ -74,7 +74,7 @@ public abstract class FreeleticsBaseExtension(private val project: Project) : Ex
 
     public fun useSqlDelight(
         name: String = "Database",
-        dependency: DelegatingProjectDependency? = null,
+        dependency: ProjectDependency? = null,
     ) {
         project.setupSqlDelight(name, dependency)
     }

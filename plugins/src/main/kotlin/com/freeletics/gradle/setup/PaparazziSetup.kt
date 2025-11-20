@@ -11,7 +11,8 @@ internal fun Project.configurePaparazzi() {
 
     val copyFailures = tasks.register("copyPaparazziFailures", Copy::class.java) {
         it.from(layout.buildDirectory.dir("paparazzi/failures"))
-        it.into(rootProject.layout.buildDirectory.dir("reports/paparazzi"))
+        @Suppress("UnstableApiUsage")
+        it.into(layout.settingsDirectory.dir("reports/paparazzi"))
         it.include("**/delta-*")
     }
 

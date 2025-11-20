@@ -10,18 +10,24 @@ import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputFile
+import org.gradle.api.tasks.PathSensitive
+import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.TaskProvider
+import org.gradle.api.tasks.UntrackedTask
 import org.gradle.work.DisableCachingByDefault
 
-@DisableCachingByDefault(because = "Relies on local git state")
+@UntrackedTask(because = "Relies on local git state")
 public abstract class ComputeGitShaTask : DefaultTask() {
     @get:Input
     public abstract val computeFromGit: Property<Boolean>
 
-    @get:Input
-    public abstract val gitRootDirectory: Property<File>
+    @get:InputDirectory
+    @get:PathSensitive(PathSensitivity.RELATIVE)
+    public abstract val gitRootDirectory: RegularFileProperty
 
     @get:OutputFile
     public abstract val outputFile: RegularFileProperty
@@ -29,7 +35,7 @@ public abstract class ComputeGitShaTask : DefaultTask() {
     @TaskAction
     public fun action() {
         val gitSha = if (computeFromGit.get()) {
-            val git = RealGit(gitRootDirectory.get())
+            val git = RealGit(gitRootDirectory.get().asFile)
             git.commitSha()
         } else {
             "sha-not-computed"

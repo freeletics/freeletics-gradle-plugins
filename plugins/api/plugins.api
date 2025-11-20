@@ -113,7 +113,7 @@ public abstract class com/freeletics/gradle/monorepo/tasks/ComputeGitShaTask : o
 	public fun <init> ()V
 	public final fun action ()V
 	public abstract fun getComputeFromGit ()Lorg/gradle/api/provider/Property;
-	public abstract fun getGitRootDirectory ()Lorg/gradle/api/provider/Property;
+	public abstract fun getGitRootDirectory ()Lorg/gradle/api/file/RegularFileProperty;
 	public abstract fun getOutputFile ()Lorg/gradle/api/file/RegularFileProperty;
 }
 
@@ -121,7 +121,7 @@ public abstract class com/freeletics/gradle/monorepo/tasks/ComputeGitTimestampTa
 	public fun <init> ()V
 	public final fun action ()V
 	public abstract fun getComputeFromGit ()Lorg/gradle/api/provider/Property;
-	public abstract fun getGitRootDirectory ()Lorg/gradle/api/provider/Property;
+	public abstract fun getGitRootDirectory ()Lorg/gradle/api/file/RegularFileProperty;
 	public abstract fun getOutputFile ()Lorg/gradle/api/file/RegularFileProperty;
 }
 
@@ -129,7 +129,7 @@ public abstract class com/freeletics/gradle/monorepo/tasks/ComputeVersionCodeTas
 	public fun <init> ()V
 	public final fun action ()V
 	public abstract fun getComputeFromGit ()Lorg/gradle/api/provider/Property;
-	public abstract fun getGitRootDirectory ()Lorg/gradle/api/provider/Property;
+	public abstract fun getGitRootDirectory ()Lorg/gradle/api/file/RegularFileProperty;
 	public abstract fun getGitTagName ()Lorg/gradle/api/provider/Property;
 	public abstract fun getOutputFile ()Lorg/gradle/api/file/RegularFileProperty;
 }
@@ -146,7 +146,7 @@ public abstract class com/freeletics/gradle/monorepo/tasks/ComputeVersionNameTas
 	public fun <init> ()V
 	public final fun action ()V
 	public abstract fun getComputeFromGit ()Lorg/gradle/api/provider/Property;
-	public abstract fun getGitRootDirectory ()Lorg/gradle/api/provider/Property;
+	public abstract fun getGitRootDirectory ()Lorg/gradle/api/file/RegularFileProperty;
 	public abstract fun getGitTagName ()Lorg/gradle/api/provider/Property;
 	public abstract fun getOutputFile ()Lorg/gradle/api/file/RegularFileProperty;
 }
@@ -212,8 +212,8 @@ public abstract class com/freeletics/gradle/plugin/FreeleticsBaseExtension : org
 	public final fun useRoom (Ljava/lang/String;)V
 	public static synthetic fun useRoom$default (Lcom/freeletics/gradle/plugin/FreeleticsBaseExtension;Ljava/lang/String;ILjava/lang/Object;)V
 	public final fun useSerialization ()V
-	public final fun useSqlDelight (Ljava/lang/String;Lorg/gradle/api/internal/catalog/DelegatingProjectDependency;)V
-	public static synthetic fun useSqlDelight$default (Lcom/freeletics/gradle/plugin/FreeleticsBaseExtension;Ljava/lang/String;Lorg/gradle/api/internal/catalog/DelegatingProjectDependency;ILjava/lang/Object;)V
+	public final fun useSqlDelight (Ljava/lang/String;Lorg/gradle/api/artifacts/ProjectDependency;)V
+	public static synthetic fun useSqlDelight$default (Lcom/freeletics/gradle/plugin/FreeleticsBaseExtension;Ljava/lang/String;Lorg/gradle/api/artifacts/ProjectDependency;ILjava/lang/Object;)V
 }
 
 public abstract class com/freeletics/gradle/plugin/FreeleticsBasePlugin : org/gradle/api/Plugin {

@@ -132,7 +132,8 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
 
     private fun Project.configureTests() {
         project.tasks.withType(Test::class.java).configureEach {
-            val directory = rootProject.layout.buildDirectory
+            @Suppress("UnstableApiUsage")
+            val directory = layout.settingsDirectory
             val projectName = path
                 .replace("projects", "")
                 .replaceFirst(":", "")
