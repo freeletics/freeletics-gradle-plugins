@@ -1,25 +1,32 @@
 Change Log
 ==========
 
-## 0.35.0 *(2024-11-18)*
+## 0.36.0 *(2025-11-18)*
+
+- All monorepo plugins are now KMP plugins.
+- Added `useBurst()` for parameterized KMP tests.
+- Enabled strict validation and AndroidX Gradle lint checks for Gradle plugins.
+
+
+## 0.35.0 *(2025-11-18)*
 
 - Use fork of Paparazzi and make it compatible with Android KMP targets.
 - Stop enabling `Parcelize` by default.
 - Remove `enableViewBinding` option.
 
 
-## 0.34.1 *(2024-11-15)*
+## 0.34.1 *(2025-11-15)*
 
 - Allow feature modules to depend on feature debug modules.
 - Fix OSS publishing not having license information.
 
 
-## 0.34.1 *(2024-11-14)*
+## 0.34.1 *(2025-11-14)*
 
 - Fix dependency on abi dumb check task.
 
 
-## 0.34.0 *(2024-11-14)*
+## 0.34.0 *(2025-11-14)*
 
 - Replace publishing plugins with extension methods.
     - `com.freeletics.gradle.publish.oss` -> `enableOssPublishing()`
