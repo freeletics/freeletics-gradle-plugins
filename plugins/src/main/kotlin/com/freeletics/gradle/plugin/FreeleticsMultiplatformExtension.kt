@@ -1,6 +1,7 @@
 package com.freeletics.gradle.plugin
 
 import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
+import com.android.build.api.dsl.androidLibrary
 import com.freeletics.gradle.setup.setupAndroidTarget
 import com.freeletics.gradle.setup.setupXcFrameworkPublishing
 import com.freeletics.gradle.util.addImplementationDependency
@@ -51,9 +52,8 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
     ) {
         project.plugins.apply("com.android.kotlin.multiplatform.library")
         project.kotlinMultiplatform {
-            targets.withType(KotlinMultiplatformAndroidLibraryTarget::class.java).configureEach {
-                it.setupAndroidTarget(project, configure)
-            }
+            extensions.findByType(KotlinMultiplatformAndroidLibraryTarget::class.java)!!
+                .setupAndroidTarget(project, configure)
         }
     }
 
