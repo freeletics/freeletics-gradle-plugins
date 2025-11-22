@@ -1,7 +1,6 @@
 package com.freeletics.gradle.plugin
 
 import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
-import com.android.build.api.dsl.androidLibrary
 import com.freeletics.gradle.setup.setupAndroidTarget
 import com.freeletics.gradle.setup.setupXcFrameworkPublishing
 import com.freeletics.gradle.util.addImplementationDependency
