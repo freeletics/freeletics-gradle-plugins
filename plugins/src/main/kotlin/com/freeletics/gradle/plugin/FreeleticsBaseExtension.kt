@@ -53,10 +53,7 @@ public abstract class FreeleticsBaseExtension(private val project: Project) : Ex
         useMetro()
         project.configureProcessing()
         project.addApiDependency(project.getDependency("khonshu-codegen-runtime"))
-        project.addKspDependency(
-            project.getDependency("khonshu-codegen-compiler"),
-            excludeTargets = setOf("metadata"),
-        )
+        project.addKspDependency(project.getDependency("khonshu-codegen-compiler"))
         // TODO workaround for Gradle not being able to resolve this in the ksp config
         project.configurations.named("ksp").configure {
             it.exclude(mapOf("group" to "org.jetbrains.skiko", "module" to "skiko"))
