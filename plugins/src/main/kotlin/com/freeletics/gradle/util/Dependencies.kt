@@ -213,7 +213,7 @@ private fun Project.addTestRuntimeOnlyDependency(
 internal fun Project.addKspDependency(
     dependency: Provider<MinimalExternalModuleDependency>?,
     limitToTargets: Set<String>? = null,
-    excludeTargets: Set<String>? = null,
+    excludeTargets: Set<String>? = setOf("metadata"),
 ) {
     addDependency(
         dependency = dependency,
