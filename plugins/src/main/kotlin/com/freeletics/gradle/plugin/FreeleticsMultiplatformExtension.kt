@@ -130,10 +130,7 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
 
             watchosArm32()
             watchosArm64()
-            // TODO remove check when Compose 1.9.0 is stable
-            if (!limitToComposeTargets) {
-                watchosDeviceArm64()
-            }
+            watchosDeviceArm64()
             watchosX64()
             watchosSimulatorArm64()
 
