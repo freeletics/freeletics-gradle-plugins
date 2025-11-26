@@ -1,6 +1,14 @@
 Change Log
 ==========
 
+## 0.36.1 *(2025-11-26)*
+
+- Add AGP 9 compatibility.
+- `useRoom()` will now apply the room processor to each target instead of the common configuration.
+- `addCommonTargets(limitToComposeTargets: Boolean = true)` will now include `watchosDeviceArm64()`.
+- General improvements around task configuration and isolated projects.
+
+
 ## 0.36.0 *(2025-11-18)*
 
 - All monorepo plugins are now KMP plugins.
