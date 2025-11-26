@@ -1,5 +1,6 @@
 package com.freeletics.gradle.plugin
 
+import com.android.build.api.AndroidPluginVersion
 import com.android.build.api.variant.HasUnitTestBuilder
 import com.freeletics.gradle.setup.configure
 import com.freeletics.gradle.util.addCompileOnlyDependency
@@ -22,7 +23,9 @@ import org.gradle.api.Project
 public abstract class FreeleticsAndroidAppPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.plugins.apply("com.android.application")
-        target.plugins.apply("org.jetbrains.kotlin.android")
+        if (AndroidPluginVersion.getCurrent() < AndroidPluginVersion(9, 0, 0).beta(1)) {
+            target.plugins.apply("org.jetbrains.kotlin.android")
+        }
         target.plugins.apply(FreeleticsBasePlugin::class.java)
 
         target.freeleticsExtension.extensions.create("android", FreeleticsAndroidAppExtension::class.java)
@@ -55,7 +58,6 @@ public abstract class FreeleticsAndroidAppPlugin : Plugin<Project> {
                 viewBinding = false
                 dataBinding = false
                 aidl = false
-                renderScript = false
                 shaders = false
             }
 
