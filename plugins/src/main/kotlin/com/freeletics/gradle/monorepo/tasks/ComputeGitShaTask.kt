@@ -9,10 +9,8 @@ import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.Input
-import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.OutputFile
-import org.gradle.api.tasks.PathSensitive
-import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.TaskProvider
 import org.gradle.api.tasks.UntrackedTask
@@ -22,8 +20,7 @@ public abstract class ComputeGitShaTask : DefaultTask() {
     @get:Input
     public abstract val computeFromGit: Property<Boolean>
 
-    @get:InputDirectory
-    @get:PathSensitive(PathSensitivity.RELATIVE)
+    @get:Internal
     public abstract val gitRootDirectory: RegularFileProperty
 
     @get:OutputFile
