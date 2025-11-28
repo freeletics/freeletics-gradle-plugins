@@ -1,0 +1,64 @@
+name: Publish Docs
+
+on:
+  push:
+    branches:
+      - main
+  # TODO: replace with on push tag https://github.com/actions/deploy-pages/issues/76
+  workflow_run:
+    workflows: [Publish Release]
+    types:
+      - completed
+
+jobs:
+  publish:
+
+    runs-on: ubuntu-latest
+    if: github.repository == 'freeletics/freeletics-gradle-plugins'
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.0
+        with:
+          fetch-depth: 0
+
+      - name: Install JDK
+        uses: actions/setup-java@v5.0.0
+        with:
+          distribution: zulu
+          java-version: 24
+
+      - name: Install Python
+        uses: actions/setup-python@v6.1.0
+        with:
+          python-version: 3.x
+
+      - name: Install MkDocs Material
+        run: pip install mkdocs-material
+
+      - name: Copy docs
+        run: |
+          # copy shared filed
+          cp README.md docs/index.md
+          cp CHANGELOG.md docs/changelog.md
+
+      - name: Build MkDocs
+        run: mkdocs build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4.0.0
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4.0.5

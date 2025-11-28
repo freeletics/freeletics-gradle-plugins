@@ -13,16 +13,8 @@ internal fun RepositoryHandler.addMavenCentral() {
     }
 }
 
-internal fun RepositoryHandler.addSonatypeSnapshotRepositories() {
+internal fun RepositoryHandler.addSonatypeSnapshotRepository() {
     newRepository("Central Portal Snapshots", "https://central.sonatype.com/repository/maven-snapshots/") {
-        snapshotsOnly()
-    }
-
-    newRepository("Sonatype Snapshots", "https://oss.sonatype.org/content/repositories/snapshots/") {
-        snapshotsOnly()
-    }
-
-    newRepository("Sonatype Snapshots S01", "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
         snapshotsOnly()
     }
 }
@@ -31,7 +23,7 @@ internal fun RepositoryHandler.addKotlinSnapshotRepository() {
     newRepository("Kotlin Bootstrap", "https://redirector.kotlinlang.org/maven/bootstrap/") {
         includeVersionByRegex("^org\\.jetbrains\\.kotlin\\..*", ".*", ".*-(dev|release)-.*")
     }
-    newRepository("Kotlin Dev", "https://packages.jetbrains.team/maven/p/kt/dev") {
+    newRepository("Kotlin Dev", "https://redirector.kotlinlang.org/maven/dev") {
         includeVersionByRegex("^org\\.jetbrains\\.kotlin\\..*", ".*", ".*-(dev|release)-.*")
     }
 }
@@ -73,8 +65,9 @@ internal fun RepositoryHandler.addAndroidXSnapshotRepositories(androidXBuildId: 
 internal fun RepositoryHandler.addInternalRepository(settings: Settings) {
     val internalUrl = settings.stringProperty("fgp.internalArtifacts.url") ?: return
 
+    val regex = settings.stringProperty("fgp.internalArtifacts.regex") ?: "^com\\.freeletics\\.internal.*"
     newExclusiveContentRepository("internalArtifacts", internalUrl) {
-        includeGroupByRegex("^com\\.freeletics\\.internal.*")
+        includeGroupByRegex(regex)
     }.apply {
         credentials(PasswordCredentials::class.java)
     }

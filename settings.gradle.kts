@@ -30,4 +30,4 @@ plugins {
     id("com.freeletics.gradle.settings").version("0.36.1")
 }
 
-rootProject.name = "freeletics-gradle-plugins"
+rootProject.name = "freeletics-gradle-plugins-monorepo"
