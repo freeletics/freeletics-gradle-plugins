@@ -1,7 +1,7 @@
 # Monorepo plugins
 
 These plugins are used in the Freeletics monorepo. They are built on top of the same foundation as the common
-plugins but are more opinionated and tailored to the structure of our code base.
+plugins but are more opinionated and tailored to the structure of our codebase.
 
 ## Structure
 
@@ -13,15 +13,15 @@ specific Gradle plugin.
     - Should be as small as possible and generally just aggregate their dependencies
 - `core`: A generic building block that can be used to build features
     - Gradle plugin: `com.freeletics.gradle.core`
-    - Should not contain anything Freeletics specific (API clients/models, business logic, analytics)
+    - Should not contain anything Freeletics-specific (API clients/models, business logic, analytics)
     - Core modules are split into 2 actual modules, `core:*:api` and `core:*:implementation`. API contains only the
       parts that are used directly by other modules, which in many cases is just an interface. The implementation
       as well as potential Dagger contributions go into the implementation module. This is done to keep
       implementation classes as well as dependencies only needed by the implementation hidden from consumers of the
       API.
-- `domain`: A Freeletics specific build block that can be used to build features
+- `domain`: A Freeletics-specific building block that can be used to build features
     - Gradle plugin: `com.freeletics.gradle.domain`
-    - Very similar to `core` but with Freeletics specific code. We've split this out of `core` because the number of
+    - Very similar to `core` but with Freeletics-specific code. We've split this out of `core` because the number of
       core modules got so big that it was hard to find what you wanted.
     - Domain modules have the same api/implementation split as `core` modules
 - `feature:*:implementation`: A feature for the app
@@ -33,23 +33,23 @@ specific Gradle plugin.
       `feature` module. Other `feature` modules can use this to navigate to it.
 
 There are rules of which type of module is allowed on which other type:
-![Module dependecies](images/project-structure.png)
+![Module dependencies](images/project-structure.png)
 *The dotted line means the dependency is optional and only present if needed while a regular line signifies a dependency
 that always exists*
 
-In case the monorepo contains multiple apps the `domain` and `feature` groups can be split up into multiple app specific
-groups. For that a suffix can be added with a `-` to the top level folder. The suffix should equal the name of the app
+In case the monorepo contains multiple apps, the `domain` and `feature` groups can be split up into multiple app-specific
+groups. For that, a suffix can be added with a `-` to the top-level folder. The suffix should equal the name of the app
 module. For example with `:app:foo` and `:app:bar` anything inside `:domain` and `:feature` can be used by either app
 while `:domain-foo` and `:feature-foo` would be for `:app:foo` and `:domain-bar` and `:feature-bar` for `:app:bar`.
 
 In addition to the `api` and `implementation` modules there are 2 other types for each category. `debug` modules that
-can provide debug only functionality and `testing` modules that can provide test helpers or fake implementations of the
+can provide debug-only functionality and `testing` modules that can provide test helpers or fake implementations of the
 `api` module.
 
 Each module has a `checkDependencyRules` task that will ensure that it only depends on modules that it is allowed to
 depend on based on the rules above. This includes checks based on the module group (e.g. an `implementation` module
 is not allowed to depend on another `implementation` module) and based on the app (e.g. `:app:bar` or
-`feature-bar:...:implemenetation` are not allowed to depend on a `domain-foo` module).
+`feature-bar:...:implementation` are not allowed to depend on a `domain-foo` module).
 
 ## Getting started
 
@@ -65,7 +65,7 @@ fgp.defaultPackageName=com.example
 fgp.kotlin.targets.android=true
 # adds a JVM target to all modules, defaults to false
 fgp.kotlin.targets.jvm=true
-# adds am iOS target to all modules, defaults to false
+# adds an iOS target to all modules, defaults to false
 fgp.kotlin.targets.ios=true
 ```
 
@@ -95,21 +95,21 @@ android-desugarjdklibs = { module = "com.android.tools:desugar_jdk_libs", versio
 # the following bundles are optional but provide a way to add default dependencies to all modules
 [bundles]
 # any dependency in this bundle is automatically added to all modules as implementation dependency
-default-all = [ ... ]
+default-all = [ ]
 # any dependency in this bundle is automatically added to all modules as compileOnly dependency
-default-all-compile = [ ... ]
+default-all-compile = [ ]
 # any dependency in this bundle is automatically added to all Android modules as implementation dependency
-default-android = [ ... ]
+default-android = [ ]
 # any dependency in this bundle is automatically added to all Android modules as compileOnly dependency
-default-android-compile = [ ... ]
+default-android-compile = [ ]
 # any dependency in this bundle is automatically added to all modules as testImplementation dependency
-default-testing = [ ... ]
+default-testing = [ ]
 # any dependency in this bundle is automatically added to all modules as testCompileOnly dependency
-default-testing-compile = [ ... ]
+default-testing-compile = [ ]
 # any dependency in this bundle is automatically added to all modules as testRuntimeOnly dependency
-default-testing-runtime = [ ... ]
+default-testing-runtime = [ ]
 # any dependency in this bundle is automatically added to all modules as lintChecks dependency
-default-lint = [ ... ]
+default-lint = [ ]
 ```
 
 Add the [settings plugin](plugins-monorepo/settings.md) to the `settings.gradle` or `settings.gradle.kts` file:

@@ -1,4 +1,4 @@
-# Gradle plugin plugin
+# Android app plugin
 
 Add the following to the root `build.gradle` or `build.gradle.kts` to apply the plugin:
 
