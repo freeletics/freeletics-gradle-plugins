@@ -50,6 +50,9 @@ jobs:
           # copy shared filed
           cp README.md docs/index.md
           cp CHANGELOG.md docs/changelog.md
+          # Update links
+          sed -i 's/(docs/monorepo.md)/(monorepo.md)/' docs/index.md
+          sed -i 's/(docs/plugins-common)/(/general-plugins)/' docs/index.md
 
       - name: Build MkDocs
         run: mkdocs build
