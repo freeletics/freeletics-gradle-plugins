@@ -4,19 +4,6 @@ import org.gradle.api.initialization.Settings
 
 public abstract class SettingsExtension(private val settings: Settings) {
     /**
-     * Automatically find and include Gradle projects in this build. It will start from the root folder and find any
-     * project where the build file name matches the path, e.g. `:example` should have `example.gradle` as build file
-     * and `:foo:bar` should have `foo-bar.gradle.
-     *
-     * This does not support nested projects. E.g. `foo:api` and `foo:impl` are generally fine, but if `:foo` also
-     * is a project (has a build file) then these 2 are not considered.
-     */
-    @JvmOverloads
-    public fun discoverProjects(kts: Boolean = true) {
-        discoverProjectsIn(kts)
-    }
-
-    /**
      * Automatically find and include Gradle projects in this build. It will only search in the given folders and find
      * any project where the build file name matches the path, e.g. `:example` should have `example.gradle` as build
      * file and `:foo:bar` should have `foo-bar.gradle.
@@ -38,7 +25,7 @@ public abstract class SettingsExtension(private val settings: Settings) {
     public fun snapshots(androidXBuildId: String? = null) {
         @Suppress("UnstableApiUsage")
         settings.dependencyResolutionManagement.repositories.apply {
-            addSonatypeSnapshotRepositories()
+            addSonatypeSnapshotRepository()
             addKotlinSnapshotRepository()
             addAndroidXSnapshotRepositories(androidXBuildId)
             mavenLocal()

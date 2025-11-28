@@ -1,19 +1,14 @@
 # Freeletics Gradle plugins
 
-A collection of convention plugins that are used internally at Freeletics. The available plugins can be separated
-into 4 groups:
+A collection of convention plugins and build tools that are used internally at Freeletics.
 
-- [monorepo plugins](plugins/monoREADME.md) which are specific to the structure of the Freeletics Android mono repository,
+- [monorepo plugins](docs/monorepo.md) which are specific to the structure of the Freeletics Android mono repository,
   provide more defaults and are more opinionated
-- [base plugins](plugins/README.md) which share the same basic configuration of the monorepo plugins but don't require
+- [base plugins](docs/plugins-common) which share the same basic configuration of the monorepo plugins but don't require
   a specific module structure. These are used internally by the monoroepo plugins and we are using these for open source
   some projects (like this one) and some secondary projects.
-- [root-plugin](plugin-root/rootREADME.md) which is applied to the root `build.gradle` file (can be used in combination
-  with both the monorepo and the common plugins)
-- [settings-plugin](plugin-settings/README.md) which is applied to `settings.gradle` file (can be used in combination
-  with both the monorepo and the common plugins)
-- [scripts](scripts-formatting/README.md) collection of ready to use command line scripts that can be
-  used from `.main.kts` scripts
+- scripts: a collection of ready to use command line scripts and helper that can be used from `.main.kts` scripts
+
 
 # License
 

@@ -1,8 +1,5 @@
 public abstract class com/freeletics/gradle/plugin/SettingsExtension {
 	public fun <init> (Lorg/gradle/api/initialization/Settings;)V
-	public final fun discoverProjects ()V
-	public final fun discoverProjects (Z)V
-	public static synthetic fun discoverProjects$default (Lcom/freeletics/gradle/plugin/SettingsExtension;ZILjava/lang/Object;)V
 	public final fun discoverProjectsIn (Z[Ljava/lang/String;)V
 	public final fun discoverProjectsIn ([Ljava/lang/String;)V
 	public static synthetic fun discoverProjectsIn$default (Lcom/freeletics/gradle/plugin/SettingsExtension;Z[Ljava/lang/String;ILjava/lang/Object;)V

@@ -15,16 +15,7 @@ plugins {
 The plugin will automatically discover all projects by finding their build files and include them. This means it is
 not necessary anymore to manually add `include("...")` for each project to `settings.gradle.kts`. The requirement for this
 to work is that the build file is named after the path. For example the project `:foo:bar` should have a build file
-called `foo-bar.gradle.kts` (or `foo-bar.gradle`). `.gradle.kts` discoverability is enabled by default and `.gradle`
-discoverability can be enabled with:
-
-```groovy
-freeletics {
-    discoverProjects(kts = false)
-}
-```
-
-Mixing `.gradle.kts` and `.gradle` files for automatic discoverability is not supported.
+called `foo-bar.gradle.kts` (or `foo-bar.gradle`). `
 
 Instead of using project root directory as a base for automatic discoverability it is possible to only include
 certain subdirectories by adding `fgp.discoverProjects.automatically=false` to project's `gradle.properties` and adding
@@ -32,26 +23,26 @@ the following:
 
 ```kotlin
 freeletics {
-    it.discoverProjectsIn(
-        directories = arrayOf("app", "features")
-    )
+    discoverProjectsIn("app", "features")
 }
 ```
 
 ### `dependencyResolutionManagement`
 
+The project will be configured to fail when repositories are defined on a project instead of through
+`dependencyResolutionManagement`.
+
 The following repositories are automatically added to `dependencyResolutionManagement`:
 - Maven Central
 - the Google Maven Repository with `exclusiveContent` rules
 - the Gradle plugin portal limited to `com.gradle.*` and `org.gradle.*`
-- optionally the internal Freeletics repository if `freeleticsAndroidArtifactsUrl` is set
-  - requires `freeleticsAndroidArtifactsAccessKey` and `freeleticsAndroidArtifactsSecretKey` properties to be set with valid S3 credentials
+- the Kotlin JS and WASM repositories
 
-By default the project will also be configured to fail when repositories are defined on a project instead of through
-`dependencyResolutionManagement`. This can be disabled by setting `fgp.kotlin.multiplatformProject=true` if the
-repository has Kotlin Multiplatform projects because of [this issue][3].
+If `fgp.internalArtifacts.url` is set a repository for that URL is created. The content of that repository is limited
+to the group regex specified by `fgp.internalArtifacts.regex`. The username and password for this repository are expected
+to be set through `internalArtifactsUsername` and `internalArtifactsPassword`.
 
-#### Snapshots
+### Snapshots
 
 By adding the following snipped to `settings.gradle` it is possible to add various snapshot repositories to the project:
 
@@ -64,9 +55,10 @@ freeletics {
 ```
 
 This adds:
-- both Sonatype snapshot repositories
-- the Jetpack Compose compiler snapshot repository
+- both Maven Central snapshot repository
 - the Kotlin bootstrap repository which contains dev builds
+- the AndroidX snapshot repository if a build id was specified
+- maven local (`~/.m2`)
 
 ### Build cache
 
@@ -96,13 +88,14 @@ freeletics {
 
 ### Other
 
-- enables the [type safe project accessor feature preview][2]
-- configures the jvm toolchain management for auto provisioning using the [Foojay Toolchains Plugin][1]
-- configures the Gradle enterprise plugin
+- [Type-safe project accessors][2] are enabled by default.
+- [Strict configuration cache][3] is enabled by default.
+- Configures the jvm toolchain management for auto provisioning using the [Foojay Toolchains Plugin][1]
+- Configures the Gradle enterprise plugin
 
 
 [1]: https://github.com/gradle/foojay-toolchains
-[2]: https://docs.gradle.org/current/userguide/declaring_dependencies.html#sec:type-safe-project-accessors
-[3]: https://youtrack.jetbrains.com/issue/KT-51379
+[2]: https://docs.gradle.org/current/userguide/declaring_dependencies_basics.html#sec:type-safe-project-accessors
+[3]: https://docs.gradle.org/current/userguide/configuration_cache_enabling.html#config_cache:stable
 [4]: https://github.com/freeletics/khonshu
 [5]: https://github.com/freeletics/flowredux
