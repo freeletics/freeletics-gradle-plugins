@@ -13,6 +13,7 @@ import com.freeletics.gradle.util.getVersion
 import com.freeletics.gradle.util.getVersionOrNull
 import kotlin.text.toInt
 import org.gradle.api.Project
+import org.gradle.api.tasks.testing.Test
 
 internal fun KotlinMultiplatformAndroidLibraryTarget.setupAndroidTarget(
     target: Project,
@@ -40,6 +41,9 @@ internal fun KotlinMultiplatformAndroidLibraryTarget.setupAndroidTarget(
     // enable tests
     withHostTestBuilder {}.configure {
         isIncludeAndroidResources = true
+    }
+    target.tasks.named("testAndroidHostTest") {
+        (it as Test).failOnNoDiscoveredTests.set(false)
     }
 
     // add default dependencies
