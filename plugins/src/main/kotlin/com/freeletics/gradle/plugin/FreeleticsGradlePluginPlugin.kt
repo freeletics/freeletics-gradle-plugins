@@ -32,6 +32,7 @@ public abstract class FreeleticsGradlePluginPlugin : Plugin<Project> {
                 // https://docs.gradle.org/current/userguide/compatibility.html#kotlin
                 apiVersion.set(KotlinVersion.KOTLIN_2_2)
                 languageVersion.set(KotlinVersion.KOTLIN_2_2)
+                progressiveMode.set(false)
 
                 // https://github.com/gradle/gradle/issues/24871
                 freeCompilerArgs.addAll("-Xsam-conversions=class", "-Xlambdas=class")
