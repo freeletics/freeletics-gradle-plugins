@@ -138,8 +138,8 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                 .replace("projects", "")
                 .replaceFirst(":", "")
                 .replace(":", "/")
-            it.reports.html.outputLocation.set(directory.dir("reports/tests/$projectName"))
-            it.reports.junitXml.outputLocation.set(directory.dir("reports/tests/$projectName"))
+            it.reports.html.outputLocation.set(directory.dir("build/reports/tests/$projectName"))
+            it.reports.junitXml.outputLocation.set(directory.dir("build/reports/tests/$projectName"))
         }
     }
 }
