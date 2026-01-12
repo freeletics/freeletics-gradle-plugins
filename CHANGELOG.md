@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## 0.36.3 *(2026-01-12)*
+
+- Fixed output directory for reports in more places.
+
+
 ## 0.36.2 *(2026-01-12)*
 
 - Added `GradleDependenciesCli` to help sorting dependency declarations.
