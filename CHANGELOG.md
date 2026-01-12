@@ -1,6 +1,14 @@
 Change Log
 ==========
 
+## 0.36.2 *(2026-01-12)*
+
+- Added `GradleDependenciesCli` to help sorting dependency declarations.
+- Disabled `failOnNoDiscoveredTests` for Android targets.
+- Disabled `progressiveMode` for Gradle plugins because they target older Kotlin language versions.
+- Fixed output directory for reports.
+
+
 ## 0.36.1 *(2025-11-26)*
 
 - Add AGP 9 compatibility.
