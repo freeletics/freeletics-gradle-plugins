@@ -12,7 +12,6 @@ import com.freeletics.gradle.util.kotlinMultiplatform
 import kotlin.jvm.java
 import org.gradle.api.Project
 import org.jetbrains.compose.ComposeExtension
-import org.jetbrains.compose.ComposePlugin
 import org.jetbrains.compose.resources.ResourcesExtension
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.plugin.mpp.Framework
