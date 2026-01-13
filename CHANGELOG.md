@@ -1,6 +1,27 @@
 Change Log
 ==========
 
+## 0.36.3 *(2026-01-12)*
+
+- Fixed output directory for reports in more places.
+
+
+## 0.36.2 *(2026-01-12)*
+
+- Added `GradleDependenciesCli` to help sorting dependency declarations.
+- Disabled `failOnNoDiscoveredTests` for Android targets.
+- Disabled `progressiveMode` for Gradle plugins because they target older Kotlin language versions.
+- Fixed output directory for reports.
+
+
+## 0.36.1 *(2025-11-26)*
+
+- Add AGP 9 compatibility.
+- `useRoom()` will now apply the room processor to each target instead of the common configuration.
+- `addCommonTargets(limitToComposeTargets: Boolean = true)` will now include `watchosDeviceArm64()`.
+- General improvements around task configuration and isolated projects.
+
+
 ## 0.36.0 *(2025-11-18)*
 
 - All monorepo plugins are now KMP plugins.
