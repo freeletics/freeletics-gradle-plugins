@@ -7,11 +7,11 @@ import com.freeletics.gradle.util.addImplementationDependency
 import com.freeletics.gradle.util.booleanProperty
 import com.freeletics.gradle.util.defaultPackageName
 import com.freeletics.gradle.util.freeleticsMultiplatformExtension
+import com.freeletics.gradle.util.getDependency
 import com.freeletics.gradle.util.kotlinMultiplatform
 import kotlin.jvm.java
 import org.gradle.api.Project
 import org.jetbrains.compose.ComposeExtension
-import org.jetbrains.compose.ComposePlugin
 import org.jetbrains.compose.resources.ResourcesExtension
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.plugin.mpp.Framework
@@ -153,7 +153,7 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
             }
         }
 
-        project.addImplementationDependency(ComposePlugin.CommonComponentsDependencies.resources)
+        project.addImplementationDependency(project.getDependency("compose-components-resources"))
     }
 
     public fun useSkie() {
