@@ -45,5 +45,5 @@ private fun Project.reportsFile(name: String): RegularFile {
         .replace(":", "/")
 
     @Suppress("UnstableApiUsage")
-    return project.layout.settingsDirectory.file("reports/lint/$projectName/$name")
+    return project.layout.settingsDirectory.file("build/reports/lint/$projectName/$name")
 }

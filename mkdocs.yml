@@ -1,0 +1,63 @@
+site_name: Freeletics Gradle plugins
+site_url: https://freeletics.github.io/freeletics-gradle-plugins/
+repo_name: Freeletics Gradle plugins
+repo_url: https://github.com/freeletics/freeletics-gradle-plugins
+site_description: "Freeletics Gradle plugins"
+site_author: Freeletics
+
+copyright: 'Copyright &copy; 2023 Freeletics.'
+
+theme:
+  name: 'material'
+  favicon: images/icon-freeletics.svg
+  logo: images/logo-freeletics.svg
+  features:
+    - navigation.sections
+    - navigation.tracking
+    - navigation.tabs
+    - content.tabs.link
+    - toc.integrate
+
+nav:
+  - index.md
+  - 'General plugins':
+      - plugins-common/multiplatform.md
+      - plugins-common/android-app.md
+      - plugins-common/gradle.md
+  - 'Monorepo':
+      - 'Overview': monorepo.md
+      - plugins-monorepo/app.md
+      - plugins-monorepo/core.md
+      - plugins-monorepo/domain.md
+      - plugins-monorepo/feature.md
+      - plugins-monorepo/nav.md
+      - plugins-monorepo/root.md
+      - plugins-monorepo/settings.md
+  - changelog.md
+
+extra_css:
+  - 'css/app.css'
+
+markdown_extensions:
+  - smarty
+  - codehilite:
+      guess_lang: false
+  - footnotes
+  - meta
+  - toc:
+      permalink: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tilde
+  - pymdownx.superfences
+  - admonition
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - pymdownx.snippets

@@ -13,6 +13,7 @@ import com.freeletics.gradle.util.getVersion
 import com.freeletics.gradle.util.getVersionOrNull
 import kotlin.text.toInt
 import org.gradle.api.Project
+import org.gradle.api.tasks.testing.Test
 
 internal fun KotlinMultiplatformAndroidLibraryTarget.setupAndroidTarget(
     target: Project,
@@ -40,6 +41,13 @@ internal fun KotlinMultiplatformAndroidLibraryTarget.setupAndroidTarget(
     // enable tests
     withHostTestBuilder {}.configure {
         isIncludeAndroidResources = true
+    }
+    // AGP sets failOnNoDiscoveredTests to true by default
+    // we want tests to be enabled by default for convenience so we disable the option again
+    target.afterEvaluate {
+        it.tasks.named("testAndroidHostTest") { task ->
+            (task as Test).failOnNoDiscoveredTests.set(false)
+        }
     }
 
     // add default dependencies
