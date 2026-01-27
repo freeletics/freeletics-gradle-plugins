@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+## 0.36.4 *(2026-01-27)*
+
+- Disable `annotation-in-metadata` compiler flag. This fixes compilation issue with Kotlin 2.3.0.
+
 ## 0.36.3 *(2026-01-12)*
 
 - Fixed output directory for reports in more places.
