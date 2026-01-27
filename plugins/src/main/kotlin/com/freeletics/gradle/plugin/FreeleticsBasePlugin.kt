@@ -121,8 +121,9 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                     "-Xjspecify-annotations=strict",
                     // Enhance not null annotated type parameter's types to definitely not null types (@NotNull T => T & Any)
                     "-Xenhance-type-parameter-types-to-def-not-null",
-                    // https://kotlinlang.org/docs/whatsnew-eap.html#support-for-reading-and-writing-annotations-in-kotlin-metadata
-                    "-Xannotations-in-metadata",
+                    // https://kotlinlang.org/docs/whatsnew22.html#support-for-reading-and-writing-annotations-in-kotlin-metadata
+                    // Disabled because of https://youtrack.jetbrains.com/issue/KT-83427
+                    // "-Xannotations-in-metadata",
                     // opt in to experimental stdlib apis
                     "-opt-in=kotlin.io.path.ExperimentalPathApi",
                 )
