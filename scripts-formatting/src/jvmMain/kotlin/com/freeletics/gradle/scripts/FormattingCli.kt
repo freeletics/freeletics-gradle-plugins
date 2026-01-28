@@ -67,7 +67,7 @@ public abstract class FormattingCli : CliktCommand() {
     private companion object {
         private const val ROOT_HELP = "The root directory of the project, used as starting point to search files. " +
             "Uses current directory if not specified."
-        private const val FILES_HELP = "The files to format, if not specified the root option will be used to" +
+        private const val FILES_HELP = "The files to format, if not specified the root option will be used to " +
             "automatically find files."
         private const val VERIFY_HELP = "When this flag is passed, the script will fail if any files changed during " +
             "formatting."

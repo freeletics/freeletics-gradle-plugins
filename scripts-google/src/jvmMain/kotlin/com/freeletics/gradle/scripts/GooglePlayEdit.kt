@@ -56,7 +56,7 @@ public class GooglePlayEdit(
         val content = edits.tracks().get(appId, editId, track).execute()
         val releases = content.releases.filter { it.versionCodes.contains(version.code) }
         check(releases.isNotEmpty()) {
-            "Track $track does not contain version code ${version.code}. This can happen if there is a newer" +
+            "Track $track does not contain version code ${version.code}. This can happen if there is a newer " +
                 "release train already running. Please continue with that release train. Currently in $track:\n" +
                 content.releases.toVersions().joinToString(separator = "\n")
         }
