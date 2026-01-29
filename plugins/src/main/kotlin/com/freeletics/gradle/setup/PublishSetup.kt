@@ -3,6 +3,7 @@ package com.freeletics.gradle.setup
 import com.freeletics.gradle.util.freeleticsExtension
 import com.freeletics.gradle.util.kotlin
 import com.freeletics.gradle.util.stringProperty
+import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import org.gradle.api.Project
 import org.gradle.api.credentials.PasswordCredentials
@@ -31,7 +32,7 @@ internal fun setupOssPublishing(target: Project) {
 
         val isSnapshot = target.stringProperty("VERSION_NAME").orNull?.endsWith("-SNAPSHOT") == true
         @Suppress("UnstableApiUsage")
-        it.configureBasedOnAppliedPlugins(sourcesJar = true, javadocJar = !isSnapshot)
+        it.configureBasedOnAppliedPlugins(javadocJar = if (isSnapshot) { JavadocJar.None() } else { JavadocJar.Empty() })
     }
 
     target.configureBinaryCompatibility()

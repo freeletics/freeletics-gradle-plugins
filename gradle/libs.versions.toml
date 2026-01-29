@@ -57,7 +57,7 @@ crashlytics-gradle = { module = "com.google.firebase:firebase-crashlytics-gradle
 
 dependency-analysis-gradle = { module = "com.autonomousapps:dependency-analysis-gradle-plugin", version.ref = "dependency-analysis" }
 
-publish-gradle = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish"}
+publish-gradle = { module = "com.vanniktech:gradle-maven-publish-plugin", version = "0.36.0"}
 dokka-gradle = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 
 develocity-gradle = { module = "com.gradle:develocity-gradle-plugin", version.ref = "develocity" }
