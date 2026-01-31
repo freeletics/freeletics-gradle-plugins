@@ -32,7 +32,7 @@ internal fun setupOssPublishing(target: Project) {
 
         val isSnapshot = target.stringProperty("VERSION_NAME").orNull?.endsWith("-SNAPSHOT") == true
         @Suppress("UnstableApiUsage")
-        it.configureBasedOnAppliedPlugins(javadocJar = if (isSnapshot) { JavadocJar.None() } else { JavadocJar.Empty() })
+        it.configureBasedOnAppliedPlugins(javadocJar = if (isSnapshot) JavadocJar.None() else JavadocJar.Empty())
     }
 
     target.configureBinaryCompatibility()
