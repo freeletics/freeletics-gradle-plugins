@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+## 0.36.5 *(2026-02-02)*
+
+- Maintenance release compatible with publish plugin 0.36.0.
+
 ## 0.36.4 *(2026-01-27)*
 
 - Disable `annotation-in-metadata` compiler flag. This fixes compilation issue with Kotlin 2.3.0.
