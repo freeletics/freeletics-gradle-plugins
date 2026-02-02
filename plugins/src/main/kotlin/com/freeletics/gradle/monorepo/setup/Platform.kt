@@ -13,13 +13,9 @@ internal fun Project.applyPlatformConstraints(multiplatform: Boolean = false) {
 
 // adapted from https://github.com/ZacSweers/CatchUp/blob/347db46d82497990ff10c441ecc75c0c9eedf7c4/buildSrc/src/main/kotlin/dev/zacsweers/catchup/gradle/CatchUpPlugin.kt#L68-L80
 private fun isPlatformConfigurationName(name: String, multiplatform: Boolean): Boolean {
-    // TODO: KT-61653 KMP fails on androidTest*Api dependencies
-    if (multiplatform) {
-        MULTIPLATFORM_API_IGNORE_CONFIGURATION.forEach {
-            if (name.contains(it, ignoreCase = true) && name.endsWith("api", ignoreCase = true)) {
-                return false
-            }
-        }
+    // adding api dependnecies to test sources is deprecated and will be removed
+    if (name.contains("test", ignoreCase = true) && name.endsWith("api", ignoreCase = true)) {
+        return false
     }
 
     // Try trimming the flavor by just matching the prefix
@@ -54,12 +50,4 @@ private val PLATFORM_CONFIGURATION_SUFFIX = setOf(
     "androidTestUtil",
     "lintChecks",
     "lintRelease",
-)
-
-private val MULTIPLATFORM_API_IGNORE_CONFIGURATION = setOf(
-    "androidTest",
-    "androidUnitTest",
-    "androidDebugUnitTest",
-    "androidReleaseUnitTest",
-    "androidInstrumentedTest",
 )
