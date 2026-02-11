@@ -4,7 +4,7 @@ java-toolchain = "24"
 
 fgp = "0.36.5"
 
-kotlin = "2.3.0"
+kotlin = "2.3.10"
 coroutines = "1.10.2"
 android-gradle = "9.0.0"
 ksp="2.3.5"
@@ -45,8 +45,8 @@ android-gradle-api = { module = "com.android.tools.build:gradle-api", version.re
 ksp-gradle = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin",  version.ref = "ksp" }
 metro-gradle = { module = "dev.zacsweers.metro:gradle-plugin", version = "0.10.3" }
 poko-gradle = { module = "dev.drewhamilton.poko:poko-gradle-plugin", version = "0.21.1" }
-kopy-gradle = { module = "com.javiersc.kotlin:kopy-gradle-plugin", version = "0.21.0+2.3.0" }
-skie-gradle = { module = "co.touchlab.skie:gradle-plugin", version = "0.10.9" }
+kopy-gradle = { module = "com.javiersc.kotlin:kopy-gradle-plugin", version = "0.22.0+2.3.10" }
+skie-gradle = { module = "co.touchlab.skie:gradle-plugin", version = "0.10.10" }
 compose-gradle = { module = "org.jetbrains.compose:compose-gradle-plugin", version = "1.10.0"}
 sqldelight-gradle = { module = "app.cash.sqldelight:gradle-plugin", version.ref = "sqldelight" }
 burst-gradle = { module = "app.cash.burst:burst-gradle-plugin", version = "2.11.0" }
