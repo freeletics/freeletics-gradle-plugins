@@ -44,7 +44,7 @@ android-gradle = { module = "com.android.tools.build:gradle", version.ref = "and
 android-gradle-api = { module = "com.android.tools.build:gradle-api", version.ref = "android-gradle" }
 ksp-gradle = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin",  version.ref = "ksp" }
 metro-gradle = { module = "dev.zacsweers.metro:gradle-plugin", version = "0.10.4" }
-poko-gradle = { module = "dev.drewhamilton.poko:poko-gradle-plugin", version = "0.21.1" }
+poko-gradle = { module = "dev.drewhamilton.poko:poko-gradle-plugin", version = "0.21.2" }
 kopy-gradle = { module = "com.javiersc.kotlin:kopy-gradle-plugin", version = "0.22.0+2.3.10" }
 skie-gradle = { module = "co.touchlab.skie:gradle-plugin", version = "0.10.10" }
 compose-gradle = { module = "org.jetbrains.compose:compose-gradle-plugin", version = "1.10.1"}
