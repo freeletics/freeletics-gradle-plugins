@@ -1,6 +1,6 @@
 package com.freeletics.gradle.scripts
 
-import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport
+import com.google.api.client.http.javanet.NetHttpTransport
 import com.google.api.client.json.gson.GsonFactory
 import com.google.api.services.sheets.v4.Sheets
 import com.google.api.services.sheets.v4.SheetsScopes.SPREADSHEETS_READONLY
@@ -13,7 +13,7 @@ public class GoogleSheetsReader(applicationName: String, jsonKey: String) {
         .createScoped(listOf(SPREADSHEETS_READONLY))
 
     private val sheets = Sheets.Builder(
-        GoogleNetHttpTransport.newTrustedTransport(),
+        NetHttpTransport(),
         GsonFactory.getDefaultInstance(),
         HttpCredentialsAdapter(credentials),
     ).setApplicationName(applicationName).build()
