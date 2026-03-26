@@ -119,8 +119,6 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                     "-Xjsr305=strict",
                     // https://kotlinlang.org/docs/whatsnew1520.html#support-for-jspecify-nullness-annotations
                     "-Xjspecify-annotations=strict",
-                    // Enhance not null annotated type parameter's types to definitely not null types (@NotNull T => T & Any)
-                    "-Xenhance-type-parameter-types-to-def-not-null",
                     // https://kotlinlang.org/docs/whatsnew22.html#support-for-reading-and-writing-annotations-in-kotlin-metadata
                     // Disabled because of https://youtrack.jetbrains.com/issue/KT-83427
                     // "-Xannotations-in-metadata",
