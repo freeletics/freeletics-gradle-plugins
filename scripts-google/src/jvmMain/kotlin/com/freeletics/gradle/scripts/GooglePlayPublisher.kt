@@ -1,6 +1,6 @@
 package com.freeletics.gradle.scripts
 
-import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport
+import com.google.api.client.http.javanet.NetHttpTransport
 import com.google.api.client.json.gson.GsonFactory
 import com.google.api.services.androidpublisher.AndroidPublisher
 import com.google.api.services.androidpublisher.AndroidPublisherScopes.ANDROIDPUBLISHER
@@ -19,7 +19,7 @@ public class GooglePlayPublisher(
         .createScoped(listOf(ANDROIDPUBLISHER))
 
     private val androidPublisher = AndroidPublisher.Builder(
-        GoogleNetHttpTransport.newTrustedTransport(),
+        NetHttpTransport(),
         GsonFactory.getDefaultInstance(),
         // long timeout because uploading an aab can take a while
         TimeoutHttpCredentialsAdapter(credentials, timeout = 3.minutes),

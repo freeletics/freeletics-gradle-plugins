@@ -71,7 +71,6 @@ ktlint-rules = { module = "com.pinterest.ktlint:ktlint-ruleset-standard", versio
 ktfmt = { module = "com.facebook:ktfmt", version = "0.62" }
 gradle-sorter = { module = "com.squareup:sort", version = "0.16" }
 slack = { module = "com.slack.api:slack-api-client-kotlin-extension", version = "1.48.0"}
-google-apiclient = { module = "com.google.api-client:google-api-client", version = "2.9.0" }
 google-http = { module = "com.google.http-client:google-http-client", version.ref = "google-http" }
 google-http-gson = { module = "com.google.http-client:google-http-client-gson", version.ref = "google-http" }
 google-credentials = { module = "com.google.auth:google-auth-library-credentials", version.ref = "google-auth" }
