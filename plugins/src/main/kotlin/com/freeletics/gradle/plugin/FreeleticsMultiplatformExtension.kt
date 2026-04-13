@@ -121,18 +121,15 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
             iosSimulatorArm64()
 
             macosArm64()
-            macosX64()
 
             mingwX64()
 
             tvosArm64()
-            tvosX64()
             tvosSimulatorArm64()
 
             watchosArm32()
             watchosArm64()
             watchosDeviceArm64()
-            watchosX64()
             watchosSimulatorArm64()
 
             if (!limitToComposeTargets) {
