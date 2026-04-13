@@ -15,7 +15,6 @@ dependencies {
     "jvmMainApi"(libs.clikt.core)
     "jvmMainApi"(libs.google.play)
     "jvmMainImplementation"(libs.google.sheets)
-    "jvmMainImplementation"(libs.google.apiclient)
     "jvmMainImplementation"(libs.google.http)
     "jvmMainImplementation"(libs.google.http.gson)
     "jvmMainImplementation"(libs.google.credentials)
