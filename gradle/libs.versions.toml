@@ -12,7 +12,7 @@ sqldelight = "2.3.2"
 paparazzi = "2.0.0-alpha02-fl05"
 licensee = "1.14.1"
 crashlytics-gradle = "3.0.7"
-dependency-analysis = "3.8.0"
+dependency-analysis = "3.9.0"
 develocity = "4.4.1"
 gradle-toolchain = "1.0.0"
 publish = "0.36.0"
@@ -70,7 +70,7 @@ ktlint-rule-engine-core = { module = "com.pinterest.ktlint:ktlint-rule-engine-co
 ktlint-rules = { module = "com.pinterest.ktlint:ktlint-ruleset-standard", version.ref = "ktlint" }
 ktfmt = { module = "com.facebook:ktfmt", version = "0.62" }
 gradle-sorter = { module = "com.squareup:sort", version = "0.16" }
-slack = { module = "com.slack.api:slack-api-client-kotlin-extension", version = "1.48.0"}
+slack = { module = "com.slack.api:slack-api-client-kotlin-extension", version = "1.48.1"}
 google-http = { module = "com.google.http-client:google-http-client", version.ref = "google-http" }
 google-http-gson = { module = "com.google.http-client:google-http-client-gson", version.ref = "google-http" }
 google-credentials = { module = "com.google.auth:google-auth-library-credentials", version.ref = "google-auth" }
