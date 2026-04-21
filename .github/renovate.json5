@@ -36,7 +36,7 @@
         "com.gradle:develocity-gradle-plugin"
       ],
       registryUrls: ["https://plugins.gradle.org/m2/"],
-      prBodyNotes: "[Changelog](https://plugins.gradle.org/plugin/com.gradle.enterprise)"
+      prBodyNotes: "[Changelog](https://docs.gradle.com/develocity/gradle/{{{newVersion}}}/release-history)"
     },
     {
       matchPackageNames: [
