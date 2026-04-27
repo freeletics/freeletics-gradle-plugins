@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-## 0.36.6 *(2026-04-27)*
+## 0.36.7 *(2026-04-27)*
 - Make iOS x64 target optional and off by default. It can be enabled with `fgp.kotlin.targets.ios` Gradle property.
 
 ## 0.36.6 *(2026-03-30)*
