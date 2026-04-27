@@ -4,6 +4,9 @@ Change Log
 ## 0.36.6 *(2026-04-27)*
 - Make iOS x64 target optional and off by default. It can be enabled with `fgp.kotlin.targets.ios` Gradle property.
 
+## 0.36.6 *(2026-03-30)*
+- Remove `-Xenhance-type-parameter-types-to-def-not-null` compiler flag. This flag is built into Kotlin 2.3.20.
+
 ## 0.36.5 *(2026-02-02)*
 
 - Maintenance release compatible with publish plugin 0.36.0.
