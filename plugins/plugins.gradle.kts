@@ -9,6 +9,7 @@ freeletics {
 dependencies {
     api(libs.javax.inject)
     implementation(libs.android.gradle.api)
+    implementation(libs.android.gradle.common.api)
     implementation(libs.annotations)
     implementation(libs.kotlin.gradle.api)
     implementation(libs.kotlin.native.utils)
