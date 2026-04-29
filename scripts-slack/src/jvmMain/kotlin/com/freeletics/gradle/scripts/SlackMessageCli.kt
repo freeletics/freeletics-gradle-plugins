@@ -40,7 +40,7 @@ public abstract class SlackMessageCli(name: String? = null) : CliktCommand(name)
             .blocks(withBlocks(builder))
             .build()
         val response = slack.send(webHookUrl, payload)
-        check(response.code == 200) { "Slack webhook failed with ${response.code}: ${response.message}" }
+        check(response.code in 200..299) { "Slack webhook failed with ${response.code}: ${response.message}" }
     }
 
     override fun help(context: Context): String {
