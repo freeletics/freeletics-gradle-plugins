@@ -1,6 +1,9 @@
 Change Log
 ==========
 
+## 0.36.8 *(2026-04-29)*
+- Throw exception if slack webhook fails when sending a message using SlackMessageCli.kt
+
 ## 0.36.7 *(2026-04-27)*
 - Make iOS x64 target optional and off by default. It can be enabled with `fgp.kotlin.targets.ios` Gradle property.
 
