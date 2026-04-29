@@ -26,7 +26,8 @@ public abstract class SlackMessageCli(name: String? = null) : CliktCommand(name)
         val payload = Payload.builder()
             .text(message)
             .build()
-        slack.send(webHookUrl, payload)
+        val response = slack.send(webHookUrl, payload)
+        check(response.code in 200..299) { "Slack webhook failed with ${response.code}: ${response.message}" }
     }
 
     /**
@@ -38,7 +39,8 @@ public abstract class SlackMessageCli(name: String? = null) : CliktCommand(name)
             .text(fallbackMessage)
             .blocks(withBlocks(builder))
             .build()
-        slack.send(webHookUrl, payload)
+        val response = slack.send(webHookUrl, payload)
+        check(response.code in 200..299) { "Slack webhook failed with ${response.code}: ${response.message}" }
     }
 
     override fun help(context: Context): String {
