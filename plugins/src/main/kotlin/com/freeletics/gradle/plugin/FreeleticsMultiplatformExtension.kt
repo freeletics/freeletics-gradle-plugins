@@ -27,14 +27,12 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
             project.freeleticsMultiplatformExtension.addJvmTarget()
         }
         if (project.booleanProperty("fgp.kotlin.targets.ios", false).get()) {
-            val x64 = project.booleanProperty("fgp.kotlin.targets.ios.x64", false).get()
             if (xcFramework) {
                 project.freeleticsMultiplatformExtension.addIosTargetsWithXcFramework(
                     frameworkName = project.name,
-                    includeX64 = x64,
                 )
             } else {
-                project.freeleticsMultiplatformExtension.addIosTargets(includeX64 = x64)
+                project.freeleticsMultiplatformExtension.addIosTargets()
             }
         }
     }
