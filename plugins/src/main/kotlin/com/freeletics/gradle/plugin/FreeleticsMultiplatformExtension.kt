@@ -62,25 +62,21 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
         addIosTargets(includeX64) {}
     }
 
-    private fun addIosTargets(includeX64: Boolean, configure: KotlinNativeTarget.() -> Unit) {
+    private fun addIosTargets(configure: KotlinNativeTarget.() -> Unit) {
         project.kotlinMultiplatform {
             iosArm64(configure)
             iosSimulatorArm64(configure)
-            if (includeX64) {
-                iosX64(configure)
-            }
         }
     }
 
     @JvmOverloads
     public fun addIosTargetsWithXcFramework(
         frameworkName: String,
-        includeX64: Boolean = false,
         configure: KotlinNativeTarget.(Framework) -> Unit = {},
     ) {
         val xcFramework = XCFrameworkConfig(project, frameworkName)
 
-        addIosTargets(includeX64 = includeX64) {
+        addIosTargets {
             binaries.framework {
                 baseName = frameworkName
                 xcFramework.add(this)
@@ -117,7 +113,6 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
             linuxArm64()
 
             iosArm64()
-            iosX64()
             iosSimulatorArm64()
 
             macosArm64()
