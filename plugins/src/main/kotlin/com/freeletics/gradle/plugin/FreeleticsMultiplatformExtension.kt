@@ -56,7 +56,7 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
     }
 
     public fun addIosTargets() {
-        addIosTargets() {}
+        addIosTargets {}
     }
 
     private fun addIosTargets(configure: KotlinNativeTarget.() -> Unit) {
