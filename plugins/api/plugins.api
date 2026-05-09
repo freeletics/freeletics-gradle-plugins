@@ -245,12 +245,9 @@ public abstract class com/freeletics/gradle/plugin/FreeleticsMultiplatformExtens
 	public final fun addCommonTargets (Z)V
 	public static synthetic fun addCommonTargets$default (Lcom/freeletics/gradle/plugin/FreeleticsMultiplatformExtension;ZILjava/lang/Object;)V
 	public final fun addIosTargets ()V
-	public final fun addIosTargets (Z)V
-	public static synthetic fun addIosTargets$default (Lcom/freeletics/gradle/plugin/FreeleticsMultiplatformExtension;ZILjava/lang/Object;)V
 	public final fun addIosTargetsWithXcFramework (Ljava/lang/String;)V
-	public final fun addIosTargetsWithXcFramework (Ljava/lang/String;Z)V
-	public final fun addIosTargetsWithXcFramework (Ljava/lang/String;ZLkotlin/jvm/functions/Function2;)V
-	public static synthetic fun addIosTargetsWithXcFramework$default (Lcom/freeletics/gradle/plugin/FreeleticsMultiplatformExtension;Ljava/lang/String;ZLkotlin/jvm/functions/Function2;ILjava/lang/Object;)V
+	public final fun addIosTargetsWithXcFramework (Ljava/lang/String;Lkotlin/jvm/functions/Function2;)V
+	public static synthetic fun addIosTargetsWithXcFramework$default (Lcom/freeletics/gradle/plugin/FreeleticsMultiplatformExtension;Ljava/lang/String;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)V
 	public final fun addJvmTarget ()V
 	public final fun useComposeResources ()V
 	public final fun useSkie ()V
