@@ -55,9 +55,8 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
         }
     }
 
-    @JvmOverloads
-    public fun addIosTargets(includeX64: Boolean = false) {
-        addIosTargets(includeX64) {}
+    public fun addIosTargets() {
+        addIosTargets() {}
     }
 
     private fun addIosTargets(configure: KotlinNativeTarget.() -> Unit) {
