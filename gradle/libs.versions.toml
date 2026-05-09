@@ -5,7 +5,7 @@ java-toolchain = "24"
 fgp = "0.36.8"
 
 kotlin = "2.3.21"
-coroutines = "1.10.2"
+coroutines = "1.11.0"
 android-gradle = "9.2.0"
 ksp="2.3.7"
 sqldelight = "2.3.2"
