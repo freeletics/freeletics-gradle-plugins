@@ -27,14 +27,12 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
             project.freeleticsMultiplatformExtension.addJvmTarget()
         }
         if (project.booleanProperty("fgp.kotlin.targets.ios", false).get()) {
-            val x64 = project.booleanProperty("fgp.kotlin.targets.ios.x64", false).get()
             if (xcFramework) {
                 project.freeleticsMultiplatformExtension.addIosTargetsWithXcFramework(
                     frameworkName = project.name,
-                    includeX64 = x64,
                 )
             } else {
-                project.freeleticsMultiplatformExtension.addIosTargets(includeX64 = x64)
+                project.freeleticsMultiplatformExtension.addIosTargets()
             }
         }
     }
@@ -57,30 +55,25 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
         }
     }
 
-    @JvmOverloads
-    public fun addIosTargets(includeX64: Boolean = false) {
-        addIosTargets(includeX64) {}
+    public fun addIosTargets() {
+        addIosTargets {}
     }
 
-    private fun addIosTargets(includeX64: Boolean, configure: KotlinNativeTarget.() -> Unit) {
+    private fun addIosTargets(configure: KotlinNativeTarget.() -> Unit) {
         project.kotlinMultiplatform {
             iosArm64(configure)
             iosSimulatorArm64(configure)
-            if (includeX64) {
-                iosX64(configure)
-            }
         }
     }
 
     @JvmOverloads
     public fun addIosTargetsWithXcFramework(
         frameworkName: String,
-        includeX64: Boolean = false,
         configure: KotlinNativeTarget.(Framework) -> Unit = {},
     ) {
         val xcFramework = XCFrameworkConfig(project, frameworkName)
 
-        addIosTargets(includeX64 = includeX64) {
+        addIosTargets {
             binaries.framework {
                 baseName = frameworkName
                 xcFramework.add(this)
@@ -117,7 +110,6 @@ public abstract class FreeleticsMultiplatformExtension(private val project: Proj
             linuxArm64()
 
             iosArm64()
-            iosX64()
             iosSimulatorArm64()
 
             macosArm64()
