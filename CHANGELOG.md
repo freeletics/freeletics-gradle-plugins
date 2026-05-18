@@ -1,6 +1,9 @@
 Change Log
 ==========
 
+## 0.37.0 *(2026-05-18)*
+- Remove the iOSX64 target completely. It was already disabled by default since 0.36.7 and is now removed to support new AndroidX versions that have dropped iosX64 support.
+
 ## 0.36.8 *(2026-04-29)*
 - Throw exception if slack webhook fails when sending a message using SlackMessageCli.kt
 
