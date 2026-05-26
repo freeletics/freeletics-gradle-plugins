@@ -1,13 +1,17 @@
 package com.freeletics.gradle.setup
 
+import com.freeletics.gradle.util.booleanProperty
 import org.gradle.api.Project
 import org.gradle.api.attributes.java.TargetJvmEnvironment
 import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.testing.Test
-import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType.Companion.attribute
 
 internal fun Project.configurePaparazzi() {
-    plugins.apply("com.freeletics.fork.paparazzi")
+    if (booleanProperty("fgp.usePaparazziFork", true).get()) {
+        plugins.apply("com.freeletics.fork.paparazzi")
+    } else {
+        plugins.apply("app.cash.paparazzi")
+    }
 
     val copyFailures = tasks.register("copyPaparazziFailures", Copy::class.java) {
         it.from(layout.buildDirectory.dir("paparazzi/failures"))
