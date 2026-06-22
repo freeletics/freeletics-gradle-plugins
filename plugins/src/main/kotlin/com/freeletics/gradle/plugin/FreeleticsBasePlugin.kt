@@ -89,11 +89,13 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                 }
 
                 if (version >= KotlinVersion.KOTLIN_2_2 && version < KotlinVersion.KOTLIN_2_4) {
-                    // Enable 2.2.0 feature previews
                     freeCompilerArgs.addAll(
+                        // Enable 2.2.0 feature previews
                         "-Xcontext-parameters",
                         "-Xcontext-sensitive-resolution",
                         "-Xannotation-target-all",
+                        // https://youtrack.jetbrains.com/issue/KT-73255 - fixed in 2.4
+                        "-Xannotation-default-target=param-property",
                     )
                 }
                 if (version >= KotlinVersion.KOTLIN_2_0) {
@@ -105,8 +107,6 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                 }
 
                 freeCompilerArgs.addAll(
-                    // https://youtrack.jetbrains.com/issue/KT-73255
-                    "-Xannotation-default-target=param-property",
                     // opt in to experimental stdlib apis
                     "-opt-in=kotlin.ExperimentalStdlibApi",
                     "-opt-in=kotlin.time.ExperimentalTime",
