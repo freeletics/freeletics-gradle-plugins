@@ -12,8 +12,6 @@ import org.gradle.api.publish.maven.MavenPom
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.tasks.AbstractPublishToMaven
 import org.gradle.api.tasks.bundling.Zip
-import org.jetbrains.kotlin.gradle.dsl.abi.AbiValidationExtension
-import org.jetbrains.kotlin.gradle.dsl.abi.AbiValidationMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
 import org.jetbrains.kotlin.konan.target.HostManager
 
@@ -139,26 +137,7 @@ internal fun setupXcFrameworkPublishing(project: Project, frameworkName: String)
 @OptIn(ExperimentalAbiValidation::class)
 private fun Project.configureBinaryCompatibility() {
     kotlin {
-        // Preparation for DSL changes in 2.4.0: https://youtrack.jetbrains.com/issue/KT-80685
-        val abiExtension = extensions.findByName("abiValidation") ?: return@kotlin
-        when (abiExtension) {
-            is AbiValidationExtension -> abiExtension.apply {
-                enabled.set(true)
-                // TODO remove manual task dependency https://youtrack.jetbrains.com/issue/KT-80614
-                tasks.named("check").configure { task ->
-                    task.dependsOn(legacyDump.legacyCheckTaskProvider)
-                }
-            }
-
-            is AbiValidationMultiplatformExtension -> abiExtension.apply {
-                enabled.set(true)
-                // TODO remove manual task dependency https://youtrack.jetbrains.com/issue/KT-80614
-                tasks.named("check").configure { task ->
-                    task.dependsOn(legacyDump.legacyCheckTaskProvider)
-                }
-            }
-
-            else -> throw IllegalStateException("Unsupported kotlin extension ${abiExtension.javaClass}")
-        }
+        // Calling extension function lazily enables ABI validation
+        abiValidation()
     }
 }
