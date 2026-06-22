@@ -141,26 +141,25 @@ internal fun setupXcFrameworkPublishing(project: Project, frameworkName: String)
 @OptIn(ExperimentalAbiValidation::class)
 private fun Project.configureBinaryCompatibility() {
     kotlin {
-        when (this) {
-            is KotlinJvmProjectExtension -> extensions.configure<AbiValidationExtension>(
-                "abiValidation",
-            ) { validation ->
-                validation.enabled.set(true)
+        // Preparation for DSL changes in 2.4.0: https://youtrack.jetbrains.com/issue/KT-80685
+        when (val abiExtension = extensions.findByName("abiValidation")) {
+            is AbiValidationExtension -> abiExtension.apply {
+                enabled.set(true)
                 // TODO remove manual task dependency https://youtrack.jetbrains.com/issue/KT-80614
                 tasks.named("check").configure { task ->
-                    task.dependsOn(validation.legacyDump.legacyCheckTaskProvider)
+                    task.dependsOn(legacyDump.legacyCheckTaskProvider)
                 }
             }
-            is KotlinMultiplatformExtension -> extensions.configure<AbiValidationMultiplatformExtension>(
-                "abiValidation",
-            ) { validation ->
-                validation.enabled.set(true)
+
+            is AbiValidationMultiplatformExtension -> abiExtension.apply {
+                enabled.set(true)
                 // TODO remove manual task dependency https://youtrack.jetbrains.com/issue/KT-80614
                 tasks.named("check").configure { task ->
-                    task.dependsOn(validation.legacyDump.legacyCheckTaskProvider)
+                    task.dependsOn(legacyDump.legacyCheckTaskProvider)
                 }
             }
-            else -> throw IllegalStateException("Unsupported kotlin extension ${this::class}")
+
+            else -> throw IllegalStateException("Unsupported kotlin extension ${abiExtension?.javaClass}")
         }
     }
 }
