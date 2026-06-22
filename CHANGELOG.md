@@ -1,6 +1,9 @@
 Change Log
 ==========
 
+## 0.37.2 *(2026-06-22)*
+- Add `abiValidation` extension null check.
+
 ## 0.37.1 *(2026-06-22)*
 - Verify `abiValidation` extension is registered before configuring it.
 - Opt-in for experimental language features now checks for Kotlin language version.

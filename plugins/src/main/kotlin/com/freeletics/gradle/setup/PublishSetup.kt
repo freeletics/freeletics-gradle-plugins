@@ -3,6 +3,7 @@ package com.freeletics.gradle.setup
 import com.freeletics.gradle.util.freeleticsExtension
 import com.freeletics.gradle.util.kotlin
 import com.freeletics.gradle.util.stringProperty
+import com.gradle.enterprise.testdistribution.a.a.b.ab
 import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import org.gradle.api.Project
@@ -140,7 +141,8 @@ internal fun setupXcFrameworkPublishing(project: Project, frameworkName: String)
 private fun Project.configureBinaryCompatibility() {
     kotlin {
         // Preparation for DSL changes in 2.4.0: https://youtrack.jetbrains.com/issue/KT-80685
-        when (val abiExtension = extensions.findByName("abiValidation")) {
+        val abiExtension = extensions.findByName("abiValidation") ?: return@kotlin
+        when (abiExtension) {
             is AbiValidationExtension -> abiExtension.apply {
                 enabled.set(true)
                 // TODO remove manual task dependency https://youtrack.jetbrains.com/issue/KT-80614
@@ -157,7 +159,7 @@ private fun Project.configureBinaryCompatibility() {
                 }
             }
 
-            else -> throw IllegalStateException("Unsupported kotlin extension ${abiExtension?.javaClass}")
+            else -> throw IllegalStateException("Unsupported kotlin extension ${abiExtension.javaClass}")
         }
     }
 }
