@@ -88,15 +88,25 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                     freeCompilerArgs.add("-Xwarning-level=OVERRIDE_DEPRECATION:disabled")
                 }
 
+                if (version >= KotlinVersion.KOTLIN_2_2 && version < KotlinVersion.KOTLIN_2_4) {
+                    // Enable 2.2.0 feature previews
+                    freeCompilerArgs.addAll(
+                        "-Xcontext-parameters",
+                        "-Xcontext-sensitive-resolution",
+                        "-Xannotation-target-all",
+                    )
+                }
+                if (version >= KotlinVersion.KOTLIN_2_0) {
+                    // Enable 2.0.20 experimental features
+                    freeCompilerArgs.addAll(
+                        // https://kotlinlang.org/docs/whatsnew2020.html#data-class-copy-function-to-have-the-same-visibility-as-constructor
+                        "-Xconsistent-data-class-copy-visibility",
+                    )
+                }
+
                 freeCompilerArgs.addAll(
                     // https://youtrack.jetbrains.com/issue/KT-73255
                     "-Xannotation-default-target=param-property",
-                    // https://kotlinlang.org/docs/whatsnew2020.html#data-class-copy-function-to-have-the-same-visibility-as-constructor
-                    "-Xconsistent-data-class-copy-visibility",
-                    // Enable 2.2.0 feature previews
-                    "-Xcontext-parameters",
-                    "-Xcontext-sensitive-resolution",
-                    "-Xannotation-target-all",
                     // opt in to experimental stdlib apis
                     "-opt-in=kotlin.ExperimentalStdlibApi",
                     "-opt-in=kotlin.time.ExperimentalTime",
