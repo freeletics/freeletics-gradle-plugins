@@ -88,6 +88,20 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                     freeCompilerArgs.add("-Xwarning-level=OVERRIDE_DEPRECATION:disabled")
                 }
 
+                if (version >= KotlinVersion.KOTLIN_2_4) {
+                    // Enable 2.4.0 feature previews
+                    freeCompilerArgs.addAll(
+                        // Bracket syntax for collections initialization
+                        // https://kotlinlang.org/docs/whatsnew24.html#support-for-collection-literals
+                        "-Xcollection-literals",
+                        // Improved unused returned result checks
+                        // https://kotlinlang.org/docs/whatsnew24.html#improved-unused-result-checks-for-higher-order-functions
+                        "-Xallow-returns-result-of",
+                        // Enable const intrinsics
+                        // https://kotlinlang.org/docs/whatsnew24.html#improved-compile-time-constants
+                        "-Xintrinsic-const-evaluation",
+                    )
+                }
                 if (version >= KotlinVersion.KOTLIN_2_2 && version < KotlinVersion.KOTLIN_2_4) {
                     freeCompilerArgs.addAll(
                         // Enable 2.2.0 feature previews
