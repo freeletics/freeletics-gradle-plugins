@@ -70,7 +70,7 @@ ktlint-rule-engine = { module = "com.pinterest.ktlint:ktlint-rule-engine", versi
 ktlint-rule-engine-core = { module = "com.pinterest.ktlint:ktlint-rule-engine-core", version.ref = "ktlint" }
 ktlint-rules = { module = "com.pinterest.ktlint:ktlint-ruleset-standard", version.ref = "ktlint" }
 ktfmt = { module = "com.facebook:ktfmt", version = "0.63" }
-gradle-sorter = { module = "com.squareup:sort", version = "0.18.0" }
+gradle-sorter = { module = "com.squareup:sort", version = "0.19.0" }
 slack = { module = "com.slack.api:slack-api-client-kotlin-extension", version = "1.49.0"}
 google-http = { module = "com.google.http-client:google-http-client", version.ref = "google-http" }
 google-http-gson = { module = "com.google.http-client:google-http-client-gson", version.ref = "google-http" }
