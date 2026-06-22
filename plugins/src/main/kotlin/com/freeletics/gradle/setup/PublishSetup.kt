@@ -3,7 +3,6 @@ package com.freeletics.gradle.setup
 import com.freeletics.gradle.util.freeleticsExtension
 import com.freeletics.gradle.util.kotlin
 import com.freeletics.gradle.util.stringProperty
-import com.gradle.enterprise.testdistribution.a.a.b.ab
 import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import org.gradle.api.Project
