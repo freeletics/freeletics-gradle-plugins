@@ -3,6 +3,7 @@ Change Log
 
 ## 0.37.1 *(2026-06-22)*
 - Verify `abiValidation` extension is registered before configuring it.
+- Opt-in for experimental language features now checks for Kotlin language version.
 
 ## 0.37.0 *(2026-05-18)*
 - Remove the iOSX64 target completely. It was already disabled by default since 0.36.7 and is now removed to support new AndroidX versions that have dropped iosX64 support.
