@@ -1,6 +1,9 @@
 Change Log
 ==========
 
+## 0.38.0 *(2026-06-22)*
+- Support Kotlin 2.4.0.
+
 ## 0.37.2 *(2026-06-22)*
 - Add `abiValidation` extension null check.
 
