@@ -27,7 +27,7 @@ pluginManagement {
 }
 
 plugins {
-    id("com.freeletics.gradle.settings").version("0.37.2")
+    id("com.freeletics.gradle.settings").version("0.38.0")
 }
 
 rootProject.name = "freeletics-gradle-plugins-monorepo"
