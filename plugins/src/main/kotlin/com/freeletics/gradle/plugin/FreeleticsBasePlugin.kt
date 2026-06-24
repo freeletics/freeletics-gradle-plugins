@@ -88,7 +88,12 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                     freeCompilerArgs.add("-Xwarning-level=OVERRIDE_DEPRECATION:disabled")
                 }
 
-                if (version >= KotlinVersion.KOTLIN_2_4) {
+                if (version >= KotlinVersion.KOTLIN_2_4 &&
+                    booleanProperty(
+                        "fgp.kotlin.compiler.optInFeaturePreviews.2_4",
+                        false,
+                    ).get()
+                ) {
                     // Enable 2.4.0 feature previews
                     freeCompilerArgs.addAll(
                         // Bracket syntax for collections initialization
@@ -102,7 +107,12 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                         "-Xintrinsic-const-evaluation",
                     )
                 }
-                if (version >= KotlinVersion.KOTLIN_2_2 && version < KotlinVersion.KOTLIN_2_4) {
+                if (version >= KotlinVersion.KOTLIN_2_2 && version < KotlinVersion.KOTLIN_2_4 &&
+                    booleanProperty(
+                        "fgp.kotlin.compiler.optInFeaturePreviews.2_2",
+                        false,
+                    ).get()
+                ) {
                     freeCompilerArgs.addAll(
                         // Enable 2.2.0 feature previews
                         "-Xcontext-parameters",
@@ -112,7 +122,12 @@ public abstract class FreeleticsBasePlugin : Plugin<Project> {
                         "-Xannotation-default-target=param-property",
                     )
                 }
-                if (version >= KotlinVersion.KOTLIN_2_0) {
+                if (version >= KotlinVersion.KOTLIN_2_0 &&
+                    booleanProperty(
+                        "fgp.kotlin.compiler.optInFeaturePreviews.2_0",
+                        false,
+                    ).get()
+                ) {
                     // Enable 2.0.20 experimental features
                     freeCompilerArgs.addAll(
                         // https://kotlinlang.org/docs/whatsnew2020.html#data-class-copy-function-to-have-the-same-visibility-as-constructor

@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+## 0.38.2 *(2026-06-24)*
+- Disable Kotlin Compiler experimental features by default. Add optional opt-in
+  via gradle properties - `fpg.kotlin.compiler.optInFeaturePreviews.<version>`. Versions supported:
+  - `2_0` - enables `-Xconsistent-data-class-copy-visibility`.
+  - `2_2` - enables `-Xcontext-parameters`, `-Xcontext-sensitive-resolution`, `-Xannotation-target-all`, `-Xannotation-default-target=param-property`.
+  - `2_4` - enables `-Xcollection-literals`, `-Xallow-returns-result-of`, `-Xintrinsic-const-evaluation`.
+
 ## 0.38.1 *(2026-06-24)*
 - Updated SKIE plugin with Kotlin 2.4.0 support.
 
