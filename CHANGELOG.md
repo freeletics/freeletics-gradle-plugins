@@ -1,6 +1,9 @@
 Change Log
 ==========
 
+## 0.38.1 *(2026-06-24)*
+- Updated SKIE plugin with Kotlin 2.4.0 support.
+
 ## 0.38.0 *(2026-06-22)*
 - Support Kotlin 2.4.0.
 
