@@ -4,7 +4,7 @@ java-toolchain = "24"
 
 fgp = "0.38.2"
 
-kotlin = "2.4.0"
+kotlin = "2.4.10"
 coroutines = "1.11.0"
 android-gradle = "9.2.1"
 ksp="2.3.9"
@@ -12,7 +12,7 @@ sqldelight = "2.3.2"
 paparazzi = "2.0.0-alpha02-fl05"
 licensee = "1.14.1"
 crashlytics-gradle = "3.0.7"
-dependency-analysis = "3.16.0"
+dependency-analysis = "3.17.0"
 develocity = "4.5.0"
 gradle-toolchain = "1.0.0"
 publish = "0.37.0"
@@ -46,7 +46,7 @@ android-gradle-common-api = { module = "com.android.tools.build:gradle-common-ap
 ksp-gradle = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin",  version.ref = "ksp" }
 metro-gradle = { module = "dev.zacsweers.metro:gradle-plugin", version = "1.2.1" }
 poko-gradle = { module = "dev.drewhamilton.poko:poko-gradle-plugin", version = "0.23.1" }
-kopy-gradle = { module = "com.javiersc.kotlin:kopy-gradle-plugin", version = "0.24.0+2.4.0" }
+kopy-gradle = { module = "com.javiersc.kotlin:kopy-gradle-plugin", version = "0.25.0+2.4.10" }
 skie-gradle = { module = "co.touchlab.skie:gradle-plugin", version = "0.10.13" }
 compose-gradle = { module = "org.jetbrains.compose:compose-gradle-plugin", version = "1.11.1"}
 sqldelight-gradle = { module = "app.cash.sqldelight:gradle-plugin", version.ref = "sqldelight" }
@@ -70,7 +70,7 @@ ktlint-rule-engine = { module = "com.pinterest.ktlint:ktlint-rule-engine", versi
 ktlint-rule-engine-core = { module = "com.pinterest.ktlint:ktlint-rule-engine-core", version.ref = "ktlint" }
 ktlint-rules = { module = "com.pinterest.ktlint:ktlint-ruleset-standard", version.ref = "ktlint" }
 ktfmt = { module = "com.facebook:ktfmt", version = "0.64" }
-gradle-sorter = { module = "com.squareup:sort", version = "0.19.0" }
+gradle-sorter = { module = "com.squareup:sort", version = "0.20.0" }
 slack = { module = "com.slack.api:slack-api-client-kotlin-extension", version = "1.49.0"}
 google-http = { module = "com.google.http-client:google-http-client", version.ref = "google-http" }
 google-http-gson = { module = "com.google.http-client:google-http-client-gson", version.ref = "google-http" }
