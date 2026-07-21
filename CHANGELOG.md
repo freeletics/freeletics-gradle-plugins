@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+## 0.39.0 *(2026-07-21)*
+- Update Kotlin to 2.4.10.
+- Update Android Gradle Plugin to 9.3.0.
+
 ## 0.38.2 *(2026-06-24)*
 - Disable Kotlin Compiler experimental features by default. Add optional opt-in
   via gradle properties - `fpg.kotlin.compiler.optInFeaturePreviews.<version>`. Versions supported:
