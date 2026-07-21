@@ -26,10 +26,13 @@ internal fun Lint.configure(project: Project) {
     abortOnError = true
     warningsAsErrors = true
 
-    htmlReport = true
-    htmlOutput = project.reportsFile("lint-result.html").asFile
-    textReport = true
-    textOutput = project.reportsFile("lint-result.txt").asFile
+    @Suppress("DEPRECATION")
+    run {
+        htmlReport = true
+        htmlOutput = project.reportsFile("lint-result.html").asFile
+        textReport = true
+        textOutput = project.reportsFile("lint-result.txt").asFile
+    }
 
     disable += "NewerVersionAvailable"
     disable += "GradleDependency"
