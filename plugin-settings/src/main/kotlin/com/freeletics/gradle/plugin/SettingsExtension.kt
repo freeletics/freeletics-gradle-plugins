@@ -55,6 +55,9 @@ public abstract class SettingsExtension(private val settings: Settings) {
                     .using(it.project(":codegen-compiler"))
             }
         }
+        // also include it for plugin resolution so that Khonshu's Gradle plugins, like
+        // com.freeletics.khonshu.deeplinks, are taken from the local clone
+        settings.pluginManagement { it.includeBuild(path) }
     }
 
     @JvmOverloads
