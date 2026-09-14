@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+## 0.40.0 *(2026-09-14)*
+- Update Kotlin to 2.4.20.
+- Update Android Gradle Plugin to 9.4.0.
+- `includeKhonshu` now also includes the local clone for plugin resolution, so that Khonshu's
+  Gradle plugins, like `com.freeletics.khonshu.deeplinks`, are taken from it.
+- The dependency rules check now ignores projects from included builds.
+
 ## 0.39.0 *(2026-07-21)*
 - Update Kotlin to 2.4.10.
 - Update Android Gradle Plugin to 9.3.0.
