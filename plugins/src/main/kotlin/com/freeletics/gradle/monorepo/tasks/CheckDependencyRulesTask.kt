@@ -43,6 +43,7 @@ public abstract class CheckDependencyRulesTask : DefaultTask() {
     public fun check() {
         val projectPath = this.projectPath.get()
         val component = this.artifactIds.get()
+        val buildPath = (component.id as? ProjectComponentIdentifier)?.build?.buildPath
         val errors = component.dependencies
             .asSequence()
             .filterIsInstance<ResolvedDependencyResult>()
@@ -59,6 +60,9 @@ public abstract class CheckDependencyRulesTask : DefaultTask() {
             .filterNot { it.selected == component }
             .map { it.selected.id }
             .filterIsInstance<ProjectComponentIdentifier>()
+            // Projects from included builds, e.g. a local clone of Khonshu, don't follow the
+            // project structure of this build so the rules don't apply to them.
+            .filter { it.build.buildPath == buildPath }
             .flatMap {
                 checkDependencyRules(
                     projectPath = projectPath,
