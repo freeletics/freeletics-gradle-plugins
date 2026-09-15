@@ -1,5 +1,6 @@
 package com.freeletics.gradle.plugin
 
+import com.freeletics.gradle.util.booleanProperty
 import com.freeletics.gradle.util.getDependency
 import com.gradle.develocity.agent.gradle.test.DevelocityTestConfiguration
 import java.time.Duration
@@ -15,12 +16,11 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.gradle.testing.base.TestingExtension
 
-@Suppress("EagerGradleConfiguration", "GradleProjectIsolation")
 public abstract class AppiumPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         project.plugins.apply("jvm-test-suite")
 
-        val localTestCases = project.rootProject.name == "shared-infrastructure"
+        val localTestCases = project.booleanProperty("fgp.appium.localTestCases", false).get()
 
         val unzipTestClasses = project.setupTestDependency(localTestCases)
         project.setSharedTestConfiguration(unzipTestClasses, localTestCases)
@@ -43,10 +43,8 @@ public abstract class AppiumPlugin : Plugin<Project> {
 
         val testClassesDir = layout.buildDirectory.dir("testClasses")
         return tasks.register("unzipTests", Copy::class.java) {
-            if (localTestCases) {
-                it.dependsOn(tasks.getByPath(":testing:appium-tests:jvmJar"))
-            }
-            it.from(zipTree(testCases.get().singleFile))
+            it.dependsOn(testCases)
+            it.from(testCases.map { configuration -> zipTree(configuration.singleFile) })
             it.into(testClassesDir)
         }
     }
@@ -83,8 +81,7 @@ public abstract class AppiumPlugin : Plugin<Project> {
                         failOnPassedAfterRetry.set(false)
                     }
 
-                    test.dependsOn(unzipTestClasses)
-                    test.testClassesDirs = unzipTestClasses.get().outputs.files
+                    test.testClassesDirs = files(unzipTestClasses)
 
                     test.testLogging {
                         it.events(
