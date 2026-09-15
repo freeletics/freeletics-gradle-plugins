@@ -16,7 +16,6 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.gradle.testing.base.TestingExtension
 
-@Suppress("EagerGradleConfiguration", "GradleProjectIsolation")
 public abstract class AppiumPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         project.plugins.apply("jvm-test-suite")
