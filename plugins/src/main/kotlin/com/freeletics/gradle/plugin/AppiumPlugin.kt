@@ -82,8 +82,7 @@ public abstract class AppiumPlugin : Plugin<Project> {
                         failOnPassedAfterRetry.set(false)
                     }
 
-                    test.dependsOn(unzipTestClasses)
-                    test.testClassesDirs = unzipTestClasses.get().outputs.files
+                    test.testClassesDirs = files(unzipTestClasses)
 
                     test.testLogging {
                         it.events(
