@@ -1,5 +1,6 @@
 package com.freeletics.gradle.plugin
 
+import com.freeletics.gradle.util.booleanProperty
 import com.freeletics.gradle.util.getDependency
 import com.gradle.develocity.agent.gradle.test.DevelocityTestConfiguration
 import java.time.Duration
@@ -20,7 +21,7 @@ public abstract class AppiumPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         project.plugins.apply("jvm-test-suite")
 
-        val localTestCases = project.rootProject.name == "shared-infrastructure"
+        val localTestCases = project.booleanProperty("fgp.appium.localTestCases", false).get()
 
         val unzipTestClasses = project.setupTestDependency(localTestCases)
         project.setSharedTestConfiguration(unzipTestClasses, localTestCases)
