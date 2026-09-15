@@ -46,7 +46,7 @@ android-gradle-common-api = { module = "com.android.tools.build:gradle-common-ap
 ksp-gradle = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin",  version.ref = "ksp" }
 metro-gradle = { module = "dev.zacsweers.metro:gradle-plugin", version = "1.4.3" }
 poko-gradle = { module = "dev.drewhamilton.poko:poko-gradle-plugin", version = "0.23.1" }
-kopy-gradle = { module = "com.javiersc.kotlin:kopy-gradle-plugin", version = "0.25.0+2.4.10" }
+kopy-gradle = { module = "com.javiersc.kotlin:kopy-gradle-plugin", version = "0.26.0+2.4.20" }
 skie-gradle = { module = "co.touchlab.skie:gradle-plugin", version = "0.10.14" }
 compose-gradle = { module = "org.jetbrains.compose:compose-gradle-plugin", version = "1.12.0"}
 sqldelight-gradle = { module = "app.cash.sqldelight:gradle-plugin", version.ref = "sqldelight" }
