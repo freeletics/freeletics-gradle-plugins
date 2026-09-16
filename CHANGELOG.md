@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+## UNRELEASED
+- The Appium plugin now takes the test cases from the published `appium-test-cases` library.
+  Set the `fgp.appium.localTestCases` Gradle property to `true` to use the local
+  `:testing:appium-tests` project instead.
+- The Appium plugin is now compatible with Isolated Projects.
+
 ## 0.40.0 *(2026-09-14)*
 - Update Kotlin to 2.4.20.
 - Update Android Gradle Plugin to 9.4.0.
