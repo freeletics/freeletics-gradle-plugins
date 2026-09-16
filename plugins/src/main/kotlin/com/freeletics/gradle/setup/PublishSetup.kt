@@ -38,6 +38,8 @@ internal fun setupInternalPublishing(target: Project) {
     target.plugins.apply("com.vanniktech.maven.publish")
 
     target.extensions.configure(MavenPublishBaseExtension::class.java) {
+        @Suppress("UnstableApiUsage")
+        it.configureBasedOnAppliedPlugins(javadocJar = JavadocJar.None())
         it.pom { pom ->
             pom.configurePom(target, includeLicense = false)
         }

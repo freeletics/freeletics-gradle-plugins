@@ -6,6 +6,7 @@ Change Log
   Set the `fgp.appium.localTestCases` Gradle property to `true` to use the local
   `:testing:appium-tests` project instead.
 - The Appium plugin is now compatible with Isolated Projects.
+- `enableInternalPublishing` now explicitly disables javadoc JAR.
 
 ## 0.40.0 *(2026-09-14)*
 - Update Kotlin to 2.4.20.
