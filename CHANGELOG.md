@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-## UNRELEASED
+## 0.41.0 *(2026-09-16)*
 - The Appium plugin now takes the test cases from the published `appium-test-cases` library.
   Set the `fgp.appium.localTestCases` Gradle property to `true` to use the local
   `:testing:appium-tests` project instead.
