@@ -3,7 +3,10 @@ package com.freeletics.gradle.monorepo.setup
 import org.gradle.api.Project
 
 internal fun Project.applyPlatformConstraints(multiplatform: Boolean = false) {
-    val platformDependency = dependencies.enforcedPlatform(project(":"))
+    @Suppress("UnstableApiUsage")
+    val platformDependency = dependencies.enforcedPlatform(
+        dependencyFactory.createProjectDependency(":"),
+    )
     configurations.configureEach { config ->
         if (isPlatformConfigurationName(config.name, multiplatform)) {
             config.dependencies.add(platformDependency)
@@ -13,7 +16,7 @@ internal fun Project.applyPlatformConstraints(multiplatform: Boolean = false) {
 
 // adapted from https://github.com/ZacSweers/CatchUp/blob/347db46d82497990ff10c441ecc75c0c9eedf7c4/buildSrc/src/main/kotlin/dev/zacsweers/catchup/gradle/CatchUpPlugin.kt#L68-L80
 private fun isPlatformConfigurationName(name: String, multiplatform: Boolean): Boolean {
-    // adding api dependnecies to test sources is deprecated and will be removed
+    // adding api dependencies to test sources is deprecated and will be removed
     if (name.contains("test", ignoreCase = true) && name.endsWith("api", ignoreCase = true)) {
         return false
     }
