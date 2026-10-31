@@ -6,7 +6,7 @@ fgp = "0.41.0"
 
 kotlin = "2.4.21"
 coroutines = "1.11.0"
-android-gradle = "9.4.1"
+android-gradle = "9.5.0"
 ksp="2.3.12"
 sqldelight = "2.4.1"
 paparazzi = "2.0.0-alpha02-fl05"
