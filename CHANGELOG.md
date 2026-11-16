@@ -2,6 +2,11 @@ Change Log
 ==========
 
 ## UNRELEASED
+
+## 0.42.0 *(2026-11-16)*
+- Update Kotlin to 2.4.21.
+- Update Android Gradle Plugin to 9.5.1.
+- Update SKIE to 0.10.16.
 - Internal `applyPlatformConstraints` used by every plugin no longer use a deprecated
 dependency notation that fails with Gradle 10.
 
