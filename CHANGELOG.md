@@ -2,6 +2,8 @@ Change Log
 ==========
 
 ## UNRELEASED
+
+## 0.43.0 *(2026-11-26)*
 - The `android.compile` version now supports minor API levels, for example `37.1`.
 
 ## 0.42.0 *(2026-11-16)*
