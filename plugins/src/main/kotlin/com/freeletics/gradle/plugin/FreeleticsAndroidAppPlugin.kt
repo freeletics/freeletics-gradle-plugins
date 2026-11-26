@@ -7,6 +7,7 @@ import com.freeletics.gradle.util.addImplementationDependency
 import com.freeletics.gradle.util.addMaybe
 import com.freeletics.gradle.util.androidApp
 import com.freeletics.gradle.util.androidComponentsApp
+import com.freeletics.gradle.util.compileSdkVersion
 import com.freeletics.gradle.util.defaultPackageName
 import com.freeletics.gradle.util.freeleticsExtension
 import com.freeletics.gradle.util.getBundleOrNull
@@ -43,7 +44,7 @@ public abstract class FreeleticsAndroidAppPlugin : Plugin<Project> {
                 buildToolsVersion = buildTools
             }
 
-            compileSdk = getVersion("android.compile").toInt()
+            compileSdk { version = compileSdkVersion(getVersion("android.compile")) }
             defaultConfig.minSdk = getVersion("android.min").toInt()
             defaultConfig.targetSdk = getVersion("android.target").toInt()
 

@@ -1,5 +1,7 @@
 package com.freeletics.gradle.util
 
+import com.android.build.api.dsl.CompileSdkSpec
+import com.android.build.api.dsl.CompileSdkVersion
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.artifacts.ExternalModuleDependencyBundle
@@ -28,6 +30,16 @@ internal fun Project.getVersion(name: String): String {
 
 internal fun Project.getVersionOrNull(name: String): String? {
     return libs.findVersion(name).orElseGet { null }?.requiredVersion
+}
+
+internal fun CompileSdkSpec.compileSdkVersion(version: String): CompileSdkVersion {
+    require(version.matches(Regex("""\d+(\.\d+)?"""))) {
+        "Invalid android.compile version $version, expected <major> or <major>.<minor>, e.g. 37 or 37.1"
+    }
+    val parts = version.split(".")
+    return release(parts[0].toInt()) {
+        minorApiLevel = parts.getOrNull(1)?.toInt()
+    }
 }
 
 internal fun Project.getBundleOrNull(name: String): Provider<ExternalModuleDependencyBundle>? {

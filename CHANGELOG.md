@@ -2,6 +2,7 @@ Change Log
 ==========
 
 ## UNRELEASED
+- The `android.compile` version now supports minor API levels, for example `37.1`.
 
 ## 0.42.0 *(2026-11-16)*
 - Update Kotlin to 2.4.21.
