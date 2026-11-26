@@ -5,6 +5,7 @@ import com.freeletics.gradle.plugin.FreeleticsMultiplatformAndroidExtension
 import com.freeletics.gradle.util.addCompileOnlyDependency
 import com.freeletics.gradle.util.addImplementationDependency
 import com.freeletics.gradle.util.addMaybe
+import com.freeletics.gradle.util.compileSdkVersion
 import com.freeletics.gradle.util.defaultPackageName
 import com.freeletics.gradle.util.freeleticsExtension
 import com.freeletics.gradle.util.getBundleOrNull
@@ -26,7 +27,7 @@ internal fun KotlinMultiplatformAndroidLibraryTarget.setupAndroidTarget(
         buildToolsVersion = buildTools
     }
 
-    compileSdk = target.getVersion("android.compile").toInt()
+    compileSdk { version = compileSdkVersion(target.getVersion("android.compile")) }
     minSdk = target.getVersion("android.min").toInt()
 
     // default all features to false, they will be enabled through FreeleticsAndroidExtension
